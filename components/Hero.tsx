@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { hero } from "@/lib/content";
 import KineticLogo from "@/components/KineticLogo";
 import SlideUpText from "@/components/ui/SlideUpText";
+import HeroPlayCursor, { PlayCursorBadge } from "@/components/HeroPlayCursor";
+import HeroVideoModal from "@/components/HeroVideoModal";
 
 /* Star Orbit Ring Graphic: perspective dashed ellipse with centered 4-point star */
 function StarOrbitRing() {
@@ -62,33 +64,18 @@ function StarOrbitRing() {
   );
 }
 
-/* Play Video Squircle Tile: rounded yellow square with spinning circular text */
-function PlayVideoTile({ href = "#recent-experiences" }: { href?: string }) {
+/* Play Video Squircle Tile: rounded yellow squircle with + shape kinetic ticker */
+function PlayVideoTile({ onPlay }: { onPlay?: () => void }) {
   return (
-    <a
-      href={href}
+    <button
+      type="button"
+      onClick={onPlay}
       data-magnetic
       aria-label="Play video"
-      className="group relative flex h-[76px] w-[76px] items-center justify-center rounded-[20px] bg-[#edeea5] text-[#1d1d1b] shadow-[0_4px_24px_rgba(237,238,165,0.22)] transition-transform duration-300 active:scale-95 hover:scale-105"
+      className="group relative transition-transform duration-300 active:scale-95 hover:scale-105 cursor-pointer"
     >
-      <svg
-        viewBox="0 0 100 100"
-        className="h-full w-full animate-[spin_10s_linear_infinite]"
-        aria-hidden="true"
-      >
-        <defs>
-          <path
-            id="playCirclePath"
-            d="M 50, 50 m -33, 0 a 33,33 0 1,1 66,0 a 33,33 0 1,1 -66,0"
-          />
-        </defs>
-        <text className="text-[9px] font-bold uppercase tracking-[0.18em] fill-[#1d1d1b]">
-          <textPath href="#playCirclePath" startOffset="0%">
-            • PLAY VIDEO • PLAY VIDEO 
-          </textPath>
-        </text>
-      </svg>
-    </a>
+      <PlayCursorBadge className="scale-90" />
+    </button>
   );
 }
 
@@ -99,11 +86,17 @@ function PlayVideoTile({ href = "#recent-experiences" }: { href?: string }) {
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   useEffect(() => {
     const el = sectionRef.current;
     const video = videoRef.current;
     if (!el || !video) return;
+
+    if (isVideoModalOpen) {
+      video.pause();
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -118,7 +111,7 @@ export default function Hero() {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [isVideoModalOpen]);
 
   return (
     <section
@@ -168,7 +161,7 @@ export default function Hero() {
 
         {/* Mobile Play Video Button & Celestial Star Orbit Ring */}
         <div className="mt-5 flex flex-col items-center">
-          <PlayVideoTile href={hero.primaryCta.href} />
+          <PlayVideoTile onPlay={() => setIsVideoModalOpen(true)} />
           <StarOrbitRing />
         </div>
       </div>
@@ -176,13 +169,34 @@ export default function Hero() {
       {/* ========================================================
           DESKTOP HERO VIEW (>= md): KineticLogo in Center
           ======================================================== */}
+      {/* Clickable Desktop Hit-Zone (opens video modal on click) */}
+      <div
+        onClick={() => setIsVideoModalOpen(true)}
+        aria-label="Play full video"
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setIsVideoModalOpen(true);
+          }
+        }}
+        className="hidden md:block absolute inset-0 z-10 cursor-pointer"
+      />
+
+      {/* Hero Custom Play Cursor (Floating Yellow Squircle with Rotating Spoke Text) */}
+      <HeroPlayCursor
+        containerRef={sectionRef}
+        onOpen={() => setIsVideoModalOpen(true)}
+      />
+
       {/* Center Kinetic Logo (replaces 3x3 HOY letter grid) */}
-      <div className="hidden md:flex absolute inset-0 items-center justify-center z-10 pointer-events-none">
+      <div className="hidden md:flex absolute inset-0 items-center justify-center z-20 pointer-events-none">
         <KineticLogo className="pointer-events-auto" />
       </div>
 
       {/* Primary headline: desktop at left-center */}
-      <div className="hidden md:block absolute md:top-1/2 md:-translate-y-1/2 md:left-10 md:max-w-[24rem] z-10 pointer-events-auto">
+      <div className="hidden md:block absolute md:top-1/2 md:-translate-y-1/2 md:left-10 md:max-w-[24rem] z-20 pointer-events-none">
         <p className="mb-2 md:mb-3 text-xs font-medium">
           <SlideUpText split="words" delay={0.2} stagger={0.02}>
             {hero.label}
@@ -196,13 +210,23 @@ export default function Hero() {
       </div>
 
       {/* Supporting copy: desktop right-center */}
-      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 max-w-[18rem] lg:max-w-[20rem] text-right text-[15px] lg:text-base leading-relaxed z-10 md:right-10 pointer-events-auto">
+      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 max-w-[18rem] lg:max-w-[20rem] text-right text-[15px] lg:text-base leading-relaxed z-20 md:right-10 pointer-events-none">
         <p>
           <SlideUpText split="words" delay={0.45} stagger={0.015}>
             {hero.aside}
           </SlideUpText>
         </p>
       </div>
+
+      {/* ========================================================
+          FULLSCREEN VIDEO MODAL (Matches Reference Image 2)
+          ======================================================== */}
+      <HeroVideoModal
+        isOpen={isVideoModalOpen}
+        onClose={() => setIsVideoModalOpen(false)}
+        videoSrc="/rockcastle.mp4"
+        title="Rock Castle — Experiences Un-Ltd."
+      />
     </section>
   );
 }

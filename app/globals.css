@@ -185,6 +185,35 @@ body {
   text-transform: uppercase;
 }
 
+/* Hero Play Cursor + Shape Marquee Tickers */
+@keyframes playCursorV {
+  0% {
+    transform: translateY(-88px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes videoCursorH {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-88px);
+  }
+}
+
+.anim-play-v {
+  animation: playCursorV 3.6s linear infinite;
+  will-change: transform;
+}
+
+.anim-video-h {
+  animation: videoCursorH 3.6s linear infinite;
+  will-change: transform;
+}
+
 /* Honour reduced-motion: keep the layout, drop the movement */
 @media (prefers-reduced-motion: reduce) {
   html {
