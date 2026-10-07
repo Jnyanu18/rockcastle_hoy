@@ -16,8 +16,11 @@ export default function Home() {
     <>
       <Navigation />
       <main>
-        <Hero />
-        <Statement />
+        {/* Sticky Hero with Curtain-rising Statement (Who are we) Scroll Effect */}
+        <div className="relative">
+          <Hero />
+          <Statement />
+        </div>
         <RecentExperiences />
         <Stats />
         <Process />

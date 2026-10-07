@@ -32,7 +32,7 @@ html {
 body {
   background-color: #edeea5;
   color: #1d1d1b;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 ::selection {

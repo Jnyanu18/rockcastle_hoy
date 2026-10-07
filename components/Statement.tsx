@@ -1,10 +1,14 @@
 import { statement } from "@/lib/content";
 
 /* Light statement block: small label left, large body set in the right
-   column, supporting line and two pills, and an outlined rounded frame. */
+   column, supporting line and two pills, and an outlined rounded frame.
+   Rises over the sticky hero as the user scrolls. */
 export default function Statement() {
   return (
-    <section id="about" className="relative bg-canvas px-4 pb-24 pt-20 md:px-10 md:pt-28">
+    <section
+      id="about"
+      className="relative z-10 bg-canvas px-4 pb-24 pt-20 md:px-10 md:pt-28 min-h-[100svh] shadow-[0_-25px_60px_rgba(0,0,0,0.35)]"
+    >
       <div className="mx-auto max-w-[1600px]">
         <div className="flex justify-between text-xs">
           <p className="w-1/4">{statement.label}</p>
@@ -20,7 +24,9 @@ export default function Statement() {
 
             <div className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="max-w-xs text-lg leading-snug md:text-2xl">{statement.sub}</p>
+                <p className="max-w-xs text-lg leading-snug md:text-2xl">
+                  {statement.sub}
+                </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   {statement.ctas.map((cta) => (
                     <a
@@ -44,8 +50,12 @@ export default function Statement() {
                 aria-hidden
                 className="relative h-72 w-full max-w-[368px] rounded-[42px] border border-ink md:h-[380px]"
               >
-                <span className="absolute left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2 text-2xl leading-none">+</span>
-                <span className="absolute left-[38%] top-[38%] text-sm leading-none">+</span>
+                <span className="absolute left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2 text-2xl leading-none">
+                  +
+                </span>
+                <span className="absolute left-[38%] top-[38%] text-sm leading-none">
+                  +
+                </span>
               </div>
             </div>
           </div>
