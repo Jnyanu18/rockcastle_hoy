@@ -10,6 +10,7 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [navTheme, setNavTheme] = useState('dark') // 'dark' (white text) | 'light' (dark text)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('home')
 
   const navRef = useRef(null)
   const pathname = usePathname() || '/'
@@ -67,6 +68,29 @@ export default function Navigation() {
       }
 
       setNavTheme(isLight ? 'light' : 'dark')
+
+      // Detect active section for navbar link indicator
+      const sectionWatchList = [
+        { id: 'leadership', navKey: 'team' },
+        { id: 'services', navKey: 'services' },
+        { id: 'capabilities', navKey: 'services' },
+        { id: 'recent-experiences', navKey: 'our-work' },
+        { id: 'about', navKey: 'about' },
+        { id: 'home', navKey: 'home' },
+      ]
+
+      let currentSec = 'home'
+      for (const item of sectionWatchList) {
+        const el = document.getElementById(item.id)
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          if (rect.top <= 240 && rect.bottom > 80) {
+            currentSec = item.navKey
+            break
+          }
+        }
+      }
+      setActiveSection(currentSec)
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -106,9 +130,19 @@ export default function Navigation() {
   // In-page section targets for single-page smooth scroll fallback
   const sectionMap = {
     '/': 'home',
-    '/made-by-rock-castle': 'recent-experiences',
-    '/stories': 'recent-experiences',
-    '/how-we-work': 'process',
+    '/#home': 'home',
+    '/#about': 'about',
+    '/#about-us': 'about',
+    '/about': 'about',
+    '/#our-work': 'recent-experiences',
+    '/#work': 'recent-experiences',
+    '/#recent-experiences': 'recent-experiences',
+    '/#services': 'services',
+    '/#capabilities': 'services',
+    '/services': 'services',
+    '/#team': 'leadership',
+    '/#leadership': 'leadership',
+    '/team': 'leadership',
   }
 
   const handleNavClick = (e, href) => {
@@ -137,7 +171,7 @@ export default function Navigation() {
 
     // Smooth scroll if matching target section is available on current page
     if (pathname === '/') {
-      if (href === '/') {
+      if (href === '/' || href === '/#home') {
         e.preventDefault()
         if (window.__lenis) {
           window.__lenis.scrollTo(0, { duration: 1 })
@@ -147,7 +181,7 @@ export default function Navigation() {
         return
       }
 
-      const targetId = sectionMap[href] || (href.startsWith('#') ? href.slice(1) : null)
+      const targetId = sectionMap[href] || (href.includes('#') ? href.split('#')[1] : null)
       if (targetId) {
         const el = document.getElementById(targetId)
         if (el) {
@@ -159,6 +193,13 @@ export default function Navigation() {
           }
           return
         }
+      }
+    } else {
+      // If navigating from another page (e.g. /contact), push link with hash to go home
+      if (href.startsWith('/#') || href === '/') {
+        e.preventDefault()
+        router.push(href)
+        return
       }
     }
 
@@ -181,20 +222,25 @@ export default function Navigation() {
     }
   }
 
-  // Exact separate route destinations
+  // Primary Navigation Links: Home | About Us | Our Work | Services | Team
   const links = [
     { href: '/', label: 'Home' },
-    { href: '/made-by-rock-castle', label: 'Made by rock castle' },
-    { href: '/stories', label: 'Stories' },
-    { href: '/how-we-work', label: 'How we work' },
+    { href: '/#about', label: 'About Us' },
+    { href: '/#our-work', label: 'Our Work' },
+    { href: '/#services', label: 'Services' },
+    { href: '/#team', label: 'Team' },
   ]
 
   const isLinkActive = (href) => {
-    if (href === '/') return pathname === '/'
-    if (href === '/made-by-rock-castle') {
-      return pathname === '/made-by-rock-castle' || pathname.startsWith('/work')
+    if (pathname !== '/') {
+      return pathname === href
     }
-    return pathname === href
+    if (href === '/' || href === '/#home') return activeSection === 'home'
+    if (href === '/#about') return activeSection === 'about'
+    if (href === '/#our-work' || href === '/#recent-experiences') return activeSection === 'our-work'
+    if (href === '/#services' || href === '/#capabilities') return activeSection === 'services'
+    if (href === '/#team' || href === '/#leadership') return activeSection === 'team'
+    return false
   }
 
   return (

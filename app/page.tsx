@@ -21,7 +21,7 @@ export default function Home() {
         <RecentExperiences />
         <Stats />
         <Process />
-        <ScrollingServices />
+        <ScrollingServices id="services" />
         <Leadership />
         <Clients />
         <Contact />
