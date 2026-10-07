@@ -94,7 +94,7 @@
   align-items: flex-start;
   gap: clamp(12px, 1.4vw, 24px);
   margin: 0;
-  padding: 0 var(--container-x) 8px;
+  padding: 0 0 8px var(--container-x);
   list-style: none;
   overflow-x: auto;
   overscroll-behavior-x: contain;
@@ -106,13 +106,12 @@
 .rx-rail::-webkit-scrollbar { display: none; }
 
 .rx-rail__item {
-  flex: 0 0 clamp(270px, 27vw, 430px);
+  flex: 0 0 calc((100% - 2 * clamp(12px, 1.4vw, 24px)) / 3);
   scroll-snap-align: start;
 }
 
-/* Staggered heights: plates, not a card grid. */
-.rx-rail__item:nth-child(2n) {
-  margin-top: clamp(28px, 6vh, 72px);
+.rx-rail__item:last-child {
+  margin-right: var(--container-x);
 }
 
 /* ---- Plate --------------------------------------------------------------- */
@@ -127,10 +126,6 @@
   color: var(--rc-white);
   text-align: left;
   isolation: isolate;
-}
-
-.rx-rail__item:nth-child(3n + 2) .rx-plate {
-  aspect-ratio: 3 / 4;
 }
 
 .rx-plate:focus-visible {
@@ -296,7 +291,6 @@
 
   .rx-head__arrow { display: none; }
   .rx-rail__item { flex-basis: 76vw; }
-  .rx-rail__item:nth-child(2n) { margin-top: 28px; }
 }
 
 /* ==========================================================================
