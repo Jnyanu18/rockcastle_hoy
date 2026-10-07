@@ -48,19 +48,20 @@ export default function Process() {
               </span>
             </div>
 
-            {/* Bottom-Right White Ticker Marquee Button */}
-            <div className="mt-4 lg:mt-auto pt-2 lg:pt-4">
+            {/* Bottom-Right White Ticker Marquee Button (Normal Compact Pill Size) */}
+            <div className="mt-6 lg:mt-auto pt-2 lg:pt-4">
               <a
                 href="#services"
-                className="group relative inline-flex h-11 items-center overflow-hidden rounded-full bg-white px-6 text-[11px] md:text-xs font-semibold uppercase tracking-wider text-[#1d1d1b] shadow-md transition-colors hover:bg-[#f2efa3]"
+                className="process-pill-btn"
+                aria-label="How we roll"
               >
                 {/* Scrolling Ticker Text */}
-                <div className="relative flex overflow-hidden whitespace-nowrap">
-                  <div className="flex animate-[hoyMarquee_8s_linear_infinite] group-hover:[animation-play-state:paused] items-center gap-2">
-                    <span>HOW WE ROLL \</span>
-                    <span>HOW WE ROLL \</span>
-                    <span>HOW WE ROLL \</span>
-                    <span>HOW WE ROLL \</span>
+                <div className="process-pill-track-mask">
+                  <div className="process-pill-track">
+                    <span>HOW WE ROLL </span>
+                    <span>HOW WE ROLL </span>
+                    <span>HOW WE ROLL </span>
+                    <span>HOW WE ROLL </span>
                   </div>
                 </div>
               </a>
