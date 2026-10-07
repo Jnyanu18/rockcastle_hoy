@@ -32,6 +32,7 @@ export default function Statement() {
                     <a
                       key={cta.label}
                       href={cta.href}
+                      data-magnetic
                       className={
                         cta.primary
                           ? "inline-flex h-10 sm:h-11 items-center gap-2.5 sm:gap-3 rounded-full bg-ink px-5 sm:px-6 text-[11px] sm:text-xs font-medium uppercase tracking-wide text-canvas transition-transform active:scale-95"

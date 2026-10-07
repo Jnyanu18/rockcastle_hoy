@@ -362,6 +362,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
                                 <span className="buttonWrapper">
                                   <Link
                                     href={item.link}
+                                    data-magnetic
                                     className="arrowButton"
                                     aria-label={`Explore ${line1} ${line2}`}
                                     onClick={(e) => e.stopPropagation()}
@@ -391,7 +392,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
                           </p>
                           {item.buttonText && item.link && (
                             <div className="buttonRow">
-                              <Link href={item.link} className="ss__cta-btn" onClick={(e) => e.stopPropagation()}>
+                              <Link href={item.link} data-magnetic className="ss__cta-btn" onClick={(e) => e.stopPropagation()}>
                                 <span>{item.buttonText}</span>
                                 <span className="ss__cta-arrow" aria-hidden="true">→</span>
                               </Link>

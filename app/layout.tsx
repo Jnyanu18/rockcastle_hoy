@@ -13,6 +13,7 @@ const sans = Poppins({
 
 import SmoothScroll from "@/components/SmoothScroll";
 import ViewCursor from "@/components/ViewCursor";
+import { GlobalMagnetic } from "@/components/hooks/useMagnetic";
 
 export const metadata: Metadata = {
   title: brand.name,
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-canvas font-sans text-ink antialiased">
         <SmoothScroll />
         <ViewCursor />
+        <GlobalMagnetic />
         {children}
       </body>
     </html>

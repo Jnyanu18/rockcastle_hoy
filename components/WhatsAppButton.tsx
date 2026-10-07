@@ -8,6 +8,8 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="WhatsApp"
+      data-magnetic
+      data-magnetic-strength="0.38"
       className="fixed bottom-5 right-5 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-canvas text-ink shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition-transform duration-300 active:scale-95 hover:scale-105 md:bottom-6 md:right-6 md:h-14 md:w-14 md:shadow-none"
     >
       <svg

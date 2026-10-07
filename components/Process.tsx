@@ -53,6 +53,7 @@ export default function Process() {
               <a
                 href="#services"
                 className="process-pill-btn"
+                data-magnetic
                 aria-label="How we roll"
               >
                 {/* Scrolling Ticker Text */}

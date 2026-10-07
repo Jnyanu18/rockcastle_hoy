@@ -61,6 +61,7 @@ export default function Contact() {
               <Link
                 href="/contact"
                 className="contact-pill-btn shrink-0"
+                data-magnetic
                 aria-label="Connect with Rockcastle"
               >
                 <div className="contact-pill-track-mask">

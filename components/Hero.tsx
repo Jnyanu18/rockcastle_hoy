@@ -63,6 +63,7 @@ function PlayVideoTile({ href = "#recent-experiences" }: { href?: string }) {
   return (
     <a
       href={href}
+      data-magnetic
       aria-label="Play video"
       className="group relative flex h-[76px] w-[76px] items-center justify-center rounded-[20px] bg-[#edeea5] text-[#1d1d1b] shadow-[0_4px_24px_rgba(237,238,165,0.22)] transition-transform duration-300 active:scale-95 hover:scale-105"
     >
