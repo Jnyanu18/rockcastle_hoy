@@ -11,6 +11,8 @@ const sans = Poppins({
   display: "swap",
 });
 
+import SmoothScroll from "@/components/SmoothScroll";
+
 export const metadata: Metadata = {
   title: brand.name,
   description: brand.tagline,
@@ -19,7 +21,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={sans.variable}>
-      <body className="bg-canvas font-sans text-ink antialiased">{children}</body>
+      <body className="bg-canvas font-sans text-ink antialiased">
+        <SmoothScroll />
+        {children}
+      </body>
     </html>
   );
 }
