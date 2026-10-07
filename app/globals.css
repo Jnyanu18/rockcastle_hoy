@@ -24,13 +24,17 @@
 html {
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  /* `hidden` (not `clip`) makes body the sticky containing block for every
+     descendant and silently breaks `position: sticky` throughout the page
+     (confirmed via the case-studies rail). `clip` still stops the horizontal
+     scrollbar without creating that scroll context. */
+  overflow-x: clip;
 }
 
 body {
   background-color: var(--color-acid);
   color: var(--color-ink);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Anchor targets sit below the fixed header */
