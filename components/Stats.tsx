@@ -16,14 +16,14 @@ export default function Stats() {
   return (
     <section
       id="stats"
-      className="hoy-stats-section px-4 sm:px-8 lg:px-12 pt-16 md:pt-24 pb-20 md:pb-28"
+      className="hoy-stats-section px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-28"
     >
       {/* Container wrapper matching max content bounds */}
       <div className="mx-auto w-full max-w-[1760px]">
         {/* ========================================================================= */}
         {/* TOP INTRO BLOCK [ 03 ] Beyond the Screen (Matches Reference Image 3)      */}
         {/* ========================================================================= */}
-        <div className="hoy-intro-cols mb-20 lg:mb-28">
+        <div className="hoy-intro-cols mb-12 sm:mb-16 lg:mb-28">
           {/* Column 1: Section Index */}
           <div className="hoy-intro-col-1">
             <span className="text-xs md:text-[13px] font-medium tracking-wide text-[#f2efa3]">
@@ -233,14 +233,14 @@ export default function Stats() {
           </div>
 
           {/* Stats Figures Column */}
-          <div className="hoy-showcase-col-stats">
-            <div className="flex flex-col gap-8 lg:gap-11">
+          <div className="hoy-showcase-col-stats w-full">
+            <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:flex lg:flex-col lg:gap-11">
               {figures.map((item) => (
                 <div key={item.label} className="flex flex-col">
                   <span className="text-xs md:text-[14px] font-normal text-[#f2efa3]/80 mb-1">
                     {item.label}
                   </span>
-                  <span className="text-5xl sm:text-6xl lg:text-[72px] xl:text-[80px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#f2efa3]">
+                  <span className="text-3xl sm:text-5xl lg:text-[72px] xl:text-[80px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#f2efa3]">
                     {item.value}
                   </span>
                 </div>

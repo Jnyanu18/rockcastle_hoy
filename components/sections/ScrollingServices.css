@@ -342,21 +342,32 @@
 }
 
 @media (max-width: 767px) {
+  .servicesBlock .sideCross {
+    display: none;
+  }
+
   .servicesBlock .scrollContainer {
     height: 280vh;
   }
 
   .servicesBlock .stickyWrapper {
-    padding-top: clamp(80px, 11vh, 92px);
-    padding-bottom: 14px;
+    padding-top: clamp(74px, 10vh, 90px);
+    padding-bottom: 12px;
   }
 
   .servicesBlock .items {
-    height: calc(100vh - clamp(80px, 11vh, 92px) - 14px);
+    height: calc(100vh - clamp(74px, 10vh, 90px) - 12px);
+    max-width: 100%;
+    padding: 0 16px;
   }
 
   .servicesBlock .normalTitle .titleText {
-    font-size: clamp(1.35rem, 5.8vw, 2rem);
+    font-size: clamp(1.2rem, 5.4vw, 1.85rem);
+    white-space: normal;
+  }
+
+  .servicesBlock .normalTitleLine {
+    white-space: normal;
   }
 
   .servicesBlock .normalTitle .numIndex {
@@ -365,9 +376,9 @@
   }
 
   .servicesBlock .normalTitle .arrowButton {
-    width: 28px;
-    height: 28px;
-    margin-left: 8px;
+    width: 26px;
+    height: 26px;
+    margin-left: 6px;
   }
 
   .servicesBlock .normalTitleLine--1 {
@@ -375,7 +386,7 @@
   }
 
   .servicesBlock .itemText {
-    max-width: 90%;
+    max-width: 92%;
     margin: 4px auto 8px;
     font-size: 0.76rem;
     line-height: 1.4;

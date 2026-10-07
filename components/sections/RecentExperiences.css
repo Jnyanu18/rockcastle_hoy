@@ -284,13 +284,34 @@
 }
 
 @media (max-width: 767px) {
+  .recent-experiences {
+    padding: 60px 0 54px;
+  }
+
   .rx-head {
     grid-template-columns: 1fr;
     grid-template-areas: 'eyebrow' 'title' 'controls';
+    row-gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .rx-head__title {
+    font-size: clamp(2.2rem, 8.5vw, 3.2rem);
+    line-height: 1.0;
   }
 
   .rx-head__arrow { display: none; }
-  .rx-rail__item { flex-basis: 76vw; }
+
+  .rx-rail {
+    gap: 14px;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .rx-rail__item {
+    flex-basis: 76vw;
+    max-width: 320px;
+  }
 }
 
 /* ==========================================================================
