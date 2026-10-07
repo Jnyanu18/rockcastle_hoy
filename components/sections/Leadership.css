@@ -61,7 +61,7 @@
   font-weight: 700;
   line-height: 1.04;
   letter-spacing: -0.025em;
-  color: var(--rc-white);
+  color: var(--rc-yellow);
   max-width: 24ch;
   margin: 0;
 }
@@ -98,38 +98,39 @@
   align-items: center;
   gap: 8px;
   width: 100%;
-  margin-bottom: 14px;
+  margin-bottom: 20px;
   padding: 0 4px;
   box-sizing: border-box;
 }
 
 .leadership__track-num {
   font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 500;
   color: var(--rc-white);
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
 .leadership__track-sep {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10px;
   color: var(--rc-white);
-  opacity: 0.35;
+  opacity: 0.3;
 }
 
 .leadership__track-label {
   font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--rc-white);
+  opacity: 0.65;
 }
 
 .leadership__flipcard {
-  box-shadow: 0 24px 60px -12px rgba(12, 13, 12, 0.35);
-  border-radius: 24px;
+  box-shadow: 0 20px 48px -28px rgba(29, 29, 27, 0.4);
+  border-radius: 16px;
   transition: transform 0.3s ease;
 }
 
@@ -140,91 +141,38 @@
   height: 100%;
   overflow: hidden;
   border-radius: inherit;
-  background: #141413;
-}
-
-.leadership__card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.leadership__card-front-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(12, 13, 12, 0.96) 0%,
-    rgba(12, 13, 12, 0.75) 32%,
-    rgba(12, 13, 12, 0.15) 60%,
-    transparent 100%
-  );
-  z-index: 1;
+  background: var(--rc-white);
+  padding: 26px 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .leadership__card-credential {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  z-index: 2;
-  background: #0c0d0c;
-  color: var(--rc-yellow);
-  border: 1px solid rgba(237, 238, 165, 0.4);
+  align-self: flex-end;
   font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  padding: 5px 14px;
-  border-radius: 9999px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(29, 29, 27, 0.5);
 }
 
 .leadership__card-front-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 28px 24px 22px;
-  z-index: 2;
   display: flex;
   flex-direction: column;
-}
-
-.leadership__card-tag {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  color: var(--rc-yellow);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 600;
+  gap: 7px;
 }
 
 .leadership__card-name {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #ffffff;
-  margin: 6px 0 16px;
-  line-height: 1.15;
-}
-
-.leadership__card-flip-hint {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.65);
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-}
-
-.leadership__card-flip-icon {
-  font-size: 14px;
-  line-height: 1;
-  color: var(--rc-yellow);
+  color: var(--rc-black);
+  margin: 0;
+  line-height: 1.14;
+  letter-spacing: -0.01em;
 }
 
 /* ---- FlipCard back face content ---- */
@@ -232,38 +180,28 @@
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 32px 28px;
+  padding: 26px 24px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: linear-gradient(150deg, #1c1c1b 0%, #10100f 100%);
-  border: 1px solid rgba(237, 238, 165, 0.22);
+  background: var(--rc-white);
   border-radius: inherit;
 }
 
 .leadership__card-back-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-}
-
-.leadership__card-back-tag {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  color: var(--rc-yellow);
-  letter-spacing: 0.12em;
-  font-weight: 600;
 }
 
 .leadership__card-back-cred {
   font-family: var(--font-mono);
-  font-size: 10.5px;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.12);
-  padding: 4px 12px;
-  border-radius: 9999px;
-  letter-spacing: 0.08em;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(29, 29, 27, 0.5);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .leadership__card-back-body {
@@ -275,36 +213,34 @@
 
 .leadership__quote-mark {
   font-family: var(--font-editorial);
-  font-size: 4rem;
+  font-size: 3.4rem;
   line-height: 0.75;
-  color: var(--rc-yellow);
-  opacity: 0.4;
-  margin-bottom: 8px;
+  color: rgba(29, 29, 27, 0.3);
+  margin-bottom: 6px;
   display: block;
 }
 
 .leadership__card-quote {
   font-family: var(--font-editorial);
   font-style: italic;
-  font-size: 1.12rem;
-  line-height: 1.58;
-  color: #ffffff;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--rc-black);
   margin: 0;
 }
 
 .leadership__card-back-divider {
-  width: 40px;
-  height: 2px;
-  background: var(--rc-yellow);
-  margin: 22px 0 14px;
-  border-radius: 1px;
+  width: 32px;
+  height: 1px;
+  background: rgba(29, 29, 27, 0.3);
+  margin: 20px 0 14px;
 }
 
 .leadership__card-back-name {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--rc-black);
   margin: 0;
 }
 
@@ -312,95 +248,9 @@
   font-family: var(--font-mono);
   font-size: 9px;
   letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(29, 29, 27, 0.5);
   margin-top: 5px;
   display: block;
-}
-
-.leadership__card-back-action {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  color: var(--rc-yellow);
-  padding-top: 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-/* ==========================================================================
-   Kinetic transition ribbon into the clients section
-   ========================================================================== */
-
-.leadership__transition-wrap {
-  margin-top: clamp(64px, 10vh, 108px);
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.leadership__transition-divider {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-}
-
-.leadership__transition-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--rc-yellow);
-  flex-shrink: 0;
-}
-
-.leadership__transition-line {
-  flex: 1;
-  height: 1px;
-  background: rgba(241, 236, 226, 0.16);
-}
-
-.leadership__transition-badge {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: var(--rc-white);
-  background: rgba(241, 236, 226, 0.08);
-  padding: 6px 14px;
-  border-radius: 9999px;
-  white-space: nowrap;
-}
-
-.leadership__transition-ticker-track {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  overflow: hidden;
-  white-space: nowrap;
-  padding: 14px 0;
-  border-top: 1px solid rgba(241, 236, 226, 0.12);
-  border-bottom: 1px solid rgba(241, 236, 226, 0.12);
-  background: rgba(241, 236, 226, 0.04);
-}
-
-.leadership__transition-ticker {
-  display: inline-flex;
-  align-items: center;
-  gap: 28px;
-  font-family: var(--font-display);
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--rc-white);
-  will-change: transform;
-}
-
-.leadership__ticker-bullet {
-  font-size: 11px;
-  color: rgba(241, 236, 226, 0.4);
 }
 
 /* ==========================================================================
@@ -437,12 +287,12 @@
     width: 100%;
   }
 
-  .leadership__card-front-info {
+  .leadership__card-front {
     padding: 20px 18px;
   }
 
   .leadership__card-back {
-    padding: 24px 20px;
+    padding: 20px 18px;
   }
 }
 

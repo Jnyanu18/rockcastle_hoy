@@ -10,8 +10,6 @@ import "@/components/sections/Leadership.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PLACEHOLDER_IMAGES = ["/rx/placeholder-1.svg", "/rx/placeholder-2.svg", "/rx/placeholder-3.svg"];
-
 const founders = [
   {
     num: "01",
@@ -20,7 +18,6 @@ const founders = [
     tag: "BRIEF → STRATEGY",
     credential: "12 YRS",
     quote: "Every brief gets interrogated until the idea can survive contact with a deadline.",
-    image: PLACEHOLDER_IMAGES[0],
   },
   {
     num: "02",
@@ -29,7 +26,6 @@ const founders = [
     tag: "CONCEPT → SHOOT",
     credential: "9 YRS",
     quote: "A concept that only works as a mood board is not a concept — it's a wish.",
-    image: PLACEHOLDER_IMAGES[1],
   },
   {
     num: "03",
@@ -38,7 +34,6 @@ const founders = [
     tag: "EDIT → DELIVERY",
     credential: "10 YRS",
     quote: "The edit is only as good as the footage still on the drive at midnight.",
-    image: PLACEHOLDER_IMAGES[2],
   },
 ];
 
@@ -57,7 +52,6 @@ export default function Leadership() {
     const ctx = gsap.context(() => {
       const cards = root.querySelectorAll<HTMLElement>(".leadership__founder-item");
       const head = root.querySelector<HTMLElement>(".leadership__head");
-      const ticker = root.querySelector<HTMLElement>(".leadership__transition-ticker");
 
       if (cards.length) {
         gsap.fromTo(
@@ -91,7 +85,6 @@ export default function Leadership() {
             gsap.set(cards[2], { y: -80 * p, rotateZ: 3 * p, scale: 1 - 0.04 * p, opacity: 1 - 0.35 * p });
 
             if (head) gsap.set(head, { y: -45 * p, opacity: 1 - 0.45 * p });
-            if (ticker) gsap.set(ticker, { xPercent: -22 * p });
           },
         });
       }
@@ -140,51 +133,41 @@ export default function Leadership() {
 
               <FlipCard
                 axis="y"
-                flipOnClick
-                draggable
-                dragDistance={0}
-                tilt
-                tiltMax={12}
-                glare
-                glareOpacity={0.24}
-                hoverScale={1.03}
-                perspective={1100}
-                stiffness={170}
-                damping={20}
+                flipOnClick={false}
+                flipOnHover
+                draggable={false}
+                tilt={false}
+                glare={false}
+                hoverScale={1}
+                perspective={1800}
+                stiffness={130}
+                damping={24}
                 width={280}
                 height={360}
-                radius={24}
-                background="#141413"
-                color="#f5f5f5"
+                radius={16}
+                background="var(--rc-white)"
+                color="var(--rc-black)"
                 shadow
-                shadowColor="#0c0d0c"
-                shadowOpacity={0.35}
+                shadowColor="#1d1d1b"
+                shadowOpacity={0.16}
                 ariaLabel={`${f.name} - ${f.tag}`}
                 className="leadership__flipcard"
                 front={
                   <div className="leadership__card-front">
-                    <img src={f.image} alt={f.name} className="leadership__card-img" />
-                    <div className="leadership__card-front-overlay" />
                     <span className="leadership__card-credential">{f.credential}</span>
 
                     <div className="leadership__card-front-info">
-                      <span className="leadership__card-tag">[ {f.tag} ]</span>
                       <h3 className="leadership__card-name">
                         <SlideUpText split="words" inView once delay={0.08}>
                           {f.name}
                         </SlideUpText>
                       </h3>
-                      <div className="leadership__card-flip-hint">
-                        <span>DRAG OR CLICK TO FLIP</span>
-                        <span className="leadership__card-flip-icon">↻</span>
-                      </div>
                     </div>
                   </div>
                 }
                 back={
                   <div className="leadership__card-back">
                     <div className="leadership__card-back-header">
-                      <span className="leadership__card-back-tag">[ {f.tag} ]</span>
                       <span className="leadership__card-back-cred">{f.credential}</span>
                     </div>
 
@@ -196,43 +179,11 @@ export default function Leadership() {
                       <h4 className="leadership__card-back-name">{f.name}</h4>
                       <span className="leadership__card-back-role">EXECUTIVE LEADERSHIP // {brand.shortName}</span>
                     </div>
-
-                    <div className="leadership__card-back-action">
-                      <span>CLICK TO FLIP BACK</span>
-                      <span className="leadership__card-flip-icon">↺</span>
-                    </div>
                   </div>
                 }
               />
             </div>
           ))}
-        </div>
-
-        <div className="leadership__transition-wrap" aria-hidden="true">
-          <div className="leadership__transition-divider">
-            <span className="leadership__transition-dot" />
-            <span className="leadership__transition-line" />
-            <span className="leadership__transition-badge">SCROLL ↓</span>
-            <span className="leadership__transition-line" />
-            <span className="leadership__transition-dot" />
-          </div>
-
-          <div className="leadership__transition-ticker-track">
-            <div className="leadership__transition-ticker">
-              {Array.from({ length: 2 }).map((_, i) => (
-                <span key={i} style={{ display: "contents" }}>
-                  <span>FROM EXECUTIVE SIGN-OFF</span>
-                  <span className="leadership__ticker-bullet">✦</span>
-                  <span>TO THE EDIT BAY</span>
-                  <span className="leadership__ticker-bullet">✦</span>
-                  <span>ZERO OUTSOURCING</span>
-                  <span className="leadership__ticker-bullet">✦</span>
-                  <span>100% IN-HOUSE CREW</span>
-                  <span className="leadership__ticker-bullet">✦</span>
-                </span>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </section>

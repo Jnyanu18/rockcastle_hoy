@@ -87,7 +87,28 @@ export const works = {
 
 export const clients = {
   label: "Selected partners",
-  names: ["Client one", "Client two", "Client three", "Client four", "Client five", "Client six", "Client seven"],
+  logos: [
+    { name: "EY", src: "/clients/ey.png" },
+    { name: "Numero Uno", src: "/clients/numero-uno.png" },
+    { name: "M3M", src: "/clients/m3m.png" },
+    { name: "Hindustan Times", src: "/clients/hindustan-times.png" },
+    { name: "Trident Group", src: "/clients/trident-group.png" },
+    { name: "Ambience", src: "/clients/ambience.png" },
+    { name: "Candor TechSpace", src: "/clients/candor-techspace.png" },
+    { name: "The Times of India", src: "/clients/toi.png" },
+    { name: "SBI Card", src: "/clients/sbi-card.png" },
+    { name: "Samsung", src: "/clients/samsung.png" },
+    { name: "Royal Stag", src: "/clients/royal-stag.png" },
+    { name: "Quaker", src: "/clients/quaker.png" },
+    { name: "Pernod Ricard", src: "/clients/pernod-ricard.png" },
+    { name: "cult.fit", src: "/clients/cult-fit.png" },
+    { name: "Firefox Bikes", src: "/clients/firefox-bikes.png" },
+    { name: "GoPro", src: "/clients/gopro.png" },
+    { name: "Jaguar", src: "/clients/jaguar.png" },
+    { name: "Noise", src: "/clients/noise.png" },
+    { name: "Central Park Resorts", src: "/clients/central-park-resorts.png" },
+    { name: "Brookfield Properties", src: "/clients/brookfield-properties.png" },
+  ],
 };
 
 export const stats = {

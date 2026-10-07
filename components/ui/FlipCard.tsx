@@ -41,6 +41,7 @@ type Props = {
   onFlipChange?: (flipped: boolean) => void;
   axis?: "x" | "y";
   flipOnClick?: boolean;
+  flipOnHover?: boolean;
   draggable?: boolean;
   dragDistance?: number;
   tilt?: boolean;
@@ -74,6 +75,7 @@ export default function FlipCard({
   onFlipChange,
   axis = "y",
   flipOnClick = true,
+  flipOnHover = false,
   draggable = true,
   dragDistance = 0,
   tilt = true,
@@ -270,9 +272,11 @@ export default function FlipCard({
       onLostPointerCapture={(e) => release(e, true)}
       onPointerEnter={(e) => {
         if (!reduce && !disabled && e.pointerType !== "touch") lift.set(hoverScale);
+        if (flipOnHover && !disabled && !reduce && e.pointerType !== "touch" && !grip.current) settle(180, 0, false);
       }}
       onPointerLeave={() => {
         if (!grip.current) rest();
+        if (flipOnHover && !disabled && !reduce) settle(0, 0, false);
       }}
       onKeyDown={onKeyDown}
       onClick={onClick}

@@ -1,21 +1,40 @@
 import { clients } from "@/lib/content";
+import "@/components/Clients.css";
 
-/* Horizontal partner strip with hairline dividers. Names are placeholders
-   until the client's logo files arrive; they take the same slot. */
+/* Two slow marquee rows of client logos, looping in opposite directions. */
 export default function Clients() {
+  const half = Math.ceil(clients.logos.length / 2);
+  const rows = [clients.logos.slice(0, half), clients.logos.slice(half)];
+
   return (
-    <section aria-label={clients.label} className="bg-canvas pb-24">
-      {/* Negative margins let each cell draw only its right and bottom rule */}
-      <ul className="mx-4 grid grid-cols-2 overflow-hidden border-l border-t border-ink/30 md:mx-10 md:grid-cols-4 lg:grid-cols-7">
-        {clients.names.map((name) => (
-          <li
-            key={name}
-            className="flex h-24 items-center justify-center border-b border-r border-ink/30 px-4 text-center text-sm font-medium uppercase tracking-wide md:h-28"
-          >
-            {name}
-          </li>
+    <section className="clients" id="clients" aria-labelledby="cl-title">
+      <header className="cl-head">
+        <span className="cl-head__eyebrow">[&nbsp;WHO WE WORK WITH&nbsp;]</span>
+        <h2 className="cl-head__title" id="cl-title">
+          In good <em>company.</em>
+        </h2>
+      </header>
+
+      {/* Screen readers get one plain list; the moving rows are decoration. */}
+      <ul className="sr-only">
+        {clients.logos.map((c) => (
+          <li key={c.name}>{c.name}</li>
         ))}
       </ul>
+
+      <div className="cl-rows" aria-hidden="true">
+        {rows.map((row, r) => (
+          <div className={`cl-row ${r ? "cl-row--reverse" : ""}`} key={r}>
+            {/* Four copies: the two halves are identical, so a -50% loop is
+                seamless, and each half is wide enough to fill wide screens. */}
+            {[...row, ...row, ...row, ...row].map((c, i) => (
+              <span className="cl-cell" key={`${c.name}-${i}`}>
+                <img className="cl-logo" src={c.src} alt="" loading="lazy" decoding="async" />
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
