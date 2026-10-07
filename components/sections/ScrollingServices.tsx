@@ -402,7 +402,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
                         {item.images && item.images.length > 0 && (
                           <div className="images">
                             {item.images.map((src, j) => (
-                              <div className="imageWrapper" key={j}>
+                              <div className="imageWrapper" key={j} data-cursor="view">
                                 <img src={src} alt={`${line1} — visual ${j + 1}`} loading="lazy" />
                               </div>
                             ))}

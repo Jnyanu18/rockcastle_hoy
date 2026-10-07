@@ -150,6 +150,7 @@ export default function RecentExperiences() {
             <button
               type="button"
               className="rx-plate"
+              data-cursor="view"
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}

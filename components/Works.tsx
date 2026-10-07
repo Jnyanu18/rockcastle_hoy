@@ -25,7 +25,7 @@ export default function Works() {
         <ul className="mt-16 grid gap-6 md:grid-cols-3">
           {works.projects.map((p) => (
             <li key={p.title} className="group">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-xl" data-cursor="view">
                 <Media
                   src={p.image}
                   alt={p.alt}
