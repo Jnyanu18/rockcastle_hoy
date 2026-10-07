@@ -32,11 +32,10 @@ export const hero = {
   primaryCta: { label: "Play reel", href: "#works" },
   // Letter grid: [row, column, letter]. Cells not listed stay empty.
   letters: [
-    { row: 0, col: 1, letter: "H" },
-    { row: 1, col: 0, letter: "H" },
+    { row: 0, col: 2, letter: "H" },
     { row: 1, col: 1, letter: "O" },
-    { row: 1, col: 2, letter: "Y" },
-    { row: 2, col: 1, letter: "Y" },
+    { row: 2, col: 0, letter: "Y" },
+    { row: 2, col: 2, letter: "Y" },
   ],
 };
 

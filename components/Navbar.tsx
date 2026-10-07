@@ -1,24 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { brand, navigation, social } from "@/lib/content";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Transparent over the hero media, light bar once the page scrolls
-  const tone = scrolled ? "bg-header text-ink" : "bg-transparent text-canvas";
-
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 h-20 transition-colors duration-500 ${tone}`}>
+    <header className="fixed inset-x-0 top-0 z-50 h-14 border-b border-ink/10 bg-header text-ink md:h-16">
       <nav className="relative mx-auto flex h-full max-w-[1600px] items-center justify-between px-4 md:px-10">
         {/* Left: links (desktop) / menu toggle (mobile) */}
         <ul className="hidden items-center gap-8 text-sm md:flex">
@@ -73,7 +62,7 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <ul id="mobile-menu" className="absolute inset-x-0 top-20 flex flex-col gap-4 bg-header px-4 py-6 text-ink md:hidden">
+        <ul id="mobile-menu" className="absolute inset-x-0 top-14 flex flex-col gap-4 border-b border-ink/10 bg-header px-4 py-6 text-ink md:hidden">
           {navigation.map((link) => (
             <li key={link.label}>
               <a href={link.href} onClick={() => setOpen(false)} className="text-2xl">
