@@ -46,9 +46,13 @@ function applyMagnetic(el, defaultStrength = 0.32) {
 
   let cachedRect = null
 
+  let prevTransition = ''
+
   const onEnter = () => {
     cachedRect = el.getBoundingClientRect()
     el.style.willChange = 'transform'
+    prevTransition = el.style.transition
+    el.style.transition = 'none'
   }
 
   const onMove = (e) => {
@@ -89,6 +93,7 @@ function applyMagnetic(el, defaultStrength = 0.32) {
       overwrite: 'auto',
       onComplete: () => {
         el.style.willChange = ''
+        el.style.transition = prevTransition || ''
       },
     })
     if (inner) {

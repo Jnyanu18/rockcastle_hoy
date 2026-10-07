@@ -31,18 +31,19 @@ function parseMetric(val: string) {
 
 function RunningMetric({ value, delay = 0 }: { value: string; delay?: number }) {
   const { ref, inView } = useInView<HTMLSpanElement>(0.15);
-  const [display, setDisplay] = useState(() => {
+  const hasAnimated = useRef(false);
+  const initialValue = (() => {
     const { prefix = "", suffix = "", decimals = 0 } = parseMetric(value);
     return `${prefix}${decimals > 0 ? "0.0" : "0"}${suffix}`;
-  });
-  const hasAnimated = useRef(false);
+  })();
 
   useEffect(() => {
-    if (!inView || hasAnimated.current) return;
+    const el = ref.current;
+    if (!el || !inView || hasAnimated.current) return;
     hasAnimated.current = true;
 
     if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setDisplay(value);
+      el.textContent = value;
       return;
     }
 
@@ -54,6 +55,7 @@ function RunningMetric({ value, delay = 0 }: { value: string; delay?: number }) 
       const startTime = performance.now();
 
       const tick = (now: number) => {
+        if (!el) return;
         const elapsed = now - startTime;
         const t = Math.min(1, elapsed / duration);
         const ease = 1 - Math.pow(1 - t, 4);
@@ -68,12 +70,12 @@ function RunningMetric({ value, delay = 0 }: { value: string; delay?: number }) 
           formatted = Math.round(current).toString();
         }
 
-        setDisplay(`${prefix}${formatted}${suffix}`);
+        el.textContent = `${prefix}${formatted}${suffix}`;
 
         if (t < 1) {
           rafId = requestAnimationFrame(tick);
         } else {
-          setDisplay(value);
+          el.textContent = value;
         }
       };
 
@@ -84,11 +86,11 @@ function RunningMetric({ value, delay = 0 }: { value: string; delay?: number }) 
       clearTimeout(timerId);
       cancelAnimationFrame(rafId);
     };
-  }, [inView, value, delay]);
+  }, [inView, value, delay, ref]);
 
   return (
     <span ref={ref} className="tabular-nums">
-      {display}
+      {initialValue}
     </span>
   );
 }
