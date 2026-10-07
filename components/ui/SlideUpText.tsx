@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useInView } from "@/lib/hooks";
 
 type Props = {
   children: string;
@@ -8,7 +9,7 @@ type Props = {
   split?: "characters" | "words";
   /** Gate the reveal behind scroll visibility; false renders plain text. */
   inView?: boolean;
-  /** Replay every time it scrolls into view, or only the first time. */
+  /** Accepted for API compatibility; useInView always reveals once and stops observing. */
   once?: boolean;
   /** Seconds between each unit's start. */
   stagger?: number;
@@ -18,35 +19,42 @@ type Props = {
 };
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
+const REVEALED = { y: "0%", opacity: 1 };
+const HIDDEN = { y: "110%", opacity: 0 };
 
 /**
  * Masks each word (or character) behind `overflow: hidden` and slides it up
  * into place on scroll-into-view, staggered unit by unit. Characters are
  * grouped by word so a word never breaks mid-reveal across a line wrap.
+ *
+ * Visibility is driven by a single IntersectionObserver on the outer wrapper
+ * (lib/hooks' useInView) rather than per-unit whileInView: with 50+ masked
+ * spans in a paragraph, per-unit scroll observers were unreliable here.
  */
 export default function SlideUpText({
   children,
   split = "words",
-  inView = true,
-  once = true,
+  inView: gate = true,
   stagger = 0.02,
   delay = 0,
   className = "",
 }: Props) {
-  if (!inView) return <span className={className}>{children}</span>;
+  const { ref, inView } = useInView<HTMLSpanElement>(0.4);
+  const revealed = gate && inView;
+
+  if (!gate) return <span className={className}>{children}</span>;
 
   const words = children.split(" ");
   let unitIndex = 0;
 
-  const unit = (content: string, i: number, extraClass = "") => {
+  const unit = (content: string, i: number) => {
     const index = unitIndex++;
     return (
-      <span key={i} className={`slide-up-text__mask ${extraClass}`} aria-hidden="true">
+      <span key={i} className="slide-up-text__mask" aria-hidden="true">
         <motion.span
           className="slide-up-text__unit"
-          initial={{ y: "110%", opacity: 0 }}
-          whileInView={{ y: "0%", opacity: 1 }}
-          viewport={{ once, amount: 0.6 }}
+          initial={HIDDEN}
+          animate={revealed ? REVEALED : HIDDEN}
           transition={{ duration: 0.65, delay: delay + index * stagger, ease: EASE_OUT_EXPO }}
         >
           {content}
@@ -56,7 +64,7 @@ export default function SlideUpText({
   };
 
   return (
-    <span className={`slide-up-text ${className}`}>
+    <span className={`slide-up-text ${className}`} ref={ref}>
       <span className="sr-only">{children}</span>
       {split === "characters"
         ? words.map((word, wi) => (
@@ -68,7 +76,7 @@ export default function SlideUpText({
         : words.map((word, wi) => (
             <span className="slide-up-text__word" key={wi} aria-hidden="true">
               {unit(word, wi)}
-              {wi < words.length - 1 && " "}
+              {wi < words.length - 1 && " "}
             </span>
           ))}
     </span>

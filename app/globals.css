@@ -13,6 +13,7 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-display: var(--font-sans), system-ui, sans-serif;
   --font-body: var(--font-sans), system-ui, sans-serif;
+  --font-editorial: Georgia, "Times New Roman", serif;
   --fs-meta: 0.75rem;
   --ls-meta: 0.08em;
   --gutter: clamp(16px, 4vw, 40px);

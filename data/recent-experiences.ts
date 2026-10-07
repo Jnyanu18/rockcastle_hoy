@@ -42,7 +42,7 @@ const recentExperiences: RecentStory[] = [
     city: "City",
     category: "Film",
     cover: "/rx/placeholder-1.svg",
-    projectUrl: "#works",
+    projectUrl: "#contact",
     frames: [
       { id: "s1-f1", type: "image", variant: "cover", label: "Project", src: "/rx/placeholder-1.svg", duration: 4200 },
       {
@@ -81,7 +81,7 @@ const recentExperiences: RecentStory[] = [
     city: "City",
     category: "Campaign",
     cover: "/rx/placeholder-2.svg",
-    projectUrl: "#works",
+    projectUrl: "#contact",
     frames: [
       { id: "s2-f1", type: "image", variant: "cover", label: "Project", src: "/rx/placeholder-2.svg", duration: 4200 },
       {
@@ -118,7 +118,7 @@ const recentExperiences: RecentStory[] = [
     city: "City",
     category: "Photography",
     cover: "/rx/placeholder-3.svg",
-    projectUrl: "#works",
+    projectUrl: "#contact",
     frames: [
       { id: "s3-f1", type: "image", variant: "cover", label: "Project", src: "/rx/placeholder-3.svg", duration: 4200 },
       {
@@ -141,7 +141,7 @@ const recentExperiences: RecentStory[] = [
     city: "City",
     category: "Animation",
     cover: "/rx/placeholder-4.svg",
-    projectUrl: "#works",
+    projectUrl: "#contact",
     frames: [
       { id: "s4-f1", type: "image", variant: "cover", label: "Project", src: "/rx/placeholder-4.svg", duration: 4200 },
       {

@@ -11,10 +11,10 @@ export const brand = {
 };
 
 export const navigation = [
-  { label: "Work", href: "#works" },
+  { label: "Work", href: "#recent-experiences" },
   { label: "About", href: "#about" },
   { label: "Process", href: "#process" },
-  { label: "Services", href: "#services" },
+  { label: "Services", href: "#capabilities" },
 ];
 
 export const social = {
@@ -29,7 +29,7 @@ export const hero = {
     "We’re a creative content agency that moves at the speed of your ambition. From idea to production and beyond. Where speed meets craftsmanship.",
   aside:
     "We craft formats that stick and stories that move. From an 8-second viral to a full brand documentary, we translate your message into content that creates real momentum.",
-  primaryCta: { label: "Play reel", href: "#works" },
+  primaryCta: { label: "Play reel", href: "#recent-experiences" },
   // Letter grid: [row, column, letter]. Cells not listed stay empty.
   letters: [
     { row: 0, col: 2, letter: "H" },

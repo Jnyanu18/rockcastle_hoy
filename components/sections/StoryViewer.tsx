@@ -569,7 +569,7 @@ export default function StoryViewer({ stories, startIndex, getOriginRect, onClos
           {frame.type === "cta" && (
             <div className="story-viewer__cta">
               <Link
-                href={story.projectUrl ?? "#works"}
+                href={story.projectUrl ?? "#contact"}
                 className="story-viewer__cta-link"
                 onClick={close}
               >

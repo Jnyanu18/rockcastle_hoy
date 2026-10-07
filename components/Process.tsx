@@ -21,7 +21,7 @@ export default function Process() {
       </div>
 
       <a
-        href="#services"
+        href="#capabilities"
         className="fixed bottom-6 right-20 z-40 inline-flex h-11 items-center rounded-full bg-canvas px-5 text-xs font-medium uppercase tracking-wide text-ink md:right-24"
       >
         {process.cta}
