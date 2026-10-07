@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { contact } from "@/lib/content";
 
 /* Dark closing call: outlined rounded frame with a cross, a yellow label, a
@@ -16,12 +17,12 @@ export default function Contact() {
         <div>
           <p className="text-sm text-canvas">{contact.label}</p>
           <p className="mt-6 text-3xl leading-[1.15] md:text-[44px] lg:text-[52px]">{contact.heading}</p>
-          <a
-            href={contact.href}
+          <Link
+            href="/contact"
             className="mt-10 inline-flex h-12 items-center rounded-full bg-canvas px-8 text-xs font-medium uppercase tracking-wide text-ink transition-transform duration-300 hover:scale-[1.03]"
           >
             {contact.cta}
-          </a>
+          </Link>
         </div>
       </div>
     </section>

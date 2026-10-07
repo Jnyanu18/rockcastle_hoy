@@ -8,7 +8,6 @@ import Process from "@/components/Process";
 import ScrollingServices from "@/components/sections/ScrollingServices";
 import Leadership from "@/components/sections/Leadership";
 import Contact from "@/components/Contact";
-import BriefForm from "@/components/sections/BriefForm";
 import Footer from "@/components/Footer.jsx";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
@@ -26,7 +25,6 @@ export default function Home() {
         <Leadership />
         <Clients />
         <Contact />
-        <BriefForm />
       </main>
       <Footer />
       <WhatsAppButton />

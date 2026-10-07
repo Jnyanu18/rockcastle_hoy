@@ -149,7 +149,7 @@ export const services = [
     index: "07",
     title: "Animation that brings ideas into motion",
     body:
-      "From 3D worlds to motion graphics, we bring concepts to life with visuals that feel tangible, playful and precise.",
+      "From refined 3D visuals to immersive motion design, we create animations that turn complex ideas into striking visual experiences built to captivate, explain, and elevate every brand story.",
     images: ["", "", "", ""],
   },
 ];
@@ -160,7 +160,7 @@ export const contact = {
   heading:
     "If you’re looking for a creative partner that combines craftsmanship, speed and innovation, let’s shape the future together. Get in touch and let’s lead.",
   cta: "Connect",
-  href: "mailto:hello@example.com",
+  href: "/contact",
 };
 
 export const footer = {

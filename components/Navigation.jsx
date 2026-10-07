@@ -109,12 +109,31 @@ export default function Navigation() {
     '/made-by-rock-castle': 'recent-experiences',
     '/stories': 'recent-experiences',
     '/how-we-work': 'process',
-    '/connect': 'contact',
-    '/contact': 'contact',
   }
 
   const handleNavClick = (e, href) => {
     closeMenu()
+
+    // Dedicated routes that should always navigate to the page
+    if (href === '/contact' || href === '/connect') {
+      if (pathname === '/contact' || pathname === '/connect') {
+        e.preventDefault()
+        if (window.__lenis) {
+          window.__lenis.scrollTo(0, { duration: 1 })
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }
+        return
+      }
+      e.preventDefault()
+      router.push('/contact')
+      if (window.__lenis) {
+        window.__lenis.scrollTo(0, { immediate: true })
+      } else {
+        window.scrollTo(0, 0)
+      }
+      return
+    }
 
     // Smooth scroll if matching target section is available on current page
     if (pathname === '/') {
@@ -259,11 +278,11 @@ export default function Navigation() {
               </a>
             </div>
 
-            {/* Signature Scrolling Yellow Pill Button (Routes to dedicated /connect page) */}
+            {/* Signature Scrolling Yellow Pill Button (Routes to dedicated /contact page) */}
             <Link
-              href="/connect"
+              href="/contact"
               className={`nav__pill-btn ${pathname === '/connect' || pathname === '/contact' ? 'nav__pill-btn--active' : ''}`}
-              onClick={(e) => handleNavClick(e, '/connect')}
+              onClick={(e) => handleNavClick(e, '/contact')}
               aria-label="Connect with Rockcastle"
             >
               <div className="nav__pill-track-mask">
@@ -337,9 +356,9 @@ export default function Navigation() {
           </div>
 
           <Link
-            href="/connect"
+            href="/contact"
             className="menu__cta"
-            onClick={(e) => handleNavClick(e, '/connect')}
+            onClick={(e) => handleNavClick(e, '/contact')}
           >
             <span>CONNECT</span>
             <span>+</span>

@@ -18,7 +18,7 @@ export default function Footer({ reveal = true }) {
     { label: 'Who We Are', href: '/#about' },
     { label: 'Leadership', href: '/#leadership' },
     { label: 'Client Stories', href: '/stories' },
-    { label: 'Connect', href: '/connect' },
+    { label: 'Connect', href: '/contact' },
   ]
 
   const handleSitemapClick = (e, href) => {
