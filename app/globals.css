@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Shared tokens for sections built with plain CSS instead of Tailwind
+     utilities (e.g. Recent Experiences). Sampled from the Tailwind palette
+     in tailwind.config.ts so both systems stay in sync. */
+  --rc-yellow: #edeea5;
+  --rc-yellow-bright: #f3f4bd;
+  --rc-white: #f1ece2;
+  --rc-black: #1d1d1b;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-display: var(--font-sans), system-ui, sans-serif;
+  --font-body: var(--font-sans), system-ui, sans-serif;
+  --fs-meta: 0.75rem;
+  --ls-meta: 0.08em;
+  --gutter: clamp(16px, 4vw, 40px);
+  --container-x: var(--gutter);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
@@ -16,6 +34,24 @@ body {
 ::selection {
   background: #1d1d1b;
   color: #edeea5;
+}
+
+/* SlideUpText (components/ui/SlideUpText.tsx): each word/character is masked
+   behind overflow:hidden and slid up into place by the inner motion.span. */
+.slide-up-text__word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.slide-up-text__mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.slide-up-text__unit {
+  display: inline-block;
+  will-change: transform, opacity;
 }
 
 /* Honour reduced-motion: keep the layout, drop the movement */
