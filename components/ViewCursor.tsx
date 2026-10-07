@@ -173,8 +173,8 @@ export default function ViewCursor({
       className="pointer-events-none fixed left-0 top-0 z-[99999] hidden select-none md:block"
       style={{ willChange: "transform, opacity" }}
     >
-      <div className="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#edeea5] text-[#1d1d1b] shadow-[0_10px_30px_rgba(0,0,0,0.38)] border border-black/10 backdrop-blur-sm">
-        <span className="text-[11px] font-bold tracking-[0.16em] uppercase select-none leading-none">
+      <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-[#edeea5] text-[#1d1d1b] shadow-[0_6px_20px_rgba(0,0,0,0.32)] border border-black/10 backdrop-blur-sm">
+        <span className="text-[9.5px] font-bold tracking-[0.15em] uppercase select-none leading-none">
           {text}
         </span>
       </div>
