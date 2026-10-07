@@ -1,9 +1,20 @@
-import { works } from "@/lib/siteContent";
+"use client";
+
+import { useRef, useState } from "react";
+import { stories, works } from "@/lib/siteContent";
 import { MediaReveal, Reveal } from "./motion";
 import Placeholder from "./Placeholder";
+import StoryViewer from "./StoryViewer";
 
-/* Selected work: a quiet row of three equal cards and a client strip. */
+/* Selected work: a quiet row of three equal cards and a client strip.
+   Each card opens its story in the full-screen viewer. */
 export default function Work() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const mediaRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Where the viewer expands from and collapses back into
+  const getOriginRect = (index: number) => mediaRefs.current[index]?.getBoundingClientRect() ?? null;
+
   return (
     <section id="works" aria-labelledby="works-heading" className="bg-acid px-5 pb-24 md:px-12 md:pb-36">
       <div className="mx-auto max-w-[1680px]">
@@ -19,22 +30,32 @@ export default function Work() {
         </Reveal>
 
         <ul className="grid grid-cols-1 gap-x-5 gap-y-14 md:grid-cols-3">
-          {works.projects.map((p) => (
+          {works.projects.map((p, i) => (
             <li key={p.title} className="group">
               <MediaReveal className="relative">
-                <div className="relative">
+                <div className="relative" ref={(el) => { mediaRefs.current[i] = el; }}>
                   <Placeholder label={p.image.alt} ratio={p.image.ratio} />
+
                   {/* Category pills sit on the image's top edge */}
                   <div className="absolute left-3 top-3 flex flex-wrap gap-2">
                     {p.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-pill bg-acid px-3 py-1 text-[11px] text-ink"
-                      >
+                      <span key={t} className="rounded-pill bg-acid px-3 py-1 text-[11px] text-ink">
                         {t}
                       </span>
                     ))}
                   </div>
+
+                  {/* Opens the story viewer for this project */}
+                  <button
+                    type="button"
+                    onClick={() => setOpenIndex(i)}
+                    aria-haspopup="dialog"
+                    className="absolute inset-x-3 bottom-3 flex items-center justify-between rounded-pill bg-ink/85 px-4 py-2.5 text-[11px] font-medium uppercase tracking-[0.1em] text-acid transition-colors hover:bg-ink focus-visible:outline-acid"
+                  >
+                    <span aria-hidden>+</span>
+                    <span>Take a look</span>
+                    <span aria-hidden>+</span>
+                  </button>
                 </div>
               </MediaReveal>
 
@@ -66,6 +87,15 @@ export default function Work() {
           ))}
         </ul>
       </div>
+
+      {openIndex !== null && (
+        <StoryViewer
+          stories={stories}
+          startIndex={openIndex}
+          getOriginRect={getOriginRect}
+          onClosed={() => setOpenIndex(null)}
+        />
+      )}
     </section>
   );
 }

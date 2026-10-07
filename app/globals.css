@@ -9,6 +9,15 @@
   --radius-media: 14px;
   --radius-pill: 999px;
   --header-h: 72px;
+  --gutter: clamp(20px, 4vw, 56px);
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --fs-meta: 11px;
+  --ls-meta: 0.12em;
+  /* Aliases used by the story viewer */
+  --rc-yellow: var(--color-acid);
+  --rc-yellow-bright: #f6fabd;
+  --rc-black: var(--color-ink);
+  --rc-white: var(--color-paper);
   color-scheme: light;
 }
 

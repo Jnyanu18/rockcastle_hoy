@@ -159,3 +159,40 @@ export const footer = {
   copyright: "© 2026 BRAND Studio. All rights reserved.",
   legal: "Privacy",
 };
+
+/* Story viewer: one story per project card, in the same order as works.projects.
+ * PLACEHOLDER frames until client stills and copy are supplied. */
+const storyFrames = (n: number) => [
+  { id: `cover-${n}`, type: "image" as const, variant: "cover" as const, label: "Opening", duration: 5000, caption: "PLACEHOLDER caption" },
+  { id: `brief-${n}`, type: "text" as const, label: "Brief", duration: 4500, statement: "PLACEHOLDER: The idea behind the piece, in one short statement." },
+  { id: `still-${n}`, type: "image" as const, label: "Still", duration: 5000, caption: "PLACEHOLDER still caption" },
+  {
+    id: `facts-${n}`,
+    type: "metadata" as const,
+    label: "Facts",
+    duration: 5000,
+    stats: [
+      { value: "0", label: "Views" },
+      { value: "0", label: "Countries" },
+    ],
+    facts: [
+      ["Client", "Client name"],
+      ["Delivery", "0 weeks"],
+      ["Crew", "0"],
+      ["Format", "Film"],
+    ] as [string, string][],
+  },
+  { id: `cta-${n}`, type: "cta" as const, label: "Next", duration: 6000, caption: "" },
+];
+
+export const stories = works.projects.map((p, i) => ({
+  id: `story-${i + 1}`,
+  title: p.title,
+  client: p.client,
+  city: "City",
+  date: "2026",
+  category: p.tags[0],
+  tagline: `PLACEHOLDER: ${p.title} in one line.`,
+  projectUrl: "#works",
+  frames: storyFrames(i + 1),
+}));
