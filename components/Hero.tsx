@@ -1,54 +1,78 @@
-import { hero } from "@/lib/content";
+"use client";
 
-/* Full-bleed hero: media placeholder, a staggered HOY letter block, and the
-   two small copy blocks pinned to the lower-left and right edges. */
+import { motion, useReducedMotion } from "framer-motion";
+import { hero } from "@/lib/siteContent";
+
+const EASE = [0.76, 0, 0.24, 1] as const;
+
+/* Tile positions in % of the hero box, matching the stepped cluster in the reference. */
+const TILE_POS = [
+  { left: "52%", top: "36%" },
+  { left: "50%", top: "50%" },
+  { left: "54%", top: "64%" },
+];
+
 export default function Hero() {
-  const rows = [0, 1, 2];
-  const cols = [0, 1, 2];
+  const reduce = useReducedMotion();
+  const rise = (delay: number) =>
+    reduce
+      ? {}
+      : {
+          initial: { opacity: 0, y: 40 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 1.1, ease: EASE, delay },
+        };
 
   return (
-    <section id="home" className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-[#2a2d33] text-canvas">
-      {/* Media placeholder. Replace with <video autoPlay muted loop playsInline src="..."> */}
-      <div aria-hidden className="absolute inset-0 bg-[#2a2d33]" />
+    <section
+      id="top"
+      className="relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-[#22262f] text-acid"
+    >
+      {/* PLACEHOLDER background: swap for the client's <video autoPlay muted loop playsInline> */}
+      <div aria-hidden className="absolute inset-0 bg-[#22262f]" />
 
-      <div className="absolute inset-x-0 top-0 flex h-full items-center justify-center">
-        <div className="relative grid grid-cols-3 gap-2 md:gap-3">
-          {/* Play tile sits in the top-left cell, like the reference */}
-          <button
-            type="button"
-            aria-label={hero.primaryCta.label}
-            className="col-start-1 row-start-1 flex h-16 w-16 items-center justify-center rounded-2xl bg-canvas text-[10px] font-medium uppercase tracking-wide text-ink md:h-24 md:w-24 md:text-xs"
-          >
-            Play
-          </button>
-          {rows.flatMap((r) =>
-            cols.map((c) => {
-              const cell = hero.letters.find((l) => l.row === r && l.col === c);
-              if (!cell) return null;
-              return (
-                <span
-                  key={`${r}-${c}`}
-                  style={{ gridRow: r + 1, gridColumn: c + 1 }}
-                  className="flex h-16 w-16 items-center justify-center rounded-2xl bg-canvas text-3xl font-semibold text-ink md:h-24 md:w-24 md:text-5xl"
-                >
-                  {cell.letter}
-                </span>
-              );
-            }),
-          )}
+      {/* Letter-tile cluster */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="relative h-[260px] w-[260px] md:h-[360px] md:w-[360px]">
+          {hero.mark.map((letter, i) => (
+            <motion.div
+              key={`${letter}-${i}`}
+              className="absolute grid h-[30%] w-[30%] place-items-center rounded-[18%] bg-acid font-semibold text-ink"
+              style={{
+                left: `${TILE_POS[i].left}`,
+                top: `${TILE_POS[i].top}`,
+                translate: "-50% -50%",
+                fontSize: "clamp(28px, 4vw, 52px)",
+              }}
+              {...rise(0.25 + i * 0.12)}
+            >
+              {letter}
+            </motion.div>
+          ))}
         </div>
       </div>
 
-      {/* Lower-left: welcome + headline */}
-      <div className="absolute bottom-16 left-4 max-w-[24rem] md:left-10 md:bottom-20">
-        <p className="mb-3 text-xs font-medium">{hero.label}</p>
-        <p className="text-xl leading-snug md:text-2xl">{hero.headline}</p>
-      </div>
+      {/* Top-left marker */}
+      <motion.p
+        className="absolute left-5 top-[calc(var(--header-h)+24px)] z-10 text-[11px] font-medium uppercase tracking-[0.12em] md:left-12"
+        {...rise(0.1)}
+      >
+        Welcome!
+      </motion.p>
 
-      {/* Lower-right: supporting copy */}
-      <p className="absolute bottom-16 right-4 max-w-[15rem] text-right text-[13px] leading-relaxed md:bottom-20 md:right-10">
-        {hero.aside}
-      </p>
+      {/* Bottom-left and bottom-right copy */}
+      <motion.p
+        className="absolute bottom-10 left-5 z-10 max-w-[18rem] text-[17px] font-medium leading-[1.25] md:left-12 md:text-[20px]"
+        {...rise(0.45)}
+      >
+        {hero.leftCopy}
+      </motion.p>
+      <motion.p
+        className="absolute bottom-10 right-5 z-10 max-w-[15rem] text-right text-[12px] leading-[1.45] md:right-12"
+        {...rise(0.55)}
+      >
+        {hero.rightCopy}
+      </motion.p>
     </section>
   );
 }

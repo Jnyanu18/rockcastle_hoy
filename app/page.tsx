@@ -1,31 +1,27 @@
-import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Statement from "@/components/Statement";
-import Works from "@/components/Works";
-import Clients from "@/components/Clients";
+import Intro from "@/components/Intro";
+import Work from "@/components/Work";
+import About from "@/components/About";
 import Stats from "@/components/Stats";
-import Process from "@/components/Process";
 import Services from "@/components/Services";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
+      <Header />
       <main>
         <Hero />
-        <Statement />
-        <Works />
-        <Clients />
+        <Intro />
+        <Work />
+        <About />
         <Stats />
-        <Process />
         <Services />
         <Contact />
       </main>
       <Footer />
-      <WhatsAppButton />
     </>
   );
 }

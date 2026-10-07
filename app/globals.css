@@ -2,32 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
+:root {
+  --color-acid: #eef3a6;
+  --color-ink: #171717;
+  --color-paper: #f1f1ee;
+  --radius-media: 14px;
+  --radius-pill: 999px;
+  --header-h: 72px;
+  color-scheme: light;
 }
 
-body {
-  background-color: #edeea5;
-  color: #1d1d1b;
+html {
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
-::selection {
-  background: #1d1d1b;
-  color: #edeea5;
+body {
+  background-color: var(--color-acid);
+  color: var(--color-ink);
+  overflow-x: hidden;
 }
 
-/* Honour reduced-motion: keep the layout, drop the movement */
+/* Anchor targets sit below the fixed header */
+section[id] {
+  scroll-margin-top: var(--header-h);
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-acid);
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
   }
 }

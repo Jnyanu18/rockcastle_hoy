@@ -1,71 +1,58 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Media from "@/components/Media";
-import { services } from "@/lib/content";
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { services } from "@/lib/siteContent";
+import Placeholder from "./Placeholder";
 
-/* Services: each statement is a full-height step. The step nearest the middle
-   of the viewport stays bright; the others drop to a dimmed tone, as in the
-   reference. Pure opacity/colour change, no transform choreography. */
+/* Three stacked service statements. Each heading drifts sideways as it crosses the viewport. */
 export default function Services() {
-  const [active, setActive] = useState(0);
-  const refs = useRef<(HTMLDivElement | null)[]>([]);
+  return (
+    <section id="services" aria-label="Services" className="bg-ink text-acid">
+      {services.map((s) => (
+        <ServiceBlock key={s.title} service={s} />
+      ))}
+    </section>
+  );
+}
 
-  useEffect(() => {
-    const els = refs.current.filter(Boolean) as HTMLDivElement[];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(Number((e.target as HTMLElement).dataset.index));
-        });
-      },
-      { rootMargin: "-45% 0px -45% 0px" },
-    );
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+type Service = (typeof services)[number];
+
+function ServiceBlock({ service }: { service: Service }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  // Slow, small displacement: the heading moves through the viewport rather than fading
+  const x = useTransform(scrollYProgress, [0, 1], ["12vw", "-12vw"]);
 
   return (
-    <section id="services" className="relative bg-ink px-4 text-canvas md:px-10">
-      {services.map((s, i) => {
-        const isActive = i === active;
-        return (
-          <div
-            key={s.index}
-            ref={(el) => {
-              refs.current[i] = el;
-            }}
-            data-index={i}
-            className="flex min-h-[90vh] flex-col items-center justify-center py-24 text-center"
-          >
-            <h2
-              className={`relative flex max-w-5xl flex-wrap items-center justify-center gap-4 text-4xl leading-[1.05] transition-opacity duration-700 md:text-6xl lg:text-[72px] ${
-                isActive ? "opacity-100" : "opacity-40"
-              }`}
-            >
-              <span className="mr-2 align-top text-xs font-normal tabular-nums">[ {s.index} ]</span>
-              {s.title}
-              <span
-                aria-hidden
-                className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-canvas text-sm leading-none text-ink md:h-16 md:w-16"
-              >
-                →
-              </span>
-            </h2>
-            <p className={`mt-8 max-w-lg text-sm leading-relaxed transition-opacity duration-700 ${isActive ? "opacity-100" : "opacity-40"}`}>
-              {s.body}
-            </p>
+    <div
+      ref={ref}
+      className="relative flex min-h-[90svh] flex-col justify-center overflow-hidden px-5 py-24 md:px-12 md:py-40"
+    >
+      <span className="absolute left-5 top-10 text-[12px] md:left-12">{service.index}</span>
 
-            <ul className="mt-12 grid w-full max-w-3xl grid-cols-2 gap-3 md:grid-cols-4">
-              {s.images.map((src, j) => (
-                <li key={j} className="aspect-[3/4] overflow-hidden rounded-xl">
-                  <Media src={src} alt={`${s.title} still ${j + 1}`} className="h-full w-full" />
-                </li>
-              ))}
-            </ul>
-          </div>
-        );
-      })}
-    </section>
+      <motion.h2
+        style={reduce ? undefined : { x }}
+        className="text-center text-[clamp(2.2rem,5.2vw,5.6rem)] font-medium leading-[0.98] tracking-[-0.035em]"
+      >
+        {service.title}
+      </motion.h2>
+
+      <p className="mx-auto mt-8 max-w-[26rem] text-center text-[13px] leading-[1.6] text-acid/85">
+        {service.body}
+      </p>
+
+      <ul className="mx-auto mt-14 grid w-full max-w-[1000px] grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+        {service.images.map((label) => (
+          <li key={label}>
+            <Placeholder label={label} ratio="3 / 4" />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
