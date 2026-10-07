@@ -1,5 +1,8 @@
+"use client";
+
 import { useEffect, useRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import './Footer.css'
@@ -8,15 +11,45 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function Footer({ reveal = true }) {
   const footerRef = useRef(null)
-  const location = useLocation()
+  const pathname = usePathname() || '/'
 
   const sitemapLinks = [
-    { label: 'What We Produce', href: '/#what-we-produce' },
-    { label: 'Who We Are', href: '/#who-we-are' },
+    { label: 'What We Produce', href: '/#capabilities' },
+    { label: 'Who We Are', href: '/#about' },
     { label: 'Leadership', href: '/#leadership' },
     { label: 'Client Stories', href: '/stories' },
     { label: 'Connect', href: '/connect' },
   ]
+
+  const handleSitemapClick = (e, href) => {
+    const targetMap = {
+      '/#capabilities': 'capabilities',
+      '/capabilities': 'capabilities',
+      '/#what-we-produce': 'capabilities',
+      '/#about': 'about',
+      '/about': 'about',
+      '/#who-we-are': 'about',
+      '/#leadership': 'leadership',
+      '/leadership': 'leadership',
+      '/stories': 'recent-experiences',
+      '/#stories': 'recent-experiences',
+      '/connect': 'contact',
+      '/contact': 'contact',
+    }
+
+    const targetId = targetMap[href] || (href.includes('#') ? href.split('#')[1] : null)
+    if (targetId && pathname === '/') {
+      const el = document.getElementById(targetId)
+      if (el) {
+        e.preventDefault()
+        if (window.__lenis) {
+          window.__lenis.scrollTo(el, { duration: 1.2, offset: -20 })
+        } else {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+    }
+  }
 
   useEffect(() => {
     if (!reveal) return
@@ -106,7 +139,7 @@ export default function Footer({ reveal = true }) {
       footerEl.style.visibility = ''
       footerEl.style.pointerEvents = ''
     }
-  }, [reveal, location.pathname])
+  }, [reveal, pathname])
 
   return (
     <footer ref={footerRef} className="footer" id="footer" aria-label="Site Footer">
@@ -136,7 +169,7 @@ export default function Footer({ reveal = true }) {
 
           {/* Center Column: Rock Castle Logo */}
           <div className="footer__col footer__col--center">
-            <Link to="/" className="footer__logo-link" aria-label="Rock Castle Home">
+            <Link href="/" className="footer__logo-link" aria-label="Rock Castle Home">
               <img
                 src="/rockcastle-logo-black.png"
                 alt="Rock Castle"
@@ -154,6 +187,7 @@ export default function Footer({ reveal = true }) {
                   key={item.label}
                   href={item.href}
                   className="footer__link footer__link--nav"
+                  onClick={(e) => handleSitemapClick(e, item.href)}
                 >
                   {item.label}
                 </a>
