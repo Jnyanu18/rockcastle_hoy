@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import { site } from "@/lib/siteContent";
+import { brand } from "@/data/site";
 import "./globals.css";
 
 const sans = Poppins({
@@ -11,8 +11,8 @@ const sans = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: site.title,
-  description: site.description,
+  title: `${brand.name} | ${brand.tagline}`,
+  description: "Rock Castle is a production team for events, shows and brand experiences.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
