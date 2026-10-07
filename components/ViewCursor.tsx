@@ -87,31 +87,36 @@ export default function ViewCursor({
       }
     };
 
+    let scrollCheckTimer: NodeJS.Timeout | null = null;
     const handleScroll = () => {
       if (lastX < 0 || lastY < 0) return;
-      const elUnderCursor = document.elementFromPoint(lastX, lastY);
-      const target = elUnderCursor?.closest(selector);
-      if (target) {
-        if (!isVisibleRef.current) {
-          isVisibleRef.current = true;
+      if (scrollCheckTimer) clearTimeout(scrollCheckTimer);
+      scrollCheckTimer = setTimeout(() => {
+        if (lastX < 0 || lastY < 0) return;
+        const elUnderCursor = document.elementFromPoint(lastX, lastY);
+        const target = elUnderCursor?.closest(selector);
+        if (target) {
+          if (!isVisibleRef.current) {
+            isVisibleRef.current = true;
+            gsap.to(el, {
+              scale: 1,
+              opacity: 1,
+              duration: 0.35,
+              ease: "back.out(1.8)",
+              overwrite: "auto",
+            });
+          }
+        } else if (isVisibleRef.current) {
+          isVisibleRef.current = false;
           gsap.to(el, {
-            scale: 1,
-            opacity: 1,
-            duration: 0.35,
-            ease: "back.out(1.8)",
+            scale: 0,
+            opacity: 0,
+            duration: 0.25,
+            ease: "power2.in",
             overwrite: "auto",
           });
         }
-      } else if (isVisibleRef.current) {
-        isVisibleRef.current = false;
-        gsap.to(el, {
-          scale: 0,
-          opacity: 0,
-          duration: 0.25,
-          ease: "power2.in",
-          overwrite: "auto",
-        });
-      }
+      }, 100);
     };
 
     const handleMouseLeave = () => {
@@ -158,6 +163,7 @@ export default function ViewCursor({
     window.addEventListener("mouseup", handleMouseUp);
 
     return () => {
+      if (scrollCheckTimer) clearTimeout(scrollCheckTimer);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mouseleave", handleMouseLeave);

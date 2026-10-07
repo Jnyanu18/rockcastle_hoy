@@ -98,6 +98,26 @@ function RunningMetric({ value, delay = 0 }: { value: string; delay?: number }) 
 */
 export default function Stats() {
   const figures = stats.figures;
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
@@ -229,6 +249,7 @@ export default function Stats() {
 
                 {/* Looping Content Video */}
                 <video
+                  ref={videoRef}
                   src="/video1.mp4"
                   autoPlay
                   loop

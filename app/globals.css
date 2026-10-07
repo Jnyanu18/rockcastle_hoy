@@ -55,7 +55,6 @@ body {
 
 .slide-up-text__unit {
   display: inline-block;
-  will-change: transform, opacity;
 }
 
 /* Contact Section Pill Button Marquee Ticker */

@@ -44,14 +44,19 @@ function applyMagnetic(el, defaultStrength = 0.32) {
   // Subtle parallax depth for inner text / SVG icon if present
   const inner = el.querySelector('[data-magnetic-inner], span, svg')
 
+  let cachedRect = null
+
   const onEnter = () => {
+    cachedRect = el.getBoundingClientRect()
     el.style.willChange = 'transform'
   }
 
   const onMove = (e) => {
-    const rect = el.getBoundingClientRect()
-    const cx = rect.left + rect.width / 2
-    const cy = rect.top + rect.height / 2
+    if (!cachedRect) {
+      cachedRect = el.getBoundingClientRect()
+    }
+    const cx = cachedRect.left + cachedRect.width / 2
+    const cy = cachedRect.top + cachedRect.height / 2
     const dx = (e.clientX - cx) * strength
     const dy = (e.clientY - cy) * strength
 
@@ -75,6 +80,7 @@ function applyMagnetic(el, defaultStrength = 0.32) {
   }
 
   const onLeave = () => {
+    cachedRect = null
     gsap.to(el, {
       x: 0,
       y: 0,
@@ -96,12 +102,13 @@ function applyMagnetic(el, defaultStrength = 0.32) {
     }
   }
 
-  el.addEventListener('mouseenter', onEnter)
-  el.addEventListener('mousemove', onMove)
-  el.addEventListener('mouseleave', onLeave)
+  el.addEventListener('mouseenter', onEnter, { passive: true })
+  el.addEventListener('mousemove', onMove, { passive: true })
+  el.addEventListener('mouseleave', onLeave, { passive: true })
 
   return () => {
     delete el.__hasMagnetic
+    cachedRect = null
     el.removeEventListener('mouseenter', onEnter)
     el.removeEventListener('mousemove', onMove)
     el.removeEventListener('mouseleave', onLeave)
@@ -154,12 +161,17 @@ export function GlobalMagnetic({ selector = DEFAULT_MAGNETIC_SELECTOR, strength 
 
     scanAndBind()
 
+    let debounceTimer = null
     const observer = new MutationObserver(() => {
-      scanAndBind()
+      if (debounceTimer) clearTimeout(debounceTimer)
+      debounceTimer = setTimeout(() => {
+        scanAndBind()
+      }, 250)
     })
     observer.observe(document.body, { childList: true, subtree: true })
 
     return () => {
+      if (debounceTimer) clearTimeout(debounceTimer)
       observer.disconnect()
       cleanups.forEach((cleanup) => cleanup && cleanup())
       cleanups.clear()

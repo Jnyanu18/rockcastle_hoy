@@ -79,7 +79,10 @@ export default function Footer({ reveal = true }) {
 
       footerEl.classList.add('footer--reveal')
       const h = footerEl.offsetHeight
-      mainEl.style.marginBottom = `${h}px`
+      const targetMargin = `${h}px`
+      if (mainEl.style.marginBottom !== targetMargin) {
+        mainEl.style.marginBottom = targetMargin
+      }
 
       if (ctx) ctx.revert()
 
@@ -121,16 +124,20 @@ export default function Footer({ reveal = true }) {
       initReveal()
     }, 60)
 
+    let roTimer = null
     ro = new ResizeObserver(() => {
-      initReveal()
+      if (roTimer) clearTimeout(roTimer)
+      roTimer = setTimeout(() => {
+        initReveal()
+      }, 150)
     })
     ro.observe(footerEl)
-    ro.observe(mainEl)
 
     window.addEventListener('resize', initReveal)
 
     return () => {
       clearTimeout(timer)
+      if (roTimer) clearTimeout(roTimer)
       if (ro) ro.disconnect()
       window.removeEventListener('resize', initReveal)
       if (ctx) ctx.revert()

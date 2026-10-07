@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { hero } from "@/lib/content";
 import KineticLogo from "@/components/KineticLogo";
 import SlideUpText from "@/components/ui/SlideUpText";
@@ -96,13 +97,38 @@ function PlayVideoTile({ href = "#recent-experiences" }: { href?: string }) {
    - Desktop: Kept identical with original 3x3 letter grid and left/right copy
 */
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    const video = videoRef.current;
+    if (!el || !video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="home"
       className="sticky top-0 h-[100svh] min-h-[640px] w-full overflow-hidden bg-ink text-canvas z-0"
     >
       {/* Background Video */}
       <video
+        ref={videoRef}
         src="/rockcastle.mp4"
         autoPlay
         muted

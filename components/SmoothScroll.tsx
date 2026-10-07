@@ -32,26 +32,17 @@ export default function SmoothScroll() {
 
     if (prefersReducedMotion) return;
 
-    // Initialize Lenis with optimized momentum damping
+    // Initialize Lenis with award-winning luxury smooth scrolling physics
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 0.95,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 0.85, // Dampens aggressive wheel acceleration
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.0,
       infinite: false,
       autoRaf: false, // Driven synchronously by gsap.ticker below
-      virtualScroll: (data) => {
-        // Cap excessive mousewheel momentum spikes so forceful scrolls glide gracefully
-        // instead of throwing the user 80% down the page
-        const maxDelta = 110;
-        if (Math.abs(data.deltaY) > maxDelta) {
-          data.deltaY = Math.sign(data.deltaY) * maxDelta;
-        }
-        return true;
-      },
     });
 
     lenisRef.current = lenis;
@@ -68,7 +59,8 @@ export default function SmoothScroll() {
     };
 
     gsap.ticker.add(tickerCallback);
-    gsap.ticker.lagSmoothing(0);
+    // Standard lag smoothing: prevents jumpy stutters if frames take > 33ms
+    gsap.ticker.lagSmoothing(500, 33);
 
     // Initial ScrollTrigger refresh after DOM layout settles
     const refreshTimer = setTimeout(() => {
