@@ -1,0 +1,25 @@
+import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
+import "./globals.css";
+import { brand } from "@/lib/content";
+
+// Geometric sans that matches the reference typography
+const sans = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: brand.name,
+  description: brand.tagline,
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={sans.variable}>
+      <body className="bg-canvas font-sans text-ink antialiased">{children}</body>
+    </html>
+  );
+}
