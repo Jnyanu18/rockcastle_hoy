@@ -1,0 +1,234 @@
+/* House of Yellow Section [ 03 ] Video & Stats Exact Architecture */
+
+.hoy-stats-section {
+  position: relative;
+  background-color: #1d1d1b;
+  color: #f2efa3;
+  width: 100vw;
+  overflow-x: clip;
+}
+
+/* --- Section 03 Top Intro Grid --- */
+.hoy-intro-cols {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .hoy-intro-cols {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .hoy-intro-col-1 {
+    width: 16.0625vw;
+    flex-shrink: 0;
+  }
+
+  .hoy-intro-col-2 {
+    width: 56.125vw;
+    padding-right: 18vw;
+  }
+
+  .hoy-intro-col-3 {
+    width: 22.8125vw;
+    flex-shrink: 0;
+  }
+}
+
+/* --- Section 03 Video + Stats Showcase Grid --- */
+.hoy-showcase-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  width: 100%;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .hoy-showcase-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+  }
+
+  .hoy-showcase-col-decor-left {
+    width: 16.0625vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+  }
+
+  .hoy-showcase-col-phone {
+    width: 30.75vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .hoy-showcase-col-stats {
+    width: 40.1875vw;
+    padding-left: 9.25vw;
+    flex-shrink: 0;
+  }
+
+  .hoy-showcase-col-decor-right {
+    width: 8vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-shrink: 0;
+  }
+}
+
+/* --- The Phone Frame Container --- */
+.hoy-phone-container {
+  position: relative;
+  width: 28.375vw;
+  height: 51.25vw;
+  max-height: calc(100vh - 10vw);
+  margin: 0 auto;
+}
+
+@media (max-width: 1080px) and (min-width: 768px) {
+  .hoy-phone-container {
+    width: 35.185vw;
+    height: 75.926vw;
+    max-height: calc(100vh - 14.815vw);
+  }
+}
+
+@media (max-width: 767px) {
+  .hoy-phone-container {
+    width: min(85vw, 340px);
+    height: auto;
+    aspect-ratio: 28.375 / 51.25;
+    max-height: 80vh;
+  }
+}
+
+/* Outer Pale-Yellow Border Outline */
+.hoy-phone-outline {
+  position: absolute;
+  inset: -1.25vw;
+  border: 1px solid #f2efa3;
+  border-radius: 4.125vw;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (max-width: 1080px) and (min-width: 768px) {
+  .hoy-phone-outline {
+    inset: -1.852vw;
+    border-radius: 6.111vw;
+  }
+}
+
+@media (max-width: 767px) {
+  .hoy-phone-outline {
+    inset: -10px;
+    border-radius: 44px;
+  }
+}
+
+/* Inner Phone Screen Screen Bezel */
+.hoy-phone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 3vw;
+  overflow: hidden;
+  background-color: #1a1b18;
+}
+
+@media (max-width: 1080px) and (min-width: 768px) {
+  .hoy-phone-screen {
+    border-radius: 4.444vw;
+  }
+}
+
+@media (max-width: 767px) {
+  .hoy-phone-screen {
+    border-radius: 36px;
+  }
+}
+
+/* Status Bar Inside Phone */
+.hoy-phone-status {
+  position: absolute;
+  top: 1.25vw;
+  left: 0;
+  width: 100%;
+  height: 1.75vw;
+  line-height: 1.75vw;
+  padding: 0 2.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 30;
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .hoy-phone-status {
+    top: 12px;
+    padding: 0 18px;
+    height: 20px;
+  }
+}
+
+.hoy-phone-camera {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7.4375vw;
+  height: 1.75vw;
+  background-color: #1d1d1b;
+  border-radius: 1.875vw;
+}
+
+@media (max-width: 767px) {
+  .hoy-phone-camera {
+    width: 80px;
+    height: 18px;
+    border-radius: 12px;
+  }
+}
+
+/* Floating Reactions */
+.hoy-reaction-badge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  animation: floatReaction 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.hoy-reaction-heart {
+  background-color: #f2efa3;
+}
+
+.hoy-reaction-like {
+  background-color: #ffffff;
+}
+
+@keyframes floatReaction {
+  0% {
+    transform: translateY(0px) scale(1);
+  }
+  100% {
+    transform: translateY(-8px) scale(1.03);
+  }
+}

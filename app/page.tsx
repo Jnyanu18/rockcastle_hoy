@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import RecentExperiences from "@/components/sections/RecentExperiences";
 import Statement from "@/components/Statement";
@@ -8,25 +8,26 @@ import Process from "@/components/Process";
 import ScrollingServices from "@/components/sections/ScrollingServices";
 import Leadership from "@/components/sections/Leadership";
 import Contact from "@/components/Contact";
-import BriefForm from "@/components/sections/BriefForm";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer.jsx";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
+      <Navigation />
       <main>
-        <Hero />
-        <Statement />
+        {/* Sticky Hero with Curtain-rising Statement (Who are we) Scroll Effect */}
+        <div className="relative">
+          <Hero />
+          <Statement />
+        </div>
         <RecentExperiences />
         <Stats />
         <Process />
-        <ScrollingServices />
+        <ScrollingServices id="services" />
         <Leadership />
         <Clients />
         <Contact />
-        <BriefForm />
       </main>
       <Footer />
       <WhatsAppButton />

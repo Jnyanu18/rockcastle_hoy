@@ -1,31 +1,70 @@
-import { process } from "@/lib/content";
+"use client";
 
-/* Dark process block: label, large statement at a fixed column, a small
-   supporting paragraph in yellow, and a floating pill that anchors to Services. */
+import Link from "next/link";
+
+/* Section [ 04 ] How we roll
+   Exact House of Yellow Architecture matching Reference Image 1:
+   - Col 1 (left): "How we roll"
+   - Col 2 (center): Primary statement & supporting paragraph
+   - Col 3 (right): Top "[ 04 ]", bottom white ticker pill button ("SCROLL HOW WE ROLL \")
+*/
 export default function Process() {
   return (
-    <section id="process" className="relative bg-ink px-4 pb-24 text-canvas md:px-10">
-      <div className="mx-auto max-w-[1600px]">
-        <div className="flex justify-between text-xs">
-          <p>{process.label}</p>
-          <p className="tabular-nums">[ {process.index} ]</p>
-        </div>
+    <section
+      id="process"
+      className="relative bg-[#1d1d1b] text-[#f2efa3] px-4 sm:px-8 lg:px-12 pt-16 md:pt-24 pb-24 md:pb-32 overflow-hidden"
+    >
+      <div className="mx-auto w-full max-w-[1760px]">
+        <div className="flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-0">
+          {/* Column 1: Label (24vw) */}
+          <div className="w-full lg:w-[24.0625vw] shrink-0">
+            <span className="text-xs md:text-[13px] font-medium tracking-wide text-[#f2efa3]">
+              How we roll
+            </span>
+          </div>
 
-        <div className="mt-10 grid gap-8 md:grid-cols-[27%_1fr]">
-          <div aria-hidden className="hidden md:block" />
-          <div>
-            <p className="max-w-3xl text-2xl leading-snug md:text-[30px]">{process.body}</p>
-            <p className="mt-8 max-w-md text-sm font-medium leading-relaxed">{process.sub}</p>
+          {/* Column 2: Large Statement + Subparagraph (40vw) */}
+          <div className="w-full lg:w-[40.125vw] lg:pr-8">
+            <h2 className="text-xl sm:text-2xl lg:text-[27px] font-normal leading-[1.24] text-[#f2efa3]">
+              At House of Yellow, we listen first and create with you, not just
+              for you. Everything happens in-house, fast and focused, like having
+              your own team, with outsider firepower.
+            </h2>
+            <p className="mt-8 text-xs md:text-[13px] font-normal leading-relaxed text-[#f2efa3]/80 max-w-md">
+              We combine strategic thinking, creative craftsmanship and rapid
+              execution to keep ideas moving and momentum growing.
+            </p>
+          </div>
+
+          {/* Column 3: Index [ 04 ] + Bottom-Right Inline Button (30vw) */}
+          <div className="w-full lg:w-[30.8125vw] flex flex-col justify-between items-start lg:items-end lg:min-h-[220px] shrink-0">
+            {/* Top Index */}
+            <div className="text-right">
+              <span className="text-xs md:text-[13px] font-medium tabular-nums text-[#f2efa3]">
+                [ 04 ]
+              </span>
+            </div>
+
+            {/* Bottom-Right White Ticker Marquee Button (Matching Screenshot 1) */}
+            <div className="mt-8 lg:mt-auto pt-4">
+              <a
+                href="#services"
+                className="group relative inline-flex h-11 items-center overflow-hidden rounded-full bg-white px-6 text-[11px] md:text-xs font-semibold uppercase tracking-wider text-[#1d1d1b] shadow-md transition-colors hover:bg-[#f2efa3]"
+              >
+                {/* Scrolling Ticker Text */}
+                <div className="relative flex overflow-hidden whitespace-nowrap">
+                  <div className="flex animate-[hoyMarquee_8s_linear_infinite] group-hover:[animation-play-state:paused] items-center gap-2">
+                    <span>HOW WE ROLL \</span>
+                    <span>HOW WE ROLL \</span>
+                    <span>HOW WE ROLL \</span>
+                    <span>HOW WE ROLL \</span>
+                  </div>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-
-      <a
-        href="#capabilities"
-        className="fixed bottom-6 right-20 z-40 inline-flex h-11 items-center rounded-full bg-canvas px-5 text-xs font-medium uppercase tracking-wide text-ink md:right-24"
-      >
-        {process.cta}
-      </a>
     </section>
   );
 }

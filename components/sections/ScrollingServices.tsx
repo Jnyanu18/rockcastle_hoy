@@ -302,6 +302,16 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
       <div className="howWeRollItemsBlock">
         <div className="scrollContainer" ref={scrollContainerRef}>
           <div className="stickyWrapper">
+            <span className="sideCross sideCross--left" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0 C12 6.627 6.627 12 0 12 C6.627 12 12 17.373 12 24 C12 17.373 17.373 12 24 12 C17.373 12 12 6.627 12 0 Z" />
+              </svg>
+            </span>
+            <span className="sideCross sideCross--right" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0 C12 6.627 6.627 12 0 12 C6.627 12 12 17.373 12 24 C12 17.373 17.373 12 24 12 C17.373 12 12 6.627 12 0 Z" />
+              </svg>
+            </span>
             <div className="items" ref={itemsRef}>
               {data.map((item, i) => {
                 const line1 = item.line1;

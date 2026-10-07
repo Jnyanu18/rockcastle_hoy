@@ -23,7 +23,11 @@ type Status = "idle" | "sending" | "success" | "error";
  * message field, next to a short contact form. Sits on the light canvas to
  * give the run of dark sections above it room to breathe before the footer.
  */
-export default function BriefForm() {
+type Props = {
+  className?: string;
+};
+
+export default function BriefForm({ className }: Props = {}) {
   const [form, setForm] = useState({ firstName: "", lastName: "", email: "", message: "" });
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -83,7 +87,7 @@ export default function BriefForm() {
   };
 
   return (
-    <section id="brief" className="bg-canvas px-4 py-24 md:px-10">
+    <section id="brief" className={className || "bg-canvas px-4 py-24 md:px-10"}>
       <div className="mx-auto max-w-[1400px] rounded-[2.5rem] border border-ink/10 bg-header p-6 shadow-[0_24px_60px_rgba(29,29,27,0.08)] md:p-12">
         <div className="grid gap-12 md:grid-cols-[1fr_1.3fr] md:gap-16">
           {/* Left: heading, description, direct details */}

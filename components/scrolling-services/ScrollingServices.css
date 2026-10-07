@@ -1,0 +1,442 @@
+/* ===================================================
+   ROCKCASTLE — Scrolling Services / 3 Stacking Cards Deck
+   Exact HOY Reference Aesthetics & Sequencing:
+   - When Section 1 is active, its complete images appear in full
+     with 100% visibility and zero bottom obstructions
+   - Sections 2 & 3 appear on scroll after the complete images
+   - Smooth rising card transitions between sections
+   - Compact top navbar clearance with maximum room for content
+   =================================================== */
+
+.servicesBlock {
+  position: relative;
+  background: var(--rc-black-rich, #121211);
+  color: #f8f5ab;
+  width: 100%;
+}
+
+.howWeRollItemsBlock {
+  position: relative;
+  width: 100%;
+}
+
+/* Height provides 3 smooth scroll segments for 3 items */
+.servicesBlock .scrollContainer {
+  height: 320vh;
+  position: relative;
+  width: 100%;
+}
+
+/* Sticky viewport frame */
+.servicesBlock .stickyWrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-top: clamp(96px, 11vh, 114px);
+  /* Clean spacing below fixed navbar */
+  padding-bottom: clamp(14px, 1.8vh, 22px);
+}
+
+/* ---- Corner Rotating Rock Castle Round Logos ---- */
+.servicesBlock .icons {
+  position: absolute;
+  top: clamp(94px, 10.8vh, 110px);
+  left: 0;
+  width: 100%;
+  padding: 0 clamp(20px, 3.5vw, 68px);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.servicesBlock .icons .icon {
+  width: clamp(52px, 4.6vw, 74px);
+  height: clamp(52px, 4.6vw, 74px);
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.55));
+  transition: transform 0.2s ease-out;
+  flex-shrink: 0;
+}
+
+.servicesBlock .icons .icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.servicesBlock .ss__round-logo-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ---- Items Deck Container ---- */
+.servicesBlock .items {
+  width: 100%;
+  max-width: 95vw;
+  height: calc(100vh - clamp(96px, 11vh, 114px) - clamp(14px, 1.8vh, 22px));
+  margin: 0 auto;
+  padding: 0 clamp(12px, 2vw, 32px);
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+/* ---- Individual Stacked Card Item ---- */
+.servicesBlock .scrollItem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  will-change: transform, height, opacity;
+  box-sizing: border-box;
+  background: var(--rc-black-rich, #121211);
+  transition: opacity 0.15s ease-out;
+}
+
+.servicesBlock .scrollItem:nth-child(1) {
+  z-index: 10;
+}
+
+.servicesBlock .scrollItem:nth-child(2) {
+  z-index: 11;
+}
+
+.servicesBlock .scrollItem:nth-child(3) {
+  z-index: 12;
+}
+
+.servicesBlock .innerContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.servicesBlock .innerItem {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ---- Title Row: 2 Balanced Lines ---- */
+.servicesBlock .normalTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  transition: opacity 0.2s ease;
+  width: 100%;
+}
+
+.servicesBlock .normalTitleLine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.08;
+  white-space: nowrap;
+}
+
+.servicesBlock .normalTitleLine--1 {
+  min-height: clamp(34px, 4vw, 48px);
+}
+
+.servicesBlock .normalTitleLine--2 {
+  margin-top: clamp(2px, 0.3vh, 5px);
+}
+
+/* Index number: [ 01 ], [ 02 ], [ 03 ] */
+.servicesBlock .normalTitle .numIndex {
+  font-family: var(--font-mono);
+  font-size: clamp(13px, 1.1vw, 17px);
+  letter-spacing: 0.08em;
+  color: #f8f5ab;
+  margin-right: clamp(10px, 1.1vw, 16px);
+  opacity: 0.85;
+}
+
+/* Display Headline Typography */
+.servicesBlock .normalTitle .titleText {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.2vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--rc-white, #F1ECE2);
+  line-height: 1.08;
+  display: inline-block;
+}
+
+/* Inactive / Collapsed Stacked Card appearance */
+.servicesBlock .scrollItem:not(.ss__item--active) .normalTitle .titleText {
+  color: rgba(241, 236, 226, 0.26);
+}
+
+.servicesBlock .scrollItem:not(.ss__item--active) .normalTitle .numIndex {
+  color: rgba(241, 236, 226, 0.26);
+}
+
+.servicesBlock .scrollItem:not(.ss__item--active):hover {
+  opacity: 0.75 !important;
+}
+
+.servicesBlock .scrollItem:not(.ss__item--active):hover .normalTitle .titleText,
+.servicesBlock .scrollItem:not(.ss__item--active):hover .normalTitle .numIndex {
+  color: rgba(248, 245, 171, 0.75);
+}
+
+/* Inline Circular Arrow Button */
+.servicesBlock .normalTitle .buttonWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: clamp(10px, 1.2vw, 18px);
+  vertical-align: middle;
+}
+
+.servicesBlock .normalTitle .arrowButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(34px, 2.8vw, 46px);
+  height: clamp(34px, 2.8vw, 46px);
+  border-radius: 50%;
+  background: #ffffff;
+  color: #121211;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.servicesBlock .normalTitle .arrowButton:hover {
+  transform: scale(1.12);
+  background: #f8f5ab;
+}
+
+.servicesBlock .normalTitle .arrowButton svg {
+  width: clamp(15px, 1.2vw, 18px);
+  height: clamp(15px, 1.2vw, 18px);
+}
+
+/* ---- Centered Description ---- */
+.servicesBlock .itemText {
+  max-width: clamp(360px, 32vw, 540px);
+  margin: clamp(6px, 0.9vh, 12px) auto clamp(8px, 1.2vh, 14px);
+  text-align: center;
+}
+
+.servicesBlock .itemText p {
+  font-family: var(--font-body);
+  font-size: clamp(0.78rem, 0.85vw, 0.92rem);
+  line-height: 1.5;
+  color: #aba89f;
+  margin: 0;
+}
+
+/* ---- Action CTA Pill Button ---- */
+.servicesBlock .buttonRow {
+  margin-top: clamp(8px, 1.2vh, 14px);
+  display: flex;
+  justify-content: center;
+}
+
+.servicesBlock .ss__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8f5ab;
+  color: #121211;
+  font-family: var(--font-body);
+  font-size: clamp(0.7rem, 0.74vw, 0.8rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: clamp(6px, 0.9vh, 9px) clamp(16px, 1.4vw, 24px);
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(248, 245, 171, 0.28);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.servicesBlock .ss__cta-btn:hover {
+  background: #ffffff;
+  color: #121211;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.4);
+}
+
+.servicesBlock .ss__cta-btn .ss__cta-arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.servicesBlock .ss__cta-btn:hover .ss__cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ---- 4 Large Portrait Images Grid ---- */
+.servicesBlock .images {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(14px, 1.8vw, 24px);
+  width: 100%;
+  max-width: clamp(860px, 84vw, 1280px);
+  margin: clamp(10px, 1.4vh, 18px) auto 0 auto;
+  padding: 0 8px;
+}
+
+/* Entire image is 100% visible on screen — large, prominent portrait cards */
+.servicesBlock .imageWrapper {
+  aspect-ratio: 3 / 4;
+  height: clamp(230px, 36vh, 380px);
+  border-radius: clamp(10px, 1vw, 16px);
+  overflow: hidden;
+  position: relative;
+  background: #1c1c1a;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+}
+
+.servicesBlock .imageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.servicesBlock .imageWrapper:hover img {
+  transform: scale(1.06);
+}
+
+/* ===================================================
+   Responsive Breakpoints
+   =================================================== */
+
+@media (max-width: 1024px) {
+  .servicesBlock .stickyWrapper {
+    padding-top: clamp(88px, 10.5vh, 102px);
+    padding-bottom: 16px;
+  }
+
+  .servicesBlock .items {
+    height: calc(100vh - clamp(88px, 10.5vh, 102px) - 16px);
+  }
+
+  .servicesBlock .icons {
+    top: clamp(86px, 10.2vh, 100px);
+    padding: 0 clamp(16px, 2.8vw, 38px);
+  }
+
+  .servicesBlock .icons .icon {
+    width: clamp(44px, 4.8vw, 58px);
+    height: clamp(44px, 4.8vw, 58px);
+  }
+
+  .servicesBlock .normalTitle .titleText {
+    font-size: clamp(1.7rem, 4.2vw, 3rem);
+  }
+
+  .servicesBlock .images {
+    max-width: 720px;
+    gap: 12px;
+  }
+
+  .servicesBlock .imageWrapper {
+    height: clamp(180px, 26vh, 260px);
+  }
+
+  .servicesBlock .itemText {
+    max-width: 440px;
+  }
+}
+
+@media (max-width: 767px) {
+  .servicesBlock .scrollContainer {
+    height: 280vh;
+  }
+
+  .servicesBlock .stickyWrapper {
+    padding-top: clamp(80px, 11vh, 92px);
+    padding-bottom: 14px;
+  }
+
+  .servicesBlock .items {
+    height: calc(100vh - clamp(80px, 11vh, 92px) - 14px);
+  }
+
+  .servicesBlock .icons {
+    top: clamp(78px, 10.5vh, 88px);
+    padding: 0 14px;
+  }
+
+  .servicesBlock .icons .icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  /* Single clean corner emblem on mobile to preserve title space */
+  .servicesBlock .icons .ss__star--right {
+    display: none;
+  }
+
+  .servicesBlock .normalTitle .titleText {
+    font-size: clamp(1.35rem, 5.8vw, 2rem);
+  }
+
+  .servicesBlock .normalTitle .numIndex {
+    font-size: 11px;
+    margin-right: 6px;
+  }
+
+  .servicesBlock .normalTitle .arrowButton {
+    width: 28px;
+    height: 28px;
+    margin-left: 8px;
+  }
+
+  .servicesBlock .normalTitleLine--1 {
+    min-height: 28px;
+  }
+
+  .servicesBlock .itemText {
+    max-width: 90%;
+    margin: 4px auto 8px;
+    font-size: 0.76rem;
+    line-height: 1.4;
+  }
+
+  .servicesBlock .images {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 320px;
+    gap: 10px;
+  }
+
+  .servicesBlock .imageWrapper {
+    height: clamp(140px, 22vh, 180px);
+  }
+
+  /* Show 2 cards on mobile */
+  .servicesBlock .imageWrapper:nth-child(n+3) {
+    display: none;
+  }
+}

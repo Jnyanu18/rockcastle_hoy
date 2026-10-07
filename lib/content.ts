@@ -121,23 +121,11 @@ export const stats = {
     body:
       "In a scroll-stop world, you need content that pops. We craft dynamic, thumb-stopping videos designed purely for mobile. Get ready to scroll, tap, and share.",
   },
-  // Each frame of the phone block shows one set of figures.
   figures: [
-    [
-      { label: "Countries", value: "2" },
-      { label: "Followers", value: "+4.000" },
-      { label: "Impressions", value: "400.000" },
-    ],
-    [
-      { label: "Countries", value: "3" },
-      { label: "Followers", value: "+7.000" },
-      { label: "Impressions", value: "700.000" },
-    ],
-    [
-      { label: "Followers", value: "+21.000" },
-      { label: "Impressions", value: "2.600.000" },
-      { label: "Engagements", value: "210.000" },
-    ],
+    { label: "Countries", value: "7" },
+    { label: "Followers", value: "+18.000" },
+    { label: "Impressions", value: "2.100.000" },
+    { label: "Engagements", value: "160.000" },
   ],
 };
 
@@ -170,18 +158,19 @@ export const services = [
     index: "07",
     title: "Animation that brings ideas into motion",
     body:
-      "From 3D worlds to motion graphics, we bring concepts to life with visuals that feel tangible, playful and precise.",
+      "From refined 3D visuals to immersive motion design, we create animations that turn complex ideas into striking visual experiences built to captivate, explain, and elevate every brand story.",
     images: ["", "", "", ""],
   },
 ];
 
 export const contact = {
   index: "08",
-  label: "Let’s connect",
+  label: "Let's connect",
   heading:
-    "If you’re looking for a creative partner that combines craftsmanship, speed and innovation, let’s shape the future together. Get in touch and let’s lead.",
-  cta: "Connect",
-  href: "mailto:hello@example.com",
+    "If you're looking for a creative partner that combines craftsmanship, speed and impact, let's make something remarkable.",
+  subheading: "Built for brands that want to lead.",
+  cta: "CONNECT",
+  href: "/contact",
 };
 
 export const footer = {
