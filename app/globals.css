@@ -112,6 +112,15 @@ body {
   }
 }
 
+@keyframes hoyMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 .contact-pill-track span {
   font-family: var(--font-body);
   font-size: 12px;

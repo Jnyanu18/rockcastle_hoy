@@ -100,23 +100,11 @@ export const stats = {
     body:
       "In a scroll-stop world, you need content that pops. We craft dynamic, thumb-stopping videos designed purely for mobile. Get ready to scroll, tap, and share.",
   },
-  // Each frame of the phone block shows one set of figures.
   figures: [
-    [
-      { label: "Countries", value: "2" },
-      { label: "Followers", value: "+4.000" },
-      { label: "Impressions", value: "400.000" },
-    ],
-    [
-      { label: "Countries", value: "3" },
-      { label: "Followers", value: "+7.000" },
-      { label: "Impressions", value: "700.000" },
-    ],
-    [
-      { label: "Followers", value: "+21.000" },
-      { label: "Impressions", value: "2.600.000" },
-      { label: "Engagements", value: "210.000" },
-    ],
+    { label: "Countries", value: "7" },
+    { label: "Followers", value: "+18.000" },
+    { label: "Impressions", value: "2.100.000" },
+    { label: "Engagements", value: "160.000" },
   ],
 };
 
