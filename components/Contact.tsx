@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { contact } from "@/lib/content";
 import Sparkle from "@/components/ui/Sparkle";
+import SlideUpText from "@/components/ui/SlideUpText";
 
 /* Dark closing call matching House of Yellow [ 08 ] Let's connect:
    - Left: [ 08 ] index with outlined squarish rounded frame containing an upper-third sparkle mark
@@ -13,10 +16,14 @@ export default function Contact() {
         {/* Mobile top meta row */}
         <div className="flex items-center justify-between md:hidden mb-6">
           <p className="text-xs font-medium tracking-normal text-[#edeea5]">
-            {contact.label}
+            <SlideUpText split="words">
+              {contact.label}
+            </SlideUpText>
           </p>
           <p className="text-xs font-medium tracking-normal text-[#edeea5] tabular-nums">
-            [ {contact.index} ]
+            <SlideUpText split="characters" delay={0.04}>
+              {`[ ${contact.index} ]`}
+            </SlideUpText>
           </p>
         </div>
 
@@ -24,7 +31,9 @@ export default function Contact() {
           {/* Left Column (Desktop): [ 08 ] and shifted outlined frame */}
           <div className="hidden md:flex flex-col">
             <p className="text-xs md:text-[13px] font-medium tracking-normal text-[#edeea5] tabular-nums">
-              [ {contact.index} ]
+              <SlideUpText split="characters" delay={0.04}>
+                {`[ ${contact.index} ]`}
+              </SlideUpText>
             </p>
             <div
               aria-hidden
@@ -40,20 +49,21 @@ export default function Contact() {
           {/* Right Column: Let's connect, headlines, and white pill CTA */}
           <div className="flex flex-col md:pl-[clamp(24px,2.5vw,56px)]">
             <p className="hidden md:block text-xs md:text-[13px] font-medium tracking-normal text-[#edeea5]">
-              {contact.label}
+              <SlideUpText split="words">
+                {contact.label}
+              </SlideUpText>
             </p>
 
             <h2 className="md:mt-9 max-w-[1150px] text-[26px] sm:text-[38px] md:text-[52px] lg:text-[66px] xl:text-[76px] font-medium leading-[1.08] sm:leading-[1.04] tracking-[-0.035em] text-[#edeea5]">
-              If you&apos;re looking for a creative<br className="hidden md:inline" />{" "}
-              partner that combines<br className="hidden md:inline" />{" "}
-              craftsmanship, speed and<br className="hidden md:inline" />{" "}
-              impact, let&apos;s make something<br className="hidden md:inline" />{" "}
-              remarkable.
+              <SlideUpText split="words" stagger={0.015} delay={0.06}>
+                {contact.heading}
+              </SlideUpText>
             </h2>
 
             <p className="mt-8 sm:mt-12 md:mt-16 max-w-[960px] text-[22px] sm:text-[32px] md:text-[46px] lg:text-[56px] xl:text-[68px] font-medium leading-[1.08] sm:leading-[1.04] tracking-[-0.035em] text-[#edeea5]">
-              Built for brands that want to<br className="hidden md:inline" />{" "}
-              lead.
+              <SlideUpText split="words" stagger={0.02} delay={0.12}>
+                {contact.subheading}
+              </SlideUpText>
             </p>
 
             {/* Mobile: button on left and squircle frame on right; Desktop: button only (frame is in left col) */}

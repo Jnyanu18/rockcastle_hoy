@@ -1,3 +1,6 @@
+"use client";
+
+import SlideUpText from "@/components/ui/SlideUpText";
 import "./Stats.css";
 
 /* Section [ 03 ] Beyond the Screen & Stats Showcase
@@ -27,20 +30,23 @@ export default function Stats() {
           {/* Column 1: Section Index */}
           <div className="hoy-intro-col-1">
             <span className="text-xs md:text-[13px] font-medium tracking-wide text-[#f2efa3]">
-              [ 03 ]
+              <SlideUpText split="characters">
+                {"[ 03 ]"}
+              </SlideUpText>
             </span>
           </div>
 
           {/* Column 2: Beyond the Screen Eyebrow & Hero Statement */}
           <div className="hoy-intro-col-2">
             <p className="text-xs md:text-[13px] font-medium text-[#f2efa3] mb-4">
-              Beyond the Screen
+              <SlideUpText split="words">
+                Beyond the Screen
+              </SlideUpText>
             </p>
             <h2 className="text-xl sm:text-2xl lg:text-[27px] font-normal leading-[1.24] text-[#f2efa3]">
-              At House of Yellow, we believe every story deserves its perfect
-              stage. From the intimate tap-and-scroll of a smartphone to the
-              immersive grandeur of the silver screen, our passion lies in
-              bringing your vision to life, no matter the medium.
+              <SlideUpText split="words" stagger={0.012} delay={0.06}>
+                At House of Yellow, we believe every story deserves its perfect stage. From the intimate tap-and-scroll of a smartphone to the immersive grandeur of the silver screen, our passion lies in bringing your vision to life, no matter the medium.
+              </SlideUpText>
             </h2>
           </div>
 
@@ -49,13 +55,15 @@ export default function Stats() {
             <div className="flex items-center gap-2 mb-3">
               <span className="inline-block h-2.5 w-2.5 bg-[#f2efa3] rounded-[1px] shrink-0" />
               <span className="text-xs md:text-[13px] font-medium text-[#f2efa3]">
-                Mobile content
+                <SlideUpText split="words" delay={0.04}>
+                  Mobile content
+                </SlideUpText>
               </span>
             </div>
             <p className="text-xs md:text-[13px] leading-relaxed text-[#f2efa3]/80 max-w-sm">
-              In a scroll-stop world, you need content that pops. We craft
-              dynamic, thumb-stopping videos designed purely for mobile. Get
-              ready to scroll, tap, and share.
+              <SlideUpText split="words" stagger={0.015} delay={0.1}>
+                In a scroll-stop world, you need content that pops. We craft dynamic, thumb-stopping videos designed purely for mobile. Get ready to scroll, tap, and share.
+              </SlideUpText>
             </p>
           </div>
         </div>
@@ -238,7 +246,9 @@ export default function Stats() {
               {figures.map((item) => (
                 <div key={item.label} className="flex flex-col">
                   <span className="text-xs md:text-[14px] font-normal text-[#f2efa3]/80 mb-1">
-                    {item.label}
+                    <SlideUpText split="words" delay={0.06}>
+                      {item.label}
+                    </SlideUpText>
                   </span>
                   <span className="text-3xl sm:text-5xl lg:text-[72px] xl:text-[80px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#f2efa3]">
                     {item.value}

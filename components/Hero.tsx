@@ -1,5 +1,8 @@
+"use client";
+
 import { hero } from "@/lib/content";
 import KineticLogo from "@/components/KineticLogo";
+import SlideUpText from "@/components/ui/SlideUpText";
 
 /* Star Orbit Ring Graphic: perspective dashed ellipse with centered 4-point star */
 function StarOrbitRing() {
@@ -126,10 +129,14 @@ export default function Hero() {
         {/* Mobile Welcome & Headline Copy */}
         <div className="mt-3 flex flex-col items-center text-center px-2">
           <p className="text-xs font-semibold tracking-wide text-[#edeea5]">
-            {hero.label}
+            <SlideUpText split="words" delay={0.2} stagger={0.02}>
+              {hero.label}
+            </SlideUpText>
           </p>
           <p className="mt-1.5 max-w-[290px] text-[13px] leading-relaxed font-medium text-white/95">
-            {hero.headline}
+            <SlideUpText split="words" delay={0.35} stagger={0.015}>
+              {hero.headline}
+            </SlideUpText>
           </p>
         </div>
 
@@ -150,14 +157,26 @@ export default function Hero() {
 
       {/* Primary headline: desktop at left-center */}
       <div className="hidden md:block absolute md:top-1/2 md:-translate-y-1/2 md:left-10 md:max-w-[24rem] z-10 pointer-events-auto">
-        <p className="mb-2 md:mb-3 text-xs font-medium">{hero.label}</p>
-        <p className="text-lg leading-snug md:text-xl lg:text-2xl">{hero.headline}</p>
+        <p className="mb-2 md:mb-3 text-xs font-medium">
+          <SlideUpText split="words" delay={0.2} stagger={0.02}>
+            {hero.label}
+          </SlideUpText>
+        </p>
+        <p className="text-lg leading-snug md:text-xl lg:text-2xl">
+          <SlideUpText split="words" delay={0.35} stagger={0.015}>
+            {hero.headline}
+          </SlideUpText>
+        </p>
       </div>
 
       {/* Supporting copy: desktop right-center */}
-      <p className="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 max-w-[15rem] text-right text-[13px] leading-relaxed z-10 md:right-10 pointer-events-auto">
-        {hero.aside}
-      </p>
+      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 max-w-[15rem] text-right text-[13px] leading-relaxed z-10 md:right-10 pointer-events-auto">
+        <p>
+          <SlideUpText split="words" delay={0.45} stagger={0.015}>
+            {hero.aside}
+          </SlideUpText>
+        </p>
+      </div>
     </section>
   );
 }

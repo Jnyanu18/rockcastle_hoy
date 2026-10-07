@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import SlideUpText from "@/components/ui/SlideUpText";
 
 /* Section [ 04 ] How we roll
    Exact House of Yellow Architecture matching Reference Image 1:
@@ -19,23 +20,28 @@ export default function Process() {
           {/* Column 1: Label + Index on Mobile (24vw) */}
           <div className="flex w-full items-center justify-between lg:w-[24.0625vw] shrink-0">
             <span className="text-xs md:text-[13px] font-medium tracking-wide text-[#f2efa3]">
-              How we roll
+              <SlideUpText split="words">
+                How we roll
+              </SlideUpText>
             </span>
             <span className="text-xs md:text-[13px] font-medium tabular-nums text-[#f2efa3] lg:hidden">
-              [ 04 ]
+              <SlideUpText split="characters" delay={0.04}>
+                {"[ 04 ]"}
+              </SlideUpText>
             </span>
           </div>
 
           {/* Column 2: Large Statement + Subparagraph (40vw) */}
           <div className="w-full lg:w-[40.125vw] lg:pr-8">
             <h2 className="text-lg sm:text-2xl lg:text-[27px] font-normal leading-[1.28] sm:leading-[1.24] text-[#f2efa3]">
-              At House of Yellow, we listen first and create with you, not just
-              for you. Everything happens in-house, fast and focused, like having
-              your own team, with outsider firepower.
+              <SlideUpText split="words" stagger={0.012} delay={0.06}>
+                At House of Yellow, we listen first and create with you, not just for you. Everything happens in-house, fast and focused, like having your own team, with outsider firepower.
+              </SlideUpText>
             </h2>
             <p className="mt-5 sm:mt-8 text-xs md:text-[13px] font-normal leading-relaxed text-[#f2efa3]/80 max-w-md">
-              We combine strategic thinking, creative craftsmanship and rapid
-              execution to keep ideas moving and momentum growing.
+              <SlideUpText split="words" stagger={0.015} delay={0.12}>
+                We combine strategic thinking, creative craftsmanship and rapid execution to keep ideas moving and momentum growing.
+              </SlideUpText>
             </p>
           </div>
 
@@ -44,7 +50,9 @@ export default function Process() {
             {/* Top Index (Desktop only) */}
             <div className="hidden lg:block text-right">
               <span className="text-xs md:text-[13px] font-medium tabular-nums text-[#f2efa3]">
-                [ 04 ]
+                <SlideUpText split="characters" delay={0.04}>
+                  {"[ 04 ]"}
+                </SlideUpText>
               </span>
             </div>
 

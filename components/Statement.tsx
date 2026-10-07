@@ -1,4 +1,7 @@
+"use client";
+
 import { statement } from "@/lib/content";
+import SlideUpText from "@/components/ui/SlideUpText";
 
 /* Light statement block: small label left, large body set in the right
    column, supporting line and two pills, and an outlined rounded frame.
@@ -11,21 +14,33 @@ export default function Statement() {
     >
       <div className="mx-auto max-w-[1600px]">
         <div className="flex justify-between text-xs sm:text-[13px] font-medium">
-          <p className="w-1/2 sm:w-1/4">{statement.label}</p>
-          <p className="tabular-nums">[ {statement.index} ]</p>
+          <p className="w-1/2 sm:w-1/4">
+            <SlideUpText split="words">
+              {statement.label}
+            </SlideUpText>
+          </p>
+          <p className="tabular-nums">
+            <SlideUpText split="characters" delay={0.04}>
+              {`[ ${statement.index} ]`}
+            </SlideUpText>
+          </p>
         </div>
 
         <div className="mt-8 sm:mt-12 grid gap-8 sm:gap-12 md:grid-cols-[27%_1fr]">
           <div aria-hidden className="hidden md:block" />
           <div>
             <p className="text-2xl sm:text-3xl leading-[1.2] tracking-[-0.015em] md:text-[46px] md:leading-[1.1] lg:text-[52px]">
-              {statement.body}
+              <SlideUpText split="words" stagger={0.015} delay={0.06}>
+                {statement.body}
+              </SlideUpText>
             </p>
 
             <div className="mt-8 sm:mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="max-w-xs text-base sm:text-lg leading-snug md:text-2xl">
-                  {statement.sub}
+                  <SlideUpText split="words" stagger={0.02} delay={0.12}>
+                    {statement.sub}
+                  </SlideUpText>
                 </p>
                 <div className="mt-6 sm:mt-8 flex flex-wrap gap-2.5 sm:gap-3">
                   {statement.ctas.map((cta) => (
