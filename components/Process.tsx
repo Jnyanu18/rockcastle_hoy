@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import SlideUpText from "@/components/ui/SlideUpText";
+import { process as processContent } from "@/lib/content";
 
 /* Section [ 04 ] How we roll
    Exact House of Yellow Architecture matching Reference Image 1:
@@ -21,12 +22,12 @@ export default function Process() {
           <div className="flex w-full items-center justify-between lg:w-[24.0625vw] shrink-0">
             <span className="text-xs md:text-[13px] font-medium tracking-wide text-[#f2efa3]">
               <SlideUpText split="words">
-                How we roll
+                {processContent.label}
               </SlideUpText>
             </span>
             <span className="text-xs md:text-[13px] font-medium tabular-nums text-[#f2efa3] lg:hidden">
               <SlideUpText split="characters" delay={0.04}>
-                {"[ 04 ]"}
+                {`[ ${processContent.index} ]`}
               </SlideUpText>
             </span>
           </div>
@@ -35,12 +36,12 @@ export default function Process() {
           <div className="w-full lg:w-[40.125vw] lg:pr-8">
             <h2 className="text-lg sm:text-2xl lg:text-[27px] font-normal leading-[1.28] sm:leading-[1.24] text-[#f2efa3]">
               <SlideUpText split="words" stagger={0.012} delay={0.06}>
-                At House of Yellow, we listen first and create with you, not just for you. Everything happens in-house, fast and focused, like having your own team, with outsider firepower.
+                {processContent.body}
               </SlideUpText>
             </h2>
             <p className="mt-5 sm:mt-8 text-xs md:text-[13px] font-normal leading-relaxed text-[#f2efa3]/80 max-w-md">
               <SlideUpText split="words" stagger={0.015} delay={0.12}>
-                We combine strategic thinking, creative craftsmanship and rapid execution to keep ideas moving and momentum growing.
+                {processContent.sub}
               </SlideUpText>
             </p>
           </div>

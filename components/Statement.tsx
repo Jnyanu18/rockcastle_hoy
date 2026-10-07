@@ -29,8 +29,14 @@ export default function Statement() {
         <div className="mt-8 sm:mt-12 grid gap-8 sm:gap-12 md:grid-cols-[27%_1fr]">
           <div aria-hidden className="hidden md:block" />
           <div>
-            <p className="text-2xl sm:text-3xl leading-[1.2] tracking-[-0.015em] md:text-[46px] md:leading-[1.1] lg:text-[52px]">
-              <SlideUpText split="words" stagger={0.015} delay={0.06}>
+            <h2 className="text-2xl sm:text-3xl font-medium tracking-[-0.02em] md:text-[44px] md:leading-[1.08] lg:text-[52px] text-ink mb-5 sm:mb-7">
+              <SlideUpText split="words" stagger={0.02} delay={0.04}>
+                {statement.title}
+              </SlideUpText>
+            </h2>
+
+            <p className="text-base sm:text-xl leading-[1.4] tracking-[-0.01em] md:text-[22px] md:leading-[1.35] lg:text-[25px] text-ink/85">
+              <SlideUpText split="words" stagger={0.01} delay={0.08}>
                 {statement.body}
               </SlideUpText>
             </p>

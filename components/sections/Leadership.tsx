@@ -14,26 +14,26 @@ const founders = [
   {
     num: "01",
     track: "STRATEGY & DIRECTION",
-    name: "Founder & Creative Director",
-    tag: "BRIEF → STRATEGY",
-    credential: "12 YRS",
-    quote: "Every brief gets interrogated until the idea can survive contact with a deadline.",
+    name: "Alok Nagpal",
+    tag: "FOUNDER & MANAGING DIRECTOR",
+    credential: "16+ YRS",
+    quote: "Every experience must transcend ordinary event production — we build living brand worlds that leave indelible marks.",
   },
   {
     num: "02",
-    track: "CONCEPT & PRODUCTION",
-    name: "Head of Production",
-    tag: "CONCEPT → SHOOT",
-    credential: "9 YRS",
-    quote: "A concept that only works as a mood board is not a concept — it's a wish.",
+    track: "CONCEPT & EXPERIENCES",
+    name: "Pooja Dugar",
+    tag: "DIRECTOR & HEAD OF EXPERIENCES",
+    credential: "14+ YRS",
+    quote: "A true experience is felt in every detail — from the first spatial impression to the final standing ovation.",
   },
   {
     num: "03",
-    track: "EDIT & DELIVERY",
-    name: "Head of Post-Production",
-    tag: "EDIT → DELIVERY",
-    credential: "10 YRS",
-    quote: "The edit is only as good as the footage still on the drive at midnight.",
+    track: "SPATIAL & STAGE PRODUCTION",
+    name: "Technical & Stage Direction",
+    tag: "ARCHITECTURE & FABRICATION",
+    credential: "15+ YRS",
+    quote: "Precision engineering on the ground turns impossible creative blueprints into flawless reality.",
   },
 ];
 
@@ -99,7 +99,7 @@ export default function Leadership() {
         <div className="leadership__head">
           <div className="leadership__meta-bar">
             <SlideUpText split="characters" stagger={0.015} inView once className="leadership__tag">
-              [ EXECUTIVE DIRECTION ]
+              [ TEAM ]
             </SlideUpText>
             <SlideUpText split="words" stagger={0.02} delay={0.05} inView once className="leadership__coords">
               {footer.office.lines.slice(1).join(", ").toUpperCase()}
@@ -108,14 +108,13 @@ export default function Leadership() {
 
           <h2 className="leadership__title">
             <SlideUpText split="words" stagger={0.03} inView once>
-              Three leads personally sign off on every project we ship
+              THE PEOPLE BEHIND THE EXPERIENCE
             </SlideUpText>
           </h2>
 
           <p className="leadership__subtitle">
             <SlideUpText split="words" stagger={0.014} delay={0.1} inView once>
-              No account managers in between. No diluted briefs. Every film, shoot and edit is steered
-              directly by our three studio partners from concept note to final delivery.
+              No layers of separation. No diluted vision. Every benchmark experience, spatial architecture, and live stage is directed directly by our leadership from initial blueprint to final cue.
             </SlideUpText>
           </p>
         </div>

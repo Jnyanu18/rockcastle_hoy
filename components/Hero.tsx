@@ -170,7 +170,7 @@ export default function Hero() {
       </div>
 
       {/* Supporting copy: desktop right-center */}
-      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 max-w-[15rem] text-right text-[13px] leading-relaxed z-10 md:right-10 pointer-events-auto">
+      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 max-w-[18rem] lg:max-w-[20rem] text-right text-[15px] lg:text-base leading-relaxed z-10 md:right-10 pointer-events-auto">
         <p>
           <SlideUpText split="words" delay={0.45} stagger={0.015}>
             {hero.aside}
