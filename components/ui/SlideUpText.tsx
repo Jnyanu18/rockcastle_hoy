@@ -63,22 +63,21 @@ export default function SlideUpText({
     );
   };
 
+  // The space between words is a plain sibling text node here, outside any
+  // `white-space: nowrap` box. Nested inside one (as trailing content of a
+  // word's own span) it gets silently trimmed, since CSS collapses
+  // whitespace at the end of a nowrap line.
   return (
     <span className={`slide-up-text ${className}`} ref={ref}>
       <span className="sr-only">{children}</span>
-      {split === "characters"
-        ? words.map((word, wi) => (
-            <span className="slide-up-text__word" key={wi} aria-hidden="true">
-              {word.split("").map((char, ci) => unit(char, wi * 1000 + ci))}
-              {wi < words.length - 1 && unit(" ", wi * 1000 + 999)}
-            </span>
-          ))
-        : words.map((word, wi) => (
-            <span className="slide-up-text__word" key={wi} aria-hidden="true">
-              {unit(word, wi)}
-              {wi < words.length - 1 && " "}
-            </span>
-          ))}
+      {words.flatMap((word, wi) => {
+        const wordNode = (
+          <span className="slide-up-text__word" key={`w-${wi}`} aria-hidden="true">
+            {split === "characters" ? word.split("").map((char, ci) => unit(char, wi * 1000 + ci)) : unit(word, wi)}
+          </span>
+        );
+        return wi < words.length - 1 ? [wordNode, " "] : [wordNode];
+      })}
     </span>
   );
 }
