@@ -1,4 +1,5 @@
 import { hero } from "@/lib/content";
+import KineticLogo from "@/components/KineticLogo";
 
 /* Star Orbit Ring Graphic: perspective dashed ellipse with centered 4-point star */
 function StarOrbitRing() {
@@ -91,9 +92,6 @@ function PlayVideoTile({ href = "#recent-experiences" }: { href?: string }) {
    - Desktop: Kept identical with original 3x3 letter grid and left/right copy
 */
 export default function Hero() {
-  const rows = [0, 1, 2];
-  const cols = [0, 1, 2];
-
   return (
     <section
       id="home"
@@ -116,33 +114,16 @@ export default function Hero() {
       />
 
       {/* ========================================================
-          MOBILE HERO VIEW (< md): Exact match to reference image
+          MOBILE HERO VIEW (< md)
           ======================================================== */}
       <div className="flex md:hidden absolute inset-0 z-10 flex-col items-center justify-center px-4 pt-14 pb-6 pointer-events-auto">
-        {/* Mobile Center HOY Letter Unit */}
-        <div className="relative flex flex-col items-center justify-center gap-2">
-          {/* Top Row: H and Y */}
-          <div className="flex w-36 items-center justify-between text-3xl font-bold tracking-wider text-white">
-            <span>H</span>
-            <span>Y</span>
-          </div>
-
-          {/* Center Row: [O] Squircle Tile */}
-          <div className="flex items-center justify-center">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#edeea5] text-xl font-bold text-[#1d1d1b] shadow-md">
-              O
-            </div>
-          </div>
-
-          {/* Bottom Row: H and Y */}
-          <div className="flex w-36 items-center justify-between text-3xl font-bold tracking-wider text-white">
-            <span>H</span>
-            <span>Y</span>
-          </div>
+        {/* Mobile Center Kinetic Logo (replaces HOY letter stack) */}
+        <div className="relative mb-3 flex items-center justify-center h-24 w-full">
+          <KineticLogo className="!relative !top-auto !left-auto !translate-x-0 !translate-y-0 pointer-events-auto" />
         </div>
 
         {/* Mobile Welcome & Headline Copy */}
-        <div className="mt-4 flex flex-col items-center text-center px-2">
+        <div className="mt-3 flex flex-col items-center text-center px-2">
           <p className="text-xs font-semibold tracking-wide text-[#edeea5]">
             {hero.label}
           </p>
@@ -159,35 +140,11 @@ export default function Hero() {
       </div>
 
       {/* ========================================================
-          DESKTOP HERO VIEW (>= md): Kept exact same layout & sizes
+          DESKTOP HERO VIEW (>= md): KineticLogo in Center
           ======================================================== */}
-      {/* Center 3x3 letter grid with Play tile in top-left cell */}
-      <div className="hidden md:flex absolute inset-x-0 top-0 h-full items-center justify-center z-10 pointer-events-none">
-        <div className="relative grid grid-cols-3 gap-2 md:gap-3 pointer-events-auto">
-          {/* Play tile sits in the top-left cell, like the reference */}
-          <a
-            href={hero.primaryCta.href}
-            aria-label={hero.primaryCta.label}
-            className="col-start-1 row-start-1 flex h-16 w-16 items-center justify-center rounded-2xl bg-canvas text-[10px] font-medium uppercase tracking-wide text-ink md:h-24 md:w-24 md:text-xs"
-          >
-            Play
-          </a>
-          {rows.flatMap((r) =>
-            cols.map((c) => {
-              const cell = hero.letters.find((l) => l.row === r && l.col === c);
-              if (!cell) return null;
-              return (
-                <span
-                  key={`${r}-${c}`}
-                  style={{ gridRow: r + 1, gridColumn: c + 1 }}
-                  className="flex h-16 w-16 items-center justify-center rounded-2xl bg-canvas text-3xl font-semibold text-ink md:h-24 md:w-24 md:text-5xl"
-                >
-                  {cell.letter}
-                </span>
-              );
-            }),
-          )}
-        </div>
+      {/* Center Kinetic Logo (replaces 3x3 HOY letter grid) */}
+      <div className="hidden md:flex absolute inset-0 items-center justify-center z-10 pointer-events-none">
+        <KineticLogo className="pointer-events-auto" />
       </div>
 
       {/* Primary headline: desktop at left-center */}

@@ -7,7 +7,10 @@ export default function KineticLogo({ className = '' }) {
         {/* Main Active Logo Unit */}
         <div className="kl-container">
           <div className="kl-rock-stage">
-            <span className="kl-rock-word">ROCK</span>
+            <div className="kl-letter kl-l-r">R</div>
+            <div className="kl-letter kl-l-o">O</div>
+            <div className="kl-letter kl-l-c">C</div>
+            <div className="kl-letter kl-l-k">K</div>
           </div>
 
           <div className="kl-castle-text">CASTLE</div>
@@ -24,4 +27,4 @@ export default function KineticLogo({ className = '' }) {
       </div>
     </div>
   )
-}
+}
