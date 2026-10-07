@@ -59,16 +59,17 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Left-center: welcome + headline */}
-      <div className="absolute top-1/2 -translate-y-1/2 left-4 max-w-[24rem] z-10 md:left-10 pointer-events-auto">
-        <p className="mb-3 text-xs font-medium">{hero.label}</p>
-        <p className="text-xl leading-snug md:text-2xl">{hero.headline}</p>
+      {/* Primary headline: displayed on mobile at the bottom (to prevent overlap with center logo) and on desktop at left-center */}
+      <div className="absolute bottom-8 left-4 max-w-[20rem] z-10 md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:left-10 md:max-w-[24rem] pointer-events-auto">
+        <p className="mb-2 md:mb-3 text-xs font-medium">{hero.label}</p>
+        <p className="text-lg leading-snug md:text-xl lg:text-2xl">{hero.headline}</p>
       </div>
 
-      {/* Right-center: supporting copy */}
-      <p className="absolute top-1/2 -translate-y-1/2 right-4 max-w-[15rem] text-right text-[13px] leading-relaxed z-10 md:right-10 pointer-events-auto">
+      {/* Supporting copy: hidden on mobile view, visible on desktop right-center */}
+      <p className="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 max-w-[15rem] text-right text-[13px] leading-relaxed z-10 md:right-10 pointer-events-auto">
         {hero.aside}
       </p>
     </section>
   );
 }
+
