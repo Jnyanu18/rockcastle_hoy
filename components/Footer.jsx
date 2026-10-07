@@ -171,7 +171,7 @@ export default function Footer({ reveal = true }) {
           <div className="footer__col footer__col--center">
             <Link href="/" className="footer__logo-link" aria-label="Rock Castle Home">
               <img
-                src="/rockcastle-logo-black.png"
+                src="/rockcastle-logo.jpg"
                 alt="Rock Castle"
                 className="footer__logo-img"
               />

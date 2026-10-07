@@ -156,10 +156,11 @@ export const services = [
 
 export const contact = {
   index: "08",
-  label: "Let’s connect",
+  label: "Let's connect",
   heading:
-    "If you’re looking for a creative partner that combines craftsmanship, speed and innovation, let’s shape the future together. Get in touch and let’s lead.",
-  cta: "Connect",
+    "If you're looking for a creative partner that combines craftsmanship, speed and impact, let's make something remarkable.",
+  subheading: "Built for brands that want to lead.",
+  cta: "CONNECT",
   href: "/contact",
 };
 
