@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import RecentExperiences from "@/components/sections/RecentExperiences";
 import Statement from "@/components/Statement";
@@ -15,7 +15,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 export default function Home() {
   return (
     <>
-      <Navbar />
+      <Navigation />
       <main>
         <Hero />
         <Statement />

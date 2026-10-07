@@ -10,6 +10,9 @@
   --rc-yellow-bright: #f3f4bd;
   --rc-white: #f1ece2;
   --rc-black: #1d1d1b;
+  --rc-black-rich: #141413;
+  --rc-gray-light: #a0a09e;
+  --rc-gray: #70706e;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-display: var(--font-sans), system-ui, sans-serif;
   --font-body: var(--font-sans), system-ui, sans-serif;
