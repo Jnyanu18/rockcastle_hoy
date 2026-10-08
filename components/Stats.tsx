@@ -1,61 +1,174 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import SlideUpText from "@/components/ui/SlideUpText";
+import { stats } from "@/lib/content";
+import { useInView } from "@/lib/hooks";
 import "./Stats.css";
 
-/* Section [ 03 ] Beyond the Screen & Stats Showcase
-   Pixel-for-pixel match to House of Yellow reference architecture:
-   - Top Intro: 3-column row with [ 03 ], Beyond the Screen statement, and Mobile content aside
-   - Main Showcase: Left square accent, wide iPhone mockup with reaction badges, 4 massive stats, right sparkle accent
+function parseMetric(val: string) {
+  const hasPrefixPlus = val.startsWith("+");
+  const cleaned = hasPrefixPlus ? val.slice(1) : val;
+
+  if (cleaned.endsWith("M+")) {
+    const num = parseFloat(cleaned.replace("M+", ""));
+    return { target: num, prefix: hasPrefixPlus ? "+" : "", suffix: "M+", decimals: 1 };
+  }
+  if (cleaned.endsWith("+")) {
+    const num = parseFloat(cleaned.replace("+", ""));
+    return { target: num, prefix: hasPrefixPlus ? "+" : "", suffix: "+", decimals: 0 };
+  }
+  if (cleaned.includes(".") && !cleaned.includes("M")) {
+    const parts = cleaned.split(".");
+    if (parts.length > 2 || (parts.length === 2 && parts[1].length === 3)) {
+      const num = parseInt(cleaned.replace(/\./g, ""), 10);
+      return { target: num, prefix: hasPrefixPlus ? "+" : "", suffix: "", separator: ".", decimals: 0 };
+    }
+  }
+  const num = parseFloat(cleaned);
+  return { target: isNaN(num) ? 0 : num, prefix: hasPrefixPlus ? "+" : "", suffix: "", decimals: 0 };
+}
+
+function RunningMetric({ value, delay = 0 }: { value: string; delay?: number }) {
+  const { ref, inView } = useInView<HTMLSpanElement>(0.15);
+  const hasAnimated = useRef(false);
+  const initialValue = (() => {
+    const { prefix = "", suffix = "", decimals = 0 } = parseMetric(value);
+    return `${prefix}${decimals > 0 ? "0.0" : "0"}${suffix}`;
+  })();
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !inView || hasAnimated.current) return;
+    hasAnimated.current = true;
+
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.textContent = value;
+      return;
+    }
+
+    const { target, prefix = "", suffix = "", decimals = 0, separator } = parseMetric(value);
+    const duration = 1600;
+
+    let rafId: number;
+    const timerId = setTimeout(() => {
+      const startTime = performance.now();
+
+      const tick = (now: number) => {
+        if (!el) return;
+        const elapsed = now - startTime;
+        const t = Math.min(1, elapsed / duration);
+        const ease = 1 - Math.pow(1 - t, 4);
+        const current = target * ease;
+
+        let formatted = "";
+        if (decimals > 0) {
+          formatted = current.toFixed(decimals);
+        } else if (separator === ".") {
+          formatted = Math.round(current).toLocaleString("de-DE");
+        } else {
+          formatted = Math.round(current).toString();
+        }
+
+        el.textContent = `${prefix}${formatted}${suffix}`;
+
+        if (t < 1) {
+          rafId = requestAnimationFrame(tick);
+        } else {
+          el.textContent = value;
+        }
+      };
+
+      rafId = requestAnimationFrame(tick);
+    }, delay);
+
+    return () => {
+      clearTimeout(timerId);
+      cancelAnimationFrame(rafId);
+    };
+  }, [inView, value, delay, ref]);
+
+  return (
+    <span ref={ref} className="tabular-nums">
+      {initialValue}
+    </span>
+  );
+}
+
+/* Section [ 03 ] Beyond the Stage & Stats Showcase
+   Experiential and live events metrics for Rock Castle Entertainment
 */
 export default function Stats() {
-  const figures = [
-    { label: "Countries", value: "7" },
-    { label: "Followers", value: "+18.000" },
-    { label: "Impressions", value: "2.100.000" },
-    { label: "Engagements", value: "160.000" },
-  ];
+  const figures = stats.figures;
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
       id="stats"
-      className="hoy-stats-section px-4 sm:px-8 lg:px-12 pt-16 md:pt-24 pb-20 md:pb-28"
+      className="hoy-stats-section px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-28"
     >
       {/* Container wrapper matching max content bounds */}
       <div className="mx-auto w-full max-w-[1760px]">
         {/* ========================================================================= */}
-        {/* TOP INTRO BLOCK [ 03 ] Beyond the Screen (Matches Reference Image 3)      */}
+        {/* TOP INTRO BLOCK [ 03 ] Beyond the Stage                                    */}
         {/* ========================================================================= */}
-        <div className="hoy-intro-cols mb-20 lg:mb-28">
+        <div className="hoy-intro-cols mb-12 sm:mb-16 lg:mb-28">
           {/* Column 1: Section Index */}
           <div className="hoy-intro-col-1">
             <span className="text-xs md:text-[13px] font-medium tracking-wide text-[#f2efa3]">
-              [ 03 ]
+              <SlideUpText split="characters">
+                {`[ ${stats.index} ]`}
+              </SlideUpText>
             </span>
           </div>
 
-          {/* Column 2: Beyond the Screen Eyebrow & Hero Statement */}
+          {/* Column 2: Beyond the Stage Eyebrow & Hero Statement */}
           <div className="hoy-intro-col-2">
             <p className="text-xs md:text-[13px] font-medium text-[#f2efa3] mb-4">
-              Beyond the Screen
+              <SlideUpText split="words">
+                {stats.label}
+              </SlideUpText>
             </p>
             <h2 className="text-xl sm:text-2xl lg:text-[27px] font-normal leading-[1.24] text-[#f2efa3]">
-              At House of Yellow, we believe every story deserves its perfect
-              stage. From the intimate tap-and-scroll of a smartphone to the
-              immersive grandeur of the silver screen, our passion lies in
-              bringing your vision to life, no matter the medium.
+              <SlideUpText split="words" stagger={0.012} delay={0.06}>
+                {stats.heading}
+              </SlideUpText>
             </h2>
           </div>
 
-          {/* Column 3: Mobile Content Aside with Square Accent */}
+          {/* Column 3: Mobile Content / Brand Activations Aside */}
           <div className="hoy-intro-col-3">
             <div className="flex items-center gap-2 mb-3">
               <span className="inline-block h-2.5 w-2.5 bg-[#f2efa3] rounded-[1px] shrink-0" />
               <span className="text-xs md:text-[13px] font-medium text-[#f2efa3]">
-                Mobile content
+                <SlideUpText split="words" delay={0.04}>
+                  {stats.mobile.label}
+                </SlideUpText>
               </span>
             </div>
             <p className="text-xs md:text-[13px] leading-relaxed text-[#f2efa3]/80 max-w-sm">
-              In a scroll-stop world, you need content that pops. We craft
-              dynamic, thumb-stopping videos designed purely for mobile. Get
-              ready to scroll, tap, and share.
+              <SlideUpText split="words" stagger={0.015} delay={0.1}>
+                {stats.mobile.body}
+              </SlideUpText>
             </p>
           </div>
         </div>
@@ -138,6 +251,7 @@ export default function Stats() {
 
                 {/* Looping Content Video */}
                 <video
+                  ref={videoRef}
                   src="/video1.mp4"
                   autoPlay
                   loop
@@ -233,15 +347,17 @@ export default function Stats() {
           </div>
 
           {/* Stats Figures Column */}
-          <div className="hoy-showcase-col-stats">
-            <div className="flex flex-col gap-8 lg:gap-11">
-              {figures.map((item) => (
+          <div className="hoy-showcase-col-stats w-full">
+            <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:flex lg:flex-col lg:gap-11">
+              {figures.map((item, index) => (
                 <div key={item.label} className="flex flex-col">
                   <span className="text-xs md:text-[14px] font-normal text-[#f2efa3]/80 mb-1">
-                    {item.label}
+                    <SlideUpText split="words" delay={0.06}>
+                      {item.label}
+                    </SlideUpText>
                   </span>
-                  <span className="text-5xl sm:text-6xl lg:text-[72px] xl:text-[80px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#f2efa3]">
-                    {item.value}
+                  <span className="text-3xl sm:text-5xl lg:text-[72px] xl:text-[80px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#f2efa3]">
+                    <RunningMetric value={item.value} delay={index * 120} />
                   </span>
                 </div>
               ))}

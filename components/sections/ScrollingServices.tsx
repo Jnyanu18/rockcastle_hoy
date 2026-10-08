@@ -26,29 +26,29 @@ const PLACEHOLDER_IMAGES = ["/rx/placeholder-1.svg", "/rx/placeholder-2.svg", "/
 // the two balanced headline lines this deck expects.
 const DEFAULT_ITEMS: DeckItem[] = [
   {
-    index: services[0].index,
-    line1: "Video that moves beyond",
-    line2: "the screen",
-    desc: services[0].body,
-    buttonText: "Talk video",
+    index: "05",
+    line1: "STORIES WE’VE",
+    line2: "BROUGHT TO LIFE",
+    desc: "From landmark corporate summits and public festivals to immersive brand pavilions — we engineer spaces that captivate thousands and create permanent brand recall.",
+    buttonText: "Explore Stories",
+    link: "#recent-experiences",
+    images: PLACEHOLDER_IMAGES,
+  },
+  {
+    index: "06",
+    line1: "EXPERIENCES UN-LTD —",
+    line2: "SPATIAL & PRODUCTION",
+    desc: "360-degree event architecture, cutting-edge stage engineering, immersive AV technology, and turnkey fabrication built to transform any venue into an extraordinary world.",
+    buttonText: "Our Capabilities",
     link: "#contact",
     images: PLACEHOLDER_IMAGES,
   },
   {
-    index: services[1].index,
-    line1: "Photography that captures",
-    line2: "more than moments",
-    desc: services[1].body,
-    buttonText: "Talk photography",
-    link: "#contact",
-    images: PLACEHOLDER_IMAGES,
-  },
-  {
-    index: services[2].index,
-    line1: "Animation that brings ideas",
-    line2: "into motion",
-    desc: services[2].body,
-    buttonText: "Talk animation",
+    index: "07",
+    line1: "Awards & Recognition —",
+    line2: "WORK THAT GETS NOTICED",
+    desc: "Industry-celebrated IPs, EEMA-recognized experiential executions, and landmark corporate spectacles trusted by top global brands and institutions across India.",
+    buttonText: "Work That Gets Noticed",
     link: "#contact",
     images: PLACEHOLDER_IMAGES,
   },
@@ -101,10 +101,13 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
         return inner ? Math.ceil(inner.getBoundingClientRect().height) : 560;
       });
 
-      return { minHeights, innerHeights };
+      const containerH = itemsEl.clientHeight || 850;
+
+      return { minHeights, innerHeights, containerH };
     };
 
-    let { minHeights, innerHeights } = readDimensions();
+    let { minHeights, innerHeights, containerH } = readDimensions();
+    let lastActiveIndex = -1;
 
     // Timeline keyframes:
     // 0.00 - 0.18: Card 0 dwell (active), Card 1 & 2 docked at the bottom of the page
@@ -120,7 +123,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
 
     const updateCards = (progress: number) => {
       const p = Math.max(0, Math.min(1, progress));
-      const containerH = itemsRef.current ? itemsRef.current.clientHeight : 850;
+      const currentContainerH = containerH;
       const gap = 8;
 
       // Determine active index for class tagging
@@ -154,9 +157,9 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
       const c0_opacity = 1 - (1 - 0.28) * c0_t;
       const c0_y = 0;
 
-      // Card 1: top position: min0 + gap; bottom position: containerH - min2 - gap - min1
+      // Card 1: top position: min0 + gap; bottom position: currentContainerH - min2 - gap - min1
       const c1_topY = min0 + gap;
-      const c1_botY = Math.max(c1_topY, containerH - min2 - gap - min1);
+      const c1_botY = Math.max(c1_topY, currentContainerH - min2 - gap - min1);
 
       let c1_y: number, c1_height: number, c1_opacity: number;
       if (p <= DWELL_1) {
@@ -183,9 +186,9 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
         c1_opacity = 0.28;
       }
 
-      // Card 2: top position: min0 + gap + min1 + gap; bottom position: containerH - min2
+      // Card 2: top position: min0 + gap + min1 + gap; bottom position: currentContainerH - min2
       const c2_topY = min0 + gap + min1 + gap;
-      const c2_botY = Math.max(c2_topY, containerH - min2);
+      const c2_botY = Math.max(c2_topY, currentContainerH - min2);
 
       let c2_y: number, c2_height: number, c2_opacity: number;
       if (p <= DWELL_2) {
@@ -209,6 +212,11 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
         { y: c2_y, height: c2_height, opacity: c2_opacity },
       ];
 
+      const activeIndexChanged = activeIndex !== lastActiveIndex;
+      if (activeIndexChanged) {
+        lastActiveIndex = activeIndex;
+      }
+
       itemEls.forEach((item, i) => {
         const state = states[i];
         if (!state) return;
@@ -219,13 +227,15 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
           opacity: state.opacity,
         });
 
-        item.classList.remove("ss__item--past", "ss__item--active", "ss__item--upcoming");
-        if (i < activeIndex) {
-          item.classList.add("ss__item--past");
-        } else if (i === activeIndex) {
-          item.classList.add("ss__item--active");
-        } else {
-          item.classList.add("ss__item--upcoming");
+        if (activeIndexChanged) {
+          item.classList.remove("ss__item--past", "ss__item--active", "ss__item--upcoming");
+          if (i < activeIndex) {
+            item.classList.add("ss__item--past");
+          } else if (i === activeIndex) {
+            item.classList.add("ss__item--active");
+          } else {
+            item.classList.add("ss__item--upcoming");
+          }
         }
       });
     };
@@ -362,6 +372,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
                                 <span className="buttonWrapper">
                                   <Link
                                     href={item.link}
+                                    data-magnetic
                                     className="arrowButton"
                                     aria-label={`Explore ${line1} ${line2}`}
                                     onClick={(e) => e.stopPropagation()}
@@ -391,7 +402,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
                           </p>
                           {item.buttonText && item.link && (
                             <div className="buttonRow">
-                              <Link href={item.link} className="ss__cta-btn" onClick={(e) => e.stopPropagation()}>
+                              <Link href={item.link} data-magnetic className="ss__cta-btn" onClick={(e) => e.stopPropagation()}>
                                 <span>{item.buttonText}</span>
                                 <span className="ss__cta-arrow" aria-hidden="true">→</span>
                               </Link>
@@ -402,7 +413,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
                         {item.images && item.images.length > 0 && (
                           <div className="images">
                             {item.images.map((src, j) => (
-                              <div className="imageWrapper" key={j}>
+                              <div className="imageWrapper" key={j} data-cursor="view">
                                 <img src={src} alt={`${line1} — visual ${j + 1}`} loading="lazy" />
                               </div>
                             ))}

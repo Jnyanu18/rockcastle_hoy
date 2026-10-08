@@ -79,7 +79,10 @@ export default function Footer({ reveal = true }) {
 
       footerEl.classList.add('footer--reveal')
       const h = footerEl.offsetHeight
-      mainEl.style.marginBottom = `${h}px`
+      const targetMargin = `${h}px`
+      if (mainEl.style.marginBottom !== targetMargin) {
+        mainEl.style.marginBottom = targetMargin
+      }
 
       if (ctx) ctx.revert()
 
@@ -121,16 +124,20 @@ export default function Footer({ reveal = true }) {
       initReveal()
     }, 60)
 
+    let roTimer = null
     ro = new ResizeObserver(() => {
-      initReveal()
+      if (roTimer) clearTimeout(roTimer)
+      roTimer = setTimeout(() => {
+        initReveal()
+      }, 150)
     })
     ro.observe(footerEl)
-    ro.observe(mainEl)
 
     window.addEventListener('resize', initReveal)
 
     return () => {
       clearTimeout(timer)
+      if (roTimer) clearTimeout(roTimer)
       if (ro) ro.disconnect()
       window.removeEventListener('resize', initReveal)
       if (ctx) ctx.revert()
@@ -148,7 +155,7 @@ export default function Footer({ reveal = true }) {
         <div className="footer__grid">
           {/* Column 1: Office (Far Left) */}
           <div className="footer__col footer__col--office">
-            <h4 className="footer__col-heading">Corporate Office</h4>
+            <h4 className="footer__col-heading">Office</h4>
             <div className="footer__col-content">
               <p>1st Floor, Plus Offices</p>
               <p>Landmark Cyber Park, Sector 67</p>
@@ -209,8 +216,8 @@ export default function Footer({ reveal = true }) {
           </div>
         </div>
 
-        {/* Bottom Legal / Copyright Bar */}
-        <div className="footer__bottom">
+        {/* Desktop Bottom Legal / Copyright Bar */}
+        <div className="footer__bottom footer__bottom--desktop">
           <span className="footer__copyright">
             © {new Date().getFullYear()} Rock Castle Entertainment Pvt. Ltd. · Regd. Office: Sector 12, Dwarka, New Delhi 110075
           </span>
@@ -219,6 +226,12 @@ export default function Footer({ reveal = true }) {
             <span className="footer__bottom-sep">/</span>
             <span className="footer__bottom-motto">Experiences Un-ltd.</span>
           </div>
+        </div>
+
+        {/* Mobile Bottom Bar (Matches reference image) */}
+        <div className="footer__bottom footer__bottom--mobile">
+          <a href="#cookies" className="footer__mobile-cookie">Cookies</a>
+          <p className="footer__mobile-copy">© {new Date().getFullYear()} Rock Castle</p>
         </div>
       </div>
     </footer>

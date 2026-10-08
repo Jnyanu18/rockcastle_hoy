@@ -16,6 +16,7 @@ type Props = {
   /** Seconds before the first unit starts. */
   delay?: number;
   className?: string;
+  threshold?: number;
 };
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
@@ -38,13 +39,14 @@ export default function SlideUpText({
   stagger = 0.02,
   delay = 0,
   className = "",
+  threshold = 0.15,
 }: Props) {
-  const { ref, inView } = useInView<HTMLSpanElement>(0.4);
+  const { ref, inView } = useInView<HTMLSpanElement>(threshold);
   const revealed = gate && inView;
 
   if (!gate) return <span className={className}>{children}</span>;
 
-  const words = children.split(" ");
+  const words = children.trim().split(/\s+/).filter(Boolean);
   let unitIndex = 0;
 
   const unit = (content: string, i: number) => {

@@ -50,6 +50,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       <Reveal variant="clip" className="relative">
         <div
           className="relative aspect-[493/453] w-full overflow-hidden rounded-[4px]"
+          data-cursor="view"
           style={{ background: project.media.tone }}
           role="img"
           aria-label={project.media.alt}

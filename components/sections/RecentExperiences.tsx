@@ -126,6 +126,7 @@ export default function RecentExperiences() {
           <button
             type="button"
             className="rx-head__arrow"
+            data-magnetic
             onClick={() => scrollRail(-1)}
             disabled={edges.start}
             aria-label="Scroll stories left"
@@ -135,6 +136,7 @@ export default function RecentExperiences() {
           <button
             type="button"
             className="rx-head__arrow"
+            data-magnetic
             onClick={() => scrollRail(1)}
             disabled={edges.end}
             aria-label="Scroll stories right"
@@ -150,6 +152,7 @@ export default function RecentExperiences() {
             <button
               type="button"
               className="rx-plate"
+              data-cursor="view"
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}

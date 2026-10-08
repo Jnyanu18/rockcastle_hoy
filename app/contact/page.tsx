@@ -14,7 +14,7 @@ export default function ContactPage() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen bg-canvas">
+      <main className="min-h-screen bg-canvas main--contact !shadow-none" style={{ boxShadow: "none" }}>
         <BriefForm className="bg-canvas px-4 pt-28 pb-20 md:px-10 md:pt-36 md:pb-28" />
       </main>
       <Footer />

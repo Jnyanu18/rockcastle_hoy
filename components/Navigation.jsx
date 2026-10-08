@@ -19,97 +19,157 @@ export default function Navigation() {
   useMagnetic(navRef, '.nav__link, .nav__pill-btn, .nav__social-link', 0.25)
 
   // Scroll detection: theme adaptation, scrolled state, and dynamic hero-to-corner spread
+  const scrolledRef = useRef(false)
+  const themeRef = useRef('dark')
+  const activeSectionRef = useRef('home')
+  const lastProgressRef = useRef(-1)
+
   useEffect(() => {
+    // Cache section bounds to avoid querying getBoundingClientRect() on every frame
+    let lightBounds = []
+    let watchBounds = []
+
+    const lightSectionIds = [
+      'about',
+      'who-we-are',
+      'what-we-produce',
+      'produce',
+      'leadership',
+      'process',
+      'contact',
+      'services',
+      'testimonials',
+      'recent-experiences',
+      'clients',
+      'brief',
+    ]
+
+    const sectionWatchList = [
+      { id: 'leadership', navKey: 'team' },
+      { id: 'services', navKey: 'services' },
+      { id: 'capabilities', navKey: 'services' },
+      { id: 'recent-experiences', navKey: 'our-work' },
+      { id: 'about', navKey: 'about' },
+      { id: 'home', navKey: 'home' },
+    ]
+
+    const measureSections = () => {
+      const scrollY = window.__lenis?.scroll ?? window.scrollY
+
+      // Measure light sections
+      const lightEls = document.querySelectorAll(
+        lightSectionIds.map((id) => `#${id}, .${id}`).join(', ')
+      )
+      const newLight = []
+      lightEls.forEach((el) => {
+        const rect = el.getBoundingClientRect()
+        newLight.push({
+          top: rect.top + scrollY,
+          bottom: rect.bottom + scrollY,
+        })
+      })
+      lightBounds = newLight
+
+      // Measure active section watcher targets
+      const newWatch = []
+      sectionWatchList.forEach((item) => {
+        const el = document.getElementById(item.id)
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          newWatch.push({
+            navKey: item.navKey,
+            top: rect.top + scrollY,
+            bottom: rect.bottom + scrollY,
+          })
+        }
+      })
+      watchBounds = newWatch
+    }
+
+    measureSections()
+
+    let rafId = 0
     const onScroll = () => {
+      rafId = 0
       const y = window.__lenis?.scroll ?? window.scrollY
-      setScrolled(y > 30)
+
+      // Scrolled state
+      const isScrolled = y > 30
+      if (scrolledRef.current !== isScrolled) {
+        scrolledRef.current = isScrolled
+        setScrolled(isScrolled)
+      }
 
       // Calculate scroll progress (0 at top of hero, 1 once scrolled 120px)
       const scrollDist = 120
       const progress = Math.min(1, Math.max(0, y / scrollDist))
-      if (navRef.current) {
-        navRef.current.style.setProperty('--nav-scroll-p', progress.toFixed(3))
+      if (lastProgressRef.current !== progress && navRef.current) {
+        // Only update style when actively transitioning
+        if (progress < 1 || lastProgressRef.current < 1) {
+          navRef.current.style.setProperty('--nav-scroll-p', progress.toFixed(3))
+        }
+        lastProgressRef.current = progress
       }
 
       // Detect background theme (light vs dark sections)
       const navMidY = 46
-      const lightSectionIds = [
-        'about',
-        'who-we-are',
-        'what-we-produce',
-        'produce',
-        'leadership',
-        'process',
-        'contact',
-        'services',
-        'testimonials',
-        'recent-experiences',
-        'clients',
-        'brief',
-      ]
-
+      const currentNavY = y + navMidY
       let isLight = false
+
       if (pathname === '/connect' || pathname === '/contact') {
         isLight = true
       } else if (pathname === '/how-we-work') {
         isLight = false
       } else {
-        const lightElements = document.querySelectorAll(
-          lightSectionIds.map((id) => `#${id}, .${id}`).join(', ')
-        )
-
-        for (const el of lightElements) {
-          const rect = el.getBoundingClientRect()
-          if (rect.top <= navMidY && rect.bottom > navMidY) {
+        for (let i = 0; i < lightBounds.length; i++) {
+          const b = lightBounds[i]
+          if (currentNavY >= b.top && currentNavY < b.bottom) {
             isLight = true
             break
           }
         }
       }
 
-      setNavTheme(isLight ? 'light' : 'dark')
+      const targetTheme = isLight ? 'light' : 'dark'
+      if (themeRef.current !== targetTheme) {
+        themeRef.current = targetTheme
+        setNavTheme(targetTheme)
+      }
 
       // Detect active section for navbar link indicator
-      const sectionWatchList = [
-        { id: 'leadership', navKey: 'team' },
-        { id: 'services', navKey: 'services' },
-        { id: 'capabilities', navKey: 'services' },
-        { id: 'recent-experiences', navKey: 'our-work' },
-        { id: 'about', navKey: 'about' },
-        { id: 'home', navKey: 'home' },
-      ]
-
       let currentSec = 'home'
-      for (const item of sectionWatchList) {
-        const el = document.getElementById(item.id)
-        if (el) {
-          const rect = el.getBoundingClientRect()
-          if (rect.top <= 240 && rect.bottom > 80) {
-            currentSec = item.navKey
-            break
-          }
+      for (let i = 0; i < watchBounds.length; i++) {
+        const b = watchBounds[i]
+        if (y + 240 >= b.top && y + 80 <= b.bottom) {
+          currentSec = b.navKey
+          break
         }
       }
-      setActiveSection(currentSec)
-    }
 
-    window.addEventListener('scroll', onScroll, { passive: true })
-    if (window.__lenis) {
-      window.__lenis.on('scroll', onScroll)
-    }
-    // Also retry attaching to Lenis in case it initialized slightly after
-    const lenisCheckTimer = setTimeout(() => {
-      if (window.__lenis) {
-        window.__lenis.on('scroll', onScroll)
+      if (activeSectionRef.current !== currentSec) {
+        activeSectionRef.current = currentSec
+        setActiveSection(currentSec)
       }
-    }, 100)
+    }
 
+    const scheduleScroll = () => {
+      if (!rafId) {
+        rafId = requestAnimationFrame(onScroll)
+      }
+    }
+
+    window.addEventListener('scroll', scheduleScroll, { passive: true })
+    window.addEventListener('resize', measureSections)
+
+    // Remeasure after initial layout settlements
+    const layoutTimer = setTimeout(measureSections, 250)
     onScroll()
 
     return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.__lenis?.off('scroll', onScroll)
-      clearTimeout(lenisCheckTimer)
+      if (rafId) cancelAnimationFrame(rafId)
+      window.removeEventListener('scroll', scheduleScroll)
+      window.removeEventListener('resize', measureSections)
+      clearTimeout(layoutTimer)
     }
   }, [pathname, menuOpen])
 

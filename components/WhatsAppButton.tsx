@@ -1,6 +1,6 @@
 import { social } from "@/lib/content";
 
-/* Fixed round messaging button, bottom-right, as in the reference. */
+/* Fixed round messaging button, bottom-right, optimized for mobile and desktop. */
 export default function WhatsAppButton() {
   return (
     <a
@@ -8,9 +8,18 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="WhatsApp"
-      className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-canvas text-ink shadow-none transition-transform duration-300 hover:scale-105"
+      data-magnetic
+      data-magnetic-strength="0.38"
+      className="fixed bottom-5 right-5 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-canvas text-ink shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition-transform duration-300 active:scale-95 hover:scale-105 md:bottom-6 md:right-6 md:h-14 md:w-14 md:shadow-none"
     >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
+      <svg
+        className="h-5 w-5 md:h-6 md:w-6"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        aria-hidden="true"
+      >
         <path d="M4 20l1.3-4A8 8 0 1 1 8.2 18.7L4 20z" strokeLinejoin="round" />
       </svg>
     </a>

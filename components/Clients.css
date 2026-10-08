@@ -44,6 +44,7 @@
   display: flex;
   flex-direction: column;
   gap: 1px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
 
@@ -51,6 +52,7 @@
   display: flex;
   width: max-content;
   border-top: 1px solid rgba(241, 236, 226, 0.14);
+  will-change: transform;
   animation: cl-marquee 60s linear infinite;
 }
 
@@ -88,6 +90,31 @@
 @keyframes cl-marquee {
   to {
     transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 767px) {
+  .clients {
+    padding: 60px 0 54px;
+  }
+
+  .cl-head {
+    margin-bottom: 28px;
+  }
+
+  .cl-head__title {
+    font-size: clamp(2.2rem, 8.5vw, 3.2rem);
+  }
+
+  .cl-cell {
+    width: 140px;
+    height: 72px;
+    padding: 10px 14px;
+  }
+
+  .cl-logo {
+    max-width: 110px;
+    max-height: 52px;
   }
 }
 

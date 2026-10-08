@@ -1,13 +1,12 @@
 /* -------------------------------------------------------------------------- */
 /*  Content config. Every string, image and link the layout renders lives    */
-/*  here. Swap the placeholder values for client content; no component       */
-/*  should need editing to do so.                                            */
+/*  here. Configured for Rock Castle Entertainment Pvt. Ltd.                 */
 /* -------------------------------------------------------------------------- */
 
 export const brand = {
-  name: "LUM",
-  shortName: "LUM",
-  tagline: "Placeholder tagline — replace with client copy.",
+  name: "Rock Castle",
+  shortName: "Rock Castle",
+  tagline: "Experiences Un-Ltd.",
 };
 
 export const navigation = [
@@ -18,69 +17,70 @@ export const navigation = [
 ];
 
 export const social = {
-  linkedin: "https://www.linkedin.com",
-  instagram: "https://www.instagram.com",
-  whatsapp: "https://wa.me/",
+  linkedin: "https://www.linkedin.com/company/rock-castle-entertainment-pvt-ltd",
+  instagram: "https://www.instagram.com/rockcastle.experiences",
+  whatsapp: "https://wa.me/919717733823",
 };
 
 export const hero = {
-  label: "Welcome!",
+  label: "Experiences Un-Ltd.",
   headline:
-    "We’re a creative content agency that moves at the speed of your ambition. From idea to production and beyond. Where speed meets craftsmanship.",
+    "We turn ambitious ideas into monumental experiences. From brand activations and immersive pavilions to mega concerts and corporate spectacles.",
   aside:
-    "We craft formats that stick and stories that move. From an 8-second viral to a full brand documentary, we translate your message into content that creates real momentum.",
+    "Where visionary design meets flawless technical execution. We engineer high-octane experiential environments that leave lasting impressions across India and global stages.",
   primaryCta: { label: "Play reel", href: "#recent-experiences" },
   // Letter grid: [row, column, letter]. Cells not listed stay empty.
   letters: [
-    { row: 0, col: 2, letter: "H" },
+    { row: 0, col: 2, letter: "R" },
     { row: 1, col: 1, letter: "O" },
-    { row: 2, col: 0, letter: "Y" },
-    { row: 2, col: 2, letter: "Y" },
+    { row: 2, col: 0, letter: "C" },
+    { row: 2, col: 2, letter: "K" },
   ],
 };
 
 export const statement = {
   label: "Who are we?",
   index: "01",
+  title: "WE TURN IDEAS INTO EXPERIENCES.",
   body:
-    "Trusted by industry leaders, not because we chase volume, but because we craft stories with intention. From cinematic video and photography to high-end 3D animation, every detail is carefully crafted to create impact, from the first concept to global rollout.",
-  sub: "Looking for a partner that’s agile and thinks big? Let’s talk.",
+    "Rock Castle Entertainment is a premier 360-degree experiential marketing and event management powerhouse based in India. We conceptualize and execute monumental brand activations, corporate summits, immersive public festivals, and live entertainment spectacles. Blending visionary spatial design with meticulous production engineering, we transform ambitious brand visions into unforgettable, high-impact sensory experiences that captivate audiences and inspire industries.",
+  sub: "Looking for a partner that turns scale into benchmark experiences? Let’s talk.",
   ctas: [
     { label: "Connect", href: "#contact", primary: true },
-    { label: "Our culture", href: "#about", primary: false },
+    { label: "Our work", href: "#recent-experiences", primary: false },
   ],
 };
 
 export const works = {
-  label: "The works",
+  label: "Recent experiences",
   index: "02",
   body:
-    "Every frame tells our story too, of passion, agility, and the pursuit of brilliance. A showcase of the work we proudly shaped together with our partners.",
+    "Every build reflects our commitment to scale, precision, and experiential immersion. A showcase of landmark events and brand worlds crafted with our visionary partners.",
   cta: "See all work",
   projects: [
     {
-      title: "Project title one",
-      tags: ["Category", "Commercials"],
-      views: "0",
-      delivery: "2 wks production + 2 wks post",
+      title: "Green Wheels Bike Festival",
+      tags: ["Festival IP", "Live Events"],
+      views: "100k+",
+      delivery: "National Touring IP",
       image: "",
-      alt: "Placeholder project still",
+      alt: "Green Wheels Bike Festival still",
     },
     {
-      title: "Project title two",
-      tags: ["Artists", "Commercials"],
-      views: "0",
-      delivery: "1 week pre-production + 2 shoot days",
+      title: "Corporate Landmark Summit",
+      tags: ["Brand Activation", "Conferences"],
+      views: "15k+",
+      delivery: "Turnkey Stage & Fabrication",
       image: "",
-      alt: "Placeholder project still",
+      alt: "Corporate Summit still",
     },
     {
-      title: "Project title three",
-      tags: ["Artists", "Events"],
-      views: "0",
-      delivery: "8 days",
+      title: "Experiential Brand Pavilion",
+      tags: ["Spatial Design", "Immersive"],
+      views: "50k+",
+      delivery: "Atelier Build & AV Tech",
       image: "",
-      alt: "Placeholder project still",
+      alt: "Experiential Pavilion still",
     },
   ],
 };
@@ -113,19 +113,19 @@ export const clients = {
 
 export const stats = {
   index: "03",
-  label: "Beyond the screen",
+  label: "Beyond the Stage",
   heading:
-    "At our studio, we believe every story deserves its perfect stage. From the intimate tap-and-scroll of a smartphone to the immersive grandeur of the silver screen, our passion lies in bringing your vision to life, no matter the medium.",
+    "At Rock Castle, we believe every vision deserves a stage of uncompromised grandeur. From intimate VIP brand activations to stadium-scale live festivals and high-impact corporate summits, our passion lies in engineering moments that resonate far beyond the venue.",
   mobile: {
-    label: "Mobile content",
+    label: "Brand Activations & Live Impact",
     body:
-      "In a scroll-stop world, you need content that pops. We craft dynamic, thumb-stopping videos designed purely for mobile. Get ready to scroll, tap, and share.",
+      "In an attention-deficit world, you need experiences that captivate. We architect immersive, multi-sensory brand worlds that stop people in their tracks. Live, unfiltered, unforgettable.",
   },
   figures: [
-    { label: "Countries", value: "7" },
-    { label: "Followers", value: "+18.000" },
-    { label: "Impressions", value: "2.100.000" },
-    { label: "Engagements", value: "160.000" },
+    { label: "Cities & Destinations", value: "25+" },
+    { label: "Mega Experiences", value: "500+" },
+    { label: "Audience Engaged", value: "2.5M+" },
+    { label: "Years of Excellence", value: "15+" },
   ],
 };
 
@@ -133,32 +133,32 @@ export const process = {
   label: "How we roll",
   index: "04",
   body:
-    "We listen first and create with you, not just for you. Everything happens in-house, fast and focused, like having your own team, with outsider firepower.",
+    "At Rock Castle, we listen first and create with you, not just for you. From initial spatial blueprint to live load-in and cue-to-cue execution, everything happens in-house with precision engineering and outsider firepower.",
   sub:
-    "We combine strategic thinking, creative craftsmanship and rapid execution to keep ideas moving and momentum growing.",
+    "We combine strategic brand storytelling, architectural craftsmanship and rapid production execution to turn ambitious ideas into benchmark experiences.",
   cta: "Scroll how we roll",
 };
 
 export const services = [
   {
     index: "05",
-    title: "Video that moves beyond the screen",
+    title: "Stories We’ve Brought to Life",
     body:
-      "From cinematic brand films to fast-paced social content, we create visuals designed to capture attention, build emotion, and leave a lasting impact.",
+      "From visionary corporate mega-summits to high-octane public festivals and immersive brand pavilions — we engineer spaces that captivate thousands and create permanent brand recall.",
     images: ["", "", "", ""],
   },
   {
     index: "06",
-    title: "Photography that captures more than moments",
+    title: "Experiences Un-Ltd — Spatial & Production",
     body:
-      "From campaign shoots to brand imagery, we create photography that feels authentic, refined, and built to strengthen the visual identity behind every brand.",
+      "360-degree event architecture, cutting-edge stage engineering, immersive AV technology, and turnkey fabrication built to transform any venue into an extraordinary world.",
     images: ["", "", "", ""],
   },
   {
     index: "07",
-    title: "Animation that brings ideas into motion",
+    title: "Awards & Recognition — Work That Gets Noticed",
     body:
-      "From refined 3D visuals to immersive motion design, we create animations that turn complex ideas into striking visual experiences built to captivate, explain, and elevate every brand story.",
+      "Industry-celebrated IPs, EEMA-recognized experiential executions, and landmark corporate spectacles trusted by top global brands and institutions across India.",
     images: ["", "", "", ""],
   },
 ];
@@ -167,7 +167,7 @@ export const contact = {
   index: "08",
   label: "Let's connect",
   heading:
-    "If you're looking for a creative partner that combines craftsmanship, speed and impact, let's make something remarkable.",
+    "If you're looking for an experiential partner that combines architectural vision, speed and unyielding scale, let's create something extraordinary.",
   subheading: "Built for brands that want to lead.",
   cta: "CONNECT",
   href: "/contact",
@@ -176,17 +176,21 @@ export const contact = {
 export const footer = {
   office: {
     title: "Office",
-    lines: ["Street address 00", "0000 AA, City", "Country"],
+    lines: [
+      "1st Floor, Plus Offices",
+      "Landmark Cyber Park, Sector 67",
+      "Gurugram, Haryana 122018",
+    ],
   },
   contact: {
     title: "Contact",
-    lines: ["+00 0 0000 0000", "hello@example.com"],
+    lines: ["+91 97177 33823", "info@rockcastle.in"],
   },
   sitemap: {
     title: "Sitemap",
     links: navigation.map((n) => ({ label: n.label, href: n.href })),
   },
-  join: { label: "Join the movement", tagline: "Let’s shape the future — frame by frame." },
-  copyright: `© ${new Date().getFullYear()} ${brand.name}`,
-  legal: [{ label: "Cookies", href: "#" }],
+  join: { label: "Join the movement", tagline: "Architects of the untold — monumental builds worldwide." },
+  copyright: `© ${new Date().getFullYear()} Rock Castle Entertainment Pvt. Ltd.`,
+  legal: [{ label: "Cookies", href: "#cookies" }],
 };

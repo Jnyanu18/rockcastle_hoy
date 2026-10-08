@@ -91,6 +91,7 @@
   align-items: center;
   flex: 0 1 280px;
   max-width: 100%;
+  will-change: transform;
 }
 
 .leadership__card-header-track {
