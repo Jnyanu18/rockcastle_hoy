@@ -1,14 +1,14 @@
 /* ==========================================================================
    CLIENTS — two slow marquee rows of client names, looping in opposite
-   directions. Pale-yellow canvas, dark text, hairline structure.
+   directions. Pure black canvas, pale-yellow eyebrow, hairline structure.
    ========================================================================== */
 
 .clients {
   position: relative;
   z-index: 2;
   padding: clamp(90px, 14vh, 170px) 0;
-  color: var(--black, #0b0b0b);
-  background: var(--hoy-yellow, #f0f3a6);
+  color: var(--white, #ffffff);
+  background: #000000;
   overflow: clip;
 }
 
@@ -22,7 +22,7 @@
   font-family: var(--font-mono);
   font-size: var(--fs-meta);
   letter-spacing: var(--ls-meta);
-  color: var(--black, #0b0b0b);
+  color: var(--hoy-yellow, #f2efa3);
   margin-bottom: clamp(18px, 3vh, 32px);
 }
 
@@ -33,11 +33,12 @@
   font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.045em;
+  color: var(--white, #ffffff);
 }
 
 .cl-head__title em {
   font-style: normal;
-  color: var(--rc-orange);
+  color: var(--hoy-yellow, #f2efa3);
 }
 
 .cl-rows {
@@ -53,6 +54,8 @@
   width: max-content;
   will-change: transform;
   animation: cl-marquee 60s linear infinite;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .cl-row--reverse {
@@ -67,7 +70,7 @@
   width: clamp(170px, 17vw, 260px);
   height: clamp(84px, 9vw, 130px);
   padding: 16px 20px;
-  border-right: 1px solid rgba(11, 11, 11, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .cl-logo {
@@ -76,6 +79,15 @@
   max-width: 160px;
   max-height: 72px;
   object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.78;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.cl-cell:hover .cl-logo,
+.cl-logo:hover {
+  opacity: 1;
+  transform: scale(1.04);
 }
 
 @keyframes cl-marquee {
