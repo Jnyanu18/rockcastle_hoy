@@ -21,8 +21,6 @@
     'title controls';
   align-items: end;
   row-gap: clamp(18px, 3vh, 32px);
-  max-width: 1480px;
-  margin-inline: auto;
   padding: 0 var(--container-x);
   margin-bottom: clamp(40px, 7vh, 88px);
 }
@@ -97,8 +95,8 @@
   display: flex;
   align-items: flex-start;
   gap: var(--rx-gap);
-  max-width: 1480px;
-  margin: 0 auto;
+  max-width: 1200px;
+  margin: 0;
   padding: 0 var(--container-x) 8px;
   list-style: none;
   overflow-x: auto;
