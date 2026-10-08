@@ -24,15 +24,6 @@ export default function KineticLogo({ className = '' }) {
 
             <Sparkle size={22} className="kl-sparkle" />
           </div>
-
-          <div className="kl-brush-wrap">
-            <svg className="kl-brush-svg" viewBox="0 0 380 20" aria-hidden="true">
-              <path d="M 8 10 C 120 7 270 3 330 2 C 342 6 332 11 316 12 C 250 14 110 16 8 10 Z" />
-              <circle cx="355" cy="8" r="4.5" />
-            </svg>
-          </div>
-
-          <div className="kl-tagline">experiences un-ltd.</div>
         </div>
       </div>
     </div>

@@ -332,12 +332,8 @@ export default function Navigation() {
               aria-label="Rockcastle Home"
               onClick={(e) => handleNavClick(e, '/')}
             >
-              <img src="/rockcastle-logo.jpg" alt="Rockcastle" className="nav__brand-logo" />
-              <img
-                src="/rockcastle-logo-black.png"
-                alt="Rock Castle"
-                className="nav__brand-wordmark"
-              />
+              <img src="/rockcastle-logo.jpg" alt="" aria-hidden="true" className="nav__brand-logo" />
+              <span className="nav__brand-word">Rock Castle</span>
             </Link>
           </div>
 

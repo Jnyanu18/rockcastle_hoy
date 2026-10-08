@@ -16,7 +16,7 @@ export default function Works() {
           <p className="max-w-xl text-2xl leading-snug md:text-[28px]">{works.body}</p>
           <a
             href="#works"
-            className="inline-flex h-11 shrink-0 items-center rounded-full bg-ink px-6 text-xs font-medium uppercase tracking-wide text-canvas"
+            className="inline-flex h-11 shrink-0 items-center rounded-full bg-ink px-6 text-xs font-medium uppercase tracking-wide text-accent"
           >
             {works.cta} +
           </a>
@@ -38,7 +38,7 @@ export default function Works() {
                     </span>
                   ))}
                 </div>
-                <div className="absolute inset-x-4 bottom-4 flex items-center justify-between rounded-full bg-ink/80 px-5 py-2.5 text-[11px] uppercase tracking-wide text-canvas opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-within:opacity-100">
+                <div className="absolute inset-x-4 bottom-4 flex items-center justify-between rounded-full bg-ink/80 px-5 py-2.5 text-[11px] uppercase tracking-wide text-accent opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-within:opacity-100">
                   <span>+</span>
                   <span>Take a look</span>
                   <span>+</span>

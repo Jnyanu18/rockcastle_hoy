@@ -70,7 +70,7 @@ export default function Statement() {
                       data-magnetic
                       className={
                         cta.primary
-                          ? "inline-flex h-11 sm:h-12 items-center gap-2.5 sm:gap-3 rounded-full bg-ink px-6 sm:px-7 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-canvas transition-transform active:scale-95"
+                          ? "inline-flex h-11 sm:h-12 items-center gap-2.5 sm:gap-3 rounded-full bg-ink px-6 sm:px-7 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-accent transition-transform active:scale-95"
                           : "inline-flex h-11 sm:h-12 items-center rounded-full border border-ink px-6 sm:px-7 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-ink transition-transform active:scale-95 hover:bg-black/5"
                       }
                     >

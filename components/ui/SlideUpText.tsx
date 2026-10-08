@@ -9,7 +9,7 @@ type Props = {
   split?: "characters" | "words";
   /** Gate the reveal behind scroll visibility; false renders plain text. */
   inView?: boolean;
-  /** Accepted for API compatibility; useInView always reveals once and stops observing. */
+  /** Unused: reveals always replay on every scroll into view. Kept for call-site compatibility. */
   once?: boolean;
   /** Seconds between each unit's start. */
   stagger?: number;

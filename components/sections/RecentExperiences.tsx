@@ -20,7 +20,7 @@ export default function RecentExperiences() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [edges, setEdges] = useState({ start: true, end: false });
 
-  // Plates rise into place as the section arrives: once, restrained.
+  // Plates rise into place every time the section arrives, not just the first.
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
     const ctx = gsap.context(() => {
@@ -34,7 +34,7 @@ export default function RecentExperiences() {
           duration: 0.9,
           stagger: 0.08,
           ease: "expo.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 75%", once: true },
+          scrollTrigger: { trigger: sectionRef.current, start: "top 75%", toggleActions: "restart none restart none" },
         },
       );
       gsap.fromTo(
@@ -48,7 +48,7 @@ export default function RecentExperiences() {
           stagger: 0.09,
           ease: "expo.out",
           clearProps: "clipPath",
-          scrollTrigger: { trigger: railRef.current, start: "top 85%", once: true },
+          scrollTrigger: { trigger: railRef.current, start: "top 85%", toggleActions: "restart none restart none" },
         },
       );
     }, sectionRef);

@@ -47,7 +47,7 @@ export default function Services() {
               {s.title}
               <span
                 aria-hidden
-                className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-canvas text-sm leading-none text-ink md:h-16 md:w-16"
+                className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent text-sm leading-none text-ink md:h-16 md:w-16"
               >
                 →
               </span>

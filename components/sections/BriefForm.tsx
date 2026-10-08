@@ -126,10 +126,10 @@ export default function BriefForm({ className }: Props = {}) {
               href={social.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex w-fit items-center gap-3 rounded-full bg-ink px-5 py-3 text-xs font-medium uppercase tracking-wide text-canvas transition-transform duration-300 hover:scale-[1.03]"
+              className="group inline-flex w-fit items-center gap-3 rounded-full bg-ink px-5 py-3 text-xs font-medium uppercase tracking-wide text-accent transition-transform duration-300 hover:scale-[1.03]"
             >
               Live chat
-              <span aria-hidden className="flex h-6 w-6 items-center justify-center rounded-full bg-canvas text-ink transition-transform duration-500 group-hover:translate-x-0.5">
+              <span aria-hidden className="flex h-6 w-6 items-center justify-center rounded-full bg-accent text-ink transition-transform duration-500 group-hover:translate-x-0.5">
                 →
               </span>
             </a>
@@ -157,7 +157,7 @@ export default function BriefForm({ className }: Props = {}) {
                           aria-pressed={active}
                           onClick={() => pickTap(row.key, option)}
                           className={`rounded-full border px-3 py-1.5 text-xs transition-colors duration-300 ${
-                            active ? "border-ink bg-ink text-canvas" : "border-ink/20 text-ink/70 hover:border-ink/50"
+                            active ? "border-ink bg-ink text-accent" : "border-ink/20 text-ink/70 hover:border-ink/50"
                           }`}
                         >
                           {option}
@@ -249,10 +249,10 @@ export default function BriefForm({ className }: Props = {}) {
                 <button
                   type="submit"
                   disabled={status === "sending"}
-                  className="inline-flex items-center gap-3 rounded-full bg-ink px-6 py-3 text-xs font-medium uppercase tracking-wide text-canvas transition-opacity duration-300 disabled:opacity-60"
+                  className="inline-flex items-center gap-3 rounded-full bg-ink px-6 py-3 text-xs font-medium uppercase tracking-wide text-accent transition-opacity duration-300 disabled:opacity-60"
                 >
                   <span>{status === "sending" ? "Sending…" : "Send message"}</span>
-                  <span aria-hidden className="flex h-6 w-6 items-center justify-center rounded-full bg-canvas text-ink">
+                  <span aria-hidden className="flex h-6 w-6 items-center justify-center rounded-full bg-accent text-ink">
                     {status === "sending" ? (
                       <span className="h-3 w-3 animate-spin rounded-full border-2 border-ink/30 border-t-ink" />
                     ) : (

@@ -21,13 +21,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform: scale(0.52);
+  transform: scale(0.95);
   transform-origin: center center;
 }
 
 @media (min-width: 1440px) {
   .kl-stage {
-    transform: scale(0.58);
+    transform: scale(1.05);
   }
 }
 
@@ -37,7 +37,7 @@
   }
 
   .kl-stage {
-    transform: scale(0.44);
+    transform: scale(0.8);
   }
 }
 
@@ -47,7 +47,7 @@
   }
 
   .kl-stage {
-    transform: scale(0.36);
+    transform: scale(0.62);
   }
 }
 
@@ -91,136 +91,139 @@
 
 /*
   Timeline Breakdown (4.8s loop):
-  0% - 28%: Resolved compass state — R top, O right, C bottom, K left
-            (reads R-O-C-K clockwise)
-  30%: Snap inward — tucked tight at the center, well clear of the
-       CASTLE ring text so nothing overlaps it
-  38% / 46% / 54%: Quarter-rotations while parked inside the ring
-  56%: Snap back out to the compass state
-  100%: Loops back to 0%
-
-  The 28%→30% and 54%→56% jumps are deliberately short (a 2% / ~96ms
-  window) so the move in and out of the ring reads as a snap rather
-  than a slide across the ring text.
+  One continuous spiral — radius breathes smoothly from the outer
+  compass distance down to the inner ring radius and back out again,
+  while the group keeps rotating the whole time (R→O→C→K, always 90°
+  apart, one full turn per loop). Nothing snaps: the radius change is
+  spread across ~40% of the loop each way, so letters glide past the
+  ring rather than jumping across it.
 */
 
 /* R: top of the badge */
 @keyframes moveR {
 
-  0%,
-  28% {
-    transform: translate(0px, -185px) scale(1.05);
+  0% {
+    transform: translate(0px, -112px) scale(1.05);
   }
 
-  30% {
-    transform: translate(-26px, -26px) scale(0.5);
+  20% {
+    transform: translate(86px, -28px) scale(0.9);
   }
 
-  38% {
-    transform: translate(26px, -26px) scale(0.5);
+  40% {
+    transform: translate(65px, 90px) scale(0.82);
   }
 
-  46% {
-    transform: translate(26px, 26px) scale(0.5);
+  50% {
+    transform: translate(0px, 90px) scale(0.78);
   }
 
-  54% {
-    transform: translate(-26px, 26px) scale(0.5);
+  60% {
+    transform: translate(-65px, 90px) scale(0.82);
   }
 
-  56%,
+  80% {
+    transform: translate(-86px, -28px) scale(0.9);
+  }
+
   100% {
-    transform: translate(0px, -185px) scale(1.05);
+    transform: translate(0px, -112px) scale(1.05);
   }
 }
 
 /* O: right of the badge */
 @keyframes moveO {
 
-  0%,
-  28% {
-    transform: translate(185px, 0px) scale(1.05);
+  0% {
+    transform: translate(112px, 0px) scale(1.05);
   }
 
-  30% {
-    transform: translate(26px, -26px) scale(0.5);
+  20% {
+    transform: translate(28px, 86px) scale(0.9);
   }
 
-  38% {
-    transform: translate(26px, 26px) scale(0.5);
+  40% {
+    transform: translate(-90px, 65px) scale(0.82);
   }
 
-  46% {
-    transform: translate(-26px, 26px) scale(0.5);
+  50% {
+    transform: translate(-90px, 0px) scale(0.78);
   }
 
-  54% {
-    transform: translate(-26px, -26px) scale(0.5);
+  60% {
+    transform: translate(-90px, -65px) scale(0.82);
   }
 
-  56%,
+  80% {
+    transform: translate(28px, -86px) scale(0.9);
+  }
+
   100% {
-    transform: translate(185px, 0px) scale(1.05);
+    transform: translate(112px, 0px) scale(1.05);
   }
 }
 
 /* C: bottom of the badge */
 @keyframes moveC {
 
-  0%,
-  28% {
-    transform: translate(0px, 185px) scale(1.05);
+  0% {
+    transform: translate(0px, 112px) scale(1.05);
   }
 
-  30% {
-    transform: translate(26px, 26px) scale(0.5);
+  20% {
+    transform: translate(-86px, 28px) scale(0.9);
   }
 
-  38% {
-    transform: translate(-26px, 26px) scale(0.5);
+  40% {
+    transform: translate(-65px, -90px) scale(0.82);
   }
 
-  46% {
-    transform: translate(-26px, -26px) scale(0.5);
+  50% {
+    transform: translate(0px, -90px) scale(0.78);
   }
 
-  54% {
-    transform: translate(26px, -26px) scale(0.5);
+  60% {
+    transform: translate(65px, -90px) scale(0.82);
   }
 
-  56%,
+  80% {
+    transform: translate(86px, 28px) scale(0.9);
+  }
+
   100% {
-    transform: translate(0px, 185px) scale(1.05);
+    transform: translate(0px, 112px) scale(1.05);
   }
 }
 
 /* K: left of the badge */
 @keyframes moveK {
 
-  0%,
-  28% {
-    transform: translate(-185px, 0px) scale(1.05);
+  0% {
+    transform: translate(-112px, 0px) scale(1.05);
   }
 
-  30% {
-    transform: translate(-26px, 26px) scale(0.5);
+  20% {
+    transform: translate(-28px, -86px) scale(0.9);
   }
 
-  38% {
-    transform: translate(-26px, -26px) scale(0.5);
+  40% {
+    transform: translate(90px, -65px) scale(0.82);
   }
 
-  46% {
-    transform: translate(26px, -26px) scale(0.5);
+  50% {
+    transform: translate(90px, 0px) scale(0.78);
   }
 
-  54% {
-    transform: translate(26px, 26px) scale(0.5);
+  60% {
+    transform: translate(90px, 65px) scale(0.82);
   }
 
-  56%,
+  80% {
+    transform: translate(-28px, 86px) scale(0.9);
+  }
+
   100% {
-    transform: translate(-185px, 0px) scale(1.05);
+    transform: translate(-112px, 0px) scale(1.05);
   }
 }
 
@@ -247,8 +250,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 240px;
-  height: 240px;
+  width: 140px;
+  height: 140px;
   transform: translate(-50%, -50%);
   pointer-events: none;
   animation: castleRingPulse 4.8s cubic-bezier(0.77, 0, 0.175, 1) infinite;
@@ -258,22 +261,23 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 240px;
-  height: 48px;
+  width: 140px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Arial Black', Impact, var(--font-display), sans-serif;
-  font-size: 30px;
+  font-size: 12px;
   font-weight: 900;
-  letter-spacing: 8px;
+  letter-spacing: 3px;
   color: #ffffff;
   -webkit-text-stroke: 1.4px #ffffff;
-  text-shadow: 0 0 14px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.45);
   text-transform: uppercase;
-  /* Pivot about the ring's own center (240 / 48 = 500%, halved to 250%
+  opacity: 0.92;
+  /* Pivot about the ring's own center (140 / 20 = 700%, halved to 350%
      since translate-origin is measured from this strip's own box). */
-  transform-origin: 50% 250%;
+  transform-origin: 50% 350%;
 }
 
 .kl-castle-edge--top {
@@ -295,14 +299,12 @@
 @keyframes castleRingPulse {
 
   0%,
-  28%,
-  56%,
   100% {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
 
-  42% {
+  50% {
     opacity: 0.82;
     transform: translate(-50%, -50%) scale(0.96);
   }
@@ -314,10 +316,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 22px;
-  height: 22px;
-  margin-top: 112px;
-  margin-left: 112px;
+  width: 18px;
+  height: 18px;
+  margin-top: 78px;
+  margin-left: 78px;
   color: #ffffff;
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.55));
   animation: sparkleTwinkle 4.8s ease-in-out infinite;
@@ -337,46 +339,3 @@
   }
 }
 
-/* Dynamic Underline Brush & Dot */
-.kl-brush-wrap {
-  width: 410px;
-  height: 22px;
-  margin-top: 6px;
-}
-
-.kl-brush-svg {
-  width: 100%;
-  height: 100%;
-  fill: #ffffff;
-  transform-origin: left center;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.35));
-  will-change: transform, opacity;
-  animation: slashPulse 4.8s cubic-bezier(0.77, 0, 0.175, 1) infinite;
-}
-
-@keyframes slashPulse {
-
-  0%,
-  35%,
-  100% {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-
-  50%,
-  80% {
-    transform: scaleX(0.72);
-    opacity: 0.45;
-  }
-}
-
-.kl-tagline {
-  font-family: var(--font-mono);
-  font-size: 14.5px;
-  font-weight: 700;
-  letter-spacing: 7px;
-  color: rgba(255, 255, 255, 0.85);
-  margin-top: 14px;
-  text-transform: lowercase;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.35);
-}

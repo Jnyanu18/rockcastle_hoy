@@ -5,11 +5,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Sampled from the reference frames
-        canvas: "#f2a65e", // orange surface
-        ink: "#0f1829", // navy surface and text on canvas
-        header: "#ececea", // light bar after scroll
-        muted: "rgba(15, 24, 41, 0.55)",
+        // HOY-inspired palette: pale yellow accent + white/grey/black neutrals
+        canvas: "#ffffff", // light page surface
+        ink: "#0b0b0b", // near-black surface and text on canvas
+        accent: "#f0f3a6", // hoy yellow — primary accent, used sparingly
+        header: "#e8e9e5", // light-grey bar after scroll
+        muted: "rgba(11, 11, 11, 0.55)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],

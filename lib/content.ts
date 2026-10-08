@@ -86,7 +86,7 @@ export const works = {
 };
 
 export const clients = {
-  label: "Selected partners",
+  label: "Our clients",
   logos: [
     { name: "EY", src: "/clients/ey.png" },
     { name: "Numero Uno", src: "/clients/numero-uno.png" },

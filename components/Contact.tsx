@@ -11,16 +11,16 @@ import SlideUpText from "@/components/ui/SlideUpText";
 */
 export default function Contact() {
   return (
-    <section id="contact" className="relative flex min-h-screen flex-col justify-center bg-[#0f1829] px-5 py-14 sm:px-10 md:px-14 md:py-20 lg:px-20 text-[#f2a65e] overflow-hidden">
+    <section id="contact" className="relative flex min-h-screen flex-col justify-center bg-[#0b0b0b] px-5 py-14 sm:px-10 md:px-14 md:py-20 lg:px-20 text-[#f0f3a6] overflow-hidden">
       <div className="mx-auto w-full max-w-[1680px]">
         {/* Mobile top meta row */}
         <div className="flex items-center justify-between md:hidden mb-6">
-          <p className="text-xs font-medium tracking-normal text-[#f2a65e]">
+          <p className="text-xs font-medium tracking-normal text-[#f0f3a6]">
             <SlideUpText split="words">
               {contact.label}
             </SlideUpText>
           </p>
-          <p className="text-xs font-medium tracking-normal text-[#f2a65e] tabular-nums">
+          <p className="text-xs font-medium tracking-normal text-[#f0f3a6] tabular-nums">
             <SlideUpText split="characters" delay={0.04}>
               {`[ ${contact.index} ]`}
             </SlideUpText>
@@ -30,37 +30,37 @@ export default function Contact() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-[clamp(220px,20vw,320px)_1fr] md:gap-10 lg:gap-16 xl:gap-20 items-start">
           {/* Left Column (Desktop): [ 08 ] and shifted outlined frame */}
           <div className="hidden md:flex flex-col">
-            <p className="text-xs md:text-[13px] font-medium tracking-normal text-[#f2a65e] tabular-nums">
+            <p className="text-xs md:text-[13px] font-medium tracking-normal text-[#f0f3a6] tabular-nums">
               <SlideUpText split="characters" delay={0.04}>
                 {`[ ${contact.index} ]`}
               </SlideUpText>
             </p>
             <div
               aria-hidden
-              className="relative mt-6 md:mt-7 aspect-[1/1.08] w-full max-w-[220px] rounded-[32px] md:rounded-[36px] border border-[#f2a65e]/40"
+              className="relative mt-6 md:mt-7 aspect-[1/1.08] w-full max-w-[220px] rounded-[32px] md:rounded-[36px] border border-[#f0f3a6]/40"
             >
               <Sparkle
                 size={36}
-                className="absolute left-1/2 top-[22%] -translate-x-1/2 -translate-y-1/2 text-[#f2a65e]"
+                className="absolute left-1/2 top-[22%] -translate-x-1/2 -translate-y-1/2 text-[#f0f3a6]"
               />
             </div>
           </div>
 
           {/* Right Column: Let's connect, headlines, and white pill CTA */}
           <div className="flex flex-col md:pl-[clamp(16px,2vw,40px)]">
-            <p className="hidden md:block text-xs md:text-[13px] font-medium tracking-normal text-[#f2a65e]">
+            <p className="hidden md:block text-xs md:text-[13px] font-medium tracking-normal text-[#f0f3a6]">
               <SlideUpText split="words">
                 {contact.label}
               </SlideUpText>
             </p>
 
-            <h2 className="md:mt-6 max-w-[880px] text-[24px] sm:text-[30px] md:text-[36px] lg:text-[44px] xl:text-[50px] font-medium leading-[1.12] sm:leading-[1.08] tracking-[-0.03em] text-[#f2a65e]">
+            <h2 className="md:mt-6 max-w-[880px] text-[24px] sm:text-[30px] md:text-[36px] lg:text-[44px] xl:text-[50px] font-medium leading-[1.12] sm:leading-[1.08] tracking-[-0.03em] text-[#f0f3a6]">
               <SlideUpText split="words" stagger={0.015} delay={0.06}>
                 {contact.heading}
               </SlideUpText>
             </h2>
 
-            <p className="mt-5 sm:mt-6 md:mt-7 max-w-[700px] text-[18px] sm:text-[22px] md:text-[26px] lg:text-[32px] xl:text-[36px] font-medium leading-[1.12] sm:leading-[1.08] tracking-[-0.03em] text-[#f2a65e]/80">
+            <p className="mt-5 sm:mt-6 md:mt-7 max-w-[700px] text-[18px] sm:text-[22px] md:text-[26px] lg:text-[32px] xl:text-[36px] font-medium leading-[1.12] sm:leading-[1.08] tracking-[-0.03em] text-[#f0f3a6]/80">
               <SlideUpText split="words" stagger={0.02} delay={0.12}>
                 {contact.subheading}
               </SlideUpText>
@@ -89,11 +89,11 @@ export default function Contact() {
               {/* Mobile squircle with center sparkle star sitting beside the button (matches reference image) */}
               <div
                 aria-hidden
-                className="flex md:hidden h-[120px] w-[120px] sm:h-[140px] sm:w-[140px] shrink-0 items-center justify-center rounded-[28px] border border-[#f2a65e]/50 shadow-sm"
+                className="flex md:hidden h-[120px] w-[120px] sm:h-[140px] sm:w-[140px] shrink-0 items-center justify-center rounded-[28px] border border-[#f0f3a6]/50 shadow-sm"
               >
                 <Sparkle
                   size={32}
-                  className="text-[#f2a65e]"
+                  className="text-[#f0f3a6]"
                 />
               </div>
             </div>

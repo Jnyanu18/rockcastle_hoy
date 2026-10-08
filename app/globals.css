@@ -3,16 +3,26 @@
 @tailwind utilities;
 
 :root {
-  /* Shared tokens for sections built with plain CSS instead of Tailwind
-     utilities (e.g. Recent Experiences). Sampled from the Tailwind palette
-     in tailwind.config.ts so both systems stay in sync. */
-  --rc-orange: #f2a65e;
-  --rc-orange-bright: #ffcb85;
-  --rc-white: #f1ece2;
-  --rc-black: #0f1829;
-  --rc-black-rich: #0a1322;
-  --rc-gray-light: #a0a09e;
-  --rc-gray: #70706e;
+  /* HOY-inspired palette: pale yellow accent + white/grey/black neutrals.
+     Centralized here so plain-CSS sections (Recent Experiences, Leadership,
+     Clients, Footer, Navigation, Scrolling Services, ...) and the Tailwind
+     palette in tailwind.config.ts stay in sync. */
+  --hoy-yellow: #f0f3a6;
+  --white: #ffffff;
+  --light-grey: #e8e9e5;
+  --mid-grey: #969895;
+  --dark-grey: #242424;
+  --black: #0b0b0b;
+
+  /* Legacy aliases kept so existing component CSS (var(--rc-orange) etc.)
+     continues to resolve to the new palette without a file-by-file rename. */
+  --rc-orange: var(--hoy-yellow);
+  --rc-orange-bright: var(--white);
+  --rc-white: var(--white);
+  --rc-black: var(--black);
+  --rc-black-rich: var(--dark-grey);
+  --rc-gray-light: var(--mid-grey);
+  --rc-gray: var(--mid-grey);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-display: var(--font-sans), system-ui, sans-serif;
   --font-body: var(--font-sans), system-ui, sans-serif;
@@ -30,14 +40,42 @@ html {
 }
 
 body {
-  background-color: #f2a65e;
-  color: #0f1829;
+  background-color: var(--white);
+  color: var(--black);
   overflow-x: clip;
 }
 
 ::selection {
-  background: #0f1829;
-  color: #f2a65e;
+  background: var(--black);
+  color: var(--hoy-yellow);
+}
+
+/* Hero background video: a slow continuous drift plus a one-time fade-in,
+   so the single clip reads as a directed shot rather than a static plate. */
+.hero-video-kenburns {
+  transform-origin: center center;
+  animation: heroVideoFadeIn 1.6s ease-out both,
+             heroVideoKenBurns 28s ease-in-out infinite alternate;
+}
+
+@keyframes heroVideoFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes heroVideoKenBurns {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.06);
+  }
 }
 
 /* SlideUpText (components/ui/SlideUpText.tsx): each word/character is masked
@@ -63,7 +101,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  color: #0f1829;
+  color: #0b0b0b;
   border-radius: 9999px;
   height: 44px;
   width: 148px;
@@ -125,7 +163,7 @@ body {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #0f1829;
+  color: #0b0b0b;
   text-transform: uppercase;
 }
 
@@ -135,7 +173,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  color: #0f1829;
+  color: #0b0b0b;
   border-radius: 9999px;
   height: 44px;
   width: 154px;
@@ -152,8 +190,8 @@ body {
 
 .process-pill-btn:hover {
   transform: scale(1.03);
-  background-color: #f2a65e;
-  box-shadow: 0 4px 18px rgba(242, 166, 94, 0.35);
+  background-color: var(--hoy-yellow);
+  box-shadow: 0 4px 18px rgba(240, 243, 166, 0.35);
 }
 
 .process-pill-track-mask {
@@ -181,7 +219,7 @@ body {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #0f1829;
+  color: #0b0b0b;
   text-transform: uppercase;
 }
 

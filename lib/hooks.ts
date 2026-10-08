@@ -2,7 +2,7 @@
 
 import { type RefObject, useEffect, useRef, useState } from "react";
 
-/** Flips to true once the element has been seen, then stops observing. */
+/** Tracks whether the element is in view, toggling back on exit so the reveal can replay each time. */
 export function useInView<T extends Element>(threshold = 0.1, rootMargin = "0px 0px 60px 0px") {
   const ref = useRef<T>(null);
   const [inView, setInView] = useState(false);
@@ -14,12 +14,7 @@ export function useInView<T extends Element>(threshold = 0.1, rootMargin = "0px 
       return;
     }
     const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          io.disconnect();
-        }
-      },
+      ([entry]) => setInView(entry.isIntersecting),
       { threshold, rootMargin },
     );
     io.observe(el);

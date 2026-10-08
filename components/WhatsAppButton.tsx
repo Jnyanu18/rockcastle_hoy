@@ -10,10 +10,10 @@ export default function WhatsAppButton() {
       aria-label="WhatsApp"
       data-magnetic
       data-magnetic-strength="0.38"
-      className="fixed bottom-5 right-5 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-canvas text-ink shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition-transform duration-300 active:scale-95 hover:scale-105 md:bottom-6 md:right-6 md:h-14 md:w-14 md:shadow-none"
+      className="fixed bottom-5 right-5 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-ink shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition-transform duration-300 active:scale-95 hover:scale-105 hover:bg-white md:bottom-6 md:right-6 md:h-11 md:w-11 md:shadow-none"
     >
       <svg
-        className="h-5 w-5 md:h-6 md:w-6"
+        className="h-4 w-4 md:h-5 md:w-5"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"

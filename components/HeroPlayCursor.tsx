@@ -12,7 +12,7 @@ import gsap from "gsap";
 export function PlayCursorBadge({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`relative flex h-[88px] w-[88px] items-center justify-center rounded-[26px] bg-[#f2a65e] text-[#0f1829] shadow-[0_10px_32px_rgba(0,0,0,0.38),inset_0_1px_1px_rgba(255,255,255,0.6)] border border-black/10 select-none overflow-hidden ${className}`}
+      className={`relative flex h-[88px] w-[88px] items-center justify-center rounded-[26px] bg-[#f0f3a6] text-[#0b0b0b] shadow-[0_10px_32px_rgba(0,0,0,0.38),inset_0_1px_1px_rgba(255,255,255,0.6)] border border-black/10 select-none overflow-hidden ${className}`}
     >
       {/* Vertical Track: "Play" streaming downwards towards center & appearing on bottom arm */}
       <div
@@ -25,7 +25,7 @@ export function PlayCursorBadge({ className = "" }: { className?: string }) {
               key={i}
               className="h-[44px] w-7 flex items-center justify-center shrink-0"
             >
-              <span className="inline-block transform -rotate-90 text-[11.5px] font-semibold text-[#0f1829] tracking-[0.03em] font-sans select-none whitespace-nowrap">
+              <span className="inline-block transform -rotate-90 text-[11.5px] font-semibold text-[#0b0b0b] tracking-[0.03em] font-sans select-none whitespace-nowrap">
                 Play
               </span>
             </div>
@@ -44,7 +44,7 @@ export function PlayCursorBadge({ className = "" }: { className?: string }) {
               key={i}
               className="w-[44px] h-7 flex items-center justify-center shrink-0"
             >
-              <span className="inline-block text-[11.5px] font-semibold text-[#0f1829] tracking-[0.03em] font-sans select-none whitespace-nowrap">
+              <span className="inline-block text-[11.5px] font-semibold text-[#0b0b0b] tracking-[0.03em] font-sans select-none whitespace-nowrap">
                 Video
               </span>
             </div>
@@ -54,7 +54,7 @@ export function PlayCursorBadge({ className = "" }: { className?: string }) {
 
       {/* Center Intersection Cross Anchor: Delicate "+" symbol in the middle */}
       <span
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[9px] font-bold text-[#0f1829]/30 pointer-events-none select-none z-[3]"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[9px] font-bold text-[#0b0b0b]/30 pointer-events-none select-none z-[3]"
         aria-hidden="true"
       >
         +
