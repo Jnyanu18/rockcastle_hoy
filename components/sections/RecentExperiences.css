@@ -42,6 +42,7 @@
   font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.045em;
+  color: var(--rc-orange);
 }
 
 .rx-head__title em {

@@ -14,7 +14,7 @@ export default function Statement() {
   return (
     <section
       id="about"
-      className="relative z-10 bg-canvas px-6 py-14 sm:px-10 sm:py-20 md:px-12 lg:px-16 md:pt-24 md:pb-24 min-h-[100svh] shadow-[0_-25px_60px_rgba(0,0,0,0.35)]"
+      className="relative z-10 bg-accent px-6 py-14 sm:px-10 sm:py-20 md:px-12 lg:px-16 md:pt-24 md:pb-24 min-h-[100svh] shadow-[0_-25px_60px_rgba(0,0,0,0.35)]"
     >
       <div className="relative w-full mx-auto">
         {/* Top Right Index: "[ 01 ]" aligned at the top right of the section */}

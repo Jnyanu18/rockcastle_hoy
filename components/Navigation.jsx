@@ -333,7 +333,10 @@ export default function Navigation() {
               onClick={(e) => handleNavClick(e, '/')}
             >
               <img src="/rockcastle-logo.jpg" alt="" aria-hidden="true" className="nav__brand-logo" />
-              <span className="nav__brand-word">Rock Castle</span>
+              <span className="nav__brand-word">
+                <span className="nav__brand-word-line">Rock</span>
+                <span className="nav__brand-word-line">Castle</span>
+              </span>
             </Link>
           </div>
 

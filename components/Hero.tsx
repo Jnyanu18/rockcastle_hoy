@@ -96,7 +96,7 @@ export default function Hero() {
               {hero.label}
             </SlideUpText>
           </p>
-          <p className="mt-1.5 max-w-[260px] text-xs leading-relaxed font-medium text-white/95">
+          <p className="mt-1.5 max-w-[260px] text-xs leading-relaxed font-medium text-[#f0f3a6]">
             <SlideUpText split="words" delay={0.35} stagger={0.015}>
               {hero.headline}
             </SlideUpText>
@@ -141,12 +141,12 @@ export default function Hero() {
       {/* Primary headline: desktop at left-center, kept small/editorial so it
           supports the central identity rather than competing with it */}
       <div className="hidden md:block absolute md:top-1/2 md:-translate-y-1/2 md:left-8 md:max-w-[19rem] z-20 pointer-events-none">
-        <p className="mb-2 md:mb-3 text-xs font-medium">
+        <p className="mb-2 md:mb-3 text-xs font-medium text-[#f0f3a6]">
           <SlideUpText split="words" delay={0.2} stagger={0.02}>
             {hero.label}
           </SlideUpText>
         </p>
-        <p className="text-sm leading-snug md:text-base lg:text-lg">
+        <p className="text-sm leading-snug md:text-base lg:text-lg text-[#f0f3a6]">
           <SlideUpText split="words" delay={0.35} stagger={0.015}>
             {hero.headline}
           </SlideUpText>
@@ -154,7 +154,7 @@ export default function Hero() {
       </div>
 
       {/* Supporting copy: desktop right-center, same restrained scale */}
-      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 max-w-[14rem] lg:max-w-[16rem] text-right text-[13px] lg:text-sm leading-relaxed z-20 md:right-8 pointer-events-none">
+      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 max-w-[14rem] lg:max-w-[16rem] text-right text-[13px] lg:text-sm leading-relaxed z-20 md:right-8 pointer-events-none text-[#f0f3a6]">
         <p>
           <SlideUpText split="words" delay={0.45} stagger={0.015}>
             {hero.aside}
