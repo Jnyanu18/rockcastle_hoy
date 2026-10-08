@@ -10,7 +10,7 @@
 
 .servicesBlock {
   position: relative;
-  background: var(--rc-black-rich, #121211);
+  background: #1d1d1b;
   color: #f8f5ab;
   width: 100%;
 }

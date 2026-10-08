@@ -14,7 +14,8 @@ export default function Process() {
   return (
     <section
       id="process"
-      className="relative bg-[#0b0b0b] text-[#f0f3a6] px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-32 overflow-hidden"
+      className="relative bg-[#1d1d1b] text-[#f0f3a6] px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-32 overflow-hidden"
+      style={{ backgroundColor: "#1d1d1b" }}
     >
       <div className="mx-auto w-full max-w-[1760px]">
         <div className="flex flex-col lg:flex-row items-start justify-between gap-8 lg:gap-0">

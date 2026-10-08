@@ -124,7 +124,8 @@ export default function Stats() {
   return (
     <section
       id="stats"
-      className="hoy-stats-section px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-28"
+      className="hoy-stats-section bg-[#1d1d1b] px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-28"
+      style={{ backgroundColor: "#1d1d1b" }}
     >
       {/* Container wrapper matching max content bounds */}
       <div className="mx-auto w-full max-w-[1760px]">
