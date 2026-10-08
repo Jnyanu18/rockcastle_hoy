@@ -9,56 +9,75 @@ import gsap from "gsap";
  * The text "Play" (vertical) and "Video" (horizontal) are aligned in a "+" shape,
  * continuously gliding towards the centre, passing through, and appearing from the other side.
  */
+function InwardSpoke({
+  angle,
+  word,
+  slotWidth,
+  animClass,
+}: {
+  angle: number;
+  word: string;
+  slotWidth: number;
+  animClass: string;
+}) {
+  return (
+    <div
+      className="absolute h-[18px] w-[50px] overflow-hidden pointer-events-none select-none z-[1]"
+      style={{
+        left: "50%",
+        top: "calc(50% - 9px)",
+        transformOrigin: "0px 9px",
+        transform: `rotate(${angle}deg)`,
+      }}
+    >
+      <div className={`flex items-center will-change-transform ${animClass}`}>
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            style={{ width: `${slotWidth}px` }}
+            className="shrink-0 flex items-center justify-center h-[18px]"
+          >
+            <span className="text-[11px] font-semibold text-[#0b0b0b] tracking-[0.03em] font-sans select-none whitespace-nowrap">
+              {word}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * PlayCursorBadge
+ * Renders the House of Yellow signature pale-yellow squircle badge.
+ * The text "Play" (left & right) and "Video" (top & bottom) streams inwards along a "+" shape,
+ * disappearing behind a small yellow circle hub at the centre, while the entire "+" assembly
+ * rotates slowly clockwise.
+ */
 export function PlayCursorBadge({ className = "" }: { className?: string }) {
   return (
     <div
       className={`relative flex h-[88px] w-[88px] items-center justify-center rounded-[26px] bg-[#f0f3a6] text-[#0b0b0b] shadow-[0_10px_32px_rgba(0,0,0,0.38),inset_0_1px_1px_rgba(255,255,255,0.6)] border border-black/10 select-none overflow-hidden ${className}`}
     >
-      {/* Vertical Track: "Play" streaming downwards towards center & appearing on bottom arm */}
+      {/* Slowly clockwise rotating "+" assembly */}
       <div
-        className="absolute left-1/2 top-0 -translate-x-1/2 w-7 h-full overflow-hidden flex justify-center pointer-events-none select-none z-[2]"
+        className="absolute inset-0 flex items-center justify-center anim-plus-rotate pointer-events-none select-none"
         aria-hidden="true"
       >
-        <div className="flex flex-col h-max will-change-transform anim-play-v">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="h-[44px] w-7 flex items-center justify-center shrink-0"
-            >
-              <span className="inline-block transform -rotate-90 text-[11.5px] font-semibold text-[#0b0b0b] tracking-[0.03em] font-sans select-none whitespace-nowrap">
-                Play
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
+        {/* Horizontal Line: "Play" streaming inwards from left and right towards center */}
+        <InwardSpoke angle={0} word="Play" slotWidth={38} animClass="anim-spoke-play" />
+        <InwardSpoke angle={180} word="Play" slotWidth={38} animClass="anim-spoke-play" />
 
-      {/* Horizontal Track: "Video" streaming leftwards towards center & appearing on left arm */}
-      <div
-        className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-7 overflow-hidden flex items-center pointer-events-none select-none z-[1]"
-        aria-hidden="true"
-      >
-        <div className="flex w-max will-change-transform anim-video-h">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="w-[44px] h-7 flex items-center justify-center shrink-0"
-            >
-              <span className="inline-block text-[11.5px] font-semibold text-[#0b0b0b] tracking-[0.03em] font-sans select-none whitespace-nowrap">
-                Video
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
+        {/* Vertical Line: "Video" streaming inwards from top and bottom towards center */}
+        <InwardSpoke angle={-90} word="Video" slotWidth={44} animClass="anim-spoke-video" />
+        <InwardSpoke angle={90} word="Video" slotWidth={44} animClass="anim-spoke-video" />
 
-      {/* Center Intersection Cross Anchor: Delicate "+" symbol in the middle */}
-      <span
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[9px] font-bold text-[#0b0b0b]/30 pointer-events-none select-none z-[3]"
-        aria-hidden="true"
-      >
-        +
-      </span>
+        {/* Center Yellow Circle Hub: borderless, reduced size, text disappears behind it */}
+        <div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[16px] h-[16px] rounded-full bg-[#f0f3a6] z-10 pointer-events-none select-none"
+          aria-hidden="true"
+        />
+      </div>
     </div>
   );
 }
