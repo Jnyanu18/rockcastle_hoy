@@ -1,6 +1,9 @@
 /* ===================================================
-   ROCKCASTLE — Kinetic Lockup & Resolve Logo
-   Compass badge: R-O-C-K orbit around a CASTLE seal ring
+   ROCKCASTLE — House of Yellow Exact Kinetic Emblem
+   5-Glyph Lockup:
+   - Central anchored squircle "O"
+   - 4 orbiting glyphs: R, O, C, K shifting between Corner (X)
+     and Cross (+) formations while staying upright and readable
    =================================================== */
 
 .kinetic-logo-wrapper {
@@ -23,6 +26,7 @@
   align-items: center;
   transform: scale(0.95);
   transform-origin: center center;
+  transition: transform 0.3s ease;
 }
 
 @media (min-width: 1440px) {
@@ -47,7 +51,7 @@
   }
 
   .kl-stage {
-    transform: scale(0.62);
+    transform: scale(0.6);
   }
 }
 
@@ -56,286 +60,236 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  width: 440px;
+  width: 260px;
+  height: 260px;
 }
 
-/* Square badge stage: R/O/C/K orbit at the compass points, the CASTLE
-   ring and sparkle sit fixed at the center. */
-.kl-rock-stage {
+/* 260x260 coordinate space centered on (0, 0) */
+.kl-grid-stage {
   position: relative;
-  width: 440px;
-  height: 440px;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.kl-letter {
-  position: absolute;
-  width: 76px;
-  height: 76px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Arial Black', Impact, var(--font-display), sans-serif;
-  font-size: 62px;
-  font-weight: 900;
-  -webkit-text-stroke: 1.8px var(--hoy-yellow, #f0f3a6);
+/* ---- Shared Vector Glyph Styling ---- */
+.kl-glyph {
+  width: 64px;
+  height: 64px;
+  display: block;
   color: var(--hoy-yellow, #f0f3a6);
-  text-shadow: 0 0 16px rgba(240, 243, 166, 0.6), 0 0 32px rgba(240, 243, 166, 0.3);
+  filter: drop-shadow(0 0 16px rgba(240, 243, 166, 0.55))
+          drop-shadow(0 0 28px rgba(240, 243, 166, 0.25));
   will-change: transform;
-  animation-duration: 4.8s;
-  animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
-  animation-iteration-count: infinite;
 }
 
-/*
-  Timeline Breakdown (4.8s loop):
-  One continuous spiral — radius breathes smoothly from the outer
-  compass distance down to the inner ring radius and back out again,
-  while the group keeps rotating the whole time (R→O→C→K, always 90°
-  apart, one full turn per loop). Nothing snaps: the radius change is
-  spread across ~40% of the loop each way, so letters glide past the
-  ring rather than jumping across it.
-*/
-
-/* R: top of the badge */
-@keyframes moveR {
-
-  0% {
-    transform: translate(0px, -112px) scale(1.05);
-  }
-
-  20% {
-    transform: translate(86px, -28px) scale(0.9);
-  }
-
-  40% {
-    transform: translate(26px, 36px) scale(0.61);
-  }
-
-  50% {
-    transform: translate(0px, 29px) scale(0.5);
-  }
-
-  60% {
-    transform: translate(-26px, 36px) scale(0.61);
-  }
-
-  80% {
-    transform: translate(-86px, -28px) scale(0.9);
-  }
-
-  100% {
-    transform: translate(0px, -112px) scale(1.05);
-  }
-}
-
-/* O: right of the badge */
-@keyframes moveO {
-
-  0% {
-    transform: translate(112px, 0px) scale(1.05);
-  }
-
-  20% {
-    transform: translate(28px, 86px) scale(0.9);
-  }
-
-  40% {
-    transform: translate(-36px, 26px) scale(0.61);
-  }
-
-  50% {
-    transform: translate(-29px, 0px) scale(0.5);
-  }
-
-  60% {
-    transform: translate(-36px, -26px) scale(0.61);
-  }
-
-  80% {
-    transform: translate(28px, -86px) scale(0.9);
-  }
-
-  100% {
-    transform: translate(112px, 0px) scale(1.05);
-  }
-}
-
-/* C: bottom of the badge */
-@keyframes moveC {
-
-  0% {
-    transform: translate(0px, 112px) scale(1.05);
-  }
-
-  20% {
-    transform: translate(-86px, 28px) scale(0.9);
-  }
-
-  40% {
-    transform: translate(-26px, -36px) scale(0.61);
-  }
-
-  50% {
-    transform: translate(0px, -29px) scale(0.5);
-  }
-
-  60% {
-    transform: translate(26px, -36px) scale(0.61);
-  }
-
-  80% {
-    transform: translate(86px, 28px) scale(0.9);
-  }
-
-  100% {
-    transform: translate(0px, 112px) scale(1.05);
-  }
-}
-
-/* K: left of the badge */
-@keyframes moveK {
-
-  0% {
-    transform: translate(-112px, 0px) scale(1.05);
-  }
-
-  20% {
-    transform: translate(-28px, -86px) scale(0.9);
-  }
-
-  40% {
-    transform: translate(36px, -26px) scale(0.61);
-  }
-
-  50% {
-    transform: translate(29px, 0px) scale(0.5);
-  }
-
-  60% {
-    transform: translate(36px, 26px) scale(0.61);
-  }
-
-  80% {
-    transform: translate(-28px, 86px) scale(0.9);
-  }
-
-  100% {
-    transform: translate(-112px, 0px) scale(1.05);
-  }
-}
-
-.kl-l-r {
-  animation-name: moveR;
-}
-
-.kl-l-o {
-  animation-name: moveO;
-}
-
-.kl-l-c {
-  animation-name: moveC;
-}
-
-.kl-l-k {
-  animation-name: moveK;
-}
-
-/* ---- CASTLE seal ring: one "CASTLE" per edge of a centered square,
-   rotated around the badge's own center so the four instances meet
-   corner-to-corner like a stamped seal. ---- */
-.kl-castle-ring {
+/* Central anchored O */
+.kl-center-anchor {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 140px;
-  height: 140px;
+  width: 64px;
+  height: 64px;
   transform: translate(-50%, -50%);
-  pointer-events: none;
-  animation: castleRingPulse 4.8s cubic-bezier(0.77, 0, 0.175, 1) infinite;
-}
-
-.kl-castle-edge {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 140px;
-  height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Arial Black', Impact, var(--font-display), sans-serif;
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 3px;
+  z-index: 2;
+  animation: centerPulse 5.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.kl-center-anchor .kl-glyph {
   color: var(--hoy-yellow, #f0f3a6);
-  -webkit-text-stroke: 1.4px var(--hoy-yellow, #f0f3a6);
-  text-shadow: 0 0 8px rgba(240, 243, 166, 0.45);
-  text-transform: uppercase;
-  opacity: 0.92;
-  /* Pivot about the ring's own center (140 / 20 = 700%, halved to 350%
-     since translate-origin is measured from this strip's own box). */
-  transform-origin: 50% 350%;
 }
 
-.kl-castle-edge--top {
-  transform: rotate(0deg);
-}
-
-.kl-castle-edge--right {
-  transform: rotate(90deg);
-}
-
-.kl-castle-edge--bottom {
-  transform: rotate(180deg);
-}
-
-.kl-castle-edge--left {
-  transform: rotate(270deg);
-}
-
-@keyframes castleRingPulse {
-
-  0%,
+@keyframes centerPulse {
+  0%, 7%,
+  25%, 32%,
+  50%, 57%,
+  75%, 82%,
   100% {
-    opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
 
-  50% {
-    opacity: 0.82;
-    transform: translate(-50%, -50%) scale(0.96);
+  12.5%, 19.5%,
+  37.5%, 44.5%,
+  62.5%, 69.5%,
+  87.5%, 94.5% {
+    transform: translate(-50%, -50%) scale(1.06);
   }
 }
 
-/* ---- Small twinkling sparkle accent, offset toward the lower-right
-   of the ring like a maker's mark. ---- */
-.kl-sparkle {
+/* ---- Orbiting Letters Container ---- */
+.kl-orbit-letter {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 18px;
-  height: 18px;
-  margin-top: 78px;
-  margin-left: 78px;
-  color: var(--hoy-yellow, #f0f3a6);
-  filter: drop-shadow(0 0 8px rgba(240, 243, 166, 0.55));
-  animation: sparkleTwinkle 4.8s ease-in-out infinite;
+  width: 64px;
+  height: 64px;
+  margin-top: -32px;
+  margin-left: -32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  will-change: transform;
+  animation-duration: 5.6s;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  animation-iteration-count: infinite;
 }
 
-@keyframes sparkleTwinkle {
+/* ===================================================
+   ORBIT KEYFRAMES:
+   Letters glide continuously around (0, 0) while
+   staying strictly upright (rotate(0deg)).
+   Alternates: Corner (X) -> Cross (+) -> Corner (X)...
+   =================================================== */
 
-  0%,
+/* Letter R: Starts Top-Left */
+.kl-orbit-letter--r {
+  animation-name: orbitR;
+}
+
+@keyframes orbitR {
+  0%, 7% {
+    transform: translate(-72px, -72px);
+  }
+  12.5%, 19.5% {
+    transform: translate(0px, -84px);
+  }
+  25%, 32% {
+    transform: translate(72px, -72px);
+  }
+  37.5%, 44.5% {
+    transform: translate(84px, 0px);
+  }
+  50%, 57% {
+    transform: translate(72px, 72px);
+  }
+  62.5%, 69.5% {
+    transform: translate(0px, 84px);
+  }
+  75%, 82% {
+    transform: translate(-72px, 72px);
+  }
+  87.5%, 94.5% {
+    transform: translate(-84px, 0px);
+  }
   100% {
-    opacity: 0.55;
-    transform: scale(0.85) rotate(0deg);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.1) rotate(12deg);
+    transform: translate(-72px, -72px);
   }
 }
 
+/* Letter O: Starts Top-Right (+90° ahead) */
+.kl-orbit-letter--o {
+  animation-name: orbitO;
+}
+
+@keyframes orbitO {
+  0%, 7% {
+    transform: translate(72px, -72px);
+  }
+  12.5%, 19.5% {
+    transform: translate(84px, 0px);
+  }
+  25%, 32% {
+    transform: translate(72px, 72px);
+  }
+  37.5%, 44.5% {
+    transform: translate(0px, 84px);
+  }
+  50%, 57% {
+    transform: translate(-72px, 72px);
+  }
+  62.5%, 69.5% {
+    transform: translate(-84px, 0px);
+  }
+  75%, 82% {
+    transform: translate(-72px, -72px);
+  }
+  87.5%, 94.5% {
+    transform: translate(0px, -84px);
+  }
+  100% {
+    transform: translate(72px, -72px);
+  }
+}
+
+/* Letter K: Starts Bottom-Right (+180° ahead) */
+.kl-orbit-letter--k {
+  animation-name: orbitK;
+}
+
+@keyframes orbitK {
+  0%, 7% {
+    transform: translate(72px, 72px);
+  }
+  12.5%, 19.5% {
+    transform: translate(0px, 84px);
+  }
+  25%, 32% {
+    transform: translate(-72px, 72px);
+  }
+  37.5%, 44.5% {
+    transform: translate(-84px, 0px);
+  }
+  50%, 57% {
+    transform: translate(-72px, -72px);
+  }
+  62.5%, 69.5% {
+    transform: translate(0px, -84px);
+  }
+  75%, 82% {
+    transform: translate(72px, -72px);
+  }
+  87.5%, 94.5% {
+    transform: translate(84px, 0px);
+  }
+  100% {
+    transform: translate(72px, 72px);
+  }
+}
+
+/* Letter C: Starts Bottom-Left (+270° ahead) */
+.kl-orbit-letter--c {
+  animation-name: orbitC;
+}
+
+@keyframes orbitC {
+  0%, 7% {
+    transform: translate(-72px, 72px);
+  }
+  12.5%, 19.5% {
+    transform: translate(-84px, 0px);
+  }
+  25%, 32% {
+    transform: translate(-72px, -72px);
+  }
+  37.5%, 44.5% {
+    transform: translate(0px, -84px);
+  }
+  50%, 57% {
+    transform: translate(72px, -72px);
+  }
+  62.5%, 69.5% {
+    transform: translate(84px, 0px);
+  }
+  75%, 82% {
+    transform: translate(72px, 72px);
+  }
+  87.5%, 94.5% {
+    transform: translate(0px, 84px);
+  }
+  100% {
+    transform: translate(-72px, 72px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kl-orbit-letter,
+  .kl-center-anchor {
+    animation: none;
+  }
+}
