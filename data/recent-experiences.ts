@@ -29,6 +29,8 @@ export type RecentStory = {
   category?: string;
   cover: string;
   projectUrl?: string;
+  /** Two small stats shown under the card title, e.g. attendees + reach. */
+  metrics?: { label: string; value: string }[];
   frames: RecentFrame[];
 };
 
@@ -41,10 +43,14 @@ const recentExperiences: RecentStory[] = [
     date: "2024",
     city: "Delhi-NCR",
     category: "Festival IP",
-    cover: "/rx/placeholder-1.svg",
+    cover: "/rx/cover-1.jpg",
     projectUrl: "#contact",
+    metrics: [
+      { label: "Attendees", value: "15,000+" },
+      { label: "Reach", value: "Pan-India" },
+    ],
     frames: [
-      { id: "s1-f1", type: "image", variant: "cover", label: "Project", src: "/rx/placeholder-1.svg", duration: 4200 },
+      { id: "s1-f1", type: "image", variant: "cover", label: "Project", src: "/rx/cover-1.jpg", duration: 4200 },
       {
         id: "s1-f2",
         type: "text",
@@ -69,7 +75,7 @@ const recentExperiences: RecentStory[] = [
         ],
         duration: 5200,
       },
-      { id: "s1-f4", type: "cta", label: "View experience", src: "/rx/placeholder-1.svg", duration: 4200 },
+      { id: "s1-f4", type: "cta", label: "View experience", src: "/rx/cover-1.jpg", duration: 4200 },
     ],
   },
   {
@@ -80,10 +86,14 @@ const recentExperiences: RecentStory[] = [
     date: "2024",
     city: "Gurugram",
     category: "Corporate Summit",
-    cover: "/rx/placeholder-2.svg",
+    cover: "/rx/cover-2.jpg",
     projectUrl: "#contact",
+    metrics: [
+      { label: "Delegates", value: "3,500+" },
+      { label: "Duration", value: "3 Days" },
+    ],
     frames: [
-      { id: "s2-f1", type: "image", variant: "cover", label: "Project", src: "/rx/placeholder-2.svg", duration: 4200 },
+      { id: "s2-f1", type: "image", variant: "cover", label: "Project", src: "/rx/cover-2.jpg", duration: 4200 },
       {
         id: "s2-f2",
         type: "text",
@@ -106,7 +116,7 @@ const recentExperiences: RecentStory[] = [
         ],
         duration: 5200,
       },
-      { id: "s2-f4", type: "cta", label: "View experience", src: "/rx/placeholder-2.svg", duration: 4200 },
+      { id: "s2-f4", type: "cta", label: "View experience", src: "/rx/cover-2.jpg", duration: 4200 },
     ],
   },
   {
@@ -117,10 +127,14 @@ const recentExperiences: RecentStory[] = [
     date: "2023",
     city: "Mumbai",
     category: "Spatial Design",
-    cover: "/rx/placeholder-3.svg",
+    cover: "/rx/cover-3.jpg",
     projectUrl: "#contact",
+    metrics: [
+      { label: "Role", value: "Spatial Design" },
+      { label: "Build Time", value: "4 Weeks" },
+    ],
     frames: [
-      { id: "s3-f1", type: "image", variant: "cover", label: "Project", src: "/rx/placeholder-3.svg", duration: 4200 },
+      { id: "s3-f1", type: "image", variant: "cover", label: "Project", src: "/rx/cover-3.jpg", duration: 4200 },
       {
         id: "s3-f2",
         type: "text",
@@ -128,8 +142,8 @@ const recentExperiences: RecentStory[] = [
         statement: "A bespoke architectural pavilion engineered to showcase cutting-edge electric mobility with experiential touchpoints.",
         duration: 5200,
       },
-      { id: "s3-f3", type: "image", label: "On site", src: "/rx/placeholder-4.svg", duration: 4200 },
-      { id: "s3-f4", type: "cta", label: "View experience", src: "/rx/placeholder-3.svg", duration: 4200 },
+      { id: "s3-f3", type: "image", label: "On site", src: "/rx/cover-3.jpg", duration: 4200 },
+      { id: "s3-f4", type: "cta", label: "View experience", src: "/rx/cover-3.jpg", duration: 4200 },
     ],
   },
   {
@@ -140,10 +154,14 @@ const recentExperiences: RecentStory[] = [
     date: "2023",
     city: "Delhi / Mumbai",
     category: "Concerts",
-    cover: "/rx/placeholder-4.svg",
+    cover: "/rx/cover-4.jpg",
     projectUrl: "#contact",
+    metrics: [
+      { label: "Format", value: "Arena Scale" },
+      { label: "Run", value: "2 Days" },
+    ],
     frames: [
-      { id: "s4-f1", type: "image", variant: "cover", label: "Project", src: "/rx/placeholder-4.svg", duration: 4200 },
+      { id: "s4-f1", type: "image", variant: "cover", label: "Project", src: "/rx/cover-4.jpg", duration: 4200 },
       {
         id: "s4-f2",
         type: "text",
@@ -151,7 +169,7 @@ const recentExperiences: RecentStory[] = [
         statement: "Engineering massive outdoor festival stages with precision rigging, pyrotechnics, and flawless artist logistics.",
         duration: 5200,
       },
-      { id: "s4-f3", type: "cta", label: "View experience", src: "/rx/placeholder-4.svg", duration: 4200 },
+      { id: "s4-f3", type: "cta", label: "View experience", src: "/rx/cover-4.jpg", duration: 4200 },
     ],
   },
 ];

@@ -151,8 +151,7 @@ export default function RecentExperiences() {
           <li className="rx-rail__item" key={story.id}>
             <button
               type="button"
-              className="rx-plate"
-              data-cursor="view"
+              className="rx-plate-card"
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}
@@ -160,35 +159,50 @@ export default function RecentExperiences() {
               aria-haspopup="dialog"
               aria-label={`View story: ${story.title}, ${story.frames.length} frames`}
             >
-              <span className="rx-plate__media">
-                <img src={story.cover} alt="" loading="lazy" decoding="async" />
-              </span>
-              <span className="rx-plate__scrim" aria-hidden="true" />
-
-              {/* Sequence indicator: one hairline per frame */}
-              <span className="rx-plate__segments" aria-hidden="true">
-                {story.frames.map((f) => (
-                  <i key={f.id} />
-                ))}
-              </span>
-
-              <span className="rx-plate__top" aria-hidden="true">
-                <span className="rx-plate__index">{pad(index + 1)}</span>
-                <span className="rx-plate__frames">{pad(story.frames.length)} frames</span>
-              </span>
-
-              <span className="rx-plate__body" aria-hidden="true">
-                <span className="rx-plate__meta">
-                  {[story.date, story.city, story.category]
-                    .filter(Boolean)
-                    .map((m) => (
-                      <span key={m}>{m}</span>
-                    ))}
+              <span className="rx-plate">
+                <span className="rx-plate__media">
+                  <img src={story.cover} alt="" loading="lazy" decoding="async" />
                 </span>
+                <span className="rx-plate__scrim" aria-hidden="true" />
+
+                {/* Sequence indicator: one hairline per frame */}
+                <span className="rx-plate__segments" aria-hidden="true">
+                  {story.frames.map((f) => (
+                    <i key={f.id} />
+                  ))}
+                </span>
+
+                <span className="rx-plate__top" aria-hidden="true">
+                  <span className="rx-plate__index">{pad(index + 1)}</span>
+                  <span className="rx-plate__frames">{pad(story.frames.length)} frames</span>
+                </span>
+
+                {story.category && (
+                  <span className="rx-plate__tags" aria-hidden="true">
+                    <span className="rx-plate__tag">{story.category}</span>
+                  </span>
+                )}
+
+                <span className="rx-plate__view" aria-hidden="true">
+                  <span className="rx-plate__view-plus">+</span>
+                  <span className="rx-plate__view-pill">View story</span>
+                  <span className="rx-plate__view-plus">+</span>
+                </span>
+              </span>
+
+              {/* Title lives below the photo frame, not overlaid on it */}
+              <span className="rx-plate__footer" aria-hidden="true">
                 <span className="rx-plate__title">{story.title}</span>
-                <span className="rx-plate__cta">
-                  View story <span className="rx-plate__arrow">→</span>
-                </span>
+                {story.metrics && (
+                  <span className="rx-plate__stats">
+                    {story.metrics.map((m) => (
+                      <span className="rx-plate__stat" key={m.label}>
+                        <span className="rx-plate__stat-label">{m.label}</span>
+                        <span className="rx-plate__stat-value">{m.value}</span>
+                      </span>
+                    ))}
+                  </span>
+                )}
               </span>
             </button>
           </li>

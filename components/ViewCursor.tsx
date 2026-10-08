@@ -14,8 +14,6 @@ const DEFAULT_SELECTOR = [
   '[data-cursor="view"]',
   '[data-cursor-view]',
   '[data-project-media]',
-  ".rx-plate",
-  ".rx-plate__media",
   ".imageWrapper",
   "#works article",
   ".project-card",
