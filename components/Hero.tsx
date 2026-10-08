@@ -138,15 +138,14 @@ export default function Hero() {
         <KineticLogo className="pointer-events-auto" />
       </div>
 
-      {/* Primary headline: desktop at left-center, kept small/editorial so it
-          supports the central identity rather than competing with it */}
-      <div className="hidden md:block absolute md:top-1/2 md:-translate-y-1/2 md:left-8 md:max-w-[19rem] z-20 pointer-events-none">
-        <p className="mb-2 md:mb-3 text-xs font-medium text-[#f0f3a6]">
+      {/* Primary headline: desktop at left-center, matching House of Yellow reference scale exactly */}
+      <div className="hidden md:block absolute md:top-1/2 md:-translate-y-1/2 md:left-6 lg:left-10 xl:left-12 md:max-w-[400px] lg:max-w-[440px] z-20 pointer-events-none">
+        <p className="mb-2.5 md:mb-3 text-[14px] lg:text-[15px] font-medium text-[#f0f3a6]">
           <SlideUpText split="words" delay={0.2} stagger={0.02}>
             {hero.label}
           </SlideUpText>
         </p>
-        <p className="text-sm leading-snug md:text-base lg:text-lg text-[#f0f3a6]">
+        <p className="text-[23px] md:text-[26px] lg:text-[28px] leading-[1.22] font-medium tracking-[-0.01em] text-[#f0f3a6]">
           <SlideUpText split="words" delay={0.35} stagger={0.015}>
             {hero.headline}
           </SlideUpText>
