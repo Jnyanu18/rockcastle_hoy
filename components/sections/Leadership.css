@@ -6,7 +6,7 @@
 .leadership {
   position: relative;
   z-index: 5;
-  background-color: var(--rc-black);
+  background-color: #1d1d1b;
   color: var(--rc-white);
   width: 100%;
   overflow-x: hidden;

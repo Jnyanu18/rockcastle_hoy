@@ -223,32 +223,46 @@ body {
   text-transform: uppercase;
 }
 
-/* Hero Play Cursor + Shape Marquee Tickers */
-@keyframes playCursorV {
+/* Hero Play Cursor: rotating + assembly and inward radial text conveyors */
+@keyframes plusRotateClockwise {
   0% {
-    transform: translateY(-88px);
+    transform: rotate(0deg);
   }
   100% {
-    transform: translateY(0);
+    transform: rotate(360deg);
   }
 }
 
-@keyframes videoCursorH {
+@keyframes spokeInwardPlay {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-88px);
+    transform: translateX(-38px);
   }
 }
 
-.anim-play-v {
-  animation: playCursorV 3.6s linear infinite;
+@keyframes spokeInwardVideo {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-44px);
+  }
+}
+
+.anim-plus-rotate {
+  animation: plusRotateClockwise 24s linear infinite;
   will-change: transform;
 }
 
-.anim-video-h {
-  animation: videoCursorH 3.6s linear infinite;
+.anim-spoke-play {
+  animation: spokeInwardPlay 1.15s linear infinite;
+  will-change: transform;
+}
+
+.anim-spoke-video {
+  animation: spokeInwardVideo 1.33s linear infinite;
   will-change: transform;
 }
 

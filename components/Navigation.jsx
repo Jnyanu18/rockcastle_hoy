@@ -324,7 +324,7 @@ export default function Navigation() {
             ))}
           </nav>
 
-          {/* Center: Rockcastle Logo & Stacked Brand Name (Pinned Dead Center) */}
+          {/* Center: Rockcastle Logo & Wordmark (Pinned Dead Center) */}
           <div className="nav__brand-center-anchor">
             <Link
               href="/"
@@ -333,10 +333,7 @@ export default function Navigation() {
               onClick={(e) => handleNavClick(e, '/')}
             >
               <img src="/rockcastle-logo.jpg" alt="" aria-hidden="true" className="nav__brand-logo" />
-              <span className="nav__brand-word">
-                <span className="nav__brand-word-line">Rock</span>
-                <span className="nav__brand-word-line">Castle</span>
-              </span>
+              <img src="/rockcastle-logo-black.png" alt="Rock Castle" className="nav__brand-wordmark" />
             </Link>
           </div>
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import SlideUpText from "@/components/ui/SlideUpText";
-import { stats } from "@/lib/content";
+import { stats, social } from "@/lib/content";
 import { useInView } from "@/lib/hooks";
 import "./Stats.css";
 
@@ -124,7 +124,8 @@ export default function Stats() {
   return (
     <section
       id="stats"
-      className="hoy-stats-section px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-28"
+      className="hoy-stats-section bg-[#1d1d1b] px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-28"
+      style={{ backgroundColor: "#1d1d1b" }}
     >
       {/* Container wrapper matching max content bounds */}
       <div className="mx-auto w-full max-w-[1760px]">
@@ -362,6 +363,26 @@ export default function Stats() {
                 </div>
               ))}
             </div>
+
+            {/* Follow Us on Instagram CTA Button next to stats */}
+            <div className="mt-8 lg:mt-12 flex items-center">
+              <a
+                href={social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-magnetic
+                aria-label="Follow Rock Castle on Instagram"
+                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#f0f3a6] text-[#1d1d1b] font-medium text-xs sm:text-sm tracking-wide transition-all duration-300 hover:scale-105 hover:bg-white shadow-[0_8px_24px_rgba(240,243,166,0.22)] active:scale-95 cursor-pointer select-none"
+              >
+                <InstagramIcon className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 text-[#1d1d1b]" />
+                <span className="font-semibold uppercase tracking-wider text-[11px] sm:text-xs">
+                  Follow us on Instagram
+                </span>
+                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 font-bold">
+                  ↗
+                </span>
+              </a>
+            </div>
           </div>
 
           {/* Right Decorative Sparkle Star Accent */}
@@ -428,6 +449,25 @@ function SparkleIcon() {
         d="M21.2822 10.6685L14.9526 10.6685C12.9488 10.6685 11.3247 9.04439 11.3247 7.04057L11.3247 0.711897C11.3247 0.624892 11.254 0.554201 11.167 0.554201L10.2661 0.554201C10.1791 0.554201 10.1084 0.624892 10.1084 0.711897L10.1084 7.04148C10.1084 9.0453 8.48433 10.6694 6.48051 10.6694L0.151835 10.6694C0.06483 10.6694 -0.00586116 10.7401 -0.00586117 10.8271L-0.00586133 11.7279C-0.00586134 11.8149 0.0648298 11.8856 0.151834 11.8856L6.48141 11.8856C8.48524 11.8856 10.1093 13.5097 10.1093 15.5135L10.1093 21.8431C10.1093 21.9301 10.18 22.0008 10.267 22.0008L11.1679 22.0008C11.2549 22.0008 11.3256 21.9301 11.3256 21.8431L11.3256 15.5135C11.3256 13.5097 12.9497 11.8856 14.9535 11.8856L21.2831 11.8856C21.3701 11.8856 21.4408 11.8149 21.4408 11.7279L21.4408 10.8271C21.4408 10.7401 21.3701 10.6694 21.2831 10.6694L21.2822 10.6685Z"
         fill="currentColor"
       />
+    </svg>
+  );
+}
+
+function InstagramIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
     </svg>
   );
 }

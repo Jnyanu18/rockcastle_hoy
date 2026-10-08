@@ -94,7 +94,7 @@ export default function Leadership() {
   }, []);
 
   return (
-    <section className="leadership" id="leadership" ref={ref} aria-label="Leadership">
+    <section className="leadership bg-[#1d1d1b]" id="leadership" ref={ref} aria-label="Leadership">
       <div className="leadership__inner">
         <div className="leadership__head">
           <div className="leadership__meta-bar">
