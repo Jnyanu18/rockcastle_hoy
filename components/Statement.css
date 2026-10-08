@@ -154,7 +154,7 @@
   width: clamp(260px, 22.8125vw, 390px);
   height: clamp(260px, 22.8125vw, 390px);
   margin-left: 51.875vw;
-  margin-top: -6.25vw;
+  margin-top: clamp(-140px, -8.5vw, -60px);
   border-radius: clamp(48px, 4.375vw, 70px);
   border: 1px solid #1d1d1b;
   pointer-events: none;
@@ -197,7 +197,7 @@
 /* ---- The Works Section ---- */
 .hoy-works-section {
   position: relative;
-  margin-top: -8.6875vw;
+  margin-top: clamp(-260px, -16vw, -110px);
   z-index: 3;
 }
 
@@ -285,7 +285,7 @@
   }
 
   .hoy-works-section {
-    margin-top: 48px;
+    margin-top: 24px;
   }
 
   .hoy-works-cols {
