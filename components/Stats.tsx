@@ -343,26 +343,6 @@ export default function Stats() {
                     <HeartIcon />
                   </div>
                 </div>
-
-                {/* Phone Bottom Instagram Action Bar */}
-                <div className="absolute bottom-4 left-3 right-3 sm:left-4 sm:right-4 z-20 pointer-events-auto">
-                  <a
-                    href={social.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between px-3.5 py-2 rounded-full bg-black/55 backdrop-blur-md border border-white/20 text-white transition-all duration-200 hover:bg-black/75 hover:scale-[1.02] active:scale-95"
-                  >
-                    <div className="flex items-center gap-2">
-                      <InstagramIcon className="w-3.5 h-3.5 text-[#f0f3a6]" />
-                      <span className="text-[11px] font-medium tracking-wide">
-                        @rockcastle.experiences
-                      </span>
-                    </div>
-                    <span className="text-[10px] font-bold text-[#f0f3a6] uppercase tracking-wider">
-                      Follow ↗
-                    </span>
-                  </a>
-                </div>
               </div>
             </div>
           </div>
