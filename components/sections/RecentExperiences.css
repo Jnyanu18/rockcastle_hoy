@@ -154,7 +154,7 @@
 .rx-plate-card {
   display: block;
   width: 100%;
-  color: var(--rc-white);
+  color: #1d1d1b;
   text-align: left;
 }
 
@@ -303,6 +303,7 @@
 .rx-plate__footer {
   display: block;
   margin-top: clamp(14px, 1.8vw, 20px);
+  color: #1d1d1b;
 }
 
 .rx-plate__title {
@@ -310,6 +311,7 @@
   font-weight: 500;
   line-height: 1.08;
   letter-spacing: -0.02em;
+  color: #1d1d1b;
 }
 
 /* Small stats row under the title, like HOY's "Views / Delivery time" line */
@@ -319,7 +321,7 @@
   gap: 8px 28px;
   margin-top: 14px;
   padding-top: 14px;
-  border-top: 1px solid rgba(241, 236, 226, 0.16);
+  border-top: 1px solid rgba(29, 29, 27, 0.2);
 }
 
 .rx-plate__stat {
@@ -332,12 +334,13 @@
 }
 
 .rx-plate__stat-label {
-  color: rgba(241, 236, 226, 0.5);
+  color: rgba(29, 29, 27, 0.55);
   text-transform: uppercase;
 }
 
 .rx-plate__stat-value {
-  color: var(--rc-white);
+  color: #1d1d1b;
+  font-weight: 600;
 }
 
 @media (hover: hover) and (pointer: fine) {
