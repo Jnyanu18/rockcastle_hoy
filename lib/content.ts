@@ -52,11 +52,11 @@ export const statement = {
 };
 
 export const works = {
-  label: "Recent experiences",
+  label: "The works",
   index: "02",
   body:
     "Every build reflects our commitment to scale, precision, and experiential immersion. A showcase of landmark events and brand worlds crafted with our visionary partners.",
-  cta: "See all work",
+  cta: "Made by Rock Castle",
   projects: [
     {
       title: "Green Wheels Bike Festival",

@@ -26,7 +26,7 @@ export default function RecentExperiences() {
     const ctx = gsap.context(() => {
       const plates = gsap.utils.toArray<HTMLElement>(".rx-plate");
       gsap.fromTo(
-        ".rx-head > *",
+        ".rx-head-controls-bar > *",
         { y: 28, opacity: 0 },
         {
           y: 0,
@@ -116,35 +116,31 @@ export default function RecentExperiences() {
       ref={sectionRef}
       aria-labelledby="rx-title"
     >
-      <header className="rx-head">
-        <span className="rx-head__eyebrow">[&nbsp;RECENT EXPERIENCES&nbsp;]</span>
-        <h2 className="rx-head__title" id="rx-title">
-          Recently <em>created.</em>
-        </h2>
-        <div className="rx-head__controls">
-          <span className="rx-head__count">{pad(recentExperiences.length)} stories</span>
-          <button
-            type="button"
-            className="rx-head__arrow"
-            data-magnetic
-            onClick={() => scrollRail(-1)}
-            disabled={edges.start}
-            aria-label="Scroll stories left"
-          >
-            ←
-          </button>
-          <button
-            type="button"
-            className="rx-head__arrow"
-            data-magnetic
-            onClick={() => scrollRail(1)}
-            disabled={edges.end}
-            aria-label="Scroll stories right"
-          >
-            →
-          </button>
-        </div>
-      </header>
+      <div className="rx-head-controls-bar w-full px-[var(--container-x)] mb-5 flex items-center justify-end gap-3">
+        <span className="font-mono text-xs uppercase tracking-wider text-ink/60 mr-2">
+          {pad(recentExperiences.length)} stories
+        </span>
+        <button
+          type="button"
+          className="rx-head__arrow"
+          data-magnetic
+          onClick={() => scrollRail(-1)}
+          disabled={edges.start}
+          aria-label="Scroll stories left"
+        >
+          ←
+        </button>
+        <button
+          type="button"
+          className="rx-head__arrow"
+          data-magnetic
+          onClick={() => scrollRail(1)}
+          disabled={edges.end}
+          aria-label="Scroll stories right"
+        >
+          →
+        </button>
+      </div>
 
       <ul className="rx-rail" ref={railRef} onScroll={updateEdges} aria-label="Recent experiences">
         {recentExperiences.map((story, index) => (

@@ -8,7 +8,7 @@ const config: Config = {
         // HOY-inspired palette: pale yellow accent + white/grey/black neutrals
         canvas: "#ffffff", // light page surface
         ink: "#0b0b0b", // near-black surface and text on canvas
-        accent: "#f0f3a6", // hoy yellow — primary accent, used sparingly
+        accent: "#f2efa3", // hoy yellow — primary accent, used sparingly
         header: "#e8e9e5", // light-grey bar after scroll
         muted: "rgba(11, 11, 11, 0.55)",
       },
