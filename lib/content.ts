@@ -43,7 +43,7 @@ export const statement = {
   index: "01",
   title: "WE TURN IDEAS INTO EXPERIENCES.",
   body:
-    "Rock Castle Entertainment is a premier 360-degree experiential marketing and event management powerhouse based in India. We conceptualize and execute monumental brand activations, corporate summits, immersive public festivals, and live entertainment spectacles. Blending visionary spatial design with meticulous production engineering, we transform ambitious brand visions into unforgettable, high-impact sensory experiences that captivate audiences and inspire industries.",
+    "Rock Castle is India's premier experiential powerhouse — trusted not for chasing volume, but for engineering moments that land. From monumental brand activations and immersive festivals to corporate summits and live spectacles, every detail is crafted with precision, from first concept to global-scale execution.",
   sub: "Looking for a partner that turns scale into benchmark experiences? Let’s talk.",
   ctas: [
     { label: "Connect", href: "#contact", primary: true },

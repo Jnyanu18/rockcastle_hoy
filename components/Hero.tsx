@@ -26,7 +26,7 @@ function StarOrbitRing() {
           cy="22"
           rx="72"
           ry="15"
-          stroke="#edeea5"
+          stroke="#f2a65e"
           strokeWidth="0.8"
           strokeDasharray="2 3"
           strokeOpacity="0.65"
@@ -37,7 +37,7 @@ function StarOrbitRing() {
           cy="22"
           rx="60"
           ry="11"
-          stroke="#edeea5"
+          stroke="#f2a65e"
           strokeWidth="0.5"
           strokeOpacity="0.4"
         />
@@ -47,7 +47,7 @@ function StarOrbitRing() {
           y1="22"
           x2="148"
           y2="22"
-          stroke="#edeea5"
+          stroke="#f2a65e"
           strokeWidth="0.5"
           strokeDasharray="2 4"
           strokeOpacity="0.3"
@@ -56,7 +56,7 @@ function StarOrbitRing() {
         <g transform="translate(71, 13)">
           <path
             d="M9 0C9.4 5.5 12.5 8.6 18 9C12.5 9.4 9.4 12.5 9 18C8.6 12.5 5.5 9.4 0 9C5.5 8.6 8.6 5.5 9 0Z"
-            fill="#edeea5"
+            fill="#f2a65e"
           />
         </g>
       </svg>
@@ -147,7 +147,7 @@ export default function Hero() {
 
         {/* Mobile Welcome & Headline Copy */}
         <div className="mt-3 flex flex-col items-center text-center px-2">
-          <p className="text-xs font-semibold tracking-wide text-[#edeea5]">
+          <p className="text-xs font-semibold tracking-wide text-[#f2a65e]">
             <SlideUpText split="words" delay={0.2} stagger={0.02}>
               {hero.label}
             </SlideUpText>

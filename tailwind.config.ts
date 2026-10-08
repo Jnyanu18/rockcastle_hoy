@@ -6,10 +6,10 @@ const config: Config = {
     extend: {
       colors: {
         // Sampled from the reference frames
-        canvas: "#edeea5", // pale yellow surface
-        ink: "#1d1d1b", // near-black surface and text on canvas
+        canvas: "#f2a65e", // orange surface
+        ink: "#0f1829", // navy surface and text on canvas
         header: "#ececea", // light bar after scroll
-        muted: "rgba(29, 29, 27, 0.55)",
+        muted: "rgba(15, 24, 41, 0.55)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],

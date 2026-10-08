@@ -6,11 +6,11 @@
   /* Shared tokens for sections built with plain CSS instead of Tailwind
      utilities (e.g. Recent Experiences). Sampled from the Tailwind palette
      in tailwind.config.ts so both systems stay in sync. */
-  --rc-yellow: #edeea5;
-  --rc-yellow-bright: #f3f4bd;
+  --rc-orange: #f2a65e;
+  --rc-orange-bright: #ffcb85;
   --rc-white: #f1ece2;
-  --rc-black: #1d1d1b;
-  --rc-black-rich: #141413;
+  --rc-black: #0f1829;
+  --rc-black-rich: #0a1322;
   --rc-gray-light: #a0a09e;
   --rc-gray: #70706e;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -30,14 +30,14 @@ html {
 }
 
 body {
-  background-color: #edeea5;
-  color: #1d1d1b;
+  background-color: #f2a65e;
+  color: #0f1829;
   overflow-x: clip;
 }
 
 ::selection {
-  background: #1d1d1b;
-  color: #edeea5;
+  background: #0f1829;
+  color: #f2a65e;
 }
 
 /* SlideUpText (components/ui/SlideUpText.tsx): each word/character is masked
@@ -63,7 +63,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  color: #1d1d1b;
+  color: #0f1829;
   border-radius: 9999px;
   height: 44px;
   width: 148px;
@@ -125,7 +125,7 @@ body {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #1d1d1b;
+  color: #0f1829;
   text-transform: uppercase;
 }
 
@@ -135,7 +135,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  color: #1d1d1b;
+  color: #0f1829;
   border-radius: 9999px;
   height: 44px;
   width: 154px;
@@ -152,8 +152,8 @@ body {
 
 .process-pill-btn:hover {
   transform: scale(1.03);
-  background-color: #f2efa3;
-  box-shadow: 0 4px 18px rgba(242, 239, 163, 0.35);
+  background-color: #f2a65e;
+  box-shadow: 0 4px 18px rgba(242, 166, 94, 0.35);
 }
 
 .process-pill-track-mask {
@@ -181,7 +181,7 @@ body {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #1d1d1b;
+  color: #0f1829;
   text-transform: uppercase;
 }
 

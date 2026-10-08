@@ -22,7 +22,7 @@
   font-family: var(--font-mono);
   font-size: var(--fs-meta);
   letter-spacing: var(--ls-meta);
-  color: var(--rc-yellow);
+  color: var(--rc-orange);
   margin-bottom: clamp(18px, 3vh, 32px);
 }
 
@@ -37,7 +37,7 @@
 
 .cl-head__title em {
   font-style: normal;
-  color: var(--rc-yellow);
+  color: var(--rc-orange);
 }
 
 .cl-rows {
@@ -51,13 +51,8 @@
 .cl-row {
   display: flex;
   width: max-content;
-  border-top: 1px solid rgba(241, 236, 226, 0.14);
   will-change: transform;
   animation: cl-marquee 60s linear infinite;
-}
-
-.cl-row:last-child {
-  border-bottom: 1px solid rgba(241, 236, 226, 0.14);
 }
 
 .cl-row--reverse {
@@ -76,7 +71,6 @@
   width: clamp(170px, 17vw, 260px);
   height: clamp(84px, 9vw, 130px);
   padding: 16px 20px;
-  border-right: 1px solid rgba(241, 236, 226, 0.14);
 }
 
 .cl-logo {

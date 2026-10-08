@@ -30,7 +30,7 @@
   font-family: var(--font-mono);
   font-size: var(--fs-meta);
   letter-spacing: 0.16em;
-  color: var(--rc-yellow);
+  color: var(--rc-orange);
 }
 
 .rx-head__title {
@@ -44,7 +44,7 @@
 
 .rx-head__title em {
   font-style: normal;
-  color: var(--rc-yellow);
+  color: var(--rc-orange);
 }
 
 .rx-head__controls {
@@ -77,8 +77,8 @@
 
 .rx-head__arrow:hover:not(:disabled),
 .rx-head__arrow:focus-visible {
-  background: var(--rc-yellow);
-  border-color: var(--rc-yellow);
+  background: var(--rc-orange);
+  border-color: var(--rc-orange);
   color: var(--rc-black);
   outline: none;
 }
@@ -90,11 +90,12 @@
 
 /* ---- Rail ---------------------------------------------------------------- */
 .rx-rail {
+  --rx-gap: clamp(12px, 1.4vw, 24px);
   display: flex;
   align-items: flex-start;
-  gap: clamp(12px, 1.4vw, 24px);
+  gap: var(--rx-gap);
   margin: 0;
-  padding: 0 0 8px var(--container-x);
+  padding: 0 var(--container-x) 8px;
   list-style: none;
   overflow-x: auto;
   overscroll-behavior-x: contain;
@@ -106,12 +107,16 @@
 .rx-rail::-webkit-scrollbar { display: none; }
 
 .rx-rail__item {
-  flex: 0 0 calc((100% - 2 * clamp(12px, 1.4vw, 24px)) / 3);
+  flex: 0 0 calc((100% - 2 * var(--rx-gap)) / 3);
   scroll-snap-align: start;
 }
 
-.rx-rail__item:last-child {
-  margin-right: var(--container-x);
+/* Push the 4th (and beyond) card fully past the visible edge: a plain flex
+   gap isn't wide enough to clear the gutter reserved by .rx-rail's own
+   right padding, so the 3rd card needs a bit of extra breathing room to
+   close that gap and keep the next card from peeking in at rest. */
+.rx-rail__item:nth-child(3) {
+  margin-right: calc(var(--container-x) - var(--rx-gap));
 }
 
 /* ---- Plate --------------------------------------------------------------- */
@@ -119,7 +124,7 @@
   position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 4.3;
   overflow: hidden;
   border-radius: 2px;
   background: #121211;
@@ -129,7 +134,7 @@
 }
 
 .rx-plate:focus-visible {
-  outline: 1px solid var(--rc-yellow);
+  outline: 1px solid var(--rc-orange);
   outline-offset: 5px;
 }
 
@@ -174,7 +179,7 @@
 }
 
 .rx-plate__segments i:first-child {
-  background: var(--rc-yellow);
+  background: var(--rc-orange);
 }
 
 .rx-plate__top {
@@ -219,7 +224,7 @@
 .rx-plate__meta span + span::before {
   content: '·';
   margin-right: 10px;
-  color: var(--rc-yellow);
+  color: var(--rc-orange);
 }
 
 .rx-plate__title {
@@ -238,7 +243,7 @@
   font-size: var(--fs-meta);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--rc-yellow);
+  color: var(--rc-orange);
   opacity: 0;
   transition: opacity 450ms ease;
 }
@@ -274,7 +279,7 @@
   }
 
   .rx-plate:hover .rx-plate__segments i:first-child {
-    background: var(--rc-yellow);
+    background: var(--rc-orange);
   }
 }
 
@@ -419,7 +424,7 @@
   font-size: var(--fs-meta);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--rc-yellow);
+  color: var(--rc-orange);
 }
 
 /* Cover: title anchored bottom-left like an opening credit */
@@ -451,7 +456,7 @@
 .story-frame__cover-meta span + span::before {
   content: '·';
   margin-right: 14px;
-  color: var(--rc-yellow);
+  color: var(--rc-orange);
 }
 
 /* Statement: an editorial pause between media */
@@ -588,7 +593,7 @@
 }
 
 .story-viewer__segment-fill {
-  background: var(--rc-yellow);
+  background: var(--rc-orange);
   transform: scaleX(0);
   transform-origin: left center;
 }
@@ -623,7 +628,7 @@
   text-transform: uppercase;
 }
 
-.story-viewer__index { color: var(--rc-yellow); }
+.story-viewer__index { color: var(--rc-orange); }
 
 .story-viewer__identity h2 {
   margin: 0;
@@ -641,7 +646,7 @@
 .story-viewer__meta span + span::before {
   content: '·';
   margin-right: 10px;
-  color: var(--rc-yellow);
+  color: var(--rc-orange);
 }
 
 .story-viewer__controls {
@@ -680,8 +685,8 @@
 
 .story-viewer__close:hover,
 .story-viewer__close:focus-visible {
-  background: var(--rc-yellow) !important;
-  border-color: var(--rc-yellow) !important;
+  background: var(--rc-orange) !important;
+  border-color: var(--rc-orange) !important;
 }
 
 .story-viewer__footer {
@@ -706,7 +711,7 @@
   line-height: 1.5;
 }
 
-.story-viewer__caption-label { color: var(--rc-yellow); }
+.story-viewer__caption-label { color: var(--rc-orange); }
 
 .story-viewer__cta {
   display: flex;
@@ -720,7 +725,7 @@
   align-items: center;
   gap: 14px;
   border-radius: 999px;
-  background: var(--rc-yellow);
+  background: var(--rc-orange);
   color: var(--rc-black);
   font-size: 0.78rem;
   font-weight: 700;
@@ -732,8 +737,8 @@
 
 .story-viewer__cta-link:hover,
 .story-viewer__cta-link:focus-visible {
-  background: var(--rc-yellow-bright);
-  outline: 1px solid var(--rc-yellow);
+  background: var(--rc-orange-bright);
+  outline: 1px solid var(--rc-orange);
   outline-offset: 3px;
 }
 

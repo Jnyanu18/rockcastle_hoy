@@ -1,6 +1,6 @@
 /* ===================================================
    ROCKCASTLE — Kinetic Lockup & Resolve Logo
-   House of Yellow Inspired Centered Hero Emblem
+   Compass badge: R-O-C-K orbit around a CASTLE seal ring
    =================================================== */
 
 .kinetic-logo-wrapper {
@@ -59,11 +59,12 @@
   width: 440px;
 }
 
-/* Track container for R-O-C-K */
+/* Square badge stage: R/O/C/K orbit at the compass points, the CASTLE
+   ring and sparkle sit fixed at the center. */
 .kl-rock-stage {
   position: relative;
-  width: 320px;
-  height: 110px;
+  width: 440px;
+  height: 440px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,7 +78,7 @@
   align-items: center;
   justify-content: center;
   font-family: 'Arial Black', Impact, var(--font-display), sans-serif;
-  font-size: 58px;
+  font-size: 62px;
   font-weight: 900;
   -webkit-text-stroke: 1.8px #ffffff;
   color: #ffffff;
@@ -88,129 +89,138 @@
   animation-iteration-count: infinite;
 }
 
-/* 
+/*
   Timeline Breakdown (4.8s loop):
-  0% - 35%: Resolved readable state (R - O - C - K lined up side-by-side)
-  45%: Scatter into 2x2 grid positions
-  60%: 1st Quarter rotation
-  75%: 2nd Quarter rotation
-  90%: Pre-snap line-up
-  100%: Snap back to readable state
+  0% - 28%: Resolved compass state — R top, O right, C bottom, K left
+            (reads R-O-C-K clockwise)
+  30%: Snap inward — tucked tight at the center, well clear of the
+       CASTLE ring text so nothing overlaps it
+  38% / 46% / 54%: Quarter-rotations while parked inside the ring
+  56%: Snap back out to the compass state
+  100%: Loops back to 0%
+
+  The 28%→30% and 54%→56% jumps are deliberately short (a 2% / ~96ms
+  window) so the move in and out of the ring reads as a snap rather
+  than a slide across the ring text.
 */
 
-/* R: Starts at X = -105px (far left), orbits, returns */
+/* R: top of the badge */
 @keyframes moveR {
 
   0%,
-  35% {
-    transform: translate(-105px, 0px) scale(1.05);
+  28% {
+    transform: translate(0px, -185px) scale(1.05);
   }
 
-  45% {
-    transform: translate(-45px, -35px) scale(0.95);
+  30% {
+    transform: translate(-26px, -26px) scale(0.5);
   }
 
-  60% {
-    transform: translate(45px, -35px) scale(0.95);
+  38% {
+    transform: translate(26px, -26px) scale(0.5);
   }
 
-  75% {
-    transform: translate(45px, 35px) scale(0.95);
+  46% {
+    transform: translate(26px, 26px) scale(0.5);
   }
 
-  90% {
-    transform: translate(-45px, 35px) scale(0.95);
+  54% {
+    transform: translate(-26px, 26px) scale(0.5);
   }
 
+  56%,
   100% {
-    transform: translate(-105px, 0px) scale(1.05);
+    transform: translate(0px, -185px) scale(1.05);
   }
 }
 
-/* O: Starts at X = -35px (inner left) */
+/* O: right of the badge */
 @keyframes moveO {
 
   0%,
-  35% {
-    transform: translate(-35px, 0px) scale(1.05);
+  28% {
+    transform: translate(185px, 0px) scale(1.05);
   }
 
-  45% {
-    transform: translate(45px, -35px) scale(0.95);
+  30% {
+    transform: translate(26px, -26px) scale(0.5);
   }
 
-  60% {
-    transform: translate(45px, 35px) scale(0.95);
+  38% {
+    transform: translate(26px, 26px) scale(0.5);
   }
 
-  75% {
-    transform: translate(-45px, 35px) scale(0.95);
+  46% {
+    transform: translate(-26px, 26px) scale(0.5);
   }
 
-  90% {
-    transform: translate(-45px, -35px) scale(0.95);
+  54% {
+    transform: translate(-26px, -26px) scale(0.5);
   }
 
+  56%,
   100% {
-    transform: translate(-35px, 0px) scale(1.05);
+    transform: translate(185px, 0px) scale(1.05);
   }
 }
 
-/* C: Starts at X = 35px (inner right) */
+/* C: bottom of the badge */
 @keyframes moveC {
 
   0%,
-  35% {
-    transform: translate(35px, 0px) scale(1.05);
+  28% {
+    transform: translate(0px, 185px) scale(1.05);
   }
 
-  45% {
-    transform: translate(45px, 35px) scale(0.95);
+  30% {
+    transform: translate(26px, 26px) scale(0.5);
   }
 
-  60% {
-    transform: translate(-45px, 35px) scale(0.95);
+  38% {
+    transform: translate(-26px, 26px) scale(0.5);
   }
 
-  75% {
-    transform: translate(-45px, -35px) scale(0.95);
+  46% {
+    transform: translate(-26px, -26px) scale(0.5);
   }
 
-  90% {
-    transform: translate(45px, -35px) scale(0.95);
+  54% {
+    transform: translate(26px, -26px) scale(0.5);
   }
 
+  56%,
   100% {
-    transform: translate(35px, 0px) scale(1.05);
+    transform: translate(0px, 185px) scale(1.05);
   }
 }
 
-/* K: Starts at X = 105px (far right) */
+/* K: left of the badge */
 @keyframes moveK {
 
   0%,
-  35% {
-    transform: translate(105px, 0px) scale(1.05);
+  28% {
+    transform: translate(-185px, 0px) scale(1.05);
   }
 
-  45% {
-    transform: translate(-45px, 35px) scale(0.95);
+  30% {
+    transform: translate(-26px, 26px) scale(0.5);
   }
 
-  60% {
-    transform: translate(-45px, -35px) scale(0.95);
+  38% {
+    transform: translate(-26px, -26px) scale(0.5);
   }
 
-  75% {
-    transform: translate(45px, -35px) scale(0.95);
+  46% {
+    transform: translate(26px, -26px) scale(0.5);
   }
 
-  90% {
-    transform: translate(45px, 35px) scale(0.95);
+  54% {
+    transform: translate(26px, 26px) scale(0.5);
   }
 
+  56%,
   100% {
-    transform: translate(105px, 0px) scale(1.05);
+    transform: translate(-185px, 0px) scale(1.05);
   }
 }
 
@@ -230,35 +240,100 @@
   animation-name: moveK;
 }
 
-/* Solid CASTLE Base */
-.kl-castle-text {
-  font-family: 'Arial Black', Impact, var(--font-display), sans-serif;
-  font-size: 54px;
-  font-weight: 900;
-  -webkit-text-stroke: 1.8px #ffffff;
-  letter-spacing: 13px;
-  color: #ffffff;
-  margin-left: 12px;
-  text-transform: uppercase;
-  text-shadow: 0 0 16px rgba(255, 255, 255, 0.55);
-  animation: pulseBase 4.8s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+/* ---- CASTLE seal ring: one "CASTLE" per edge of a centered square,
+   rotated around the badge's own center so the four instances meet
+   corner-to-corner like a stamped seal. ---- */
+.kl-castle-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 240px;
+  height: 240px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: castleRingPulse 4.8s cubic-bezier(0.77, 0, 0.175, 1) infinite;
 }
 
-@keyframes pulseBase {
+.kl-castle-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Arial Black', Impact, var(--font-display), sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 8px;
+  color: #ffffff;
+  -webkit-text-stroke: 1.4px #ffffff;
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  /* Pivot about the ring's own center (240 / 48 = 500%, halved to 250%
+     since translate-origin is measured from this strip's own box). */
+  transform-origin: 50% 250%;
+}
+
+.kl-castle-edge--top {
+  transform: rotate(0deg);
+}
+
+.kl-castle-edge--right {
+  transform: rotate(90deg);
+}
+
+.kl-castle-edge--bottom {
+  transform: rotate(180deg);
+}
+
+.kl-castle-edge--left {
+  transform: rotate(270deg);
+}
+
+@keyframes castleRingPulse {
 
   0%,
-  35%,
+  28%,
+  56%,
   100% {
-    letter-spacing: 12px;
     opacity: 1;
-    transform: scale(1);
+    transform: translate(-50%, -50%) scale(1);
   }
 
-  55%,
-  85% {
-    letter-spacing: 15px;
-    opacity: 0.88;
-    transform: scale(0.98);
+  42% {
+    opacity: 0.82;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+}
+
+/* ---- Small twinkling sparkle accent, offset toward the lower-right
+   of the ring like a maker's mark. ---- */
+.kl-sparkle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  margin-top: 112px;
+  margin-left: 112px;
+  color: #ffffff;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.55));
+  animation: sparkleTwinkle 4.8s ease-in-out infinite;
+}
+
+@keyframes sparkleTwinkle {
+
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.85) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.1) rotate(12deg);
   }
 }
 

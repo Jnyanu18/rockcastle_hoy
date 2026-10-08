@@ -147,7 +147,7 @@ export default function Leadership() {
                 background="var(--rc-white)"
                 color="var(--rc-black)"
                 shadow
-                shadowColor="#1d1d1b"
+                shadowColor="#0f1829"
                 shadowOpacity={0.16}
                 ariaLabel={`${f.name} - ${f.tag}`}
                 className="leadership__flipcard"
