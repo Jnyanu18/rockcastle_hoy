@@ -151,6 +151,19 @@
 }
 
 /* ---- Plate --------------------------------------------------------------- */
+.rx-plate-card {
+  display: block;
+  width: 100%;
+  color: var(--rc-white);
+  text-align: left;
+}
+
+.rx-plate-card:focus-visible {
+  outline: 1px solid var(--rc-orange);
+  outline-offset: 5px;
+}
+
+/* The photo frame itself — everything inside it is overlaid on the image. */
 .rx-plate {
   position: relative;
   display: block;
@@ -159,14 +172,7 @@
   overflow: hidden;
   border-radius: 2px;
   background: #121211;
-  color: var(--rc-white);
-  text-align: left;
   isolation: isolate;
-}
-
-.rx-plate:focus-visible {
-  outline: 1px solid var(--rc-orange);
-  outline-offset: 5px;
 }
 
 .rx-plate__media {
@@ -228,96 +234,137 @@
   color: rgba(241, 236, 226, 0.72);
 }
 
-.rx-plate__body {
+/* Category badge, top-left, under the index row */
+.rx-plate__tags {
+  position: absolute;
+  top: 52px;
+  left: 14px;
+  right: 14px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.rx-plate__tag {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(241, 236, 226, 0.94);
+  color: var(--rc-black);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* "View story" pill flanked by plus marks, near the bottom of the frame — revealed on hover */
+.rx-plate__view {
   position: absolute;
   left: clamp(14px, 1.4vw, 22px);
   right: clamp(14px, 1.4vw, 22px);
-  bottom: clamp(16px, 1.6vw, 24px);
-  z-index: 2;
+  bottom: clamp(18px, 2.4vw, 26px);
+  z-index: 3;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transform: translateY(26px);
-  transition: transform 700ms var(--ease-out-expo);
+  align-items: center;
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 400ms ease, transform 500ms var(--ease-out-expo);
 }
 
-.rx-plate__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 10px;
-  font-family: var(--font-mono);
-  font-size: var(--fs-meta);
-  letter-spacing: var(--ls-meta);
-  text-transform: uppercase;
-  color: rgba(241, 236, 226, 0.7);
-}
-
-.rx-plate__meta span + span::before {
-  content: '·';
-  margin-right: 10px;
+.rx-plate__view-pill {
+  flex: 1;
+  height: 44px;
+  padding: 0 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--rc-black);
   color: var(--rc-orange);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.rx-plate__view-plus {
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--rc-orange);
+}
+
+/* Title sits below the photo frame, in normal flow — not overlaid on the image */
+.rx-plate__footer {
+  display: block;
+  margin-top: clamp(14px, 1.8vw, 20px);
 }
 
 .rx-plate__title {
-  font-size: clamp(1.45rem, 2.1vw, 2.2rem);
+  font-size: clamp(1.25rem, 1.8vw, 1.7rem);
   font-weight: 500;
-  line-height: 1.02;
-  letter-spacing: -0.03em;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
 }
 
-.rx-plate__cta {
+/* Small stats row under the title, like HOY's "Views / Delivery time" line */
+.rx-plate__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(241, 236, 226, 0.16);
+}
+
+.rx-plate__stat {
   display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 6px;
+  align-items: baseline;
+  gap: 6px;
   font-family: var(--font-mono);
-  font-size: var(--fs-meta);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--rc-orange);
-  opacity: 0;
-  transition: opacity 450ms ease;
+  font-size: 11px;
+  letter-spacing: 0.04em;
 }
 
-.rx-plate__arrow {
-  display: inline-block;
-  transition: transform 600ms var(--ease-out-expo);
+.rx-plate__stat-label {
+  color: rgba(241, 236, 226, 0.5);
+  text-transform: uppercase;
+}
+
+.rx-plate__stat-value {
+  color: var(--rc-white);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .rx-plate:hover .rx-plate__media img,
-  .rx-plate:focus-visible .rx-plate__media img {
+  .rx-plate-card:hover .rx-plate__media img,
+  .rx-plate-card:focus-visible .rx-plate__media img {
     transform: scale(1.04) translate3d(-1.2%, -0.8%, 0);
     filter: saturate(1);
   }
 
-  .rx-plate:hover .rx-plate__body,
-  .rx-plate:focus-visible .rx-plate__body {
+  .rx-plate-card:hover .rx-plate__view,
+  .rx-plate-card:focus-visible .rx-plate__view {
+    opacity: 1;
     transform: translateY(0);
   }
 
-  .rx-plate:hover .rx-plate__cta,
-  .rx-plate:focus-visible .rx-plate__cta {
-    opacity: 1;
-  }
-
-  .rx-plate:hover .rx-plate__arrow {
-    transform: translateX(6px);
-  }
-
-  .rx-plate:hover .rx-plate__segments i {
+  .rx-plate-card:hover .rx-plate__segments i {
     background: rgba(241, 236, 226, 0.6);
   }
 
-  .rx-plate:hover .rx-plate__segments i:first-child {
+  .rx-plate-card:hover .rx-plate__segments i:first-child {
     background: var(--rc-orange);
   }
 }
 
 /* Touch: no hover, so the call to action is always present. */
 @media (hover: none), (pointer: coarse) {
-  .rx-plate__body { transform: none; }
-  .rx-plate__cta { opacity: 1; }
+  .rx-plate__view { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 767px) {
@@ -816,8 +863,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .rx-plate__media img,
-  .rx-plate__body,
-  .rx-plate__arrow { transition: none; }
+  .rx-plate__view { transition: none; }
   .story-frame--image .story-frame__media { animation: none; }
   .story-viewer__chrome { transition: none; }
 }
