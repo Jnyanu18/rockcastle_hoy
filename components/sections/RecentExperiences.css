@@ -117,11 +117,11 @@
 
 /* ---- Rail ---------------------------------------------------------------- */
 .rx-rail {
-  --rx-gap: clamp(12px, 1.4vw, 24px);
+  --rx-gap: clamp(16px, 2vw, 32px);
   display: flex;
   align-items: flex-start;
   gap: var(--rx-gap);
-  max-width: 1200px;
+  max-width: none;
   margin: 0;
   padding: 0 var(--container-x) 8px;
   list-style: none;
