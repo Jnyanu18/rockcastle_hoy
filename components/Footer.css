@@ -9,7 +9,11 @@ main {
   position: relative;
   z-index: 2;
   background-color: var(--rc-black, #111925);
-  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.45);
+  box-shadow: none !important;
+}
+
+#contact {
+  box-shadow: none !important;
 }
 
 main:has(.who-sig-experience) {
@@ -24,12 +28,12 @@ body:has(#brief) main {
 
 main.main--connect {
   background-color: var(--light-grey, #182230);
-  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.12);
+  box-shadow: none !important;
 }
 
 main.main--how-we-work {
   background-color: var(--rc-black, #111925);
-  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.6);
+  box-shadow: none !important;
 }
 
 .footer {

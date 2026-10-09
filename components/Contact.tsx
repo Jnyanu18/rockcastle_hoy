@@ -5,9 +5,9 @@ import { contact } from "@/lib/content";
 import Sparkle from "@/components/ui/Sparkle";
 import SlideUpText from "@/components/ui/SlideUpText";
 
-/* Pale-yellow closing call matching House of Yellow [ 08 ] Let's connect:
+/* Navy closing call matching House of Yellow [ 08 ] Let's connect:
    - Left: [ 08 ] index with outlined squarish rounded frame containing an upper-third sparkle mark
-   - Right: "Let's connect" eyebrow, massive dark headline, "Built for brands that want to lead." subhead, and white scrolling pill button
+   - Right: "Let's connect" eyebrow, off-white headline, "Built for brands that want to lead." subhead, and scrolling pill button
 */
 export default function Contact() {
   return (
