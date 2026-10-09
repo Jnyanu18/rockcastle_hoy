@@ -248,7 +248,7 @@ main.main--how-we-work {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  border-radius: clamp(14px, 1.4vw, 20px);
+  border-radius: 0;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   isolation: isolate;

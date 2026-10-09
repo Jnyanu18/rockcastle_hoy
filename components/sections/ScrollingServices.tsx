@@ -108,15 +108,21 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
 
     // Timeline keyframes:
     // 0.00 - 0.18: Card 0 dwell (active), Card 1 & 2 docked at the bottom of the page
-    // 0.18 - 0.46: Transition 0 -> 1 (Card 1 rises smoothly from bottom up to top; Card 0 collapses)
+    // 0.18 - 0.46: Transition 0 -> 1. Split in two so the cards never overlap:
+    //              first half collapses/fades Card 0 out completely, second half
+    //              rises/fades Card 1 in from the bottom.
     // 0.46 - 0.58: Card 1 dwell (active), Card 0 docked at top, Card 2 docked at the bottom of the page
-    // 0.58 - 0.86: Transition 1 -> 2 (Card 2 rises smoothly from bottom up to top; Card 1 collapses)
+    // 0.58 - 0.86: Transition 1 -> 2, same out-then-in split as above
     // 0.86 - 1.00: Card 2 dwell (active), Card 0 & 1 docked at top
 
     const DWELL_1 = 0.18;
     const TRANS_1_2_END = 0.46;
     const DWELL_2 = 0.58;
     const TRANS_2_3_END = 0.86;
+    // Point within each transition window where the outgoing card finishes
+    // collapsing and the incoming card starts rising — keeps the two from
+    // ever being visible at full strength at the same time.
+    const OUT_IN_SPLIT = 0.5;
 
     const updateCards = (progress: number) => {
       const p = Math.max(0, Math.min(1, progress));
@@ -141,17 +147,26 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
       const inner1 = innerHeights[1] || 560;
       const inner2 = innerHeights[2] || 560;
 
+      // Splits a transition's raw 0..1 progress into an "outgoing" fraction
+      // (collapses/fades the leaving card across the first half) and an
+      // "incoming" fraction (rises/fades the entering card across the
+      // second half), so the two are never both partway visible at once.
+      const splitTransition = (t: number) => ({
+        out: Math.max(0, Math.min(1, t / OUT_IN_SPLIT)),
+        in: Math.max(0, Math.min(1, (t - OUT_IN_SPLIT) / (1 - OUT_IN_SPLIT))),
+      });
+
       // Card 0: always at top: y = 0
-      let c0_t = 0;
+      let c0_outT = 0;
       if (p <= DWELL_1) {
-        c0_t = 0;
+        c0_outT = 0;
       } else if (p < TRANS_1_2_END) {
-        c0_t = (p - DWELL_1) / (TRANS_1_2_END - DWELL_1);
+        c0_outT = splitTransition((p - DWELL_1) / (TRANS_1_2_END - DWELL_1)).out;
       } else {
-        c0_t = 1;
+        c0_outT = 1;
       }
-      const c0_height = inner0 - (inner0 - min0) * c0_t;
-      const c0_opacity = 1 - c0_t;
+      const c0_height = inner0 - (inner0 - min0) * c0_outT;
+      const c0_opacity = 1 - c0_outT;
       const c0_y = 0;
 
       // Card 1: top position: min0 + gap; bottom position: currentContainerH - min2 - gap - min1
@@ -164,19 +179,19 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
         c1_height = min1;
         c1_opacity = 0;
       } else if (p < TRANS_1_2_END) {
-        const t = (p - DWELL_1) / (TRANS_1_2_END - DWELL_1);
-        c1_y = c1_botY - (c1_botY - c1_topY) * t;
-        c1_height = min1 + (inner1 - min1) * t;
-        c1_opacity = t;
+        const { in: inT } = splitTransition((p - DWELL_1) / (TRANS_1_2_END - DWELL_1));
+        c1_y = c1_botY - (c1_botY - c1_topY) * inT;
+        c1_height = min1 + (inner1 - min1) * inT;
+        c1_opacity = inT;
       } else if (p <= DWELL_2) {
         c1_y = c1_topY;
         c1_height = inner1;
         c1_opacity = 1;
       } else if (p < TRANS_2_3_END) {
-        const t = (p - DWELL_2) / (TRANS_2_3_END - DWELL_2);
+        const { out: outT } = splitTransition((p - DWELL_2) / (TRANS_2_3_END - DWELL_2));
         c1_y = c1_topY;
-        c1_height = inner1 - (inner1 - min1) * t;
-        c1_opacity = 1 - t;
+        c1_height = inner1 - (inner1 - min1) * outT;
+        c1_opacity = 1 - outT;
       } else {
         c1_y = c1_topY;
         c1_height = min1;
@@ -193,10 +208,10 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
         c2_height = min2;
         c2_opacity = 0;
       } else if (p < TRANS_2_3_END) {
-        const t = (p - DWELL_2) / (TRANS_2_3_END - DWELL_2);
-        c2_y = c2_botY - (c2_botY - c2_topY) * t;
-        c2_height = min2 + (inner2 - min2) * t;
-        c2_opacity = t;
+        const { in: inT } = splitTransition((p - DWELL_2) / (TRANS_2_3_END - DWELL_2));
+        c2_y = c2_botY - (c2_botY - c2_topY) * inT;
+        c2_height = min2 + (inner2 - min2) * inT;
+        c2_opacity = inT;
       } else {
         c2_y = c2_topY;
         c2_height = inner2;
