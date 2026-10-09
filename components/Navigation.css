@@ -337,7 +337,7 @@
 .nav__pill-btn:hover {
   transform: scale(1.02);
   background: #f4f6f9;
-  box-shadow: 0 4px 18px rgba(244, 246, 249, 0.45);
+  box-shadow: 0 4px 16px rgba(17, 25, 37, 0.22);
 }
 
 .nav__pill-track-mask {

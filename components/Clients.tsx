@@ -8,9 +8,7 @@ export default function Clients() {
 
   return (
     <section className="clients" id="clients" aria-labelledby="cl-title">
-      <header className="cl-head">
-        <span className="cl-head__eyebrow" id="cl-title">[&nbsp;{clients.label.toUpperCase()}&nbsp;]</span>
-      </header>
+      <span className="sr-only" id="cl-title">{clients.label}</span>
 
       {/* Screen readers get one plain list; the moving rows are decoration. */}
       <ul className="sr-only">

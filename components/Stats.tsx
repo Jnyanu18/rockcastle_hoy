@@ -372,9 +372,9 @@ export default function Stats() {
                 rel="noopener noreferrer"
                 data-magnetic
                 aria-label="Follow Rock Castle on Instagram"
-                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#ea7700] text-[#111925] font-medium text-xs sm:text-sm tracking-wide transition-all duration-300 hover:scale-105 hover:bg-canvas shadow-[0_8px_24px_rgba(0, 0, 0,0.22)] active:scale-95 cursor-pointer select-none"
+                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#ea7700] text-[#111925] font-medium text-xs sm:text-sm tracking-wide transition-all duration-300 hover:scale-105 hover:bg-[#c46400] shadow-[0_8px_24px_rgba(0,0,0,0.22)] active:scale-95 cursor-pointer select-none"
               >
-                <InstagramIcon className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 text-[#ea7700]" />
+                <InstagramIcon className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 text-[#111925]" />
                 <span className="font-semibold uppercase tracking-wider text-[11px] sm:text-xs">
                   Follow us on Instagram
                 </span>

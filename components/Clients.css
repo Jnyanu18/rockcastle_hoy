@@ -6,39 +6,10 @@
 .clients {
   position: relative;
   z-index: 2;
-  padding: clamp(90px, 14vh, 170px) 0;
-  color: #f4f6f9;
-  background: var(--black, #111925);
+  padding: clamp(48px, 7vh, 88px) 0;
+  color: var(--rc-black, #111925);
+  background: var(--white, #f4f6f9);
   overflow: clip;
-}
-
-.cl-head {
-  padding: 0 var(--container-x);
-  margin-bottom: clamp(40px, 7vh, 88px);
-}
-
-.cl-head__eyebrow {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: var(--fs-meta);
-  letter-spacing: var(--ls-meta);
-  color: #f4f6f9;
-  margin-bottom: clamp(18px, 3vh, 32px);
-}
-
-.cl-head__title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6.4vw, 7rem);
-  font-weight: 500;
-  line-height: 0.95;
-  letter-spacing: -0.045em;
-  color: var(--white, #ffffff);
-}
-
-.cl-head__title em {
-  font-style: normal;
-  color: #f4f6f9;
 }
 
 .cl-rows {
@@ -54,8 +25,6 @@
   width: max-content;
   will-change: transform;
   animation: cl-marquee 60s linear infinite;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .cl-row--reverse {
@@ -67,19 +36,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(170px, 17vw, 260px);
-  height: clamp(84px, 9vw, 130px);
-  padding: 16px 20px;
-  border-right: 1px solid rgba(244, 246, 249, 0.15);
+  width: clamp(160px, 16vw, 240px);
+  height: clamp(88px, 9vw, 132px);
+  padding: 16px 22px;
 }
 
 .cl-logo {
   width: auto;
   height: auto;
-  max-width: 160px;
-  max-height: 72px;
+  max-width: 170px;
+  max-height: 78px;
   object-fit: contain;
-  opacity: 0.85;
+  opacity: 0.8;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
@@ -100,23 +68,15 @@
     padding: 60px 0 54px;
   }
 
-  .cl-head {
-    margin-bottom: 28px;
-  }
-
-  .cl-head__title {
-    font-size: clamp(2.2rem, 8.5vw, 3.2rem);
-  }
-
   .cl-cell {
-    width: 140px;
-    height: 72px;
-    padding: 10px 14px;
+    width: 168px;
+    height: 88px;
+    padding: 14px 18px;
   }
 
   .cl-logo {
-    max-width: 110px;
-    max-height: 52px;
+    max-width: 136px;
+    max-height: 64px;
   }
 }
 

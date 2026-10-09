@@ -104,21 +104,6 @@
   box-sizing: border-box;
 }
 
-.leadership__track-num {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--rc-black);
-  opacity: 0.45;
-}
-
-.leadership__track-sep {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--rc-black);
-  opacity: 0.3;
-}
-
 .leadership__track-label {
   font-family: var(--font-mono);
   font-size: 10.5px;
@@ -159,7 +144,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(17, 25, 37, 0.35) 0%, transparent 28%, transparent 55%, rgba(17, 25, 37, 0.88) 100%);
+  background: linear-gradient(180deg, transparent 0%, transparent 62%, rgba(17, 25, 37, 0.72) 100%);
   pointer-events: none;
 }
 
@@ -171,7 +156,11 @@
 }
 
 .leadership__card-front--photo .leadership__card-credential {
-  color: rgba(244, 246, 249, 0.85);
+  color: #f4f6f9;
+  background: rgba(17, 25, 37, 0.55);
+  padding: 4px 10px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
 }
 
 .leadership__card-credential {

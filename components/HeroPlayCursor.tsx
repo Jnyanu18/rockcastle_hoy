@@ -37,7 +37,7 @@ function InwardSpoke({
             style={{ width: `${slotWidth}px` }}
             className="shrink-0 flex items-center justify-center h-[18px]"
           >
-            <span className="text-[11px] font-semibold text-[#111925] tracking-[0.03em] font-sans select-none whitespace-nowrap">
+            <span className="text-[11px] font-semibold text-[#f4f6f9] tracking-[0.03em] font-sans select-none whitespace-nowrap">
               {word}
             </span>
           </div>

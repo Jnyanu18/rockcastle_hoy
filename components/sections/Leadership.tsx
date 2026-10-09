@@ -111,7 +111,7 @@ export default function Leadership() {
 
           <h2 className="leadership__title">
             <SlideUpText split="words" stagger={0.03} inView once>
-              THE PEOPLE BEHIND THE EXPERIENCE
+              The people behind the experience
             </SlideUpText>
           </h2>
 
@@ -126,8 +126,6 @@ export default function Leadership() {
           {founders.map((f) => (
             <div className="leadership__founder-item" key={f.name}>
               <div className="leadership__card-header-track">
-                <span className="leadership__track-num">{f.num}</span>
-                <span className="leadership__track-sep">//</span>
                 <SlideUpText split="words" inView once className="leadership__track-label">
                   {f.track}
                 </SlideUpText>
@@ -149,9 +147,7 @@ export default function Leadership() {
                 radius={16}
                 background="#ffffff"
                 color="var(--black)"
-                shadow
-                shadowColor="#000000"
-                shadowOpacity={0.16}
+                shadow={false}
                 ariaLabel={`${f.name} - ${f.tag}`}
                 className="leadership__flipcard"
                 front={

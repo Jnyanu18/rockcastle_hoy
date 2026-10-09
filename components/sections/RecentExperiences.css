@@ -117,7 +117,7 @@
 
 /* ---- Rail ---------------------------------------------------------------- */
 .rx-rail {
-  --rx-gap: clamp(16px, 2vw, 32px);
+  --rx-gap: clamp(20px, 2.4vw, 40px);
   display: flex;
   align-items: flex-start;
   gap: var(--rx-gap);
@@ -165,9 +165,9 @@
   position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 4.3;
+  aspect-ratio: 4 / 3.75;
   overflow: hidden;
-  border-radius: 2px;
+  border-radius: clamp(14px, 1.4vw, 22px);
   background: #121211;
   isolation: isolate;
 }
