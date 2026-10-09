@@ -6,6 +6,37 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useMagnetic } from './hooks/useMagnetic'
 import './Navigation.css'
 
+/** Walks up from `el` to find the nearest non-transparent background-color. */
+function getEffectiveBg(el) {
+  while (el && el !== document.documentElement) {
+    const bg = getComputedStyle(el).backgroundColor
+    const m = bg.match(/rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)(?:,\s*([\d.]+))?\)/)
+    if (m) {
+      const alpha = m[4] !== undefined ? parseFloat(m[4]) : 1
+      if (alpha > 0.5) {
+        return [parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3])]
+      }
+    }
+    el = el.parentElement
+  }
+  const bodyBg = getComputedStyle(document.body).backgroundColor
+  const m = bodyBg.match(/rgba?\(([\d.]+),\s*([\d.]+),\s*([\d.]+)/)
+  return m ? [parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3])] : [17, 25, 37]
+}
+
+/** Samples whatever is actually rendered just beneath the fixed nav bar. */
+function isBackgroundLight(navEl) {
+  if (!navEl || typeof document.elementsFromPoint !== 'function') return false
+  const rect = navEl.getBoundingClientRect()
+  const sampleX = window.innerWidth / 2
+  const sampleY = Math.min(window.innerHeight - 1, rect.bottom + 12)
+  const stack = document.elementsFromPoint(sampleX, sampleY)
+  const behind = stack.find((el) => !navEl.contains(el) && el !== navEl)
+  const [r, g, b] = getEffectiveBg(behind || document.body)
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+  return luminance > 0.6
+}
+
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [navTheme, setNavTheme] = useState('dark') // 'dark' (white text) | 'light' (dark text)
@@ -26,23 +57,7 @@ export default function Navigation() {
 
   useEffect(() => {
     // Cache section bounds to avoid querying getBoundingClientRect() on every frame
-    let lightBounds = []
     let watchBounds = []
-
-    const lightSectionIds = [
-      'about',
-      'who-we-are',
-      'what-we-produce',
-      'produce',
-      'leadership',
-      'process',
-      'contact',
-      'services',
-      'testimonials',
-      'recent-experiences',
-      'clients',
-      'brief',
-    ]
 
     const sectionWatchList = [
       { id: 'leadership', navKey: 'team' },
@@ -55,20 +70,6 @@ export default function Navigation() {
 
     const measureSections = () => {
       const scrollY = window.__lenis?.scroll ?? window.scrollY
-
-      // Measure light sections
-      const lightEls = document.querySelectorAll(
-        lightSectionIds.map((id) => `#${id}, .${id}`).join(', ')
-      )
-      const newLight = []
-      lightEls.forEach((el) => {
-        const rect = el.getBoundingClientRect()
-        newLight.push({
-          top: rect.top + scrollY,
-          bottom: rect.bottom + scrollY,
-        })
-      })
-      lightBounds = newLight
 
       // Measure active section watcher targets
       const newWatch = []
@@ -111,25 +112,11 @@ export default function Navigation() {
         lastProgressRef.current = progress
       }
 
-      // Detect background theme (light vs dark sections)
-      const navMidY = 46
-      const currentNavY = y + navMidY
-      let isLight = false
-
-      if (pathname === '/connect' || pathname === '/contact') {
-        isLight = true
-      } else if (pathname === '/how-we-work') {
-        isLight = false
-      } else {
-        for (let i = 0; i < lightBounds.length; i++) {
-          const b = lightBounds[i]
-          if (currentNavY >= b.top && currentNavY < b.bottom) {
-            isLight = true
-            break
-          }
-        }
-      }
-
+      // Detect background theme by sampling whatever is actually rendered
+      // behind the nav bar, rather than maintaining a hand-kept list of
+      // "light section" ids that drifts out of sync as sections get
+      // restyled.
+      const isLight = isBackgroundLight(navRef.current)
       const targetTheme = isLight ? 'light' : 'dark'
       if (themeRef.current !== targetTheme) {
         themeRef.current = targetTheme
