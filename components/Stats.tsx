@@ -135,7 +135,7 @@ export default function Stats() {
         <div className="hoy-intro-cols mb-12 sm:mb-16 lg:mb-28">
           {/* Column 1: Section Index */}
           <div className="hoy-intro-col-1">
-            <span className="text-xs md:text-[13px] font-medium tracking-wide text-[#111925]">
+            <span className="text-xs md:text-[13px] font-medium tracking-wide text-[#242b36]">
               <SlideUpText split="characters">
                 {`[ ${stats.index} ]`}
               </SlideUpText>
@@ -144,12 +144,12 @@ export default function Stats() {
 
           {/* Column 2: Beyond the Stage Eyebrow & Hero Statement */}
           <div className="hoy-intro-col-2">
-            <p className="text-xs md:text-[13px] font-medium text-[#111925] mb-4">
+            <p className="text-xs md:text-[13px] font-medium text-[#242b36] mb-4">
               <SlideUpText split="words">
                 {stats.label}
               </SlideUpText>
             </p>
-            <h2 className="text-lg sm:text-xl lg:text-[24px] font-normal leading-[1.24] text-[#111925]">
+            <h2 className="text-lg sm:text-xl lg:text-[24px] font-normal leading-[1.24] text-[#242b36]">
               <SlideUpText split="words" stagger={0.012} delay={0.06}>
                 {stats.heading}
               </SlideUpText>
@@ -159,14 +159,14 @@ export default function Stats() {
           {/* Column 3: Mobile Content / Brand Activations Aside */}
           <div className="hoy-intro-col-3">
             <div className="flex items-center gap-2 mb-3">
-              <span className="inline-block h-2.5 w-2.5 bg-[#111925] rounded-[1px] shrink-0" />
-              <span className="text-xs md:text-[13px] font-medium text-[#111925]">
+              <span className="inline-block h-2.5 w-2.5 bg-[#242b36] rounded-[1px] shrink-0" />
+              <span className="text-xs md:text-[13px] font-medium text-[#242b36]">
                 <SlideUpText split="words" delay={0.04}>
                   {stats.mobile.label}
                 </SlideUpText>
               </span>
             </div>
-            <p className="text-xs md:text-[13px] leading-relaxed text-[#111925]/80 max-w-sm">
+            <p className="text-xs md:text-[13px] leading-relaxed text-[#242b36]/80 max-w-sm">
               <SlideUpText split="words" stagger={0.015} delay={0.1}>
                 {stats.mobile.body}
               </SlideUpText>
@@ -182,7 +182,7 @@ export default function Stats() {
           <div className="hoy-showcase-col-decor-left hidden lg:flex">
             <span
               aria-hidden
-              className="h-2.5 w-2.5 bg-[#111925] rounded-[1px]"
+              className="h-2.5 w-2.5 bg-[#242b36] rounded-[1px]"
             />
           </div>
 
@@ -372,7 +372,7 @@ export default function Stats() {
                 rel="noopener noreferrer"
                 data-magnetic
                 aria-label="Follow Rock Castle on Instagram"
-                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#ea7700] text-[#111925] font-medium text-xs sm:text-sm tracking-wide transition-all duration-300 hover:scale-105 hover:bg-canvas shadow-[0_8px_24px_rgba(0, 0, 0,0.22)] active:scale-95 cursor-pointer select-none"
+                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#ea7700] text-[#242b36] font-medium text-xs sm:text-sm tracking-wide transition-all duration-300 hover:scale-105 hover:bg-canvas shadow-[0_8px_24px_rgba(0, 0, 0,0.22)] active:scale-95 cursor-pointer select-none"
               >
                 <InstagramIcon className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 text-[#ea7700]" />
                 <span className="font-semibold uppercase tracking-wider text-[11px] sm:text-xs">

@@ -8,7 +8,7 @@
 main {
   position: relative;
   z-index: 2;
-  background-color: var(--rc-black, #111925);
+  background-color: var(--rc-black, #242b36);
   box-shadow: none !important;
 }
 
@@ -27,18 +27,18 @@ body:has(#brief) main {
 }
 
 main.main--connect {
-  background-color: var(--light-grey, #182230);
+  background-color: var(--light-grey, #2a3441);
   box-shadow: none !important;
 }
 
 main.main--how-we-work {
-  background-color: var(--rc-black, #111925);
+  background-color: var(--rc-black, #242b36);
   box-shadow: none !important;
 }
 
 .footer {
   position: relative;
-  background-color: var(--rc-black, #111925);
+  background-color: var(--rc-black, #242b36);
   color: #f4f6f9;
   padding: clamp(56px, 7vw, 92px) 0 clamp(20px, 2.5vw, 32px);
   box-sizing: border-box;
@@ -297,7 +297,7 @@ main.main--how-we-work {
 @media (max-width: 767px) {
   .footer {
     padding: 32px 0 24px;
-    background-color: var(--rc-black, #111925);
+    background-color: var(--rc-black, #242b36);
   }
 
   .footer__inner {

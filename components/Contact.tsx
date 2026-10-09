@@ -11,7 +11,7 @@ import SlideUpText from "@/components/ui/SlideUpText";
 */
 export default function Contact() {
   return (
-    <section id="contact" className="relative flex min-h-screen flex-col justify-center bg-[#111925] px-5 py-14 sm:px-10 md:px-14 md:py-20 lg:px-20 text-[#f4f6f9] overflow-hidden">
+    <section id="contact" className="relative flex min-h-screen flex-col justify-center bg-[#242b36] px-5 py-14 sm:px-10 md:px-14 md:py-20 lg:px-20 text-[#f4f6f9] overflow-hidden">
       <div className="mx-auto w-full max-w-[1680px]">
         {/* Mobile top meta row */}
         <div className="flex items-center justify-between md:hidden mb-6">

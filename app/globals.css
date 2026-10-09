@@ -13,10 +13,10 @@
   --hoy-yellow: #ea7700; /* orange sampled directly from the Rock Castle logo artwork — buttons, CTAs, numbers/index labels */
   --rc-yellow: #ea7700;
   --white: #f4f6f9; /* soft "royal" off-white (not flat pure white) — text / light-on-dark role */
-  --light-grey: #182230; /* deepened navy — subtle surface, scroll state */
-  --mid-grey: #5c7084; /* muted blue-grey — secondary text, borders */
-  --dark-grey: #0a0e15; /* near-black navy — dark accent surface */
-  --black: #111925; /* deep navy (darkened again per feedback) — ink / dark-section role */
+  --light-grey: #2a3441; /* deepened navy — subtle surface, scroll state */
+  --mid-grey: #697b8e; /* muted blue-grey — secondary text, borders */
+  --dark-grey: #1e2128; /* near-black navy — dark accent surface */
+  --black: #242b36; /* navy, lightened ~8% per feedback — ink / dark-section role */
 
   /* Legacy aliases kept so existing component CSS (var(--rc-orange) etc.)
      continues to resolve to the new palette without a file-by-file rename. */
@@ -105,7 +105,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #f4f6f9;
-  color: #111925;
+  color: #242b36;
   border-radius: 9999px;
   height: 44px;
   width: 148px;
@@ -167,7 +167,7 @@ body {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #111925;
+  color: #242b36;
   text-transform: uppercase;
 }
 
@@ -177,7 +177,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #f4f6f9;
-  color: #111925;
+  color: #242b36;
   border-radius: 9999px;
   height: 44px;
   width: 154px;
@@ -223,7 +223,7 @@ body {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #111925;
+  color: #242b36;
   text-transform: uppercase;
 }
 

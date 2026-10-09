@@ -4,7 +4,7 @@ import Reveal from "@/components/ui/Reveal";
 /** Dark process statement: label, long statement, bold summary. */
 export default function Process() {
   return (
-    <section id="process" className="bg-[#111925] px-[var(--gutter)] pb-[var(--section-y)] text-pale" style={{ backgroundColor: "#111925" }}>
+    <section id="process" className="bg-[#242b36] px-[var(--gutter)] pb-[var(--section-y)] text-pale" style={{ backgroundColor: "#242b36" }}>
       <div className="grid grid-cols-1 gap-y-8 md:grid-cols-[26%_1fr]">
         <Reveal>
           <p className="text-[0.8125rem]">{process.label}</p>
