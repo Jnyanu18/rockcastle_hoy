@@ -151,7 +151,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
         c0_t = 1;
       }
       const c0_height = inner0 - (inner0 - min0) * c0_t;
-      const c0_opacity = 1 - (1 - 0.28) * c0_t;
+      const c0_opacity = 1 - c0_t;
       const c0_y = 0;
 
       // Card 1: top position: min0 + gap; bottom position: currentContainerH - min2 - gap - min1
@@ -162,12 +162,12 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
       if (p <= DWELL_1) {
         c1_y = c1_botY;
         c1_height = min1;
-        c1_opacity = 0.28;
+        c1_opacity = 0;
       } else if (p < TRANS_1_2_END) {
         const t = (p - DWELL_1) / (TRANS_1_2_END - DWELL_1);
         c1_y = c1_botY - (c1_botY - c1_topY) * t;
         c1_height = min1 + (inner1 - min1) * t;
-        c1_opacity = 0.28 + (1 - 0.28) * t;
+        c1_opacity = t;
       } else if (p <= DWELL_2) {
         c1_y = c1_topY;
         c1_height = inner1;
@@ -176,11 +176,11 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
         const t = (p - DWELL_2) / (TRANS_2_3_END - DWELL_2);
         c1_y = c1_topY;
         c1_height = inner1 - (inner1 - min1) * t;
-        c1_opacity = 1 - (1 - 0.28) * t;
+        c1_opacity = 1 - t;
       } else {
         c1_y = c1_topY;
         c1_height = min1;
-        c1_opacity = 0.28;
+        c1_opacity = 0;
       }
 
       // Card 2: top position: min0 + gap + min1 + gap; bottom position: currentContainerH - min2
@@ -191,12 +191,12 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
       if (p <= DWELL_2) {
         c2_y = c2_botY;
         c2_height = min2;
-        c2_opacity = 0.28;
+        c2_opacity = 0;
       } else if (p < TRANS_2_3_END) {
         const t = (p - DWELL_2) / (TRANS_2_3_END - DWELL_2);
         c2_y = c2_botY - (c2_botY - c2_topY) * t;
         c2_height = min2 + (inner2 - min2) * t;
-        c2_opacity = 0.28 + (1 - 0.28) * t;
+        c2_opacity = t;
       } else {
         c2_y = c2_topY;
         c2_height = inner2;

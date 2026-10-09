@@ -37,7 +37,7 @@ function InwardSpoke({
             style={{ width: `${slotWidth}px` }}
             className="shrink-0 flex items-center justify-center h-[18px]"
           >
-            <span className="text-[11px] font-semibold text-[#f4f6f9] tracking-[0.03em] font-sans select-none whitespace-nowrap">
+            <span className="text-[11px] font-semibold text-[#ea7700] tracking-[0.03em] font-sans select-none whitespace-nowrap">
               {word}
             </span>
           </div>
@@ -57,7 +57,7 @@ function InwardSpoke({
 export function PlayCursorBadge({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`relative flex h-[88px] w-[88px] items-center justify-center rounded-[26px] bg-[#ea7700] text-[#111925] shadow-[0_10px_32px_rgba(0, 0, 0,0.38),inset_0_1px_1px_rgba(244, 246, 249,0.6)] border border-black/10 select-none overflow-hidden ${className}`}
+      className={`relative flex h-[88px] w-[88px] items-center justify-center rounded-[26px] bg-[#f4f6f9] text-[#111925] shadow-[0_10px_32px_rgba(0, 0, 0,0.38),inset_0_1px_1px_rgba(255, 255, 255,0.6)] border border-black/10 select-none overflow-hidden ${className}`}
     >
       {/* Slowly clockwise rotating "+" assembly */}
       <div
@@ -74,7 +74,7 @@ export function PlayCursorBadge({ className = "" }: { className?: string }) {
 
         {/* Center Yellow Circle Hub: borderless, reduced size, text disappears behind it */}
         <div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[16px] h-[16px] rounded-full bg-[#ea7700] z-10 pointer-events-none select-none"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[16px] h-[16px] rounded-full bg-[#f4f6f9] z-10 pointer-events-none select-none"
           aria-hidden="true"
         />
       </div>

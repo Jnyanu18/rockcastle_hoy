@@ -86,7 +86,7 @@
   display: grid;
   place-items: center;
   border: 1px solid rgba(244, 246, 249, 0.25);
-  border-radius: 50%;
+  border-radius: 10px;
   color: #f4f6f9;
   font-size: 1rem;
   transition: background 250ms ease, color 250ms ease, border-color 250ms ease, opacity 250ms ease;
@@ -117,7 +117,7 @@
 
 /* ---- Rail ---------------------------------------------------------------- */
 .rx-rail {
-  --rx-gap: clamp(20px, 2.4vw, 40px);
+  --rx-gap: clamp(16px, 1.9vw, 32px);
   display: flex;
   align-items: flex-start;
   gap: var(--rx-gap);
