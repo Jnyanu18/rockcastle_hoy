@@ -33,7 +33,7 @@ export const hero = {
     "We turn ambitious ideas into monumental experiences. From brand activations and immersive pavilions to mega concerts and corporate spectacles.",
   aside:
     "Where visionary design meets flawless technical execution. We engineer high-octane experiential environments that leave lasting impressions across India and global stages.",
-  backgroundTone: "#1e2128",
+  backgroundTone: "#0a0e15",
   puckLabel: "Play reel",
 };
 

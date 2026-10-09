@@ -7,7 +7,7 @@
 
 .servicesBlock {
   position: relative;
-  background: #242b36;
+  background: #111925;
   color: var(--rc-white);
   width: 100%;
 }
@@ -38,7 +38,7 @@
   box-sizing: border-box;
   padding-top: clamp(96px, 11vh, 114px);
   padding-bottom: clamp(14px, 1.8vh, 22px);
-  background: #242b36;
+  background: #111925;
 }
 
 /* ---- Items Deck Container ---- */
@@ -62,7 +62,7 @@
   overflow: hidden;
   will-change: transform, height, opacity;
   box-sizing: border-box;
-  background: #242b36;
+  background: #111925;
   transition: opacity 0.15s ease-out;
 }
 

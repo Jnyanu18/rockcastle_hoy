@@ -10,7 +10,7 @@ import "@/components/Statement.css";
    - Main content: Headline & body set in the primary column (font-weight: 500, leading: 1.12)
    - Middle row: Supporting subhead & CTA pills on the left, large wireframe squircle on the right
    - "The works" row removed: it overlapped with the wireframe squircle's negative margin
-   - Background color: #242b36 (frosted navy, identical to RecentExperiences)
+   - Background color: #111925 (frosted navy, identical to RecentExperiences)
 */
 export default function Statement() {
   return (
