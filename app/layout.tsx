@@ -13,6 +13,7 @@ const sans = Poppins({
 
 import SmoothScroll from "@/components/SmoothScroll";
 import ViewCursor from "@/components/ViewCursor";
+import PageLoadingBar from "@/components/PageLoadingBar";
 import { GlobalMagnetic } from "@/components/hooks/useMagnetic";
 
 export const metadata: Metadata = {
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon" href="/rockcastle-logo.jpg" />
       </head>
       <body className="bg-canvas font-sans text-ink antialiased">
+        <PageLoadingBar />
         <SmoothScroll />
         <ViewCursor />
         <GlobalMagnetic />
