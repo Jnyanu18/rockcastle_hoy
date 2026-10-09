@@ -32,11 +32,16 @@ function parseMetric(val: string) {
 function RunningMetric({ value, delay = 0 }: { value: string; delay?: number }) {
   const { ref, inView } = useInView<HTMLSpanElement>(0.15);
   const hasAnimated = useRef(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const rafRef = useRef<number | undefined>(undefined);
   const initialValue = (() => {
     const { prefix = "", suffix = "", decimals = 0 } = parseMetric(value);
     return `${prefix}${decimals > 0 ? "0.0" : "0"}${suffix}`;
   })();
 
+  // Runs once the count-up starts; intentionally NOT cancelled when `inView`
+  // later flips back to false (e.g. scrolling past mid-animation) — only a
+  // real unmount should cut it off, otherwise the number freezes partway.
   useEffect(() => {
     const el = ref.current;
     if (!el || !inView || hasAnimated.current) return;
@@ -50,8 +55,7 @@ function RunningMetric({ value, delay = 0 }: { value: string; delay?: number }) 
     const { target, prefix = "", suffix = "", decimals = 0, separator } = parseMetric(value);
     const duration = 1600;
 
-    let rafId: number;
-    const timerId = setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       const startTime = performance.now();
 
       const tick = (now: number) => {
@@ -73,20 +77,22 @@ function RunningMetric({ value, delay = 0 }: { value: string; delay?: number }) 
         el.textContent = `${prefix}${formatted}${suffix}`;
 
         if (t < 1) {
-          rafId = requestAnimationFrame(tick);
+          rafRef.current = requestAnimationFrame(tick);
         } else {
           el.textContent = value;
         }
       };
 
-      rafId = requestAnimationFrame(tick);
+      rafRef.current = requestAnimationFrame(tick);
     }, delay);
-
-    return () => {
-      clearTimeout(timerId);
-      cancelAnimationFrame(rafId);
-    };
   }, [inView, value, delay, ref]);
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timerRef.current);
+      if (rafRef.current !== undefined) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   return (
     <span ref={ref} className="tabular-nums">

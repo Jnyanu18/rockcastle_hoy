@@ -282,7 +282,7 @@
 .servicesBlock .images {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: clamp(3px, 0.4vw, 6px);
+  gap: 0;
   width: 100%;
   max-width: clamp(860px, 84vw, 1280px);
   margin: clamp(10px, 1.4vh, 18px) auto 0 auto;
@@ -331,7 +331,7 @@
 
   .servicesBlock .images {
     max-width: 720px;
-    gap: 6px;
+    gap: 0;
   }
 
   .servicesBlock .imageWrapper {
@@ -397,7 +397,7 @@
   .servicesBlock .images {
     grid-template-columns: repeat(2, 1fr);
     max-width: 320px;
-    gap: 6px;
+    gap: 0;
   }
 
   .servicesBlock .imageWrapper {
