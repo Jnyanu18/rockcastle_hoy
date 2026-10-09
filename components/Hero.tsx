@@ -77,7 +77,7 @@ export default function Hero() {
           so the single clip reads as directed rather than a flat tint. */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.22)_0%,rgba(0,0,0,0.4)_55%,rgba(0,0,0,0.72)_100%)] pointer-events-none"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0, 0, 0,0.22)_0%,rgba(0, 0, 0,0.4)_55%,rgba(0, 0, 0,0.72)_100%)] pointer-events-none"
       />
 
       {/* ========================================================
@@ -91,12 +91,12 @@ export default function Hero() {
 
         {/* Mobile Welcome & Headline Copy */}
         <div className="mt-3 flex flex-col items-center text-center px-2">
-          <p className="text-xs font-semibold tracking-wide text-[#f0f3a6]">
+          <p className="text-xs font-semibold tracking-wide text-[#f4f6f9]">
             <SlideUpText split="words" delay={0.2} stagger={0.02}>
               {hero.label}
             </SlideUpText>
           </p>
-          <p className="mt-1.5 max-w-[260px] text-xs leading-relaxed font-medium text-[#f0f3a6]">
+          <p className="mt-1.5 max-w-[260px] text-xs leading-relaxed font-medium text-[#f4f6f9]">
             <SlideUpText split="words" delay={0.35} stagger={0.015}>
               {hero.headline}
             </SlideUpText>
@@ -140,12 +140,12 @@ export default function Hero() {
 
       {/* Primary headline: desktop at left-center, matching House of Yellow reference scale exactly */}
       <div className="hidden md:block absolute md:top-1/2 md:-translate-y-1/2 md:left-6 lg:left-10 xl:left-12 md:max-w-[400px] lg:max-w-[440px] z-20 pointer-events-none">
-        <p className="mb-2.5 md:mb-3 text-[14px] lg:text-[15px] font-medium text-[#f0f3a6]">
+        <p className="mb-2.5 md:mb-3 text-[14px] lg:text-[15px] font-medium text-[#f4f6f9]">
           <SlideUpText split="words" delay={0.2} stagger={0.02}>
             {hero.label}
           </SlideUpText>
         </p>
-        <p className="text-[23px] md:text-[26px] lg:text-[28px] leading-[1.22] font-medium tracking-[-0.01em] text-[#f0f3a6]">
+        <p className="text-[23px] md:text-[26px] lg:text-[28px] leading-[1.22] font-medium tracking-[-0.01em] text-[#f4f6f9]">
           <SlideUpText split="words" delay={0.35} stagger={0.015}>
             {hero.headline}
           </SlideUpText>
@@ -153,7 +153,7 @@ export default function Hero() {
       </div>
 
       {/* Supporting copy: desktop right-center, same restrained scale */}
-      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 max-w-[14rem] lg:max-w-[16rem] text-right text-[13px] lg:text-sm leading-relaxed z-20 md:right-8 pointer-events-none text-[#f0f3a6]">
+      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 max-w-[14rem] lg:max-w-[16rem] text-right text-[13px] lg:text-sm leading-relaxed z-20 md:right-8 pointer-events-none text-[#f4f6f9]">
         <p>
           <SlideUpText split="words" delay={0.45} stagger={0.015}>
             {hero.aside}

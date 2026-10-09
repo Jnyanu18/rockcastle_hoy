@@ -79,9 +79,9 @@
   width: 64px;
   height: 64px;
   display: block;
-  color: var(--hoy-yellow, #f0f3a6);
-  filter: drop-shadow(0 0 16px rgba(240, 243, 166, 0.55))
-          drop-shadow(0 0 28px rgba(240, 243, 166, 0.25));
+  color: #f4f6f9;
+  filter: drop-shadow(0 0 16px rgba(0, 0, 0, 0.55))
+          drop-shadow(0 0 28px rgba(0, 0, 0, 0.25));
   will-change: transform;
 }
 
@@ -101,7 +101,7 @@
 }
 
 .kl-center-anchor .kl-glyph {
-  color: var(--hoy-yellow, #f0f3a6);
+  color: #f4f6f9;
 }
 
 @keyframes centerPulse {

@@ -88,7 +88,7 @@ export default function BriefForm({ className }: Props = {}) {
 
   return (
     <section id="brief" className={className || "bg-canvas px-4 py-24 md:px-10"}>
-      <div className="mx-auto max-w-[1400px] rounded-[2.5rem] border border-ink/10 bg-header p-6 shadow-[0_24px_60px_rgba(29,29,27,0.08)] md:p-12">
+      <div className="mx-auto max-w-[1400px] rounded-[2.5rem] border border-ink/10 bg-header p-6 shadow-[0_24px_60px_rgba(0, 0, 0,0.08)] md:p-12">
         <div className="grid gap-12 md:grid-cols-[1fr_1.3fr] md:gap-16">
           {/* Left: heading, description, direct details */}
           <div className="flex flex-col gap-8">

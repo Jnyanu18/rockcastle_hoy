@@ -45,7 +45,7 @@ const DEFAULT_ITEMS: DeckItem[] = [
   },
   {
     index: "07",
-    line1: "Awards & Recognition —",
+    line1: "AWARDS & RECOGNITION —",
     line2: "WORK THAT GETS NOTICED",
     desc: "Industry-celebrated IPs, EEMA-recognized experiential executions, and landmark corporate spectacles trusted by top global brands and institutions across India.",
     buttonText: "Work That Gets Noticed",
@@ -308,7 +308,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
   };
 
   return (
-    <section className="servicesBlock bg-[#1d1d1b]" id={id} ref={sectionRef} style={{ backgroundColor: "#1d1d1b" }}>
+    <section className="servicesBlock bg-[#111925]" id={id} ref={sectionRef} style={{ backgroundColor: "#111925" }}>
       <div className="howWeRollItemsBlock">
         <div className="scrollContainer" ref={scrollContainerRef}>
           <div className="stickyWrapper">

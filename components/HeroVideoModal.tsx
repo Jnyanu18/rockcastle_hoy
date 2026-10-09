@@ -228,7 +228,7 @@ export default function HeroVideoModal({
           onClose();
         }}
         aria-label="Close video player"
-        className="fixed top-5 right-5 sm:top-7 sm:right-7 z-[1000000] flex h-11 w-11 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-white text-[#0b0b0b] shadow-[0_6px_24px_rgba(0,0,0,0.55)] transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer"
+        className="fixed top-5 right-5 sm:top-7 sm:right-7 z-[1000000] flex h-11 w-11 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-canvas text-[#111925] shadow-[0_6px_24px_rgba(0, 0, 0,0.55)] transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer"
       >
         <svg
           width="16"
@@ -267,12 +267,12 @@ export default function HeroVideoModal({
             showControls || !isPlaying ? "opacity-100 scale-100" : "opacity-0 scale-95"
           }`}
         >
-          <div className="pointer-events-auto flex items-center justify-center gap-3.5 rounded-full bg-[#f0f3a6] px-7 py-3 text-[#0b0b0b] shadow-[0_8px_30px_rgba(0,0,0,0.4)] border border-black/10 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer">
-            <span className="text-base font-light select-none leading-none text-[#0b0b0b]">+</span>
-            <span className="text-[12px] sm:text-[13px] font-bold tracking-[0.2em] uppercase select-none font-sans text-[#0b0b0b]">
+          <div className="pointer-events-auto flex items-center justify-center gap-3.5 rounded-full bg-[#ea7700] px-7 py-3 text-[#111925] shadow-[0_8px_30px_rgba(0, 0, 0,0.4)] border border-black/10 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer">
+            <span className="text-base font-light select-none leading-none text-[#111925]">+</span>
+            <span className="text-[12px] sm:text-[13px] font-bold tracking-[0.2em] uppercase select-none font-sans text-[#111925]">
               {isPlaying ? "PAUSE" : "PLAY"}
             </span>
-            <span className="text-base font-light select-none leading-none text-[#0b0b0b]">+</span>
+            <span className="text-base font-light select-none leading-none text-[#111925]">+</span>
           </div>
         </div>
       </div>
@@ -292,7 +292,7 @@ export default function HeroVideoModal({
             type="button"
             onClick={togglePlay}
             aria-label={isPlaying ? "Pause video" : "Play video"}
-            className="flex h-9 w-9 items-center justify-center text-[#f0f3a6] transition-transform duration-150 hover:scale-110 active:scale-90 cursor-pointer"
+            className="flex h-9 w-9 items-center justify-center text-[#ea7700] transition-transform duration-150 hover:scale-110 active:scale-90 cursor-pointer"
           >
             {isPlaying ? (
               // Pause Icon (two vertical bars matching image)
@@ -321,25 +321,25 @@ export default function HeroVideoModal({
             className="group relative flex flex-1 h-5 items-center cursor-pointer select-none"
           >
             {/* Background Track */}
-            <div className="h-1 w-full rounded-full bg-white/25 overflow-hidden transition-all duration-150 group-hover:h-1.5" />
+            <div className="h-1 w-full rounded-full bg-canvas/25 overflow-hidden transition-all duration-150 group-hover:h-1.5" />
 
             {/* Filled Progress Bar */}
             <div
-              className="absolute left-0 top-1/2 -translate-y-1/2 h-1 group-hover:h-1.5 rounded-full bg-[#f0f3a6] pointer-events-none transition-all duration-150"
+              className="absolute left-0 top-1/2 -translate-y-1/2 h-1 group-hover:h-1.5 rounded-full bg-[#ea7700] pointer-events-none transition-all duration-150"
               style={{ width: `${progressPercent}%` }}
             />
 
             {/* Scrubber Yellow Knob Thumb (Matches Reference Image 2) */}
             <div
-              className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-3.5 w-3.5 rounded-full bg-[#f0f3a6] shadow-[0_2px_8px_rgba(0,0,0,0.5)] border border-black/10 transition-transform duration-150 group-hover:scale-125 pointer-events-none"
+              className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-3.5 w-3.5 rounded-full bg-[#ea7700] shadow-[0_2px_8px_rgba(0, 0, 0,0.5)] border border-black/10 transition-transform duration-150 group-hover:scale-125 pointer-events-none"
               style={{ left: `${progressPercent}%` }}
             />
           </div>
 
           {/* Time Display */}
-          <div className="hidden sm:block text-[12px] font-mono tracking-wider text-white/80 select-none whitespace-nowrap">
+          <div className="hidden sm:block text-[12px] font-mono tracking-wider text-canvas/80 select-none whitespace-nowrap">
             <span>{formatTime(currentTime)}</span>
-            <span className="mx-1 text-white/40">/</span>
+            <span className="mx-1 text-canvas/40">/</span>
             <span>{formatTime(duration)}</span>
           </div>
 
@@ -348,7 +348,7 @@ export default function HeroVideoModal({
             type="button"
             onClick={toggleMute}
             aria-label={isMuted ? "Unmute audio" : "Mute audio"}
-            className="flex h-9 w-9 items-center justify-center text-white/80 transition-colors duration-150 hover:text-[#f0f3a6] cursor-pointer"
+            className="flex h-9 w-9 items-center justify-center text-canvas/80 transition-colors duration-150 hover:text-[#ea7700] cursor-pointer"
           >
             {isMuted ? (
               // Muted Icon

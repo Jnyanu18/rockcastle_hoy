@@ -3,16 +3,20 @@
 @tailwind utilities;
 
 :root {
-  /* HOY-inspired palette: pale yellow accent + white/grey/black neutrals.
-     Centralized here so plain-CSS sections (Recent Experiences, Leadership,
-     Clients, Footer, Navigation, Scrolling Services, ...) and the Tailwind
+  /* Frosted Navy + Orange brief: navy replaces the old pink/accent section
+     backgrounds (Statement, Clients, Footer, Contact, Recent Experiences —
+     these override the accent var below with a literal navy, see their own
+     CSS). Orange is reserved for buttons/CTAs and literal numbers (stat
+     counters, index labels); all other text is white. Darkened twice now
+     per feedback. Centralized here so plain-CSS sections and the Tailwind
      palette in tailwind.config.ts stay in sync. */
-  --hoy-yellow: #f0f3a6;
-  --white: #ffffff;
-  --light-grey: #e8e9e5;
-  --mid-grey: #969895;
-  --dark-grey: #242424;
-  --black: #0b0b0b;
+  --hoy-yellow: #ea7700; /* orange sampled directly from the Rock Castle logo artwork — buttons, CTAs, numbers/index labels */
+  --rc-yellow: #ea7700;
+  --white: #f4f6f9; /* soft "royal" off-white (not flat pure white) — text / light-on-dark role */
+  --light-grey: #182230; /* deepened navy — subtle surface, scroll state */
+  --mid-grey: #5c7084; /* muted blue-grey — secondary text, borders */
+  --dark-grey: #0a0e15; /* near-black navy — dark accent surface */
+  --black: #111925; /* deep navy (darkened again per feedback) — ink / dark-section role */
 
   /* Legacy aliases kept so existing component CSS (var(--rc-orange) etc.)
      continues to resolve to the new palette without a file-by-file rename. */
@@ -29,7 +33,7 @@
   --font-editorial: Georgia, "Times New Roman", serif;
   --fs-meta: 0.75rem;
   --ls-meta: 0.08em;
-  --gutter: clamp(16px, 4vw, 40px);
+  --gutter: clamp(20px, 2.5vw, 48px);
   --container-x: var(--gutter);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -47,7 +51,7 @@ body {
 
 ::selection {
   background: var(--black);
-  color: var(--hoy-yellow);
+  color: #f4f6f9;
 }
 
 /* Hero background video: a slow continuous drift plus a one-time fade-in,
@@ -100,15 +104,15 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #ffffff;
-  color: #0b0b0b;
+  background: #f4f6f9;
+  color: #111925;
   border-radius: 9999px;
   height: 44px;
   width: 148px;
   padding: 0 16px;
   overflow: hidden;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(244, 246, 249, 0.9);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.25s ease;
@@ -117,7 +121,7 @@ body {
 
 .contact-pill-btn:hover {
   transform: scale(1.03);
-  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 18px rgba(244, 246, 249, 0.25);
 }
 
 .contact-pill-track-mask {
@@ -163,7 +167,7 @@ body {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #0b0b0b;
+  color: #111925;
   text-transform: uppercase;
 }
 
@@ -172,15 +176,15 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #ffffff;
-  color: #0b0b0b;
+  background: #f4f6f9;
+  color: #111925;
   border-radius: 9999px;
   height: 44px;
   width: 154px;
   padding: 0 16px;
   overflow: hidden;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(244, 246, 249, 0.9);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.25s ease,
@@ -191,7 +195,7 @@ body {
 .process-pill-btn:hover {
   transform: scale(1.03);
   background-color: var(--hoy-yellow);
-  box-shadow: 0 4px 18px rgba(240, 243, 166, 0.35);
+  box-shadow: 0 4px 18px rgba(234, 119, 0, 0.35);
 }
 
 .process-pill-track-mask {
@@ -219,7 +223,7 @@ body {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #0b0b0b;
+  color: #111925;
   text-transform: uppercase;
 }
 

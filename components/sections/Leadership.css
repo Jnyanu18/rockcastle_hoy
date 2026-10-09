@@ -6,7 +6,7 @@
 .leadership {
   position: relative;
   z-index: 5;
-  background-color: #1d1d1b;
+  background-color: #111925;
   color: var(--rc-white);
   width: 100%;
   overflow-x: hidden;
@@ -45,7 +45,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--rc-orange);
+  color: #f4f6f9;
 }
 
 .leadership__coords {
@@ -61,7 +61,7 @@
   font-weight: 500;
   line-height: 1.04;
   letter-spacing: -0.025em;
-  color: var(--rc-orange);
+  color: #f4f6f9;
   max-width: 24ch;
   margin: 0;
 }
@@ -142,7 +142,7 @@
   height: 100%;
   overflow: hidden;
   border-radius: inherit;
-  background: var(--rc-white);
+  background: var(--light-grey);
   padding: 26px 24px;
   box-sizing: border-box;
   display: flex;
@@ -157,7 +157,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(15, 24, 41, 0.5);
+  color: rgba(244, 246, 249, 0.5);
 }
 
 .leadership__card-front-info {
@@ -170,7 +170,7 @@
   font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--rc-black);
+  color: var(--white);
   margin: 0;
   line-height: 1.14;
   letter-spacing: -0.01em;
@@ -186,7 +186,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: var(--rc-white);
+  background: var(--light-grey);
   border-radius: inherit;
 }
 
@@ -200,7 +200,7 @@
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 600;
-  color: rgba(15, 24, 41, 0.5);
+  color: rgba(244, 246, 249, 0.5);
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -216,7 +216,7 @@
   font-family: var(--font-editorial);
   font-size: 3.4rem;
   line-height: 0.75;
-  color: rgba(15, 24, 41, 0.3);
+  color: rgba(244, 246, 249, 0.35);
   margin-bottom: 6px;
   display: block;
 }
@@ -226,14 +226,14 @@
   font-style: italic;
   font-size: 1.05rem;
   line-height: 1.55;
-  color: var(--rc-black);
+  color: var(--white);
   margin: 0;
 }
 
 .leadership__card-back-divider {
   width: 32px;
   height: 1px;
-  background: rgba(15, 24, 41, 0.3);
+  background: rgba(244, 246, 249, 0.3);
   margin: 20px 0 14px;
 }
 
@@ -241,7 +241,7 @@
   font-family: var(--font-display);
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--rc-black);
+  color: var(--white);
   margin: 0;
 }
 
@@ -249,7 +249,7 @@
   font-family: var(--font-mono);
   font-size: 9px;
   letter-spacing: 0.12em;
-  color: rgba(15, 24, 41, 0.5);
+  color: rgba(244, 246, 249, 0.5);
   margin-top: 5px;
   display: block;
 }

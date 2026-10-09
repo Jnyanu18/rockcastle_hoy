@@ -2,99 +2,87 @@
 
 import { statement } from "@/lib/content";
 import SlideUpText from "@/components/ui/SlideUpText";
+import "@/components/Statement.css";
 
-/* Statement section: Matches House of Yellow reference design (Image 2)
+/* Statement section: Matches House of Yellow reference design (Screenshots 1 & 2)
    - Left column: "Who are we?" aligned directly with the top of the main headline
    - Right top: "[ 01 ]" index aligned with the top of the section
-   - Main content: Headline & body set in the primary column
-   - Bottom row: Supporting subhead & CTA pills on the left, large outlined rounded frame on the right
-   - Rises over the sticky hero with shadow as the user scrolls.
+   - Main content: Headline & body set in the primary column (font-weight: 500, leading: 1.12)
+   - Middle row: Supporting subhead & CTA pills on the left, large wireframe squircle on the right
+   - "The works" row removed: it overlapped with the wireframe squircle's negative margin
+   - Background color: #111925 (frosted navy, identical to RecentExperiences)
 */
 export default function Statement() {
   return (
-    <section
-      id="about"
-      className="relative z-10 bg-accent px-6 py-14 sm:px-10 sm:py-20 md:px-12 lg:px-16 md:pt-24 md:pb-24 min-h-[100svh] shadow-[0_-25px_60px_rgba(0,0,0,0.35)]"
-    >
-      <div className="relative w-full mx-auto">
-        {/* Top Right Index: "[ 01 ]" aligned at the top right of the section */}
-        <div className="absolute right-0 top-0 text-xs sm:text-[13px] font-medium tabular-nums z-10">
-          <SlideUpText split="characters" delay={0.04}>
-            {`[ ${statement.index} ]`}
-          </SlideUpText>
-        </div>
-
-        {/* Main 2-Column Grid:
-            - Left Column (~24%): "Who are we?"
-            - Right Column (~76%): Headline, body, subhead, CTAs & outlined box element
-        */}
-        <div className="grid grid-cols-1 md:grid-cols-[24%_1fr] lg:grid-cols-[22%_1fr] gap-6 md:gap-8 lg:gap-12 pr-12 lg:pr-16">
-          {/* Left Column: "Who are we?" */}
-          <div className="text-xs sm:text-[13px] font-medium text-ink pt-1 md:pt-2">
-            <SlideUpText split="words">
-              {statement.label}
-            </SlideUpText>
+    <section id="about" className="hoy-statement">
+      <div className="hoy-statement__inner">
+        {/* =========================================================================
+            ROW 1: Who are we? | Big Statement Headline | [ 01 ]
+            ========================================================================= */}
+        <div className="hoy-about-cols">
+          {/* Col 1: Who are we? */}
+          <div className="hoy-about-col--left">
+            <span className="hoy-text-eyebrow">
+              <SlideUpText split="words">{statement.label}</SlideUpText>
+            </span>
           </div>
 
-          {/* Right Column: Main Content */}
-          <div>
-            {/* Title / Primary Headline */}
-            <h2 className="text-2xl sm:text-3xl font-medium tracking-[-0.02em] md:text-[42px] md:leading-[1.12] lg:text-[48px] xl:text-[52px] text-ink mb-4 sm:mb-6 max-w-[1100px]">
-              <SlideUpText split="words" stagger={0.02} delay={0.04}>
-                {statement.title}
-              </SlideUpText>
-            </h2>
-
-            {/* Body Copy */}
-            <p className="text-base sm:text-xl leading-[1.42] tracking-[-0.01em] md:text-[21px] md:leading-[1.38] lg:text-[24px] xl:text-[26px] text-ink/90 font-normal max-w-[1100px]">
-              <SlideUpText split="words" stagger={0.01} delay={0.08}>
+          {/* Col 2: Big Statement Headline + Subhead + Buttons */}
+          <div className="hoy-about-col--center">
+            <h1 className="hoy-headline">
+              <SlideUpText split="words" stagger={0.012} delay={0.04}>
                 {statement.body}
               </SlideUpText>
-            </p>
+            </h1>
 
-            {/* Bottom Row: Subhead & CTAs on the left, Large Outlined Frame on the right */}
-            <div className="mt-10 sm:mt-14 md:mt-16 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 md:gap-12 lg:gap-16 items-start">
-              {/* Left Subhead & CTA Pills */}
-              <div className="max-w-md pt-2">
-                <p className="text-base sm:text-lg leading-snug md:text-xl text-ink font-normal mb-6 sm:mb-8">
-                  <SlideUpText split="words" stagger={0.02} delay={0.12}>
-                    {statement.sub}
-                  </SlideUpText>
-                </p>
+            <div className="hoy-subhead">
+              <SlideUpText split="words" stagger={0.02} delay={0.1}>
+                {statement.sub}
+              </SlideUpText>
+            </div>
 
-                <div className="flex flex-wrap gap-2.5 sm:gap-3">
-                  {statement.ctas.map((cta) => (
-                    <a
-                      key={cta.label}
-                      href={cta.href}
-                      data-magnetic
-                      className={
-                        cta.primary
-                          ? "inline-flex h-11 sm:h-12 items-center gap-2.5 sm:gap-3 rounded-full bg-ink px-6 sm:px-7 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-accent transition-transform active:scale-95"
-                          : "inline-flex h-11 sm:h-12 items-center rounded-full border border-ink px-6 sm:px-7 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-ink transition-transform active:scale-95 hover:bg-black/5"
-                      }
-                    >
-                      {cta.label}
-                      {cta.primary && <span aria-hidden className="text-sm font-bold">+</span>}
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right: Outlined Rounded Frame with Sparse Cross Marks */}
-              <div
-                aria-hidden
-                className="relative h-64 w-full max-w-[320px] sm:h-80 sm:max-w-[380px] md:h-[400px] md:w-[400px] lg:h-[440px] lg:w-[440px] rounded-[44px] md:rounded-[52px] border border-ink/80 shrink-0"
-              >
-                <span className="absolute left-[38%] top-[38%] text-sm sm:text-base leading-none text-ink/70">
-                  +
-                </span>
-                <span className="absolute left-[52%] top-[54%] text-2xl sm:text-3xl leading-none text-ink/85">
-                  +
-                </span>
-              </div>
+            <div className="hoy-buttons">
+              {statement.ctas.map((cta) => (
+                <a
+                  key={cta.label}
+                  href={cta.href}
+                  data-magnetic
+                  className={`hoy-btn ${cta.primary ? "hoy-btn--dark" : "hoy-btn--outline"}`}
+                >
+                  <span>{cta.label}</span>
+                  {cta.primary && <span aria-hidden className="text-sm font-bold">+</span>}
+                </a>
+              ))}
             </div>
           </div>
+
+          {/* Col 3: [ 01 ] Index (Far right margin) */}
+          <div className="hoy-about-col--right">
+            <span className="hoy-text-index">
+              <SlideUpText split="characters" delay={0.04}>
+                {`[ ${statement.index} ]`}
+              </SlideUpText>
+            </span>
+          </div>
+        </div>
+
+        {/* =========================================================================
+            ROW 2 (BOX THING): Wireframe Squircle with Top +, Center ✦, Bottom +
+            (Positioned at margin-left: 51.875vw, margin-top: -6.25vw)
+            ========================================================================= */}
+        <div aria-hidden className="hoy-box-frame">
+          <span className="hoy-box-plus-top">+</span>
+          <span className="hoy-box-star-center">
+            <svg width="34" height="34" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 sm:w-8 sm:h-8 md:w-[2.2vw] md:h-[2.2vw]">
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M38.7132 18.3933L27.2026 18.3933C23.5585 18.3933 20.6051 15.4398 20.6051 11.7958L20.6051 0.28678C20.6051 0.128559 20.4765 3.58023e-06 20.3183 3.55256e-06L18.68 3.26612e-06C18.5218 3.23846e-06 18.3933 0.128558 18.3933 0.28678L18.3933 11.7974C18.3933 15.4414 15.4398 18.3949 11.7958 18.3949L0.286777 18.3949C0.128556 18.3949 5.75951e-07 18.5235 5.48286e-07 18.6817L2.61845e-07 20.3199C2.34181e-07 20.4782 0.128555 20.6067 0.286777 20.6067L11.7974 20.6067C15.4414 20.6067 18.3949 23.5602 18.3949 27.2042L18.3949 38.7149C18.3949 38.8731 18.5235 39.0016 18.6817 39.0016L20.3199 39.0016C20.4782 39.0016 20.6067 38.8731 20.6067 38.7149L20.6067 27.2042C20.6067 23.5602 23.5602 20.6067 27.2042 20.6067L38.7149 20.6067C38.8731 20.6067 39.0016 20.4782 39.0016 20.32L39.0016 18.6817C39.0016 18.5235 38.8731 18.3949 38.7149 18.3949L38.7132 18.3933Z"
+                fill="#f4f6f9"
+              />
+            </svg>
+          </span>
+          <span className="hoy-box-plus-bottom">+</span>
         </div>
       </div>
     </section>

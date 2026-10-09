@@ -94,7 +94,7 @@ export default function Leadership() {
   }, []);
 
   return (
-    <section className="leadership bg-[#1d1d1b]" id="leadership" ref={ref} aria-label="Leadership">
+    <section className="leadership bg-[#111925]" id="leadership" ref={ref} aria-label="Leadership">
       <div className="leadership__inner">
         <div className="leadership__head">
           <div className="leadership__meta-bar">
@@ -144,10 +144,10 @@ export default function Leadership() {
                 width={280}
                 height={360}
                 radius={16}
-                background="var(--rc-white)"
-                color="var(--rc-black)"
+                background="var(--light-grey)"
+                color="var(--white)"
                 shadow
-                shadowColor="#0b0b0b"
+                shadowColor="#000000"
                 shadowOpacity={0.16}
                 ariaLabel={`${f.name} - ${f.tag}`}
                 className="leadership__flipcard"

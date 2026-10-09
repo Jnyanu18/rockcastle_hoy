@@ -124,8 +124,8 @@ export default function Stats() {
   return (
     <section
       id="stats"
-      className="hoy-stats-section bg-[#1d1d1b] px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-28"
-      style={{ backgroundColor: "#1d1d1b" }}
+      className="hoy-stats-section bg-[#f4f6f9] px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-28"
+      style={{ backgroundColor: "#f4f6f9" }}
     >
       {/* Container wrapper matching max content bounds */}
       <div className="mx-auto w-full max-w-[1760px]">
@@ -135,7 +135,7 @@ export default function Stats() {
         <div className="hoy-intro-cols mb-12 sm:mb-16 lg:mb-28">
           {/* Column 1: Section Index */}
           <div className="hoy-intro-col-1">
-            <span className="text-xs md:text-[13px] font-medium tracking-wide text-[#f0f3a6]">
+            <span className="text-xs md:text-[13px] font-medium tracking-wide text-[#111925]">
               <SlideUpText split="characters">
                 {`[ ${stats.index} ]`}
               </SlideUpText>
@@ -144,12 +144,12 @@ export default function Stats() {
 
           {/* Column 2: Beyond the Stage Eyebrow & Hero Statement */}
           <div className="hoy-intro-col-2">
-            <p className="text-xs md:text-[13px] font-medium text-[#f0f3a6] mb-4">
+            <p className="text-xs md:text-[13px] font-medium text-[#111925] mb-4">
               <SlideUpText split="words">
                 {stats.label}
               </SlideUpText>
             </p>
-            <h2 className="text-xl sm:text-2xl lg:text-[27px] font-normal leading-[1.24] text-[#f0f3a6]">
+            <h2 className="text-lg sm:text-xl lg:text-[24px] font-normal leading-[1.24] text-[#111925]">
               <SlideUpText split="words" stagger={0.012} delay={0.06}>
                 {stats.heading}
               </SlideUpText>
@@ -159,14 +159,14 @@ export default function Stats() {
           {/* Column 3: Mobile Content / Brand Activations Aside */}
           <div className="hoy-intro-col-3">
             <div className="flex items-center gap-2 mb-3">
-              <span className="inline-block h-2.5 w-2.5 bg-[#f0f3a6] rounded-[1px] shrink-0" />
-              <span className="text-xs md:text-[13px] font-medium text-[#f0f3a6]">
+              <span className="inline-block h-2.5 w-2.5 bg-[#111925] rounded-[1px] shrink-0" />
+              <span className="text-xs md:text-[13px] font-medium text-[#111925]">
                 <SlideUpText split="words" delay={0.04}>
                   {stats.mobile.label}
                 </SlideUpText>
               </span>
             </div>
-            <p className="text-xs md:text-[13px] leading-relaxed text-[#f0f3a6]/80 max-w-sm">
+            <p className="text-xs md:text-[13px] leading-relaxed text-[#111925]/80 max-w-sm">
               <SlideUpText split="words" stagger={0.015} delay={0.1}>
                 {stats.mobile.body}
               </SlideUpText>
@@ -182,7 +182,7 @@ export default function Stats() {
           <div className="hoy-showcase-col-decor-left hidden lg:flex">
             <span
               aria-hidden
-              className="h-2.5 w-2.5 bg-[#f0f3a6] rounded-[1px]"
+              className="h-2.5 w-2.5 bg-[#111925] rounded-[1px]"
             />
           </div>
 
@@ -195,7 +195,7 @@ export default function Stats() {
               {/* Inner Screen Bezel */}
               <div className="hoy-phone-screen">
                 {/* Status Bar */}
-                <div className="hoy-phone-status text-white font-semibold text-[11px] md:text-xs">
+                <div className="hoy-phone-status text-canvas font-semibold text-[11px] md:text-xs">
                   <span>15:14</span>
 
                   {/* Dynamic Island pill */}
@@ -352,12 +352,12 @@ export default function Stats() {
             <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:flex lg:flex-col lg:gap-11">
               {figures.map((item, index) => (
                 <div key={item.label} className="flex flex-col">
-                  <span className="text-xs md:text-[14px] font-normal text-[#f0f3a6]/80 mb-1">
+                  <span className="text-xs md:text-[14px] font-normal text-[#f4f6f9]/80 mb-1">
                     <SlideUpText split="words" delay={0.06}>
                       {item.label}
                     </SlideUpText>
                   </span>
-                  <span className="text-3xl sm:text-5xl lg:text-[72px] xl:text-[80px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#f0f3a6]">
+                  <span className="text-2xl sm:text-4xl lg:text-[64px] xl:text-[72px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#ea7700]">
                     <RunningMetric value={item.value} delay={index * 120} />
                   </span>
                 </div>
@@ -372,9 +372,9 @@ export default function Stats() {
                 rel="noopener noreferrer"
                 data-magnetic
                 aria-label="Follow Rock Castle on Instagram"
-                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#f0f3a6] text-[#1d1d1b] font-medium text-xs sm:text-sm tracking-wide transition-all duration-300 hover:scale-105 hover:bg-white shadow-[0_8px_24px_rgba(240,243,166,0.22)] active:scale-95 cursor-pointer select-none"
+                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#ea7700] text-[#111925] font-medium text-xs sm:text-sm tracking-wide transition-all duration-300 hover:scale-105 hover:bg-canvas shadow-[0_8px_24px_rgba(0, 0, 0,0.22)] active:scale-95 cursor-pointer select-none"
               >
-                <InstagramIcon className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 text-[#1d1d1b]" />
+                <InstagramIcon className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 text-[#ea7700]" />
                 <span className="font-semibold uppercase tracking-wider text-[11px] sm:text-xs">
                   Follow us on Instagram
                 </span>
@@ -405,7 +405,7 @@ function HeartIcon() {
       viewBox="0 0 26 23"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-4 h-3.5 text-[#1D1D1B]"
+      className="w-4 h-3.5 text-[#f4f6f9]"
     >
       <path
         d="M24 7.33691C24 6.63575 23.8622 5.94154 23.5947 5.29395C23.3607 4.72735 23.0315 4.20612 22.6221 3.75293L22.4414 3.5625C21.9478 3.06708 21.3614 2.67426 20.7168 2.40625C20.072 2.13824 19.3803 2 18.6826 2C17.985 2.00006 17.294 2.1383 16.6494 2.40625C16.0852 2.64082 15.566 2.97092 15.1143 3.38184L14.9248 3.5625L13.708 4.7832C13.5205 4.97136 13.2657 5.07707 13 5.07715C12.7342 5.07715 12.4786 4.97143 12.291 4.7832L11.0742 3.5625C10.077 2.56214 8.72527 2.001 7.31641 2.00098C5.90755 2.00098 4.55583 2.56217 3.55859 3.5625C2.5613 4.56299 2.00007 5.92064 2 7.33691C2 8.75329 2.56123 10.1117 3.55859 11.1123L12.999 20.583L22.4414 11.1113C22.9352 10.6162 23.3273 10.0283 23.5947 9.38086C23.8622 8.73318 24 8.03818 24 7.33691ZM26 7.33691C26 8.29989 25.8108 9.25374 25.4434 10.1436C25.0758 11.0335 24.5369 11.8431 23.8574 12.5244L23.8564 12.5234L13.708 22.7061C13.5205 22.8942 13.2657 22.9999 13 23C12.7342 23 12.4786 22.8943 12.291 22.7061L2.1416 12.5234C0.77004 11.1473 0 9.28154 0 7.33691C6.97314e-05 5.39226 0.769941 3.52644 2.1416 2.15039C3.51343 0.774171 5.37496 0.000976562 7.31641 0.000976562C9.25782 0.000996834 11.1194 0.774184 12.4912 2.15039L12.999 2.66016L13.5088 2.15039C14.1878 1.46901 14.9942 0.928589 15.8818 0.55957C16.7696 0.19053 17.7214 5.80496e-05 18.6826 0C19.6439 0 20.5964 0.190474 21.4844 0.55957C22.372 0.928597 23.1784 1.469 23.8574 2.15039C24.5369 2.83168 25.0758 3.64039 25.4434 4.53027C25.8109 5.42011 26 6.3739 26 7.33691Z"
@@ -423,7 +423,7 @@ function LikeIcon() {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-3.5 h-3.5 text-[#1D1D1B]"
+      className="w-3.5 h-3.5 text-[#f4f6f9]"
     >
       <path
         d="M13.3984 4.29688C13.3984 3.69305 13.1547 3.11066 12.7158 2.67871C12.4216 2.38915 12.0555 2.18452 11.6572 2.08008L7.58301 11.1035V21.9766H19.1885C19.4904 21.9799 19.7816 21.8757 20.0078 21.6865C20.2334 21.4977 20.3785 21.2374 20.4219 20.9561L20.4229 20.9551L21.9629 11.0654C21.9888 10.8965 21.9772 10.7241 21.9287 10.5596C21.8801 10.3947 21.7958 10.2408 21.6797 10.1094C21.5634 9.97782 21.4181 9.87136 21.2539 9.79883C21.0897 9.72632 20.9106 9.68939 20.7295 9.69141H14.3984C13.8463 9.69129 13.3984 9.24362 13.3984 8.69141V4.29688ZM2 20.7793C2.00009 21.0916 2.12606 21.3943 2.35547 21.6201C2.58554 21.8465 2.90124 21.9766 3.2334 21.9766H5.58301V11.8896H3.2334C2.90124 11.8896 2.58554 12.0197 2.35547 12.2461C2.12607 12.4719 2.00006 12.7746 2 13.0869V20.7793ZM15.3984 7.69141H20.7188C21.181 7.68789 21.6396 7.78294 22.0625 7.96973C22.4887 8.15805 22.8693 8.43611 23.1777 8.78516C23.4863 9.13436 23.7158 9.54632 23.8477 9.99316C23.9795 10.4401 24.0104 10.9106 23.9395 11.3711V11.373L22.3984 21.2598L22.3994 21.2607C22.2813 22.0273 21.8859 22.723 21.291 23.2207C20.6994 23.7156 19.9489 23.9815 19.1777 23.9756V23.9766H3.2334C2.38104 23.9766 1.55966 23.6438 0.952148 23.0459C0.344261 22.4476 9.49763e-05 21.6324 0 20.7793V13.0869C5.87839e-05 12.2338 0.344271 11.4186 0.952148 10.8203C1.55966 10.2224 2.38104 9.88965 3.2334 9.88965H5.9375L10.1377 0.588867L10.207 0.459961C10.389 0.176097 10.7051 5.47237e-05 11.0488 0C12.1973 0 13.3022 0.448992 14.1191 1.25293C14.9365 2.05739 15.3984 3.15224 15.3984 4.29688V7.69141Z"
@@ -441,7 +441,7 @@ function SparkleIcon() {
       viewBox="0 0 22 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 text-[#f0f3a6]"
+      className="w-6 h-6 text-[#f4f6f9]"
     >
       <path
         fillRule="evenodd"

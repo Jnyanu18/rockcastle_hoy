@@ -8,7 +8,7 @@
 main {
   position: relative;
   z-index: 2;
-  background-color: var(--rc-black, #1d1d1b);
+  background-color: var(--rc-black, #111925);
   box-shadow: 0 35px 70px rgba(0, 0, 0, 0.45);
 }
 
@@ -23,19 +23,19 @@ body:has(#brief) main {
 }
 
 main.main--connect {
-  background-color: var(--light-grey, #e8e9e5);
+  background-color: var(--light-grey, #182230);
   box-shadow: 0 35px 70px rgba(0, 0, 0, 0.12);
 }
 
 main.main--how-we-work {
-  background-color: var(--rc-black, #0b0b0b);
+  background-color: var(--rc-black, #111925);
   box-shadow: 0 35px 70px rgba(0, 0, 0, 0.6);
 }
 
 .footer {
   position: relative;
-  background-color: var(--rc-yellow, #edeea5);
-  color: var(--rc-black, #1d1d1b);
+  background-color: var(--rc-black, #111925);
+  color: #f4f6f9;
   padding: clamp(56px, 7vw, 92px) 0 clamp(20px, 2.5vw, 32px);
   box-sizing: border-box;
 }
@@ -111,7 +111,7 @@ main.main--how-we-work {
   font-family: var(--font-body);
   font-size: clamp(0.88rem, 1vw, 0.98rem);
   font-weight: 600;
-  color: var(--rc-black, #1d1d1b);
+  color: var(--rc-black, #f4f6f9);
   margin: 0 0 16px 0;
   letter-spacing: -0.01em;
 }
@@ -127,7 +127,7 @@ main.main--how-we-work {
   line-height: 1;
   font-weight: 500;
   display: inline-block;
-  color: var(--rc-black, #1d1d1b);
+  color: var(--rc-black, #f4f6f9);
 }
 
 .footer__col-content {
@@ -137,7 +137,7 @@ main.main--how-we-work {
   font-family: var(--font-body);
   font-size: clamp(0.84rem, 0.95vw, 0.92rem);
   line-height: 1.58;
-  color: rgba(29, 29, 27, 0.76);
+  color: rgba(244, 246, 249, 0.76);
 }
 
 .footer__col-content p {
@@ -145,7 +145,7 @@ main.main--how-we-work {
 }
 
 .footer__link {
-  color: var(--rc-black, #1d1d1b);
+  color: var(--rc-black, #f4f6f9);
   text-decoration: none;
   transition: opacity 0.2s ease;
   display: inline-block;
@@ -160,7 +160,7 @@ main.main--how-we-work {
 .footer__indicator {
   width: 9px;
   height: 9px;
-  background-color: var(--rc-black, #1d1d1b);
+  background-color: var(--rc-black, #f4f6f9);
   margin-top: 14px;
   display: block;
 }
@@ -212,7 +212,7 @@ main.main--how-we-work {
   font-family: var(--font-body);
   font-size: clamp(0.84rem, 0.95vw, 0.92rem);
   line-height: 1.5;
-  color: rgba(29, 29, 27, 0.76);
+  color: rgba(244, 246, 249, 0.76);
   max-width: 270px;
 }
 
@@ -223,11 +223,11 @@ main.main--how-we-work {
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  border-top: 1px solid rgba(29, 29, 27, 0.16);
+  border-top: 1px solid rgba(244, 246, 249, 0.16);
   padding-top: clamp(20px, 2.5vw, 28px);
   font-family: var(--font-body);
   font-size: clamp(0.78rem, 0.85vw, 0.84rem);
-  color: rgba(29, 29, 27, 0.68);
+  color: rgba(244, 246, 249, 0.68);
 }
 
 .footer__copyright {
@@ -241,7 +241,7 @@ main.main--how-we-work {
 }
 
 .footer__bottom-link {
-  color: var(--rc-black, #1d1d1b);
+  color: var(--rc-black, #f4f6f9);
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
@@ -293,7 +293,7 @@ main.main--how-we-work {
 @media (max-width: 767px) {
   .footer {
     padding: 32px 0 24px;
-    background-color: var(--rc-yellow, #edeea5);
+    background-color: var(--rc-black, #111925);
   }
 
   .footer__inner {
@@ -305,25 +305,25 @@ main.main--how-we-work {
     grid-template-columns: 1fr 1fr;
     gap: 16px 20px;
     padding-bottom: 22px;
-    border-bottom: 1px solid rgba(29, 29, 27, 0.16);
+    border-bottom: 1px solid rgba(244, 246, 249, 0.16);
   }
 
   .footer__col-heading {
     font-size: 13.5px;
     font-weight: 600;
     margin: 0 0 8px 0;
-    color: var(--rc-black, #1d1d1b);
+    color: var(--rc-black, #f4f6f9);
   }
 
   .footer__col-content {
     gap: 3px;
     font-size: 12.5px;
     line-height: 1.45;
-    color: rgba(29, 29, 27, 0.76);
+    color: rgba(244, 246, 249, 0.76);
   }
 
   .footer__link {
-    color: var(--rc-black, #1d1d1b);
+    color: var(--rc-black, #f4f6f9);
   }
 
   /* Hide center logo, sitemap, and join the movement on mobile to match exact reference */
@@ -348,14 +348,14 @@ main.main--how-we-work {
 
   .footer__mobile-cookie {
     font-size: 13px;
-    color: var(--rc-black, #1d1d1b);
+    color: var(--rc-black, #f4f6f9);
     text-decoration: none;
   }
 
   .footer__mobile-copy {
     margin: 0;
     font-size: 12.5px;
-    color: rgba(29, 29, 27, 0.68);
+    color: rgba(244, 246, 249, 0.68);
     opacity: 0.9;
   }
 }
