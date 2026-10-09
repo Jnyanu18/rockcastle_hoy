@@ -150,6 +150,30 @@
   justify-content: space-between;
 }
 
+.leadership__card-front--photo {
+  background-size: cover;
+  background-position: center 20%;
+}
+
+.leadership__card-front--photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(17, 25, 37, 0.35) 0%, transparent 28%, transparent 55%, rgba(17, 25, 37, 0.88) 100%);
+  pointer-events: none;
+}
+
+.leadership__card-front--photo .leadership__card-credential,
+.leadership__card-front--photo .leadership__card-name {
+  position: relative;
+  z-index: 1;
+  color: #f4f6f9;
+}
+
+.leadership__card-front--photo .leadership__card-credential {
+  color: rgba(244, 246, 249, 0.85);
+}
+
 .leadership__card-credential {
   align-self: flex-end;
   font-family: var(--font-mono);

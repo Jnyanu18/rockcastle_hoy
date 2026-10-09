@@ -18,6 +18,7 @@ const founders = [
     tag: "FOUNDER & MANAGING DIRECTOR",
     credential: "16+ YRS",
     quote: "Every experience must transcend ordinary event production — we build living brand worlds that leave indelible marks.",
+    photo: "/team/alok-nagpal.png",
   },
   {
     num: "02",
@@ -26,6 +27,7 @@ const founders = [
     tag: "DIRECTOR & HEAD OF EXPERIENCES",
     credential: "14+ YRS",
     quote: "A true experience is felt in every detail — from the first spatial impression to the final standing ovation.",
+    photo: "/team/pooja-dugar.png",
   },
   {
     num: "03",
@@ -34,6 +36,7 @@ const founders = [
     tag: "ARCHITECTURE & FABRICATION",
     credential: "15+ YRS",
     quote: "Precision engineering on the ground turns impossible creative blueprints into flawless reality.",
+    photo: "/team/technical-stage-direction.png",
   },
 ];
 
@@ -152,7 +155,10 @@ export default function Leadership() {
                 ariaLabel={`${f.name} - ${f.tag}`}
                 className="leadership__flipcard"
                 front={
-                  <div className="leadership__card-front">
+                  <div
+                    className="leadership__card-front leadership__card-front--photo"
+                    style={{ backgroundImage: `url(${f.photo})` }}
+                  >
                     <span className="leadership__card-credential">{f.credential}</span>
 
                     <div className="leadership__card-front-info">
