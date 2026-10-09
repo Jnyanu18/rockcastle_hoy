@@ -51,21 +51,29 @@
 
 .nav--scrolled {
   padding: 14px 0;
-  /* Solid opaque background so page content does not appear behind the navbar */
-  background: var(--rc-black, #111925);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
+}
+
+/* Solid opaque background so page content does not appear behind the navbar,
+   switching with whatever is actually behind it (see isBackgroundLight in
+   Navigation.jsx) rather than always being dark. */
+.nav--theme-dark {
+  color: #f4f6f9;
+}
+
+.nav--theme-dark.nav--scrolled {
+  background: var(--rc-black, #111925);
   box-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
-  color: #f4f6f9;
 }
 
-/* Fallback theme classes if needed */
-.nav--theme-dark:not(.nav--scrolled) {
-  color: #f4f6f9;
-}
-
-.nav--theme-light:not(.nav--scrolled) {
+.nav--theme-light {
   color: #111925;
+}
+
+.nav--theme-light.nav--scrolled {
+  background: var(--rc-white, #f4f6f9);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12);
 }
 
 /* Homepage hero treatment: compact floating navigation over the campaign media. */
@@ -236,14 +244,13 @@
   transition: filter 0.3s ease, opacity 0.25s ease;
 }
 
-/* When navbar is in dark mode (white text/icons) or scrolled (navy navbar), invert wordmark to crisp white */
-.nav--theme-dark:not(.nav--scrolled) .nav__brand-wordmark,
-.nav--scrolled .nav__brand-wordmark {
+/* When navbar is in dark mode (white text/icons), invert wordmark to crisp white */
+.nav--theme-dark .nav__brand-wordmark {
   filter: brightness(0) invert(1);
 }
 
-/* When navbar is in light mode (not scrolled), show natural black */
-.nav--theme-light:not(.nav--scrolled) .nav__brand-wordmark {
+/* When navbar is in light mode, show natural black */
+.nav--theme-light .nav__brand-wordmark {
   filter: none;
 }
 

@@ -119,7 +119,7 @@
 .hoy-phone-outline {
   position: absolute;
   inset: -1.25vw;
-  border: 2px solid #000000;
+  border: 2px solid var(--hoy-yellow, #f0f3a6);
   border-radius: 4.125vw;
   pointer-events: none;
   z-index: 10;
