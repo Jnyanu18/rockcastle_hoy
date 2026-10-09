@@ -151,7 +151,16 @@ export default function Footer({ reveal = true }) {
   return (
     <footer ref={footerRef} className="footer" id="footer" aria-label="Site Footer">
       <div className="footer__inner">
-        {/* Main 5-Column Studio Grid: Office (Far Left), Contact, Center Logo, Sitemap, Movement (Far Right) */}
+        {/* Top CTA Strip: Newsletter / Contact Prompt */}
+        <div className="footer__cta">
+          <p className="footer__cta-heading">Have a project in mind?</p>
+          <div className="footer__cta-row">
+            <a href="mailto:info@rockcastle.in" className="footer__cta-email">info@rockcastle.in</a>
+            <Link href="/contact" className="footer__cta-btn">Start a Conversation</Link>
+          </div>
+        </div>
+
+        {/* Main Studio Grid: Office (Far Left), Contact, Center Logo, Sitemap, Social, Movement (Far Right) */}
         <div className="footer__grid">
           {/* Column 1: Office (Far Left) */}
           <div className="footer__col footer__col--office">
@@ -202,6 +211,50 @@ export default function Footer({ reveal = true }) {
             </nav>
           </div>
 
+          {/* Column: Social */}
+          <div className="footer__col footer__col--social">
+            <h4 className="footer__col-heading">Follow</h4>
+            <div className="footer__col-content footer__socials">
+              <a
+                href="https://www.linkedin.com/company/rock-castle-entertainment-pvt-ltd"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__link footer__social-link"
+              >
+                <svg className="footer__social-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                  <circle cx="4.98" cy="4.98" r="2.5" />
+                  <rect x="2.5" y="9.5" width="4.96" height="12" rx="0.5" />
+                  <path d="M14.5 9.5c-2.4 0-3.5 1.3-4.1 2.2V9.5H6.2c.05 1 0 12 0 12h4.2v-6.7c0-.36.03-.72.13-.98.28-.72.93-1.47 2.03-1.47 1.43 0 2 1.09 2 2.69V21.5h4.2v-7.2c0-3.86-2.06-5.8-4.26-5.8z" />
+                </svg>
+                LinkedIn
+              </a>
+              <a
+                href="https://www.instagram.com/rockcastle.experiences"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__link footer__social-link"
+              >
+                <svg
+                  className="footer__social-icon"
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+                Instagram
+              </a>
+            </div>
+          </div>
+
           {/* Column 4: Join the movement (Far Right) */}
           <div className="footer__col footer__col--movement">
             <h4 className="footer__col-heading footer__col-heading--movement">
@@ -222,6 +275,10 @@ export default function Footer({ reveal = true }) {
             © {new Date().getFullYear()} Rock Castle Entertainment Pvt. Ltd. · Regd. Office: Sector 12, Dwarka, New Delhi 110075
           </span>
           <div className="footer__bottom-links">
+            <a href="#privacy-policy" className="footer__bottom-link">Privacy Policy</a>
+            <span className="footer__bottom-sep">/</span>
+            <a href="#terms" className="footer__bottom-link">Terms</a>
+            <span className="footer__bottom-sep">/</span>
             <a href="#cookies" className="footer__bottom-link">Cookies</a>
             <span className="footer__bottom-sep">/</span>
             <span className="footer__bottom-motto">Experiences Un-ltd.</span>
@@ -230,7 +287,11 @@ export default function Footer({ reveal = true }) {
 
         {/* Mobile Bottom Bar (Matches reference image) */}
         <div className="footer__bottom footer__bottom--mobile">
-          <a href="#cookies" className="footer__mobile-cookie">Cookies</a>
+          <div className="footer__mobile-links">
+            <a href="#privacy-policy" className="footer__mobile-cookie">Privacy Policy</a>
+            <a href="#terms" className="footer__mobile-cookie">Terms</a>
+            <a href="#cookies" className="footer__mobile-cookie">Cookies</a>
+          </div>
           <p className="footer__mobile-copy">© {new Date().getFullYear()} Rock Castle</p>
         </div>
       </div>

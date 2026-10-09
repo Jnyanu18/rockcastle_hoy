@@ -38,10 +38,74 @@ main.main--how-we-work {
 
 .footer {
   position: relative;
-  background-color: var(--rc-black, #111925);
-  color: #f4f6f9;
+  background-color: var(--white, #f4f6f9);
+  color: var(--rc-black, #111925);
   padding: clamp(56px, 7vw, 92px) 0 clamp(20px, 2.5vw, 32px);
   box-sizing: border-box;
+}
+
+/* Newsletter / Contact CTA Strip */
+.footer__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-bottom: 1px solid rgba(17, 25, 37, 0.12);
+  padding-bottom: clamp(28px, 4vw, 44px);
+  margin-bottom: clamp(36px, 5vw, 64px);
+}
+
+.footer__cta-heading {
+  font-family: var(--font-body);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--rc-black, #111925);
+  margin: 0;
+}
+
+.footer__cta-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.5vw, 28px);
+  flex-wrap: wrap;
+}
+
+.footer__cta-email {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  color: var(--rc-black, #111925);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(17, 25, 37, 0.3);
+  transition: opacity 0.2s ease;
+}
+
+.footer__cta-email:hover {
+  opacity: 0.6;
+}
+
+.footer__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rc-orange, #ea7700);
+  color: var(--white, #f4f6f9);
+  border-radius: 9999px;
+  height: 44px;
+  padding: 0 24px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.footer__cta-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 18px rgba(234, 119, 0, 0.35);
 }
 
 /* ---- Curtain Reveal Fixed Stationary State ---- */
@@ -66,10 +130,10 @@ main.main--how-we-work {
   box-sizing: border-box;
 }
 
-/* 5-Column Grid with Office on far left, Movement on far right */
+/* 6-Column Grid with Office on far left, Movement on far right */
 .footer__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr auto 1fr 1fr;
+  grid-template-columns: 1fr 1fr auto 1fr 1fr 1fr;
   align-items: start;
   gap: clamp(16px, 2.5vw, 48px);
   padding-bottom: clamp(48px, 6vw, 84px);
@@ -102,6 +166,10 @@ main.main--how-we-work {
 }
 
 .footer__col--sitemap {
+  justify-self: end;
+}
+
+.footer__col--social {
   justify-self: end;
 }
 
@@ -141,7 +209,7 @@ main.main--how-we-work {
   font-family: var(--font-body);
   font-size: clamp(0.84rem, 0.95vw, 0.92rem);
   line-height: 1.58;
-  color: rgba(244, 246, 249, 0.76);
+  color: rgba(17, 25, 37, 0.7);
 }
 
 .footer__col-content p {
@@ -212,11 +280,26 @@ main.main--how-we-work {
   font-size: clamp(0.84rem, 0.95vw, 0.92rem);
 }
 
+/* Social Column */
+.footer__socials {
+  gap: 10px;
+}
+
+.footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer__social-icon {
+  flex-shrink: 0;
+}
+
 .footer__movement-text {
   font-family: var(--font-body);
   font-size: clamp(0.84rem, 0.95vw, 0.92rem);
   line-height: 1.5;
-  color: rgba(244, 246, 249, 0.76);
+  color: rgba(17, 25, 37, 0.7);
   max-width: 270px;
 }
 
@@ -227,11 +310,11 @@ main.main--how-we-work {
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  border-top: 1px solid rgba(244, 246, 249, 0.16);
+  border-top: 1px solid rgba(17, 25, 37, 0.12);
   padding-top: clamp(20px, 2.5vw, 28px);
   font-family: var(--font-body);
   font-size: clamp(0.78rem, 0.85vw, 0.84rem);
-  color: rgba(244, 246, 249, 0.68);
+  color: rgba(17, 25, 37, 0.62);
 }
 
 .footer__copyright {
@@ -288,6 +371,10 @@ main.main--how-we-work {
     padding-left: 0;
   }
 
+  .footer__col--social {
+    justify-self: start;
+  }
+
   .footer__logo-img {
     width: clamp(115px, 16vw, 140px);
     height: clamp(115px, 16vw, 140px);
@@ -297,11 +384,22 @@ main.main--how-we-work {
 @media (max-width: 767px) {
   .footer {
     padding: 32px 0 24px;
-    background-color: var(--rc-black, #111925);
+    background-color: var(--white, #f4f6f9);
   }
 
   .footer__inner {
     padding: 0 20px;
+  }
+
+  .footer__cta {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+  }
+
+  .footer__cta-heading {
+    font-size: 1.3rem;
   }
 
   .footer__grid {
@@ -309,30 +407,31 @@ main.main--how-we-work {
     grid-template-columns: 1fr 1fr;
     gap: 16px 20px;
     padding-bottom: 22px;
-    border-bottom: 1px solid rgba(244, 246, 249, 0.16);
+    border-bottom: 1px solid rgba(17, 25, 37, 0.12);
   }
 
   .footer__col-heading {
     font-size: 13.5px;
     font-weight: 600;
     margin: 0 0 8px 0;
-    color: var(--rc-black, #f4f6f9);
+    color: var(--rc-black, #111925);
   }
 
   .footer__col-content {
     gap: 3px;
     font-size: 12.5px;
     line-height: 1.45;
-    color: rgba(244, 246, 249, 0.76);
+    color: rgba(17, 25, 37, 0.7);
   }
 
   .footer__link {
-    color: var(--rc-black, #f4f6f9);
+    color: var(--rc-black, #111925);
   }
 
-  /* Hide center logo, sitemap, and join the movement on mobile to match exact reference */
+  /* Hide center logo, sitemap, social, and join the movement on mobile to match exact reference */
   .footer__col--center,
   .footer__col--sitemap,
+  .footer__col--social,
   .footer__col--movement {
     display: none !important;
   }
@@ -345,21 +444,27 @@ main.main--how-we-work {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
+    gap: 10px;
     padding-top: 18px;
     border-top: none;
   }
 
+  .footer__mobile-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
   .footer__mobile-cookie {
     font-size: 13px;
-    color: var(--rc-black, #f4f6f9);
+    color: var(--rc-black, #111925);
     text-decoration: none;
   }
 
   .footer__mobile-copy {
     margin: 0;
     font-size: 12.5px;
-    color: rgba(244, 246, 249, 0.68);
+    color: rgba(17, 25, 37, 0.62);
     opacity: 0.9;
   }
 }
