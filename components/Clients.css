@@ -79,8 +79,7 @@
   max-width: 160px;
   max-height: 72px;
   object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: 0.78;
+  opacity: 0.85;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
