@@ -5,7 +5,6 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SlideUpText from "@/components/ui/SlideUpText";
-import { services } from "@/lib/content";
 import "@/components/sections/ScrollingServices.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -20,8 +19,6 @@ type DeckItem = {
   images?: string[];
 };
 
-const PLACEHOLDER_IMAGES = ["/rx/placeholder-1.svg", "/rx/placeholder-2.svg", "/rx/placeholder-3.svg", "/rx/placeholder-4.svg"];
-
 // Reuses the same three services shown in the Services section, split into
 // the two balanced headline lines this deck expects.
 const DEFAULT_ITEMS: DeckItem[] = [
@@ -32,7 +29,7 @@ const DEFAULT_ITEMS: DeckItem[] = [
     desc: "From landmark corporate summits and public festivals to immersive brand pavilions — we engineer spaces that captivate thousands and create permanent brand recall.",
     buttonText: "Explore Stories",
     link: "#recent-experiences",
-    images: PLACEHOLDER_IMAGES,
+    images: ["/rx/cover-1.jpg", "/rx/cover-2.jpg", "/rx/cover-3.jpg", "/rx/cover-4.jpg"],
   },
   {
     index: "06",
@@ -41,7 +38,7 @@ const DEFAULT_ITEMS: DeckItem[] = [
     desc: "360-degree event architecture, cutting-edge stage engineering, immersive AV technology, and turnkey fabrication built to transform any venue into an extraordinary world.",
     buttonText: "Our Capabilities",
     link: "#contact",
-    images: PLACEHOLDER_IMAGES,
+    images: ["/rx/service-06-1.jpg", "/rx/service-06-2.jpg", "/rx/cover-3.jpg", "/rx/cover-2.jpg"],
   },
   {
     index: "07",
@@ -50,7 +47,7 @@ const DEFAULT_ITEMS: DeckItem[] = [
     desc: "Industry-celebrated IPs, EEMA-recognized experiential executions, and landmark corporate spectacles trusted by top global brands and institutions across India.",
     buttonText: "Work That Gets Noticed",
     link: "#contact",
-    images: PLACEHOLDER_IMAGES,
+    images: ["/rx/service-07-1.jpg", "/rx/service-07-2.jpg", "/rx/service-07-3.jpg", "/rx/service-07-4.jpg"],
   },
 ];
 
