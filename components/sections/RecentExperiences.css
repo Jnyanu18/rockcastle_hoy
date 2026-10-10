@@ -281,7 +281,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: #1c3864;
+  background: #0A192F;
   border: 1px solid rgba(255, 255, 255, 0.16);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   color: var(--rc-orange);
@@ -294,7 +294,7 @@
 }
 
 .rx-plate-card:hover .rx-plate__view-pill {
-  background: #204174;
+  background: #0A192F;
   border-color: rgba(255, 255, 255, 0.24);
 }
 
