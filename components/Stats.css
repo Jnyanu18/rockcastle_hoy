@@ -115,14 +115,16 @@
   }
 }
 
-/* Outer Pale-Yellow Border Outline */
+/* Outer Phone Chassis / Frame Body (black gap & bezel giving realistic mobile look) */
 .hoy-phone-outline {
   position: absolute;
   inset: -1.25vw;
-  border: 2px solid var(--hoy-yellow, #f0f3a6);
+  background-color: #0a0e15;
+  border: 2.5px solid #0A192F;
   border-radius: 4.125vw;
   pointer-events: none;
-  z-index: 10;
+  z-index: 1;
+  box-shadow: 0 25px 60px -15px rgba(10, 25, 47, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 @media (max-width: 1080px) and (min-width: 768px) {
@@ -147,6 +149,7 @@
   border-radius: 3vw;
   overflow: hidden;
   background-color: #0a0e15;
+  z-index: 2;
 }
 
 @media (max-width: 1080px) and (min-width: 768px) {

@@ -155,6 +155,14 @@
 .servicesBlock .scrollItem.ss__item--upcoming {
   pointer-events: none !important;
   user-select: none !important;
+  cursor: default !important;
+}
+
+.servicesBlock .scrollItem:not(.ss__item--active) *,
+.servicesBlock .scrollItem.ss__item--past *,
+.servicesBlock .scrollItem.ss__item--upcoming * {
+  pointer-events: none !important;
+  cursor: default !important;
 }
 
 /* Inline circular arrow button */

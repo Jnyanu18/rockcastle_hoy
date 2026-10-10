@@ -355,15 +355,15 @@ export default function Stats() {
 
           {/* Stats Figures Column */}
           <div className="hoy-showcase-col-stats w-full">
-            <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:flex lg:flex-col lg:gap-11">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:gap-x-12 sm:gap-y-12 lg:flex lg:flex-col lg:gap-10 xl:gap-12">
               {figures.map((item, index) => (
-                <div key={item.label} className="flex flex-col">
-                  <span className="text-xs md:text-[14px] font-normal text-[#f4f6f9]/80 mb-1">
-                    <SlideUpText split="words" delay={0.06}>
+                <div key={item.label} className="flex flex-col items-start justify-start">
+                  <span className="font-sans text-xs sm:text-sm font-medium tracking-wide text-[#0A192F] mb-2 sm:mb-2.5">
+                    <SlideUpText split="words" delay={0.06} className="text-[#0A192F]">
                       {item.label}
                     </SlideUpText>
                   </span>
-                  <span className="text-2xl sm:text-4xl lg:text-[64px] xl:text-[72px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#ea7700]">
+                  <span className="font-sans text-3xl sm:text-5xl lg:text-[64px] xl:text-[72px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#ea7700]">
                     <RunningMetric value={item.value} delay={index * 120} />
                   </span>
                 </div>
@@ -371,7 +371,7 @@ export default function Stats() {
             </div>
 
             {/* Follow Us on Instagram CTA Button next to stats */}
-            <div className="mt-8 lg:mt-12 flex items-center">
+            <div className="mt-8 lg:mt-12 flex items-center justify-start">
               <a
                 href={social.instagram}
                 target="_blank"
@@ -429,7 +429,7 @@ function LikeIcon() {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-3.5 h-3.5 text-[#f4f6f9]"
+      className="w-3.5 h-3.5 text-[#0A192F]"
     >
       <path
         d="M13.3984 4.29688C13.3984 3.69305 13.1547 3.11066 12.7158 2.67871C12.4216 2.38915 12.0555 2.18452 11.6572 2.08008L7.58301 11.1035V21.9766H19.1885C19.4904 21.9799 19.7816 21.8757 20.0078 21.6865C20.2334 21.4977 20.3785 21.2374 20.4219 20.9561L20.4229 20.9551L21.9629 11.0654C21.9888 10.8965 21.9772 10.7241 21.9287 10.5596C21.8801 10.3947 21.7958 10.2408 21.6797 10.1094C21.5634 9.97782 21.4181 9.87136 21.2539 9.79883C21.0897 9.72632 20.9106 9.68939 20.7295 9.69141H14.3984C13.8463 9.69129 13.3984 9.24362 13.3984 8.69141V4.29688ZM2 20.7793C2.00009 21.0916 2.12606 21.3943 2.35547 21.6201C2.58554 21.8465 2.90124 21.9766 3.2334 21.9766H5.58301V11.8896H3.2334C2.90124 11.8896 2.58554 12.0197 2.35547 12.2461C2.12607 12.4719 2.00006 12.7746 2 13.0869V20.7793ZM15.3984 7.69141H20.7188C21.181 7.68789 21.6396 7.78294 22.0625 7.96973C22.4887 8.15805 22.8693 8.43611 23.1777 8.78516C23.4863 9.13436 23.7158 9.54632 23.8477 9.99316C23.9795 10.4401 24.0104 10.9106 23.9395 11.3711V11.373L22.3984 21.2598L22.3994 21.2607C22.2813 22.0273 21.8859 22.723 21.291 23.2207C20.6994 23.7156 19.9489 23.9815 19.1777 23.9756V23.9766H3.2334C2.38104 23.9766 1.55966 23.6438 0.952148 23.0459C0.344261 22.4476 9.49763e-05 21.6324 0 20.7793V13.0869C5.87839e-05 12.2338 0.344271 11.4186 0.952148 10.8203C1.55966 10.2224 2.38104 9.88965 3.2334 9.88965H5.9375L10.1377 0.588867L10.207 0.459961C10.389 0.176097 10.7051 5.47237e-05 11.0488 0C12.1973 0 13.3022 0.448992 14.1191 1.25293C14.9365 2.05739 15.3984 3.15224 15.3984 4.29688V7.69141Z"
@@ -447,7 +447,7 @@ function SparkleIcon() {
       viewBox="0 0 22 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 text-[#f4f6f9]"
+      className="w-6 h-6 text-[#0A192F]/40"
     >
       <path
         fillRule="evenodd"

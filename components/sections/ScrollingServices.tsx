@@ -141,7 +141,9 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
       const inner1 = innerHeights[1] || 560;
       const inner2 = innerHeights[2] || 560;
 
-      // Card 0: always at top: y = 0. Fades out as Card 1 stacks in
+      const FADED_OPACITY = 0.28;
+
+      // Card 0: always at top: y = 0. Fades down to faded effect as Card 1 stacks in
       let c0_t = 0;
       if (p <= DWELL_1) {
         c0_t = 0;
@@ -151,7 +153,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
         c0_t = 1;
       }
       const c0_height = inner0 - (inner0 - min0) * c0_t;
-      const c0_opacity = 1 - c0_t;
+      const c0_opacity = 1 - (1 - FADED_OPACITY) * c0_t;
       const c0_y = 0;
 
       // Card 1: rises from bottom and stacks under Card 0 (min0 + gap)
@@ -162,12 +164,12 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
       if (p <= DWELL_1) {
         c1_y = c1_botY;
         c1_height = min1;
-        c1_opacity = 0;
+        c1_opacity = FADED_OPACITY;
       } else if (p < TRANS_1_2_END) {
         const t = (p - DWELL_1) / (TRANS_1_2_END - DWELL_1);
         c1_y = c1_botY - (c1_botY - c1_topY) * t;
         c1_height = min1 + (inner1 - min1) * t;
-        c1_opacity = t;
+        c1_opacity = FADED_OPACITY + (1 - FADED_OPACITY) * t;
       } else if (p <= DWELL_2) {
         c1_y = c1_topY;
         c1_height = inner1;
@@ -176,11 +178,11 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
         const t = (p - DWELL_2) / (TRANS_2_3_END - DWELL_2);
         c1_y = c1_topY;
         c1_height = inner1 - (inner1 - min1) * t;
-        c1_opacity = 1 - t;
+        c1_opacity = 1 - (1 - FADED_OPACITY) * t;
       } else {
         c1_y = c1_topY;
         c1_height = min1;
-        c1_opacity = 0;
+        c1_opacity = FADED_OPACITY;
       }
 
       // Card 2: rises from bottom and stacks under Card 1 (min0 + gap + min1 + gap)
@@ -191,12 +193,12 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
       if (p <= DWELL_2) {
         c2_y = c2_botY;
         c2_height = min2;
-        c2_opacity = 0;
+        c2_opacity = FADED_OPACITY;
       } else if (p < TRANS_2_3_END) {
         const t = (p - DWELL_2) / (TRANS_2_3_END - DWELL_2);
         c2_y = c2_botY - (c2_botY - c2_topY) * t;
         c2_height = min2 + (inner2 - min2) * t;
-        c2_opacity = t;
+        c2_opacity = FADED_OPACITY + (1 - FADED_OPACITY) * t;
       } else {
         c2_y = c2_topY;
         c2_height = inner2;
@@ -218,14 +220,13 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
         const state = states[i];
         if (!state) return;
 
-        const isVisible = state.opacity > 0.005;
         const isActive = activeIndex === i && state.opacity >= 0.85;
 
         gsap.set(item, {
           y: Math.round(state.y),
           height: Math.round(state.height),
           opacity: state.opacity,
-          visibility: isVisible ? "visible" : "hidden",
+          visibility: "visible",
           pointerEvents: isActive ? "auto" : "none",
         });
 

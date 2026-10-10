@@ -125,7 +125,7 @@ export const stats = {
     { label: "Cities & Destinations", value: "25+" },
     { label: "Mega Experiences", value: "500+" },
     { label: "Audience Engaged", value: "2.5M+" },
-    { label: "Years of Excellence", value: "15+" },
+    { label: "Years of Experience", value: "15+" },
   ],
 };
 

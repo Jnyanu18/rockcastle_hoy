@@ -281,13 +281,21 @@
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: var(--rc-black);
+  background: #1c3864;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   color: var(--rc-orange);
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   white-space: nowrap;
+  transition: background 250ms ease, border-color 250ms ease, transform 200ms ease;
+}
+
+.rx-plate-card:hover .rx-plate__view-pill {
+  background: #204174;
+  border-color: rgba(255, 255, 255, 0.24);
 }
 
 .rx-plate__view-plus {
