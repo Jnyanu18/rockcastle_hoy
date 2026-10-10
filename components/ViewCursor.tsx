@@ -20,40 +20,113 @@ const DEFAULT_SELECTOR = [
 ].join(", ");
 
 /**
- * ViewCursor: An award-winning cursor follower badge.
- * Floats a smooth circular badge with "VIEW" that trails the cursor with a slight delay
- * when hovering over any project videos, project images, or elements with data-cursor="view".
+ * ViewCursor:
+ * - Default state: A small orange squircle box (12px x 12px) that follows the cursor.
+ * - On hover over images in ScrollingServices (or data-cursor="view"):
+ *   The orange box seamlessly morphs/expands into the "VIEW" circle badge.
+ * - On mouse leave: Morphs back into the small orange box.
  */
 export default function ViewCursor({
   text = "VIEW",
   selector = DEFAULT_SELECTOR,
 }: ViewCursorProps) {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const isVisibleRef = useRef(false);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const isExpandedRef = useRef(false);
 
   useEffect(() => {
     // Disable on touch devices or reduced motion
     const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (isTouch || prefersReducedMotion || !cursorRef.current) return;
+    if (isTouch || prefersReducedMotion || !cursorRef.current || !badgeRef.current || !textRef.current) return;
 
-    const el = cursorRef.current;
+    const cursor = cursorRef.current;
+    const badge = badgeRef.current;
+    const label = textRef.current;
 
-    // Initial hidden state centered on origin
-    gsap.set(el, {
+    // Initial state: centered on pointer, hidden until first mousemove
+    gsap.set(cursor, {
       xPercent: -50,
       yPercent: -50,
-      scale: 0,
       opacity: 0,
+      scale: 0.6,
       pointerEvents: "none",
     });
 
-    // Quick lerping / trailing physics with slight organic delay
-    const xTo = gsap.quickTo(el, "x", { duration: 0.42, ease: "power3.out" });
-    const yTo = gsap.quickTo(el, "y", { duration: 0.42, ease: "power3.out" });
+    // Default: small orange squircle box
+    gsap.set(badge, {
+      width: 12,
+      height: 12,
+      borderRadius: "3.5px",
+      backgroundColor: "#ea7700",
+      borderColor: "transparent",
+      boxShadow: "0 2px 8px rgba(234, 119, 0, 0.45)",
+    });
 
+    gsap.set(label, {
+      opacity: 0,
+      scale: 0.4,
+    });
+
+    // Fluid physics lerping that stays right with the cursor
+    const xTo = gsap.quickTo(cursor, "x", { duration: 0.22, ease: "power3.out" });
+    const yTo = gsap.quickTo(cursor, "y", { duration: 0.22, ease: "power3.out" });
+
+    let isVisible = false;
     let lastX = -1;
     let lastY = -1;
+
+    const expandToCircle = () => {
+      if (isExpandedRef.current) return;
+      isExpandedRef.current = true;
+
+      gsap.to(badge, {
+        width: 52,
+        height: 52,
+        borderRadius: "50%",
+        backgroundColor: "#ea7700",
+        borderColor: "rgba(0, 0, 0, 0.1)",
+        boxShadow: "0 8px 24px rgba(0, 0, 0, 0.35)",
+        duration: 0.36,
+        ease: "back.out(1.8)",
+        overwrite: "auto",
+      });
+
+      gsap.to(label, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.24,
+        delay: 0.06,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    };
+
+    const collapseToBox = () => {
+      if (!isExpandedRef.current) return;
+      isExpandedRef.current = false;
+
+      gsap.to(label, {
+        opacity: 0,
+        scale: 0.4,
+        duration: 0.16,
+        ease: "power2.in",
+        overwrite: "auto",
+      });
+
+      gsap.to(badge, {
+        width: 12,
+        height: 12,
+        borderRadius: "3.5px",
+        backgroundColor: "#ea7700",
+        borderColor: "transparent",
+        boxShadow: "0 2px 8px rgba(234, 119, 0, 0.45)",
+        duration: 0.3,
+        ease: "power3.out",
+        overwrite: "auto",
+      });
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
       lastX = e.clientX;
@@ -61,27 +134,22 @@ export default function ViewCursor({
       xTo(lastX);
       yTo(lastY);
 
-      const target = (e.target as Element | null)?.closest(selector);
-      if (target) {
-        if (!isVisibleRef.current) {
-          isVisibleRef.current = true;
-          gsap.to(el, {
-            scale: 1,
-            opacity: 1,
-            duration: 0.35,
-            ease: "back.out(1.8)",
-            overwrite: "auto",
-          });
-        }
-      } else if (isVisibleRef.current) {
-        isVisibleRef.current = false;
-        gsap.to(el, {
-          scale: 0,
-          opacity: 0,
+      if (!isVisible) {
+        isVisible = true;
+        gsap.to(cursor, {
+          opacity: 1,
+          scale: 1,
           duration: 0.25,
-          ease: "power2.in",
+          ease: "power2.out",
           overwrite: "auto",
         });
+      }
+
+      const target = (e.target as Element | null)?.closest(selector);
+      if (target) {
+        expandToCircle();
+      } else {
+        collapseToBox();
       }
     };
 
@@ -94,69 +162,60 @@ export default function ViewCursor({
         const elUnderCursor = document.elementFromPoint(lastX, lastY);
         const target = elUnderCursor?.closest(selector);
         if (target) {
-          if (!isVisibleRef.current) {
-            isVisibleRef.current = true;
-            gsap.to(el, {
-              scale: 1,
-              opacity: 1,
-              duration: 0.35,
-              ease: "back.out(1.8)",
-              overwrite: "auto",
-            });
-          }
-        } else if (isVisibleRef.current) {
-          isVisibleRef.current = false;
-          gsap.to(el, {
-            scale: 0,
-            opacity: 0,
-            duration: 0.25,
-            ease: "power2.in",
-            overwrite: "auto",
-          });
+          expandToCircle();
+        } else {
+          collapseToBox();
         }
-      }, 100);
+      }, 50);
     };
 
     const handleMouseLeave = () => {
       lastX = -1;
       lastY = -1;
-      if (isVisibleRef.current) {
-        isVisibleRef.current = false;
-        gsap.to(el, {
-          scale: 0,
-          opacity: 0,
-          duration: 0.2,
-          ease: "power2.in",
-          overwrite: "auto",
-        });
-      }
+      isVisible = false;
+      collapseToBox();
+      gsap.to(cursor, {
+        opacity: 0,
+        scale: 0.5,
+        duration: 0.2,
+        ease: "power2.in",
+        overwrite: "auto",
+      });
+    };
+
+    const handleMouseEnter = () => {
+      isVisible = true;
+      gsap.to(cursor, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.25,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
     };
 
     const handleMouseDown = () => {
-      if (isVisibleRef.current) {
-        gsap.to(el, {
-          scale: 0.86,
-          duration: 0.15,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-      }
+      gsap.to(badge, {
+        scale: 0.84,
+        duration: 0.12,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
     };
 
     const handleMouseUp = () => {
-      if (isVisibleRef.current) {
-        gsap.to(el, {
-          scale: 1,
-          duration: 0.3,
-          ease: "back.out(2)",
-          overwrite: "auto",
-        });
-      }
+      gsap.to(badge, {
+        scale: 1,
+        duration: 0.25,
+        ease: "back.out(2)",
+        overwrite: "auto",
+      });
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     window.addEventListener("scroll", handleScroll, { passive: true });
     document.addEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener("mouseenter", handleMouseEnter);
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
 
@@ -165,6 +224,7 @@ export default function ViewCursor({
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mouseleave", handleMouseLeave);
+      document.removeEventListener("mouseenter", handleMouseEnter);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };
@@ -177,8 +237,23 @@ export default function ViewCursor({
       className="pointer-events-none fixed left-0 top-0 z-[99999] hidden select-none md:block"
       style={{ willChange: "transform, opacity" }}
     >
-      <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-[#ea7700] text-[#0A192F] shadow-[0_6px_20px_rgba(0, 0, 0,0.32)] border border-black/10 backdrop-blur-sm">
-        <span className="text-[9.5px] font-bold tracking-[0.15em] uppercase select-none leading-none">
+      <div
+        ref={badgeRef}
+        className="flex items-center justify-center overflow-hidden border backdrop-blur-sm"
+        style={{
+          width: 12,
+          height: 12,
+          borderRadius: "3.5px",
+          backgroundColor: "#ea7700",
+          boxShadow: "0 2px 8px rgba(234, 119, 0, 0.45)",
+          willChange: "width, height, border-radius, background-color, transform",
+        }}
+      >
+        <span
+          ref={textRef}
+          className="text-[9.5px] font-bold tracking-[0.15em] uppercase select-none leading-none text-[#0A192F]"
+          style={{ willChange: "transform, opacity" }}
+        >
           {text}
         </span>
       </div>

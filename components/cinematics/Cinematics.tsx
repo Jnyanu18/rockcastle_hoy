@@ -308,45 +308,7 @@ function useScrollCinematics(enabled: boolean) {
       }
     });
 
-    /* 3. Follow-spot across the dark sections (fine pointers only). */
-    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-      ["about", "recent-experiences", "contact"].forEach((id) => {
-        const section = document.getElementById(id);
-        if (!section) return;
-        const spot = document.createElement("div");
-        spot.className = "cine-spot";
-        spot.setAttribute("aria-hidden", "true");
-        section.appendChild(spot);
-
-        // Eased follow: the light trails the pointer slightly, like an operator.
-        const target = { x: 0, y: 0 };
-        const pos = { x: 0, y: 0 };
-        const tick = () => {
-          pos.x += (target.x - pos.x) * 0.12;
-          pos.y += (target.y - pos.y) * 0.12;
-          spot.style.setProperty("--spot-x", `${pos.x.toFixed(1)}px`);
-          spot.style.setProperty("--spot-y", `${pos.y.toFixed(1)}px`);
-        };
-        gsap.ticker.add(tick);
-        const move = (e: PointerEvent) => {
-          const r = section.getBoundingClientRect();
-          target.x = e.clientX - r.left;
-          target.y = e.clientY - r.top;
-        };
-        const enter = () => spot.classList.add("is-on");
-        const leave = () => spot.classList.remove("is-on");
-        section.addEventListener("pointermove", move);
-        section.addEventListener("pointerenter", enter);
-        section.addEventListener("pointerleave", leave);
-        cleanups.push(() => {
-          section.removeEventListener("pointermove", move);
-          section.removeEventListener("pointerenter", enter);
-          section.removeEventListener("pointerleave", leave);
-          gsap.ticker.remove(tick);
-          spot.remove();
-        });
-      });
-    }
+    /* 3. Follow-spot removed per user request */
 
     const refresh = setTimeout(() => ScrollTrigger.refresh(), 300);
 

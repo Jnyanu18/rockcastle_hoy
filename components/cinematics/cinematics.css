@@ -117,22 +117,7 @@ html.cine-intro body {
 /* ---- Follow-spot on dark sections (desktop pointer only) --------------- */
 
 .cine-spot {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  mix-blend-mode: screen;
-  background: radial-gradient(
-    560px circle at var(--spot-x, 50%) var(--spot-y, 50%),
-    rgba(244, 246, 249, 0.07),
-    rgba(244, 246, 249, 0) 62%
-  );
-  transition: opacity 0.6s ease;
-}
-
-.cine-spot.is-on {
-  opacity: 1;
+  display: none !important;
 }
 
 /* ---- Work plates: lens settles as each plate arrives ------------------- */
