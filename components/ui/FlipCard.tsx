@@ -109,6 +109,7 @@ export default function FlipCard({
   const grip = useRef<Grip | null>(null);
   const spin = useRef<AnimationPlaybackControls | null>(null);
   const target = useRef(shown ? 180 : 0);
+  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const turn = useMotionValue(shown ? 180 : 0);
   const tiltX = useSpring(0, TILT_SPRING);
@@ -143,6 +144,29 @@ export default function FlipCard({
     const base = snap(turn.get());
     settle(isBack(base) ? base - 180 : base + 180, 0, instant);
   };
+  // Hover-triggered flip: a short intent delay (so brushing past several
+  // cards doesn't set all of them spinning), then a small pre-tilt nudge
+  // in the flip direction before committing to the full 180° spring, so
+  // the flip reads as a deliberate wind-up rather than an instant spin.
+  const hoverFlip = () => {
+    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+    hoverTimer.current = setTimeout(() => {
+      hoverTimer.current = null;
+      spin.current?.stop();
+      const base = turn.get();
+      spin.current = animate(turn, base + 8, {
+        duration: 0.18,
+        ease: "easeOut",
+        onComplete: () => settle(180, 0, false),
+      });
+    }, 120);
+  };
+  const cancelHoverFlip = () => {
+    if (hoverTimer.current) {
+      clearTimeout(hoverTimer.current);
+      hoverTimer.current = null;
+    }
+  };
   const rest = () => {
     tiltX.set(0);
     tiltY.set(0);
@@ -159,7 +183,10 @@ export default function FlipCard({
     else spin.current = animate(turn, target.current, { type: "spring", stiffness, damping, restDelta: 0.05 });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flipped]);
-  useEffect(() => () => spin.current?.stop(), []);
+  useEffect(() => () => {
+    spin.current?.stop();
+    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+  }, []);
   useEffect(() => {
     if (disabled) rest();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -272,9 +299,13 @@ export default function FlipCard({
       onLostPointerCapture={(e) => release(e, true)}
       onPointerEnter={(e) => {
         if (!reduce && !disabled && e.pointerType !== "touch") lift.set(hoverScale);
-        if (flipOnHover && !disabled && !reduce && e.pointerType !== "touch" && !grip.current) settle(180, 0, false);
+        if (flipOnHover && !disabled && !reduce && e.pointerType !== "touch" && !grip.current) {
+          if (reduce) settle(180, 0, false);
+          else hoverFlip();
+        }
       }}
       onPointerLeave={() => {
+        cancelHoverFlip();
         if (!grip.current) rest();
         if (flipOnHover && !disabled && !reduce) settle(0, 0, false);
       }}

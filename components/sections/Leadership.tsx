@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SlideUpText from "@/components/ui/SlideUpText";
@@ -45,6 +45,9 @@ const founders = [
  * past, then the ticker scrubs across the screen. */
 export default function Leadership() {
   const ref = useRef<HTMLElement>(null);
+  // Tracks which founder cards are currently flipped, so the back face's
+  // quote/divider/name can stagger in instead of appearing all at once.
+  const [flipped, setFlipped] = useState<boolean[]>(() => founders.map(() => false));
 
   useEffect(() => {
     const root = ref.current;
@@ -123,7 +126,7 @@ export default function Leadership() {
         </div>
 
         <div className="leadership__grid">
-          {founders.map((f) => (
+          {founders.map((f, i) => (
             <div className="leadership__founder-item" key={f.name}>
               <div className="leadership__card-header-track">
                 <SlideUpText split="words" inView once className="leadership__track-label">
@@ -148,6 +151,14 @@ export default function Leadership() {
                 background="#ffffff"
                 color="var(--black)"
                 shadow={false}
+                onFlipChange={(v) =>
+                  setFlipped((prev) => {
+                    if (prev[i] === v) return prev;
+                    const next = [...prev];
+                    next[i] = v;
+                    return next;
+                  })
+                }
                 ariaLabel={`${f.name} - ${f.tag}`}
                 className="leadership__flipcard"
                 front={
@@ -167,7 +178,7 @@ export default function Leadership() {
                   </div>
                 }
                 back={
-                  <div className="leadership__card-back">
+                  <div className={`leadership__card-back${flipped[i] ? " leadership__card-back--revealed" : ""}`}>
                     <div className="leadership__card-back-header">
                       <span className="leadership__card-back-cred">{f.credential}</span>
                     </div>

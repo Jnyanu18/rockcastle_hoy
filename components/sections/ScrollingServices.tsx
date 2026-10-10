@@ -273,7 +273,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
   }, [data.length]);
 
   return (
-    <section className="servicesBlock bg-[#111925]" id={id} ref={sectionRef} style={{ backgroundColor: "#111925" }}>
+    <section className="servicesBlock bg-[#0A192F]" id={id} ref={sectionRef} style={{ backgroundColor: "#0A192F" }}>
       <div className="howWeRollItemsBlock">
         <div className="scrollContainer" ref={scrollContainerRef}>
           <div className="stickyWrapper">

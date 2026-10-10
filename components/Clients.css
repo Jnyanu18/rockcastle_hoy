@@ -7,7 +7,7 @@
   position: relative;
   z-index: 2;
   padding: clamp(48px, 7vh, 88px) 0;
-  color: var(--rc-black, #111925);
+  color: var(--rc-black, #0A192F);
   background: var(--white, #f4f6f9);
   overflow: clip;
 }
@@ -36,16 +36,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(160px, 16vw, 240px);
-  height: clamp(88px, 9vw, 132px);
+  width: clamp(190px, 18vw, 280px);
+  height: clamp(104px, 10.5vw, 154px);
   padding: 16px 22px;
 }
 
 .cl-logo {
   width: auto;
   height: auto;
-  max-width: 170px;
-  max-height: 78px;
+  max-width: 210px;
+  max-height: 96px;
   object-fit: contain;
   opacity: 0.8;
   transition: opacity 0.25s ease, transform 0.25s ease;
@@ -69,14 +69,14 @@
   }
 
   .cl-cell {
-    width: 168px;
-    height: 88px;
+    width: 192px;
+    height: 102px;
     padding: 14px 18px;
   }
 
   .cl-logo {
-    max-width: 136px;
-    max-height: 64px;
+    max-width: 158px;
+    max-height: 78px;
   }
 }
 

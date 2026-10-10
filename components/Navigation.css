@@ -63,12 +63,12 @@
 }
 
 .nav--theme-dark.nav--scrolled {
-  background: var(--rc-black, #111925);
+  background: var(--rc-black, #0A192F);
   box-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
 }
 
 .nav--theme-light {
-  color: #111925;
+  color: #0A192F;
 }
 
 .nav--theme-light.nav--scrolled {
@@ -334,10 +334,11 @@
   flex-shrink: 0;
 }
 
+/* Stays orange on hover (a deeper shade) so the white label remains readable. */
 .nav__pill-btn:hover {
   transform: scale(1.02);
-  background: #f4f6f9;
-  box-shadow: 0 4px 16px rgba(17, 25, 37, 0.22);
+  background: #c46400;
+  box-shadow: 0 4px 16px rgba(234, 119, 0, 0.35);
 }
 
 .nav__pill-track-mask {
@@ -440,7 +441,7 @@
   position: fixed;
   inset: 0;
   z-index: 110;
-  background: var(--rc-black-rich, #111925);
+  background: var(--rc-black-rich, #0A192F);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

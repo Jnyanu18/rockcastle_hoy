@@ -228,7 +228,7 @@ export default function HeroVideoModal({
           onClose();
         }}
         aria-label="Close video player"
-        className="fixed top-5 right-5 sm:top-7 sm:right-7 z-[1000000] flex h-11 w-11 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-canvas text-[#111925] shadow-[0_6px_24px_rgba(0, 0, 0,0.55)] transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer"
+        className="fixed top-5 right-5 sm:top-7 sm:right-7 z-[1000000] flex h-11 w-11 sm:h-13 sm:w-13 items-center justify-center rounded-full bg-canvas text-[#0A192F] shadow-[0_6px_24px_rgba(0, 0, 0,0.55)] transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer"
       >
         <svg
           width="16"
@@ -267,12 +267,12 @@ export default function HeroVideoModal({
             showControls || !isPlaying ? "opacity-100 scale-100" : "opacity-0 scale-95"
           }`}
         >
-          <div className="pointer-events-auto flex items-center justify-center gap-3.5 rounded-full bg-[#ea7700] px-7 py-3 text-[#111925] shadow-[0_8px_30px_rgba(0, 0, 0,0.4)] border border-black/10 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer">
-            <span className="text-base font-light select-none leading-none text-[#111925]">+</span>
-            <span className="text-[12px] sm:text-[13px] font-bold tracking-[0.2em] uppercase select-none font-sans text-[#111925]">
+          <div className="pointer-events-auto flex items-center justify-center gap-3.5 rounded-full bg-[#ea7700] px-7 py-3 text-[#0A192F] shadow-[0_8px_30px_rgba(0, 0, 0,0.4)] border border-black/10 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer">
+            <span className="text-base font-light select-none leading-none text-[#0A192F]">+</span>
+            <span className="text-[12px] sm:text-[13px] font-bold tracking-[0.2em] uppercase select-none font-sans text-[#0A192F]">
               {isPlaying ? "PAUSE" : "PLAY"}
             </span>
-            <span className="text-base font-light select-none leading-none text-[#111925]">+</span>
+            <span className="text-base font-light select-none leading-none text-[#0A192F]">+</span>
           </div>
         </div>
       </div>

@@ -57,7 +57,7 @@ function InwardSpoke({
 export function PlayCursorBadge({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`relative flex h-[88px] w-[88px] items-center justify-center rounded-[26px] bg-[#f4f6f9] text-[#111925] shadow-[0_10px_32px_rgba(0, 0, 0,0.38),inset_0_1px_1px_rgba(255, 255, 255,0.6)] border border-black/10 select-none overflow-hidden ${className}`}
+      className={`relative flex h-[88px] w-[88px] items-center justify-center rounded-[26px] bg-[#f4f6f9] text-[#0A192F] shadow-[0_10px_32px_rgba(0, 0, 0,0.38),inset_0_1px_1px_rgba(255, 255, 255,0.6)] border border-black/10 select-none overflow-hidden ${className}`}
     >
       {/* Slowly clockwise rotating "+" assembly */}
       <div
