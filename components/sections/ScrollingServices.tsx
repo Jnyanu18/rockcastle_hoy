@@ -19,8 +19,7 @@ type DeckItem = {
   images?: string[];
 };
 
-// Reuses the same three services shown in the Services section, split into
-// the two balanced headline lines this deck expects.
+// Reuses the original project images and services split into two balanced headline lines
 const DEFAULT_ITEMS: DeckItem[] = [
   {
     index: "05",
@@ -57,9 +56,8 @@ type Props = {
 };
 
 /**
- * Scrolling services deck: three cards pinned in one viewport. The active
- * card shows full height with its image grid; the other two dock as dimmed
- * headline tabs at top/bottom and rise/collapse as the section scrolls.
+ * Scrolling services deck: only the active card is visible and interactive.
+ * Non-active cards are hidden and cannot be clicked or hovered over.
  */
 export default function ScrollingServices({ items, id = "capabilities" }: Props) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -80,18 +78,9 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
     const itemEls = Array.from(section.querySelectorAll<HTMLElement>(".scrollItem"));
     if (!itemEls.length) return;
 
-    // Read natural content heights and collapsed line 1 heights
+    // Read natural content heights
     const readDimensions = () => {
-      gsap.set(itemEls, { clearProps: "height,transform" });
-
-      const minHeights = itemEls.map((item) => {
-        const line1El = item.querySelector(".normalTitleLine--1");
-        if (line1El) {
-          const rect = line1El.getBoundingClientRect();
-          return Math.ceil(rect.height);
-        }
-        return 42;
-      });
+      gsap.set(itemEls, { clearProps: "height,transform,opacity,visibility" });
 
       const innerHeights = itemEls.map((item) => {
         const inner = item.querySelector(".innerItem");
@@ -100,121 +89,94 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
 
       const containerH = itemsEl.clientHeight || 850;
 
-      return { minHeights, innerHeights, containerH };
+      return { innerHeights, containerH };
     };
 
-    let { minHeights, innerHeights, containerH } = readDimensions();
+    let { innerHeights, containerH } = readDimensions();
     let lastActiveIndex = -1;
 
     // Timeline keyframes:
-    // 0.00 - 0.18: Card 0 dwell (active), Card 1 & 2 docked at the bottom of the page
-    // 0.18 - 0.46: Transition 0 -> 1. Split in two so the cards never overlap:
-    //              first half collapses/fades Card 0 out completely, second half
-    //              rises/fades Card 1 in from the bottom.
-    // 0.46 - 0.58: Card 1 dwell (active), Card 0 docked at top, Card 2 docked at the bottom of the page
-    // 0.58 - 0.86: Transition 1 -> 2, same out-then-in split as above
-    // 0.86 - 1.00: Card 2 dwell (active), Card 0 & 1 docked at top
+    // 0.00 - 0.20: Card 0 active and fully visible; Cards 1 & 2 hidden
+    // 0.20 - 0.48: Transition 0 -> 1 (Card 1 rises smoothly from bottom to top; Card 0 fades out)
+    // 0.48 - 0.60: Card 1 active and fully visible; Cards 0 & 2 hidden
+    // 0.60 - 0.88: Transition 1 -> 2 (Card 2 rises smoothly from bottom to top; Card 1 fades out)
+    // 0.88 - 1.00: Card 2 active and fully visible; Cards 0 & 1 hidden
 
-    const DWELL_1 = 0.18;
-    const TRANS_1_2_END = 0.46;
-    const DWELL_2 = 0.58;
-    const TRANS_2_3_END = 0.86;
-    // Point within each transition window where the outgoing card finishes
-    // collapsing and the incoming card starts rising — keeps the two from
-    // ever being visible at full strength at the same time.
-    const OUT_IN_SPLIT = 0.5;
+    const DWELL_1 = 0.20;
+    const TRANS_1_2_END = 0.48;
+    const DWELL_2 = 0.60;
+    const TRANS_2_3_END = 0.88;
 
     const updateCards = (progress: number) => {
       const p = Math.max(0, Math.min(1, progress));
       const currentContainerH = containerH;
-      const gap = 8;
 
       // Determine active index for class tagging
       let activeIndex = 0;
-      if (p >= 0.7) {
+      if (p >= 0.74) {
         activeIndex = 2;
-      } else if (p >= 0.32) {
+      } else if (p >= 0.34) {
         activeIndex = 1;
       } else {
         activeIndex = 0;
       }
 
-      const min0 = minHeights[0] || 42;
-      const min1 = minHeights[1] || 42;
-      const min2 = minHeights[2] || 42;
-
       const inner0 = innerHeights[0] || 560;
       const inner1 = innerHeights[1] || 560;
       const inner2 = innerHeights[2] || 560;
 
-      // Splits a transition's raw 0..1 progress into an "outgoing" fraction
-      // (collapses/fades the leaving card across the first half) and an
-      // "incoming" fraction (rises/fades the entering card across the
-      // second half), so the two are never both partway visible at once.
-      const splitTransition = (t: number) => ({
-        out: Math.max(0, Math.min(1, t / OUT_IN_SPLIT)),
-        in: Math.max(0, Math.min(1, (t - OUT_IN_SPLIT) / (1 - OUT_IN_SPLIT))),
-      });
-
-      // Card 0: always at top: y = 0
-      let c0_outT = 0;
+      // Card 0
+      let c0_y = 0;
+      let c0_height = inner0;
+      let c0_opacity = 0;
       if (p <= DWELL_1) {
-        c0_outT = 0;
+        c0_y = 0;
+        c0_opacity = 1;
       } else if (p < TRANS_1_2_END) {
-        c0_outT = splitTransition((p - DWELL_1) / (TRANS_1_2_END - DWELL_1)).out;
+        const t = (p - DWELL_1) / (TRANS_1_2_END - DWELL_1);
+        c0_y = -Math.round(40 * t);
+        c0_opacity = 1 - t;
       } else {
-        c0_outT = 1;
+        c0_y = -40;
+        c0_opacity = 0;
       }
-      const c0_height = inner0 - (inner0 - min0) * c0_outT;
-      const c0_opacity = 1 - c0_outT;
-      const c0_y = 0;
 
-      // Card 1: top position: min0 + gap; bottom position: currentContainerH - min2 - gap - min1
-      const c1_topY = min0 + gap;
-      const c1_botY = Math.max(c1_topY, currentContainerH - min2 - gap - min1);
-
-      let c1_y: number, c1_height: number, c1_opacity: number;
+      // Card 1
+      let c1_y: number;
+      let c1_height = inner1;
+      let c1_opacity: number;
       if (p <= DWELL_1) {
-        c1_y = c1_botY;
-        c1_height = min1;
+        c1_y = currentContainerH;
         c1_opacity = 0;
       } else if (p < TRANS_1_2_END) {
-        const { in: inT } = splitTransition((p - DWELL_1) / (TRANS_1_2_END - DWELL_1));
-        c1_y = c1_botY - (c1_botY - c1_topY) * inT;
-        c1_height = min1 + (inner1 - min1) * inT;
-        c1_opacity = inT;
+        const t = (p - DWELL_1) / (TRANS_1_2_END - DWELL_1);
+        c1_y = Math.round(currentContainerH * (1 - t));
+        c1_opacity = t;
       } else if (p <= DWELL_2) {
-        c1_y = c1_topY;
-        c1_height = inner1;
+        c1_y = 0;
         c1_opacity = 1;
       } else if (p < TRANS_2_3_END) {
-        const { out: outT } = splitTransition((p - DWELL_2) / (TRANS_2_3_END - DWELL_2));
-        c1_y = c1_topY;
-        c1_height = inner1 - (inner1 - min1) * outT;
-        c1_opacity = 1 - outT;
+        const t = (p - DWELL_2) / (TRANS_2_3_END - DWELL_2);
+        c1_y = -Math.round(40 * t);
+        c1_opacity = 1 - t;
       } else {
-        c1_y = c1_topY;
-        c1_height = min1;
+        c1_y = -40;
         c1_opacity = 0;
       }
 
-      // Card 2: top position: min0 + gap + min1 + gap; bottom position: currentContainerH - min2
-      const c2_topY = min0 + gap + min1 + gap;
-      const c2_botY = Math.max(c2_topY, currentContainerH - min2);
-
-      let c2_y: number, c2_height: number, c2_opacity: number;
+      // Card 2
+      let c2_y: number;
+      let c2_height = inner2;
+      let c2_opacity: number;
       if (p <= DWELL_2) {
-        c2_y = c2_botY;
-        c2_height = min2;
+        c2_y = currentContainerH;
         c2_opacity = 0;
       } else if (p < TRANS_2_3_END) {
-        const { in: inT } = splitTransition((p - DWELL_2) / (TRANS_2_3_END - DWELL_2));
-        c2_y = c2_botY - (c2_botY - c2_topY) * inT;
-        c2_height = min2 + (inner2 - min2) * inT;
-        c2_opacity = inT;
+        const t = (p - DWELL_2) / (TRANS_2_3_END - DWELL_2);
+        c2_y = Math.round(currentContainerH * (1 - t));
+        c2_opacity = t;
       } else {
-        c2_y = c2_topY;
-        c2_height = inner2;
+        c2_y = 0;
         c2_opacity = 1;
       }
 
@@ -233,10 +195,15 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
         const state = states[i];
         if (!state) return;
 
+        const isVisible = state.opacity > 0.005;
+        const isActive = activeIndex === i && state.opacity >= 0.85;
+
         gsap.set(item, {
           y: Math.round(state.y),
           height: Math.round(state.height),
           opacity: state.opacity,
+          visibility: isVisible ? "visible" : "hidden",
+          pointerEvents: isActive ? "auto" : "none",
         });
 
         if (activeIndexChanged) {
@@ -273,7 +240,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
     const onImgLoad = () => {
       loadedCount++;
       if (loadedCount >= imgs.length) {
-        ({ minHeights, innerHeights } = readDimensions());
+        ({ innerHeights } = readDimensions());
         if (stRef.current) updateCards(stRef.current.progress || 0);
       }
     };
@@ -291,7 +258,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
     const handleResize = () => {
       if (resizeTimer) clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
-        ({ minHeights, innerHeights } = readDimensions());
+        ({ innerHeights, containerH } = readDimensions());
         if (stRef.current) updateCards(stRef.current.progress || 0);
       }, 150);
     };
@@ -304,20 +271,6 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
       ctx.revert();
     };
   }, [data.length]);
-
-  // Click on a title to smoothly scroll directly to that card
-  const handleTitleClick = (targetIndex: number) => {
-    if (!stRef.current) return;
-    const st = stRef.current;
-    let targetProgress = 0.05;
-    if (targetIndex === 1) {
-      targetProgress = 0.52;
-    } else if (targetIndex === 2) {
-      targetProgress = 0.94;
-    }
-    const scrollY = st.start + targetProgress * (st.end - st.start);
-    window.scrollTo({ top: scrollY, behavior: "smooth" });
-  };
 
   return (
     <section className="servicesBlock bg-[#111925]" id={id} ref={sectionRef} style={{ backgroundColor: "#111925" }}>
@@ -347,19 +300,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
                   >
                     <div className="innerContainer">
                       <div className="innerItem">
-                        <div
-                          className="normalTitle"
-                          onClick={() => handleTitleClick(i)}
-                          title={`Jump to ${line1} ${line2}`}
-                          role="button"
-                          tabIndex={0}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === " ") {
-                              e.preventDefault();
-                              handleTitleClick(i);
-                            }
-                          }}
-                        >
+                        <div className="normalTitle">
                           <div className="normalTitleLine normalTitleLine--1">
                             <span className="numIndex">
                               <SlideUpText split="characters" inView once stagger={0.02}>
@@ -387,7 +328,6 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
                                     data-magnetic
                                     className="arrowButton"
                                     aria-label={`Explore ${line1} ${line2}`}
-                                    onClick={(e) => e.stopPropagation()}
                                   >
                                     <svg viewBox="0 0 24 24">
                                       <path
@@ -414,7 +354,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
                           </p>
                           {item.buttonText && item.link && (
                             <div className="buttonRow">
-                              <Link href={item.link} data-magnetic className="ss__cta-btn" onClick={(e) => e.stopPropagation()}>
+                              <Link href={item.link} data-magnetic className="ss__cta-btn">
                                 <span>{item.buttonText}</span>
                                 <span className="ss__cta-arrow" aria-hidden="true">→</span>
                               </Link>
