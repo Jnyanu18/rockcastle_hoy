@@ -355,15 +355,15 @@ export default function Stats() {
 
           {/* Stats Figures Column */}
           <div className="hoy-showcase-col-stats w-full">
-            <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:gap-x-12 sm:gap-y-12 lg:flex lg:flex-col lg:gap-10 xl:gap-12">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-6 sm:gap-x-8 sm:gap-y-8 lg:flex lg:flex-col lg:gap-5 xl:gap-6">
               {figures.map((item, index) => (
                 <div key={item.label} className="flex flex-col items-start justify-start">
-                  <span className="font-sans text-xs sm:text-sm font-medium tracking-wide text-[#0A192F] mb-2 sm:mb-2.5">
+                  <span className="font-sans text-xs sm:text-sm font-medium tracking-wide text-[#0A192F] mb-1 sm:mb-1.5">
                     <SlideUpText split="words" delay={0.06} className="text-[#0A192F]">
                       {item.label}
                     </SlideUpText>
                   </span>
-                  <span className="font-sans text-3xl sm:text-5xl lg:text-[64px] xl:text-[72px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#ea7700]">
+                  <span className="font-sans text-3xl sm:text-5xl lg:text-[60px] xl:text-[66px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#ea7700]">
                     <RunningMetric value={item.value} delay={index * 120} />
                   </span>
                 </div>
@@ -371,7 +371,7 @@ export default function Stats() {
             </div>
 
             {/* Follow Us on Instagram CTA Button next to stats */}
-            <div className="mt-8 lg:mt-12 flex items-center justify-start">
+            <div className="mt-6 lg:mt-8 flex items-center justify-start">
               <a
                 href={social.instagram}
                 target="_blank"

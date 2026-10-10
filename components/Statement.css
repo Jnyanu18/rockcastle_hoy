@@ -196,7 +196,7 @@
 /* ---- The Works Section ---- */
 .hoy-works-section {
   position: relative;
-  margin-top: clamp(-260px, -16vw, -110px);
+  margin-top: clamp(-220px, -15vw, -100px);
   z-index: 3;
 }
 

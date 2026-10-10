@@ -115,12 +115,12 @@
   }
 }
 
-/* Outer Phone Chassis / Frame Body (black gap & bezel giving realistic mobile look) */
+/* Outer Phone Chassis / Frame Body (black gap & bezel with orange mobile border) */
 .hoy-phone-outline {
   position: absolute;
   inset: -1.25vw;
   background-color: #0a0e15;
-  border: 2.5px solid #0A192F;
+  border: 2px solid #ea7700;
   border-radius: 4.125vw;
   pointer-events: none;
   z-index: 1;
