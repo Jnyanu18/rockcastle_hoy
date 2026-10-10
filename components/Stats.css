@@ -231,6 +231,7 @@
   0% {
     transform: translateY(0px) scale(1);
   }
+
   100% {
     transform: translateY(-8px) scale(1.03);
   }
