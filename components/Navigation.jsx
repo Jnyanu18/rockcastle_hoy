@@ -116,8 +116,14 @@ export default function Navigation() {
       // behind the nav bar, rather than maintaining a hand-kept list of
       // "light section" ids that drifts out of sync as sections get
       // restyled.
+      // Once scrolled the bar is solid, and it contrasts with the section
+      // behind it: navy bar over light sections, white bar over navy ones.
+      // At the very top the bar is transparent over the hero video, so it
+      // keeps white text there.
       const isLight = isBackgroundLight(navRef.current)
-      const targetTheme = isLight ? 'light' : 'dark'
+      const targetTheme = scrolledRef.current
+        ? (isLight ? 'dark' : 'light')
+        : (isLight ? 'light' : 'dark')
       if (themeRef.current !== targetTheme) {
         themeRef.current = targetTheme
         setNavTheme(targetTheme)

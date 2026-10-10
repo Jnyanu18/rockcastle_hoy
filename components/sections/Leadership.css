@@ -266,6 +266,54 @@
   display: block;
 }
 
+/* ---- Back face content stagger: quote mark -> quote -> divider -> name -> role,
+   instead of all appearing at once the instant the card flips. Plain CSS
+   transitions, so the site's global prefers-reduced-motion kill-switch
+   (globals.css) neutralizes this automatically — no extra JS check needed. ---- */
+.leadership__quote-mark,
+.leadership__card-quote,
+.leadership__card-back-name,
+.leadership__card-back-role {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.leadership__card-back-divider {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s ease-out;
+}
+
+.leadership__card-back--revealed .leadership__quote-mark {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.leadership__card-back--revealed .leadership__card-quote {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.06s;
+}
+
+.leadership__card-back--revealed .leadership__card-back-divider {
+  transform: scaleX(1);
+  transition-delay: 0.12s;
+}
+
+.leadership__card-back--revealed .leadership__card-back-name {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.18s;
+}
+
+.leadership__card-back--revealed .leadership__card-back-role {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.24s;
+}
+
 /* ==========================================================================
    Responsive
    ========================================================================== */

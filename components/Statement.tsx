@@ -1,8 +1,13 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { statement, works } from "@/lib/content";
 import SlideUpText from "@/components/ui/SlideUpText";
 import "@/components/Statement.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* Statement section: Matches House of Yellow reference design (Screenshots 1 & 2)
    - Left column: "Who are we?" aligned directly with the top of the main headline
@@ -11,6 +16,44 @@ import "@/components/Statement.css";
    - Background color: #111925 (frosted navy, identical to RecentExperiences)
 */
 export default function Statement() {
+  const boxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const box = boxRef.current;
+    if (!box) return;
+
+    // JS-driven GSAP animation isn't covered by the global reduced-motion
+    // CSS kill-switch, so it needs its own check — skip straight to the
+    // final visible state when reduced motion is requested.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const plusTop = box.querySelector<HTMLElement>(".hoy-box-plus-top");
+    const plusBottom = box.querySelector<HTMLElement>(".hoy-box-plus-bottom");
+    const sparkle = box.querySelector<HTMLElement>(".hoy-box-star-center");
+
+    const ctx = gsap.context(() => {
+      gsap.set(box, { opacity: 0, scale: 0.94, transformOrigin: "50% 50%" });
+      if (plusTop) gsap.set(plusTop, { opacity: 0, y: 10 });
+      if (plusBottom) gsap.set(plusBottom, { opacity: 0, y: 10 });
+      if (sparkle) gsap.set(sparkle, { opacity: 0, rotate: -90, scale: 0.6, transformOrigin: "50% 50%" });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: box,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      tl.to(box, { opacity: 1, scale: 1, duration: 0.9, ease: "expo.out" }, 0);
+      if (plusTop) tl.to(plusTop, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, 0.15);
+      if (plusBottom) tl.to(plusBottom, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, 0.25);
+      if (sparkle) tl.to(sparkle, { opacity: 1, rotate: 0, scale: 1, duration: 0.8, ease: "expo.out" }, 0.3);
+    }, box);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section id="about" className="hoy-statement">
       <div className="hoy-statement__inner">
@@ -68,7 +111,7 @@ export default function Statement() {
             ROW 2 (BOX THING): Wireframe Squircle with Top +, Center ✦, Bottom +
             (Positioned at margin-left: 51.875vw, margin-top: -6.25vw)
             ========================================================================= */}
-        <div aria-hidden className="hoy-box-frame">
+        <div aria-hidden className="hoy-box-frame" ref={boxRef}>
           <span className="hoy-box-plus-top">+</span>
           <span className="hoy-box-star-center">
             <svg width="34" height="34" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 sm:w-8 sm:h-8 md:w-[2.2vw] md:h-[2.2vw]">

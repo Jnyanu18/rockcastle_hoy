@@ -10,6 +10,7 @@ import Leadership from "@/components/sections/Leadership";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer.jsx";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import Cinematics from "@/components/cinematics/Cinematics";
 
 export default function Home() {
   return (
@@ -31,6 +32,7 @@ export default function Home() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <Cinematics />
     </>
   );
 }

@@ -334,10 +334,11 @@
   flex-shrink: 0;
 }
 
+/* Stays orange on hover (a deeper shade) so the white label remains readable. */
 .nav__pill-btn:hover {
   transform: scale(1.02);
-  background: #f4f6f9;
-  box-shadow: 0 4px 16px rgba(17, 25, 37, 0.22);
+  background: #c46400;
+  box-shadow: 0 4px 16px rgba(234, 119, 0, 0.35);
 }
 
 .nav__pill-track-mask {
