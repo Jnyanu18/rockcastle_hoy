@@ -21,10 +21,10 @@ const DEFAULT_SELECTOR = [
 
 /**
  * ViewCursor:
- * - Default state: A small orange squircle box (12px x 12px) that follows the cursor.
+ * - Hero section: Centre of cursor is a smooth white circle hub (#f4f6f9).
+ * - Default state: A small orange squircle box (12px x 12px, #ea7700) that follows the cursor.
  * - On hover over images in ScrollingServices (or data-cursor="view"):
- *   The orange box seamlessly morphs/expands into the "VIEW" circle badge.
- * - On mouse leave: Morphs back into the small orange box.
+ *   Smoothly morphs/expands into the 52px orange "VIEW" circle badge.
  */
 export default function ViewCursor({
   text = "VIEW",
@@ -33,7 +33,6 @@ export default function ViewCursor({
   const cursorRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
-  const isExpandedRef = useRef(false);
 
   useEffect(() => {
     // Disable on touch devices or reduced motion
@@ -76,56 +75,75 @@ export default function ViewCursor({
     let isVisible = false;
     let lastX = -1;
     let lastY = -1;
+    type Mode = "hero" | "view" | "default";
+    let currentMode: Mode = "default";
 
-    const expandToCircle = () => {
-      if (isExpandedRef.current) return;
-      isExpandedRef.current = true;
+    const setMode = (mode: Mode) => {
+      if (currentMode === mode) return;
+      currentMode = mode;
 
-      gsap.to(badge, {
-        width: 52,
-        height: 52,
-        borderRadius: "50%",
-        backgroundColor: "#ea7700",
-        borderColor: "rgba(0, 0, 0, 0.1)",
-        boxShadow: "0 8px 24px rgba(0, 0, 0, 0.35)",
-        duration: 0.36,
-        ease: "back.out(1.8)",
-        overwrite: "auto",
-      });
-
-      gsap.to(label, {
-        opacity: 1,
-        scale: 1,
-        duration: 0.24,
-        delay: 0.06,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-    };
-
-    const collapseToBox = () => {
-      if (!isExpandedRef.current) return;
-      isExpandedRef.current = false;
-
-      gsap.to(label, {
-        opacity: 0,
-        scale: 0.4,
-        duration: 0.16,
-        ease: "power2.in",
-        overwrite: "auto",
-      });
-
-      gsap.to(badge, {
-        width: 12,
-        height: 12,
-        borderRadius: "3.5px",
-        backgroundColor: "#ea7700",
-        borderColor: "transparent",
-        boxShadow: "0 2px 8px rgba(234, 119, 0, 0.45)",
-        duration: 0.3,
-        ease: "power3.out",
-        overwrite: "auto",
-      });
+      if (mode === "hero") {
+        // In hero section: center is a smooth white circle
+        gsap.to(label, {
+          opacity: 0,
+          scale: 0.4,
+          duration: 0.16,
+          ease: "power2.in",
+          overwrite: "auto",
+        });
+        gsap.to(badge, {
+          width: 16,
+          height: 16,
+          borderRadius: "50%",
+          backgroundColor: "#f4f6f9",
+          borderColor: "transparent",
+          boxShadow: "none",
+          duration: 0.28,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+      } else if (mode === "view") {
+        // Expanded "VIEW" circle badge on media hover
+        gsap.to(badge, {
+          width: 52,
+          height: 52,
+          borderRadius: "50%",
+          backgroundColor: "#ea7700",
+          borderColor: "rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 8px 24px rgba(0, 0, 0, 0.35)",
+          duration: 0.36,
+          ease: "back.out(1.8)",
+          overwrite: "auto",
+        });
+        gsap.to(label, {
+          opacity: 1,
+          scale: 1,
+          duration: 0.24,
+          delay: 0.06,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+      } else {
+        // Default state across the website: small orange squircle box
+        gsap.to(label, {
+          opacity: 0,
+          scale: 0.4,
+          duration: 0.16,
+          ease: "power2.in",
+          overwrite: "auto",
+        });
+        gsap.to(badge, {
+          width: 12,
+          height: 12,
+          borderRadius: "3.5px",
+          backgroundColor: "#ea7700",
+          borderColor: "transparent",
+          boxShadow: "0 2px 8px rgba(234, 119, 0, 0.45)",
+          duration: 0.3,
+          ease: "power3.out",
+          overwrite: "auto",
+        });
+      }
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -145,11 +163,13 @@ export default function ViewCursor({
         });
       }
 
-      const target = (e.target as Element | null)?.closest(selector);
-      if (target) {
-        expandToCircle();
+      const el = e.target as Element | null;
+      if (el?.closest("#home")) {
+        setMode("hero");
+      } else if (el?.closest(selector)) {
+        setMode("view");
       } else {
-        collapseToBox();
+        setMode("default");
       }
     };
 
@@ -160,11 +180,12 @@ export default function ViewCursor({
       scrollCheckTimer = setTimeout(() => {
         if (lastX < 0 || lastY < 0) return;
         const elUnderCursor = document.elementFromPoint(lastX, lastY);
-        const target = elUnderCursor?.closest(selector);
-        if (target) {
-          expandToCircle();
+        if (elUnderCursor?.closest("#home")) {
+          setMode("hero");
+        } else if (elUnderCursor?.closest(selector)) {
+          setMode("view");
         } else {
-          collapseToBox();
+          setMode("default");
         }
       }, 50);
     };
@@ -173,7 +194,7 @@ export default function ViewCursor({
       lastX = -1;
       lastY = -1;
       isVisible = false;
-      collapseToBox();
+      setMode("default");
       gsap.to(cursor, {
         opacity: 0,
         scale: 0.5,
