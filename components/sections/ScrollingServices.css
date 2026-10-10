@@ -67,9 +67,17 @@
   transition: opacity 0.15s ease-out;
 }
 
-.servicesBlock .scrollItem:nth-child(1) { z-index: 10; }
-.servicesBlock .scrollItem:nth-child(2) { z-index: 11; }
-.servicesBlock .scrollItem:nth-child(3) { z-index: 12; }
+.servicesBlock .scrollItem:nth-child(1) {
+  z-index: 10;
+}
+
+.servicesBlock .scrollItem:nth-child(2) {
+  z-index: 11;
+}
+
+.servicesBlock .scrollItem:nth-child(3) {
+  z-index: 12;
+}
 
 .servicesBlock .innerContainer {
   width: 100%;
@@ -401,6 +409,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .servicesBlock .arrowButton,
   .servicesBlock .ss__cta-btn,
   .servicesBlock .imageWrapper img {
