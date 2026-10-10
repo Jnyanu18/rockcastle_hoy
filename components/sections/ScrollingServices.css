@@ -150,8 +150,11 @@
 }
 
 /* Inactive cards must not receive clicks, hover, or focus */
-.servicesBlock .scrollItem:not(.ss__item--active) {
+.servicesBlock .scrollItem:not(.ss__item--active),
+.servicesBlock .scrollItem.ss__item--past,
+.servicesBlock .scrollItem.ss__item--upcoming {
   pointer-events: none !important;
+  user-select: none !important;
 }
 
 /* Inline circular arrow button */
