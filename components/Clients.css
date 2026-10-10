@@ -7,7 +7,7 @@
   position: relative;
   z-index: 2;
   padding: clamp(48px, 7vh, 88px) 0;
-  color: var(--rc-black, #111925);
+  color: var(--rc-black, #0A192F);
   background: var(--white, #f4f6f9);
   overflow: clip;
 }

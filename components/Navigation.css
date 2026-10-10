@@ -63,12 +63,12 @@
 }
 
 .nav--theme-dark.nav--scrolled {
-  background: var(--rc-black, #111925);
+  background: var(--rc-black, #0A192F);
   box-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
 }
 
 .nav--theme-light {
-  color: #111925;
+  color: #0A192F;
 }
 
 .nav--theme-light.nav--scrolled {
@@ -441,7 +441,7 @@
   position: fixed;
   inset: 0;
   z-index: 110;
-  background: var(--rc-black-rich, #111925);
+  background: var(--rc-black-rich, #0A192F);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

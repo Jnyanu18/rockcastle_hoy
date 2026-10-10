@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
    - Left column: "Who are we?" aligned directly with the top of the main headline
    - Right top: "[ 01 ]" index aligned with the top of the section
    - Main content: Headline & body set in the primary column (font-weight: 500, leading: 1.12)
-   - Background color: #111925 (frosted navy, identical to RecentExperiences)
+   - Background color: #0A192F (frosted navy, identical to RecentExperiences)
 */
 export default function Statement() {
   const boxRef = useRef<HTMLDivElement>(null);

@@ -7,7 +7,7 @@ import Reveal from "@/components/ui/Reveal";
 /** Dark section: phone frame, count-up figures and a short note on mobile. */
 export default function Stats() {
   return (
-    <section className="bg-[#111925] px-[var(--gutter)] pb-[var(--section-y)] pt-[var(--section-y)] text-pale" style={{ backgroundColor: "#111925" }}>
+    <section className="bg-[#0A192F] px-[var(--gutter)] pb-[var(--section-y)] pt-[var(--section-y)] text-pale" style={{ backgroundColor: "#0A192F" }}>
       <div className="grid grid-cols-1 gap-y-10 md:grid-cols-12 md:gap-x-6">
         <p className="text-[0.8125rem] md:col-span-2">{stats.index}</p>
 
