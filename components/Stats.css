@@ -2,8 +2,8 @@
 
 .hoy-stats-section {
   position: relative;
-  background-color: #f4f6f9;
-  color: #0A192F;
+  background-color: #dcdcdc;
+  color: #151515;
   width: 100%;
   overflow-x: clip;
 }
@@ -124,7 +124,7 @@
   border-radius: 4.125vw;
   pointer-events: none;
   z-index: 1;
-  box-shadow: 0 25px 60px -15px rgba(10, 25, 47, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 60px -15px rgba(21, 21, 21, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 @media (max-width: 1080px) and (min-width: 768px) {
@@ -224,7 +224,7 @@
 }
 
 .hoy-reaction-like {
-  background-color: #f4f6f9;
+  background-color: #dcdcdc;
 }
 
 @keyframes floatReaction {

@@ -62,17 +62,19 @@
   color: #f4f6f9;
 }
 
+/* Scrolled bar: cement over cream sections, cream over cement (and dark) ones */
 .nav--theme-dark.nav--scrolled {
-  background: var(--rc-black, #0A192F);
-  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+  background: #dcdcdc;
+  color: #151515;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12);
 }
 
 .nav--theme-light {
-  color: #0A192F;
+  color: #151515;
 }
 
 .nav--theme-light.nav--scrolled {
-  background: var(--rc-white, #f4f6f9);
+  background: #fff1e7;
   box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12);
 }
 
@@ -247,6 +249,9 @@
 /* When navbar is in dark mode (white text/icons), invert wordmark to crisp white */
 .nav--theme-dark .nav__brand-wordmark {
   filter: brightness(0) invert(1);
+}
+.nav--theme-dark.nav--scrolled .nav__brand-wordmark {
+  filter: none;
 }
 
 /* When navbar is in light mode, show natural black */

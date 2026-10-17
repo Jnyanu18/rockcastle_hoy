@@ -13,7 +13,7 @@
   --hoy-yellow: #ea7700;
   /* orange sampled directly from the Rock Castle logo artwork — buttons, CTAs, numbers/index labels */
   --rc-yellow: #ea7700;
-  --white: #f4f6f9;
+  --white: #dcdcdc; /* cement */
   /* soft "royal" off-white (not flat pure white) — text / light-on-dark role */
   --light-grey: #182230;
   /* deepened navy — subtle surface, scroll state */
@@ -21,7 +21,8 @@
   /* muted blue-grey — secondary text, borders */
   --dark-grey: #0a0e15;
   /* near-black navy — dark accent surface */
-  --black: #0A192F;
+  --black: #151515; /* ink */
+  --peach: #fff1e7; /* cream/pink — replaces the old navy section role */
   /* deep navy (darkened again per feedback) — ink / dark-section role */
 
   /* Legacy aliases kept so existing component CSS (var(--rc-orange) etc.)
@@ -57,7 +58,7 @@ body {
 
 ::selection {
   background: var(--black);
-  color: #f4f6f9;
+  color: #fff1e7;
 }
 
 /* Hero background video: a slow continuous drift plus a one-time fade-in,
@@ -110,8 +111,8 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #f4f6f9;
-  color: #0A192F;
+  background: #dcdcdc;
+  color: #151515;
   border-radius: 9999px;
   height: 44px;
   width: 148px;
@@ -175,7 +176,7 @@ body {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #0A192F;
+  color: #151515;
   text-transform: uppercase;
 }
 

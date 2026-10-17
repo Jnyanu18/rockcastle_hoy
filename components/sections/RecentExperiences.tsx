@@ -9,7 +9,13 @@ import "@/components/sections/RecentExperiences.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const pad = (n: number) => String(n).padStart(2, "0");
+const filters = [
+  { label: "All", match: null },
+  { label: "Events", match: "Events" },
+  { label: "Activations", match: "Activation" },
+  { label: "Exhibitions", match: "Exhibition" },
+  { label: "Creative Strategy", match: "Creative Strategy" },
+] as const;
 
 /** Horizontal rail of story plates. Opening a plate hands off to the full-screen viewer. */
 export default function RecentExperiences() {
@@ -19,12 +25,14 @@ export default function RecentExperiences() {
   const returnFocusRef = useRef<number | null>(null);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [edges, setEdges] = useState({ start: true, end: false });
+  const [filter, setFilter] = useState<string | null>(null);
+  const shown = recentExperiences.filter((s) => !filter || s.category === filter);
 
   // Plates rise into place every time the section arrives, not just the first.
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
     const ctx = gsap.context(() => {
-      const plates = gsap.utils.toArray<HTMLElement>(".rx-plate");
+      const plates = gsap.utils.toArray<HTMLElement>(".rx-plate-card");
       gsap.fromTo(
         ".rx-head-controls-bar > *",
         { y: 28, opacity: 0 },
@@ -114,36 +122,26 @@ export default function RecentExperiences() {
       className="recent-experiences"
       id="recent-experiences"
       ref={sectionRef}
-      aria-labelledby="rx-title"
+      aria-label="Stories we’ve brought to life"
     >
-      <div className="rx-head-controls-bar w-full px-[var(--container-x)] mb-5 flex items-center justify-end gap-3">
-        <span className="font-mono text-xs uppercase tracking-wider text-ink/60 mr-2">
-          {pad(recentExperiences.length)} stories
-        </span>
-        <button
-          type="button"
-          className="rx-head__arrow"
-          data-magnetic
-          onClick={() => scrollRail(-1)}
-          disabled={edges.start}
-          aria-label="Scroll stories left"
-        >
-          ←
-        </button>
-        <button
-          type="button"
-          className="rx-head__arrow"
-          data-magnetic
-          onClick={() => scrollRail(1)}
-          disabled={edges.end}
-          aria-label="Scroll stories right"
-        >
-          →
-        </button>
+      <div className="rx-filters rx-head-controls-bar" role="tablist" aria-label="Filter stories">
+        {filters.map((f) => (
+          <button
+            key={f.label}
+            type="button"
+            role="tab"
+            aria-selected={filter === f.match}
+            className={filter === f.match ? "is-active" : ""}
+            onClick={() => setFilter(f.match)}
+          >
+            {f.label}
+          </button>
+        ))}
+        <em>[ 02 ]</em>
       </div>
 
       <ul className="rx-rail" ref={railRef} onScroll={updateEdges} aria-label="Recent experiences">
-        {recentExperiences.map((story, index) => (
+        {shown.map((story, index) => (
           <li className="rx-rail__item" key={story.id}>
             <button
               type="button"
@@ -159,46 +157,21 @@ export default function RecentExperiences() {
                 <span className="rx-plate__media">
                   <img src={story.cover} alt="" loading="lazy" decoding="async" />
                 </span>
-                <span className="rx-plate__scrim" aria-hidden="true" />
-
-                {/* Sequence indicator: one hairline per frame */}
-                <span className="rx-plate__segments" aria-hidden="true">
-                  {story.frames.map((f) => (
-                    <i key={f.id} />
-                  ))}
-                </span>
-
-                <span className="rx-plate__top" aria-hidden="true">
-                  <span className="rx-plate__index">{pad(index + 1)}</span>
-                  <span className="rx-plate__frames">{pad(story.frames.length)} frames</span>
-                </span>
-
                 {story.category && (
                   <span className="rx-plate__tags" aria-hidden="true">
-                    <span className="rx-plate__tag">{story.category}</span>
+                    <span className="rx-plate__tag">{story.category} <i>↗</i></span>
                   </span>
                 )}
 
                 <span className="rx-plate__view" aria-hidden="true">
-                  <span className="rx-plate__view-plus">+</span>
-                  <span className="rx-plate__view-pill">View story</span>
-                  <span className="rx-plate__view-plus">+</span>
+                  <span className="rx-plate__view-pill">Experience <i>↗</i></span>
                 </span>
               </span>
 
               {/* Title lives below the photo frame, not overlaid on it */}
               <span className="rx-plate__footer" aria-hidden="true">
                 <span className="rx-plate__title">{story.title}</span>
-                {story.metrics && (
-                  <span className="rx-plate__stats">
-                    {story.metrics.map((m) => (
-                      <span className="rx-plate__stat" key={m.label}>
-                        <span className="rx-plate__stat-label">{m.label}</span>
-                        <span className="rx-plate__stat-value">{m.value}</span>
-                      </span>
-                    ))}
-                  </span>
-                )}
+                <span className="rx-plate__stats">Lorem ipsum &nbsp; Lorem ipsum &nbsp; Lorem ipsum</span>
               </span>
             </button>
           </li>
@@ -207,7 +180,7 @@ export default function RecentExperiences() {
 
       {openIndex !== null && (
         <StoryViewer
-          stories={recentExperiences}
+          stories={shown}
           startIndex={openIndex}
           getOriginRect={getOriginRect}
           onClosed={onClosed}

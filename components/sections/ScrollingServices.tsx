@@ -4,13 +4,15 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { BookPlaneDrawing } from "@/components/figma/Drawings";
 import SlideUpText from "@/components/ui/SlideUpText";
 import "@/components/sections/ScrollingServices.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
 type DeckItem = {
-  index: string;
+  index?: string;
+  art?: boolean;
   line1: string;
   line2?: string;
   desc: string;
@@ -22,6 +24,13 @@ type DeckItem = {
 // Reuses the same three services shown in the Services section, split into
 // the two balanced headline lines this deck expects.
 const DEFAULT_ITEMS: DeckItem[] = [
+  {
+    art: true,
+    line1: "Behind every experience,",
+    line2: "there’s a story.",
+    desc: "From the first spark of an idea to the final moment, explore the thinking, creativity and craftsmanship behind some of our most memorable brand experiences.",
+    images: ["/rx/service-07-1.jpg", "/rx/service-06-1.jpg", "/rx/service-07-3.jpg", "/rx/service-07-2.jpg"],
+  },
   {
     index: "05",
     line1: "STORIES WE’VE",
@@ -106,110 +115,50 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
     let { minHeights, innerHeights, containerH } = readDimensions();
     let lastActiveIndex = -1;
 
-    // Timeline keyframes:
-    // 0.00 - 0.18: Card 0 dwell (active), Cards 1 & 2 hidden below
-    // 0.18 - 0.46: Transition 0 -> 1 (Card 1 rises smoothly and stacks into view; Card 0 collapses and fades out)
-    // 0.46 - 0.58: Card 1 dwell (active), Card 0 hidden, Card 2 hidden below
-    // 0.58 - 0.86: Transition 1 -> 2 (Card 2 rises smoothly and stacks into view; Card 1 collapses and fades out)
-    // 0.86 - 1.00: Card 2 dwell (active), Cards 0 & 1 hidden
-
-    const DWELL_1 = 0.18;
-    const TRANS_1_2_END = 0.46;
-    const DWELL_2 = 0.58;
-    const TRANS_2_3_END = 0.86;
+    // Timeline: card 0 dwells, then each following card rises and stacks in
+    // (collapsing the one before it), with a short dwell between transitions.
+    const N = itemEls.length;
+    const START = 0.18;
+    const TRANS = 0.28;
+    const DWELL = 0.12;
+    const END = 0.14;
+    const TOTAL = START + (N - 1) * TRANS + (N - 2) * DWELL + END;
+    const tStart = itemEls.map((_, i) => (START + (i - 1) * (TRANS + DWELL)) / TOTAL);
+    const tEnd = itemEls.map((_, i) => (START + (i - 1) * (TRANS + DWELL) + TRANS) / TOTAL);
 
     const updateCards = (progress: number) => {
       const p = Math.max(0, Math.min(1, progress));
-      const currentContainerH = containerH;
       const gap = 8;
-
-      // Determine active index for class tagging
-      let activeIndex = 0;
-      if (p >= 0.7) {
-        activeIndex = 2;
-      } else if (p >= 0.32) {
-        activeIndex = 1;
-      } else {
-        activeIndex = 0;
-      }
-
-      const min0 = minHeights[0] || 42;
-      const min1 = minHeights[1] || 42;
-      const min2 = minHeights[2] || 42;
-
-      const inner0 = innerHeights[0] || 560;
-      const inner1 = innerHeights[1] || 560;
-      const inner2 = innerHeights[2] || 560;
-
       const FADED_OPACITY = 0.28;
 
-      // Card 0: always at top: y = 0. Fades down to faded effect as Card 1 stacks in
-      let c0_t = 0;
-      if (p <= DWELL_1) {
-        c0_t = 0;
-      } else if (p < TRANS_1_2_END) {
-        c0_t = (p - DWELL_1) / (TRANS_1_2_END - DWELL_1);
-      } else {
-        c0_t = 1;
-      }
-      const c0_height = inner0 - (inner0 - min0) * c0_t;
-      const c0_opacity = 1 - (1 - FADED_OPACITY) * c0_t;
-      const c0_y = 0;
-
-      // Card 1: rises from bottom and stacks under Card 0 (min0 + gap)
-      const c1_topY = min0 + gap;
-      const c1_botY = Math.max(c1_topY, currentContainerH - min2 - gap - min1);
-
-      let c1_y: number, c1_height: number, c1_opacity: number;
-      if (p <= DWELL_1) {
-        c1_y = c1_botY;
-        c1_height = min1;
-        c1_opacity = FADED_OPACITY;
-      } else if (p < TRANS_1_2_END) {
-        const t = (p - DWELL_1) / (TRANS_1_2_END - DWELL_1);
-        c1_y = c1_botY - (c1_botY - c1_topY) * t;
-        c1_height = min1 + (inner1 - min1) * t;
-        c1_opacity = FADED_OPACITY + (1 - FADED_OPACITY) * t;
-      } else if (p <= DWELL_2) {
-        c1_y = c1_topY;
-        c1_height = inner1;
-        c1_opacity = 1;
-      } else if (p < TRANS_2_3_END) {
-        const t = (p - DWELL_2) / (TRANS_2_3_END - DWELL_2);
-        c1_y = c1_topY;
-        c1_height = inner1 - (inner1 - min1) * t;
-        c1_opacity = 1 - (1 - FADED_OPACITY) * t;
-      } else {
-        c1_y = c1_topY;
-        c1_height = min1;
-        c1_opacity = FADED_OPACITY;
+      // Active card switches at the midpoint of each transition
+      let activeIndex = 0;
+      for (let k = 1; k < N; k++) {
+        if (p >= (tStart[k] + tEnd[k]) / 2) activeIndex = k;
       }
 
-      // Card 2: rises from bottom and stacks under Card 1 (min0 + gap + min1 + gap)
-      const c2_topY = min0 + gap + min1 + gap;
-      const c2_botY = Math.max(c2_topY, currentContainerH - min2);
+      const min = (i: number) => minHeights[i] || 42;
+      const inner = (i: number) => innerHeights[i] || 560;
+      const rise = (i: number) =>
+        i === 0 ? 1 : Math.max(0, Math.min(1, (p - tStart[i]) / (tEnd[i] - tStart[i])));
 
-      let c2_y: number, c2_height: number, c2_opacity: number;
-      if (p <= DWELL_2) {
-        c2_y = c2_botY;
-        c2_height = min2;
-        c2_opacity = FADED_OPACITY;
-      } else if (p < TRANS_2_3_END) {
-        const t = (p - DWELL_2) / (TRANS_2_3_END - DWELL_2);
-        c2_y = c2_botY - (c2_botY - c2_topY) * t;
-        c2_height = min2 + (inner2 - min2) * t;
-        c2_opacity = FADED_OPACITY + (1 - FADED_OPACITY) * t;
-      } else {
-        c2_y = c2_topY;
-        c2_height = inner2;
-        c2_opacity = 1;
-      }
+      const states = itemEls.map((_, i) => {
+        const tIn = rise(i);
+        const collapse = i + 1 < N ? rise(i + 1) : 0;
+        const e = tIn * (1 - collapse);
 
-      const states = [
-        { y: c0_y, height: c0_height, opacity: c0_opacity },
-        { y: c1_y, height: c1_height, opacity: c1_opacity },
-        { y: c2_y, height: c2_height, opacity: c2_opacity },
-      ];
+        let topY = 0;
+        for (let j = 0; j < i; j++) topY += min(j) + gap;
+        let below = 0;
+        for (let j = i; j < N; j++) below += min(j);
+        const botY = Math.max(topY, containerH - below - gap * (N - 1 - i));
+
+        return {
+          y: i === 0 ? 0 : botY + (topY - botY) * tIn,
+          height: min(i) + (inner(i) - min(i)) * e,
+          opacity: FADED_OPACITY + (1 - FADED_OPACITY) * e,
+        };
+      });
 
       const activeIndexChanged = activeIndex !== lastActiveIndex;
       if (activeIndexChanged) {
@@ -297,7 +246,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
   }, [data.length]);
 
   return (
-    <section className="servicesBlock bg-[#0A192F]" id={id} ref={sectionRef} style={{ backgroundColor: "#0A192F" }}>
+    <section className="servicesBlock bg-[#fff1e7]" id={id} ref={sectionRef} style={{ backgroundColor: "#fff1e7" }}>
       <div className="howWeRollItemsBlock">
         <div className="scrollContainer" ref={scrollContainerRef}>
           <div className="stickyWrapper">
@@ -324,13 +273,16 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
                   >
                     <div className="innerContainer">
                       <div className="innerItem">
+                        {item.art && <BookPlaneDrawing className="ss__art is-in" />}
                         <div className="normalTitle">
                           <div className="normalTitleLine normalTitleLine--1">
-                            <span className="numIndex">
-                              <SlideUpText split="characters" inView once stagger={0.02}>
-                                {`[ ${item.index} ]`}
-                              </SlideUpText>
-                            </span>
+                            {item.index && (
+                              <span className="numIndex">
+                                <SlideUpText split="characters" inView once stagger={0.02}>
+                                  {`[ ${item.index} ]`}
+                                </SlideUpText>
+                              </span>
+                            )}
                             <span className="titleText titleText--1">
                               <SlideUpText split="words" inView once stagger={0.025}>
                                 {line1}

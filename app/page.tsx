@@ -1,7 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import RecentExperiences from "@/components/sections/RecentExperiences";
-import Statement from "@/components/Statement";
+import { WhoWeAre, StoriesAndInsta } from "@/components/figma/FigmaSections";
 import Clients from "@/components/Clients";
 import Stats from "@/components/Stats";
 import Process from "@/components/Process";
@@ -20,9 +20,10 @@ export default function Home() {
         {/* Sticky Hero with Curtain-rising Statement (Who are we) Scroll Effect */}
         <div className="relative">
           <Hero />
-          <Statement />
+          <WhoWeAre />
         </div>
         <RecentExperiences />
+        <StoriesAndInsta />
         <Stats />
         <Process />
         <ScrollingServices id="services" />

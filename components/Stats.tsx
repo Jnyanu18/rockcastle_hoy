@@ -130,8 +130,8 @@ export default function Stats() {
   return (
     <section
       id="stats"
-      className="hoy-stats-section bg-[#f4f6f9] px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-28"
-      style={{ backgroundColor: "#f4f6f9" }}
+      className="hoy-stats-section bg-[#dcdcdc] px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-28"
+      style={{ backgroundColor: "#dcdcdc" }}
     >
       {/* Container wrapper matching max content bounds */}
       <div className="mx-auto w-full max-w-[1760px]">
@@ -141,7 +141,7 @@ export default function Stats() {
         <div className="hoy-intro-cols mb-12 sm:mb-16 lg:mb-28">
           {/* Column 1: Section Index */}
           <div className="hoy-intro-col-1">
-            <span className="text-xs md:text-[13px] font-medium tracking-wide text-[#0A192F]">
+            <span className="text-xs md:text-[13px] font-medium tracking-wide text-[#151515]">
               <SlideUpText split="characters">
                 {`[ ${stats.index} ]`}
               </SlideUpText>
@@ -150,12 +150,12 @@ export default function Stats() {
 
           {/* Column 2: Beyond the Stage Eyebrow & Hero Statement */}
           <div className="hoy-intro-col-2">
-            <p className="text-xs md:text-[13px] font-medium text-[#0A192F] mb-4">
+            <p className="text-xs md:text-[13px] font-medium text-[#151515] mb-4">
               <SlideUpText split="words">
                 {stats.label}
               </SlideUpText>
             </p>
-            <h2 className="text-lg sm:text-xl lg:text-[24px] font-normal leading-[1.24] text-[#0A192F]">
+            <h2 className="text-lg sm:text-xl lg:text-[24px] font-normal leading-[1.24] text-[#151515]">
               <SlideUpText split="words" stagger={0.012} delay={0.06}>
                 {stats.heading}
               </SlideUpText>
@@ -165,14 +165,14 @@ export default function Stats() {
           {/* Column 3: Mobile Content / Brand Activations Aside */}
           <div className="hoy-intro-col-3">
             <div className="flex items-center gap-2 mb-3">
-              <span className="inline-block h-2.5 w-2.5 bg-[#0A192F] rounded-[1px] shrink-0" />
-              <span className="text-xs md:text-[13px] font-medium text-[#0A192F]">
+              <span className="inline-block h-2.5 w-2.5 bg-[#151515] rounded-[1px] shrink-0" />
+              <span className="text-xs md:text-[13px] font-medium text-[#151515]">
                 <SlideUpText split="words" delay={0.04}>
                   {stats.mobile.label}
                 </SlideUpText>
               </span>
             </div>
-            <p className="text-xs md:text-[13px] leading-relaxed text-[#0A192F]/80 max-w-sm">
+            <p className="text-xs md:text-[13px] leading-relaxed text-[#151515]/80 max-w-sm">
               <SlideUpText split="words" stagger={0.015} delay={0.1}>
                 {stats.mobile.body}
               </SlideUpText>
@@ -188,7 +188,7 @@ export default function Stats() {
           <div className="hoy-showcase-col-decor-left hidden lg:flex">
             <span
               aria-hidden
-              className="h-2.5 w-2.5 bg-[#0A192F] rounded-[1px]"
+              className="h-2.5 w-2.5 bg-[#151515] rounded-[1px]"
             />
           </div>
 
@@ -358,8 +358,8 @@ export default function Stats() {
             <div className="grid grid-cols-2 gap-x-6 gap-y-6 sm:gap-x-8 sm:gap-y-8 lg:flex lg:flex-col lg:gap-5 xl:gap-6">
               {figures.map((item, index) => (
                 <div key={item.label} className="flex flex-col items-start justify-start">
-                  <span className="font-sans text-xs sm:text-sm font-medium tracking-wide text-[#0A192F] mb-1 sm:mb-1.5">
-                    <SlideUpText split="words" delay={0.06} className="text-[#0A192F]">
+                  <span className="font-sans text-xs sm:text-sm font-medium tracking-wide text-[#151515] mb-1 sm:mb-1.5">
+                    <SlideUpText split="words" delay={0.06} className="text-[#151515]">
                       {item.label}
                     </SlideUpText>
                   </span>
@@ -378,9 +378,9 @@ export default function Stats() {
                 rel="noopener noreferrer"
                 data-magnetic
                 aria-label="Follow Rock Castle on Instagram"
-                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#ea7700] text-[#0A192F] font-medium text-xs sm:text-sm tracking-wide transition-all duration-300 hover:scale-105 hover:bg-[#c46400] shadow-[0_8px_24px_rgba(0,0,0,0.22)] active:scale-95 cursor-pointer select-none"
+                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#ea7700] text-[#151515] font-medium text-xs sm:text-sm tracking-wide transition-all duration-300 hover:scale-105 hover:bg-[#c46400] shadow-[0_8px_24px_rgba(0,0,0,0.22)] active:scale-95 cursor-pointer select-none"
               >
-                <InstagramIcon className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 text-[#0A192F]" />
+                <InstagramIcon className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 text-[#151515]" />
                 <span className="font-semibold uppercase tracking-wider text-[11px] sm:text-xs">
                   Follow us on Instagram
                 </span>
@@ -429,7 +429,7 @@ function LikeIcon() {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-3.5 h-3.5 text-[#0A192F]"
+      className="w-3.5 h-3.5 text-[#151515]"
     >
       <path
         d="M13.3984 4.29688C13.3984 3.69305 13.1547 3.11066 12.7158 2.67871C12.4216 2.38915 12.0555 2.18452 11.6572 2.08008L7.58301 11.1035V21.9766H19.1885C19.4904 21.9799 19.7816 21.8757 20.0078 21.6865C20.2334 21.4977 20.3785 21.2374 20.4219 20.9561L20.4229 20.9551L21.9629 11.0654C21.9888 10.8965 21.9772 10.7241 21.9287 10.5596C21.8801 10.3947 21.7958 10.2408 21.6797 10.1094C21.5634 9.97782 21.4181 9.87136 21.2539 9.79883C21.0897 9.72632 20.9106 9.68939 20.7295 9.69141H14.3984C13.8463 9.69129 13.3984 9.24362 13.3984 8.69141V4.29688ZM2 20.7793C2.00009 21.0916 2.12606 21.3943 2.35547 21.6201C2.58554 21.8465 2.90124 21.9766 3.2334 21.9766H5.58301V11.8896H3.2334C2.90124 11.8896 2.58554 12.0197 2.35547 12.2461C2.12607 12.4719 2.00006 12.7746 2 13.0869V20.7793ZM15.3984 7.69141H20.7188C21.181 7.68789 21.6396 7.78294 22.0625 7.96973C22.4887 8.15805 22.8693 8.43611 23.1777 8.78516C23.4863 9.13436 23.7158 9.54632 23.8477 9.99316C23.9795 10.4401 24.0104 10.9106 23.9395 11.3711V11.373L22.3984 21.2598L22.3994 21.2607C22.2813 22.0273 21.8859 22.723 21.291 23.2207C20.6994 23.7156 19.9489 23.9815 19.1777 23.9756V23.9766H3.2334C2.38104 23.9766 1.55966 23.6438 0.952148 23.0459C0.344261 22.4476 9.49763e-05 21.6324 0 20.7793V13.0869C5.87839e-05 12.2338 0.344271 11.4186 0.952148 10.8203C1.55966 10.2224 2.38104 9.88965 3.2334 9.88965H5.9375L10.1377 0.588867L10.207 0.459961C10.389 0.176097 10.7051 5.47237e-05 11.0488 0C12.1973 0 13.3022 0.448992 14.1191 1.25293C14.9365 2.05739 15.3984 3.15224 15.3984 4.29688V7.69141Z"
@@ -447,7 +447,7 @@ function SparkleIcon() {
       viewBox="0 0 22 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 text-[#0A192F]/40"
+      className="w-6 h-6 text-[#151515]/40"
     >
       <path
         fillRule="evenodd"

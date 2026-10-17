@@ -26,7 +26,7 @@ function checkIsDarkBackground(el: Element | null): boolean {
   if (!el) return true;
 
   // 1. Direct section container check for maximum performance
-  // Footer and light sections have white/light backgrounds -> square is blue (#0A192F)
+  // Footer and light sections have white/light backgrounds -> square is blue (#151515)
   const lightSection = el.closest(
     "#footer, .footer, footer, #stats, .stats, #process, .process, #leadership, .leadership, #clients, .clients"
   );
@@ -54,15 +54,15 @@ function checkIsDarkBackground(el: Element | null): boolean {
     cur = cur.parentElement;
   }
 
-  return true; // Default site theme is dark navy (#0A192F)
+  return true; // Default site theme is dark navy (#151515)
 }
 
 /**
  * ViewCursor:
- * - On blue/dark bg: white square (#f4f6f9).
- * - On white/light bg: blue square (#0A192F).
- * - On hero section: white circle center (#f4f6f9).
- * - On media hover: smoothly expands into 80px white circle (#f4f6f9) with blue text (#0A192F).
+ * - On blue/dark bg: white square (#dcdcdc).
+ * - On white/light bg: blue square (#151515).
+ * - On hero section: white circle center (#dcdcdc).
+ * - On media hover: smoothly expands into 80px white circle (#dcdcdc) with blue text (#151515).
  * - Real-time scroll awareness: automatically transitions even when scrolling without moving the mouse.
  */
 export default function ViewCursor({
@@ -97,7 +97,7 @@ export default function ViewCursor({
       width: 12,
       height: 12,
       borderRadius: "3.5px",
-      backgroundColor: "#f4f6f9",
+      backgroundColor: "#dcdcdc",
       borderColor: "transparent",
       boxShadow: "0 2px 8px rgba(0, 0, 0, 0.45)",
     });
@@ -136,7 +136,7 @@ export default function ViewCursor({
           width: 16,
           height: 16,
           borderRadius: "50%",
-          backgroundColor: "#f4f6f9",
+          backgroundColor: "#dcdcdc",
           borderColor: "transparent",
           boxShadow: "none",
           duration: 0.28,
@@ -149,8 +149,8 @@ export default function ViewCursor({
           width: 80,
           height: 80,
           borderRadius: "50%",
-          backgroundColor: "#f4f6f9",
-          borderColor: "rgba(10, 25, 47, 0.12)",
+          backgroundColor: "#dcdcdc",
+          borderColor: "rgba(21, 21, 21, 0.12)",
           boxShadow: "0 12px 30px rgba(0, 0, 0, 0.32)",
           duration: 0.36,
           ease: "back.out(1.7)",
@@ -177,9 +177,9 @@ export default function ViewCursor({
           width: 12,
           height: 12,
           borderRadius: "3.5px",
-          backgroundColor: "#0A192F",
+          backgroundColor: "#151515",
           borderColor: "transparent",
-          boxShadow: "0 2px 8px rgba(10, 25, 47, 0.3)",
+          boxShadow: "0 2px 8px rgba(21, 21, 21, 0.3)",
           duration: 0.28,
           ease: "power3.out",
           overwrite: "auto",
@@ -197,7 +197,7 @@ export default function ViewCursor({
           width: 12,
           height: 12,
           borderRadius: "3.5px",
-          backgroundColor: "#f4f6f9",
+          backgroundColor: "#dcdcdc",
           borderColor: "transparent",
           boxShadow: "0 2px 8px rgba(0, 0, 0, 0.45)",
           duration: 0.28,
@@ -336,14 +336,14 @@ export default function ViewCursor({
           width: 12,
           height: 12,
           borderRadius: "3.5px",
-          backgroundColor: "#f4f6f9",
+          backgroundColor: "#dcdcdc",
           boxShadow: "0 2px 8px rgba(0, 0, 0, 0.45)",
           willChange: "width, height, border-radius, background-color, transform",
         }}
       >
         <span
           ref={textRef}
-          className="text-[11px] font-bold tracking-[0.2em] uppercase select-none leading-none text-[#0A192F]"
+          className="text-[11px] font-bold tracking-[0.2em] uppercase select-none leading-none text-[#151515]"
           style={{ willChange: "transform, opacity" }}
         >
           {text}

@@ -100,8 +100,13 @@
   animation: centerPulse 5.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
-.kl-center-anchor .kl-glyph {
-  color: #f4f6f9;
+.kl-center-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  box-shadow: 0 0 28px rgba(0, 0, 0, 0.35);
 }
 
 @keyframes centerPulse {

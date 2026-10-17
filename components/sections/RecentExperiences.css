@@ -7,8 +7,8 @@
   position: relative;
   z-index: 10;
   padding: 0 0 clamp(88px, 12vh, 160px);
-  color: #f4f6f9;
-  background: var(--black, #0A192F);
+  color: #151515;
+  background: #fff1e7;
   overflow: clip;
 }
 
@@ -33,7 +33,7 @@
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 500;
-  color: #f4f6f9;
+  color: #151515;
 }
 
 .rx-head__eyebrow {
@@ -41,14 +41,14 @@
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.02em;
-  color: #f4f6f9;
+  color: #151515;
 }
 
 .rx-head__index {
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 500;
-  color: #f4f6f9;
+  color: #151515;
   font-variant-numeric: tabular-nums;
 }
 
@@ -60,7 +60,7 @@
   font-weight: 400;
   line-height: 1.32;
   letter-spacing: -0.015em;
-  color: #f4f6f9;
+  color: #151515;
   max-width: 640px;
 }
 
@@ -77,7 +77,7 @@
   font-size: var(--fs-meta);
   letter-spacing: var(--ls-meta);
   text-transform: uppercase;
-  color: rgba(244, 246, 249, 0.6);
+  color: rgba(21, 21, 21, 0.6);
 }
 
 .rx-head__arrow {
@@ -85,9 +85,9 @@
   height: 48px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(244, 246, 249, 0.25);
+  border: 1px solid rgba(21, 21, 21, 0.25);
   border-radius: 10px;
-  color: #f4f6f9;
+  color: #151515;
   font-size: 1rem;
   transition: background 250ms ease, color 250ms ease, border-color 250ms ease, opacity 250ms ease;
 }
@@ -96,7 +96,7 @@
 .rx-head__arrow:focus-visible {
   background: var(--hoy-yellow, #ea7700);
   border-color: var(--hoy-yellow, #ea7700);
-  color: #f4f6f9;
+  color: #151515;
   outline: none;
 }
 
@@ -137,7 +137,7 @@
 }
 
 .rx-rail__item {
-  flex: 0 0 calc((100% - 2 * var(--rx-gap)) / 3);
+  flex: 0 0 calc((100% - 3 * var(--rx-gap)) / 4);
   scroll-snap-align: start;
 }
 
@@ -145,7 +145,7 @@
    gap isn't wide enough to clear the gutter reserved by .rx-rail's own
    right padding, so the 3rd card needs a bit of extra breathing room to
    close that gap and keep the next card from peeking in at rest. */
-.rx-rail__item:nth-child(3) {
+.rx-rail__item:nth-child(4) {
   margin-right: calc(var(--container-x) - var(--rx-gap));
 }
 
@@ -153,7 +153,7 @@
 .rx-plate-card {
   display: block;
   width: 100%;
-  color: #f4f6f9;
+  color: #151515;
   text-align: left;
 }
 
@@ -283,8 +283,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: #0A192F;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #fff1e7;
+  border: 1px solid rgba(21, 21, 21, 0.16);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   color: var(--rc-orange);
   font-family: var(--font-body);
@@ -296,21 +296,21 @@
 }
 
 .rx-plate-card:hover .rx-plate__view-pill {
-  background: #0A192F;
-  border-color: rgba(255, 255, 255, 0.24);
+  background: #fff1e7;
+  border-color: rgba(21, 21, 21, 0.24);
 }
 
 .rx-plate__view-plus {
   font-size: 1.2rem;
   line-height: 1;
-  color: #f4f6f9;
+  color: #151515;
 }
 
 /* Title sits below the photo frame, in normal flow — not overlaid on the image */
 .rx-plate__footer {
   display: block;
   margin-top: clamp(14px, 1.8vw, 20px);
-  color: #f4f6f9;
+  color: #151515;
 }
 
 .rx-plate__title {
@@ -318,7 +318,7 @@
   font-weight: 500;
   line-height: 1.08;
   letter-spacing: -0.02em;
-  color: #f4f6f9;
+  color: #151515;
 }
 
 /* Small stats row under the title, like HOY's "Views / Delivery time" line */
@@ -328,7 +328,7 @@
   gap: 8px 28px;
   margin-top: 14px;
   padding-top: 14px;
-  border-top: 1px solid rgba(244, 246, 249, 0.2);
+  border-top: 1px solid rgba(21, 21, 21, 0.2);
 }
 
 .rx-plate__stat {
@@ -341,12 +341,12 @@
 }
 
 .rx-plate__stat-label {
-  color: rgba(244, 246, 249, 0.55);
+  color: rgba(21, 21, 21, 0.55);
   text-transform: uppercase;
 }
 
 .rx-plate__stat-value {
-  color: #f4f6f9;
+  color: #151515;
   font-weight: 600;
 }
 
@@ -524,7 +524,7 @@
   font-size: var(--fs-meta);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #f4f6f9;
+  color: #dcdcdc;
 }
 
 /* Cover: title anchored bottom-left like an opening credit */
@@ -556,7 +556,7 @@
 .story-frame__cover-meta span+span::before {
   content: '·';
   margin-right: 14px;
-  color: #f4f6f9;
+  color: #dcdcdc;
 }
 
 /* Statement: an editorial pause between media */
@@ -748,7 +748,7 @@
 .story-viewer__meta span+span::before {
   content: '·';
   margin-right: 10px;
-  color: #f4f6f9;
+  color: #dcdcdc;
 }
 
 .story-viewer__controls {
@@ -814,7 +814,7 @@
 }
 
 .story-viewer__caption-label {
-  color: #f4f6f9;
+  color: #dcdcdc;
 }
 
 .story-viewer__cta {
@@ -944,4 +944,49 @@
 
 .story-viewer:focus {
   outline: none;
+}
+
+/* Six stories laid out as a 2 x 3 grid on tablet/desktop (no swiping) */
+@media (min-width: 768px) {
+  .rx-rail {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: clamp(32px, 4vw, 64px);
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  .rx-rail__item,
+  .rx-rail__item:nth-child(4) {
+    flex: none;
+    margin-right: 0;
+    min-width: 0;
+  }
+  .rx-head__arrow,
+  .rx-head-controls-bar .rx-head__arrow {
+    display: none;
+  }
+}
+
+/* ---- Figma grid: plain 3 x 2 cards, filter row top-right ---------------------- */
+.recent-experiences { padding-top: clamp(32px, 4vw, 72px); background: #dcdcdc; }
+.rx-filters { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 14px; padding: 0 var(--container-x); margin-bottom: clamp(16px, 2vw, 36px); font-family: var(--font-sans); font-size: 12px; }
+.rx-filters button { font: inherit; background: none; border: 0; padding: 2px 8px; cursor: pointer; color: #151515; }
+.rx-filters button.is-active { background: #ee7d2e; color: #fff; font-weight: 500; }
+.rx-filters em { font-style: normal; margin-left: 12px; }
+
+.rx-rail { row-gap: clamp(28px, 3.4vw, 64px); column-gap: clamp(12px, 1.5vw, 28px); }
+.rx-plate { aspect-ratio: 1; border-radius: clamp(10px, 1vw, 18px); background: #333; }
+.rx-plate__media img { transform: none; filter: none; }
+.rx-plate-card:hover .rx-plate__media img { transform: scale(1.05); filter: none; }
+.rx-plate__tags { top: 14px; left: 14px; right: auto; }
+.rx-plate__tag { height: auto; padding: 6px 14px; background: #ee7d2e; color: #fff; font-family: var(--font-sans); font-size: 11px; font-weight: 400; letter-spacing: 0; text-transform: none; gap: 6px; }
+.rx-plate__tag i, .rx-plate__view-pill i { font-style: normal; font-size: .8em; margin-left: 6px; }
+.rx-plate__view { left: 4%; right: 4%; bottom: 14px; }
+.rx-plate__view-pill { height: auto; padding: 8px 14px; background: #000; border: 0; box-shadow: none; color: #ee7d2e; font-family: var(--font-sans); font-size: 11px; font-weight: 400; }
+.rx-plate__footer { margin-top: 14px; }
+.rx-plate__title { display: block; font-size: clamp(14px, 1.15vw, 20px); font-weight: 500; letter-spacing: 0; line-height: 1.2; padding-bottom: 8px; border-bottom: 1px solid #ee7d2e; }
+.rx-plate__stats { display: block; margin-top: 8px; padding: 0; border: 0; font-family: var(--font-sans); font-size: 10px; color: rgba(21, 21, 21, .7); }
+@media (max-width: 767px) {
+  .rx-rail { display: grid; grid-template-columns: 1fr; overflow: visible; }
+  .rx-rail__item { flex: none; max-width: none; }
 }

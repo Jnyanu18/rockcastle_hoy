@@ -24,9 +24,9 @@ function getEffectiveBg(el) {
   return m ? [parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3])] : [17, 25, 37]
 }
 
-/** Samples whatever is actually rendered just beneath the fixed nav bar. */
-function isBackgroundLight(navEl) {
-  if (!navEl || typeof document.elementsFromPoint !== 'function') return false
+/** Samples what is rendered beneath the fixed nav bar: 'cream' | 'cement' | 'dark'. */
+function backgroundKind(navEl) {
+  if (!navEl || typeof document.elementsFromPoint !== 'function') return 'dark'
   const rect = navEl.getBoundingClientRect()
   const sampleX = window.innerWidth / 2
   const sampleY = Math.min(window.innerHeight - 1, rect.bottom + 12)
@@ -34,7 +34,8 @@ function isBackgroundLight(navEl) {
   const behind = stack.find((el) => !navEl.contains(el) && el !== navEl)
   const [r, g, b] = getEffectiveBg(behind || document.body)
   const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-  return luminance > 0.6
+  if (luminance <= 0.6) return 'dark'
+  return r - b > 8 ? 'cream' : 'cement'
 }
 
 export default function Navigation() {
@@ -120,10 +121,12 @@ export default function Navigation() {
       // behind it: navy bar over light sections, white bar over navy ones.
       // At the very top the bar is transparent over the hero video, so it
       // keeps white text there.
-      const isLight = isBackgroundLight(navRef.current)
+      // Scrolled: cement bar ('dark' class) over cream sections, cream bar
+      // ('light' class) over cement/dark ones. Unscrolled: text colour only.
+      const kind = backgroundKind(navRef.current)
       const targetTheme = scrolledRef.current
-        ? (isLight ? 'dark' : 'light')
-        : (isLight ? 'light' : 'dark')
+        ? (kind === 'cream' ? 'dark' : 'light')
+        : (kind === 'dark' ? 'dark' : 'light')
       if (themeRef.current !== targetTheme) {
         themeRef.current = targetTheme
         setNavTheme(targetTheme)

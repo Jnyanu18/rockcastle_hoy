@@ -74,8 +74,8 @@ export default function KineticLogo({ className = '' }) {
             </div>
 
             {/* Central Anchored Squircle O */}
-            <div className="kl-center-anchor" title="O (Center)">
-              <GlyphO className="kl-glyph--center" />
+            <div className="kl-center-anchor" title="Rock Castle">
+              <img src="/rockcastle-logo.jpg" alt="Rock Castle" className="kl-center-logo" />
             </div>
           </div>
         </div>
