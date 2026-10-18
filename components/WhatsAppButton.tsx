@@ -1,6 +1,6 @@
 import { social } from "@/lib/content";
 
-/* Fixed round messaging button, bottom-right, optimized for mobile and desktop. */
+/* Fixed round messaging button, bottom-right, coded with pure SVG hand-mic emblem. */
 export default function WhatsAppButton() {
   return (
     <a
@@ -10,15 +10,48 @@ export default function WhatsAppButton() {
       aria-label="WhatsApp"
       data-magnetic
       data-magnetic-strength="0.38"
-      className="fixed bottom-5 right-5 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-accent text-ink shadow-[0_4px_16px_rgba(0,0,0,0.2)] transition-transform duration-300 active:scale-95 hover:scale-105 hover:bg-canvas md:bottom-6 md:right-6 md:h-11 md:w-11 md:shadow-none"
+      className="fixed bottom-5 right-5 z-50 flex h-[75px] w-[75px] items-center justify-center transition-all duration-300 active:scale-95 hover:scale-105 md:bottom-8 md:right-8 md:h-[86px] md:w-[86px]"
     >
       <svg
-        className="h-5 w-5 md:h-[22px] md:w-[22px]"
-        viewBox="0 0 24 24"
-        fill="currentColor"
+        viewBox="0 0 64 64"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-full w-full object-contain filter drop-shadow-[0_8px_26px_rgba(0,0,0,0.38)] transition-transform duration-300"
         aria-hidden="true"
       >
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        {/* Centered Circle Base */}
+        <circle cx="32" cy="32" r="28" fill="#ea7700" />
+
+        {/* Pure Code Vector Hand & Microphone Outline */}
+        <g transform="translate(-6, -10)" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none">
+          {/* Microphone Head: Dome, Sides, Center Band & Collar */}
+          <path d="M 43.5 35.5 L 44 31.5 C 44 28 46.5 27 48.8 27.2 C 51 27.5 52.8 29 53 31.5 L 49.5 35.5" />
+          <path d="M 44.2 31.5 C 47 32.2 49.8 32.2 52.8 31.5" />
+          <path d="M 43.2 35.8 C 45.5 36.8 47.8 36.8 49.8 35.8" />
+          
+          {/* Microphone Handle / Shaft */}
+          <path d="M 43 36.8 L 41.5 38.5" />
+          <path d="M 48 36.8 L 46 39" />
+          <path d="M 37.5 41.8 L 33 49" />
+          <path d="M 29 51.5 L 29 55.5 C 29 56.5 32 56.5 32 55.5 L 32 51.5" />
+          
+          {/* Thumb wrapping over handle */}
+          <path d="M 34.5 40.5 C 34.5 38.5 37 37.5 39.5 37.5 C 41.8 37.5 42.8 38.5 42.8 40.2 C 42.8 41.5 40.8 41.8 38 41.8" />
+          
+          {/* 4 Curled Fingers on Right Side of Handle */}
+          <path d="M 41.5 39.5 C 43.5 38.8 46.2 39.5 46.2 41.2 C 46.2 42.5 44 42.8 39.5 42.8" />
+          <path d="M 39.5 42.8 C 42.2 42.2 45.2 42.5 45.2 44.2 C 45.2 45.5 43 45.5 38.2 45.2" />
+          <path d="M 38.2 45.2 C 40.8 44.6 44.2 44.8 44.2 46.6 C 44.2 47.8 42.2 47.8 37 47.6" />
+          <path d="M 37 47.6 C 39.5 47.3 42.5 47.6 42.5 49.3 C 42.5 50.8 40 51 35.5 50.5" />
+          
+          {/* Hand Palm, Sleeve Cuff Fold & Forearm */}
+          <path d="M 34.5 40.5 C 31.5 42.5 29.5 45 28 47" />
+          <path d="M 28 47 L 31.5 48" />
+          <path d="M 27.5 47.8 C 25.5 50.5 23 53.5 22 56.5 C 23.2 58 25.8 58.5 27.5 57.5" />
+          
+          {/* Audio Cable Curling Out to Left Edge */}
+          <path d="M 22 56.5 C 19 56.5 15.5 55.2 10 55.2" />
+        </g>
       </svg>
     </a>
   );
