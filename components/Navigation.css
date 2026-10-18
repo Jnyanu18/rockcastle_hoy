@@ -10,34 +10,13 @@
   --nav-shift-right: 0px;
 }
 
-@media (min-width: 992px) {
-  :root {
-    --nav-shift-left: clamp(25px, 3.5vw, 55px);
-    --nav-shift-right: clamp(40px, 5vw, 80px);
-  }
-}
-
-@media (min-width: 1200px) {
-  :root {
-    --nav-shift-left: clamp(45px, 5.2vw, 85px);
-    --nav-shift-right: clamp(65px, 7vw, 125px);
-  }
-}
-
-@media (min-width: 1440px) {
-  :root {
-    --nav-shift-left: clamp(65px, 6.5vw, 115px);
-    --nav-shift-right: clamp(90px, 8.5vw, 160px);
-  }
-}
-
 .nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 120;
-  padding: 22px 0;
+  padding: clamp(30px, 3.8vh, 46px) 0;
   color: #f4f6f9;
   background: transparent;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
@@ -50,7 +29,7 @@
 }
 
 .nav--scrolled {
-  padding: 14px 0;
+  padding: clamp(16px, 2vh, 22px) 0;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
@@ -78,54 +57,12 @@
   box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12);
 }
 
-/* Homepage hero treatment: compact floating navigation over the campaign media. */
-.nav--hero,
-.nav--hero.nav--scrolled {
-  top: 18px;
-  left: 50%;
-  right: auto;
-  width: min(900px, calc(100% - 32px));
-  padding: 8px 0;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: rgba(5, 5, 5, 0.84);
-  border: 1px solid rgba(241, 236, 226, 0.16);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
-  color: var(--rc-white, #f4f6f9);
-}
-
-.nav--hero .nav__inner {
-  padding-inline: clamp(14px, 2vw, 24px);
-}
-
-.nav--hero .nav__brand-logo {
-  width: 38px;
-  height: 38px;
-  border-radius: 7px;
-}
-
-.nav--hero .nav__brand-wordmark {
-  filter: brightness(0) invert(1);
-}
-
-@media (max-width: 700px) {
-  .nav--hero,
-  .nav--hero.nav--scrolled {
-    top: 12px;
-    width: calc(100% - 24px);
-  }
-
-  .nav--hero .nav__brand-wordmark {
-    display: none;
-  }
-}
-
 /* Full-bleed inner container spanning corner-to-corner */
 .nav__inner {
   width: 100%;
   max-width: 100%;
   margin: 0;
-  padding: 0 clamp(20px, 3.2vw, 48px);
+  padding: 0 clamp(24px, 3.8vw, 64px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -135,21 +72,15 @@
 
 /* ===================================================
    ZONE 1: Left Navigation Links (Corner to Center)
-   Exact order: Home, Made by Yellow, Culture, How we roll
+   Order: Home | About Us | Our Work | Services | Team | Contact
    =================================================== */
 .nav__links {
   display: none;
   align-items: center;
-  gap: clamp(18px, 2.1vw, 34px);
+  gap: clamp(16px, 1.9vw, 32px);
   flex: 1;
   justify-content: flex-start;
-  transform: translateX(calc((1 - var(--nav-scroll-p, 0)) * var(--nav-shift-left, 0px)));
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
-  will-change: transform;
-}
-
-.nav--scrolled .nav__links {
-  transform: translateX(0);
+  transition: opacity 0.25s ease;
 }
 
 .nav__link {
@@ -157,7 +88,7 @@
   font-size: 13.5px;
   font-weight: 500;
   letter-spacing: 0.01em;
-  text-transform: none; /* Title Case matching reference */
+  text-transform: none;
   color: currentColor;
   text-decoration: none;
   position: relative;
@@ -171,7 +102,7 @@
   opacity: 1;
 }
 
-/* Underline Indicator: clean solid horizontal bar below active link */
+/* Underline Indicator: vibrant orange bar below active or hovered link matching reference */
 .nav__link::after {
   content: '';
   position: absolute;
@@ -179,7 +110,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: currentColor;
+  background: var(--rc-orange, #ea7700);
   transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   border-radius: 1px;
 }
@@ -195,8 +126,9 @@
 }
 
 /* ===================================================
-   ZONE 2: Center Brand Logo & Stacked Text
-   Pinned dead-center horizontally and vertically
+   ZONE 2: Center Brand Logo & Tagline Lockup
+   Pinned dead-center horizontally and vertically:
+   [ ROCK CASTLE ] | EXPERIENCE UN-LTD
    =================================================== */
 .nav__brand-center-anchor {
   position: absolute;
@@ -213,7 +145,7 @@
 .nav__brand {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: clamp(12px, 1.25vw, 18px);
   text-decoration: none;
   color: currentColor;
   pointer-events: auto;
@@ -221,29 +153,47 @@
 }
 
 .nav__brand:hover {
-  opacity: 0.9;
+  opacity: 0.94;
   transform: scale(1.02);
 }
 
-.nav__brand-logo {
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  box-sizing: border-box;
-  background: transparent;
-  object-fit: cover;
-  border-radius: 9px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-  flex-shrink: 0;
-}
-
 .nav__brand-wordmark {
-  height: clamp(34px, 2.6vw, 42px);
+  height: clamp(40px, 3.5vw, 56px);
   width: auto;
   object-fit: contain;
   display: block;
   flex-shrink: 0;
   transition: filter 0.3s ease, opacity 0.25s ease;
+}
+
+/* Orange Vertical Separator Line */
+.nav__brand-divider {
+  display: block;
+  width: 2px;
+  height: clamp(34px, 2.9vw, 46px);
+  background-color: var(--rc-orange, #ea7700);
+  flex-shrink: 0;
+  border-radius: 1px;
+}
+
+/* Subtitle / Tagline text: EXPERIENCE UN-LTD (kept compact as before) */
+.nav__brand-tagline {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  line-height: 1.14;
+  letter-spacing: 0.08em;
+  font-family: var(--font-body);
+  font-size: clamp(9px, 0.72vw, 11px);
+  font-weight: 700;
+  color: currentColor;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nav__brand-tagline span {
+  display: block;
 }
 
 /* When navbar is in dark mode (white text/icons), invert wordmark to crisp white */
@@ -260,39 +210,33 @@
 }
 
 @media (max-width: 640px) {
-  .nav__brand-logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-  }
-
   .nav__brand-wordmark {
-    height: 28px;
+    height: 30px;
+  }
+  .nav__brand-divider {
+    height: 24px;
+  }
+  .nav__brand-tagline {
+    font-size: 8px;
   }
 }
 
 /* ===================================================
-   ZONE 3: Right Socials & Scrolling Pill CTA (Center to Right Corner)
+   ZONE 3: Right Socials (LinkedIn & Instagram)
    =================================================== */
 .nav__right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: clamp(14px, 1.8vw, 24px);
+  gap: clamp(16px, 1.8vw, 24px);
   flex: 1;
-  transform: translateX(calc((1 - var(--nav-scroll-p, 0)) * -1 * var(--nav-shift-right, 0px)));
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
-}
-
-.nav--scrolled .nav__right {
-  transform: translateX(0);
 }
 
 .nav__socials {
   display: none;
   align-items: center;
-  gap: 18px;
+  gap: clamp(18px, 1.7vw, 24px);
 }
 
 .nav__social-link {
@@ -300,18 +244,21 @@
   align-items: center;
   justify-content: center;
   color: currentColor;
-  opacity: 0.88;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
   text-decoration: none;
 }
 
 .nav__social-link:hover {
   opacity: 1;
+  color: var(--rc-orange, #ea7700);
   transform: translateY(-1px);
 }
 
 .nav__social-icon {
   display: block;
+  width: clamp(21px, 1.55vw, 25px);
+  height: clamp(21px, 1.55vw, 25px);
 }
 
 /* Yellow Capsule Pill Button with Running Marquee Ticker */
@@ -586,7 +533,7 @@
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1024px) {
   .nav__links {
     display: flex;
   }

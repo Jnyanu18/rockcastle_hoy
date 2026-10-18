@@ -48,7 +48,7 @@ export default function Navigation() {
   const pathname = usePathname() || '/'
   const router = useRouter()
 
-  useMagnetic(navRef, '.nav__link, .nav__pill-btn, .nav__social-link', 0.25)
+  useMagnetic(navRef, '.nav__link, .nav__social-link', 0.25)
 
   // Scroll detection: theme adaptation, scrolled state, and dynamic hero-to-corner spread
   const scrolledRef = useRef(false)
@@ -61,6 +61,7 @@ export default function Navigation() {
     let watchBounds = []
 
     const sectionWatchList = [
+      { id: 'contact', navKey: 'contact' },
       { id: 'leadership', navKey: 'team' },
       { id: 'services', navKey: 'services' },
       { id: 'capabilities', navKey: 'services' },
@@ -124,9 +125,9 @@ export default function Navigation() {
       // Scrolled: cement bar ('dark' class) over cream sections, cream bar
       // ('light' class) over cement/dark ones. Unscrolled: text colour only.
       const kind = backgroundKind(navRef.current)
-      const targetTheme = scrolledRef.current
-        ? (kind === 'cream' ? 'dark' : 'light')
-        : (kind === 'dark' ? 'dark' : 'light')
+      const targetTheme = !scrolledRef.current
+        ? 'dark'
+        : (kind === 'cream' ? 'dark' : 'light')
       if (themeRef.current !== targetTheme) {
         themeRef.current = targetTheme
         setNavTheme(targetTheme)
@@ -199,31 +200,12 @@ export default function Navigation() {
     '/#team': 'leadership',
     '/#leadership': 'leadership',
     '/team': 'leadership',
+    '/#contact': 'contact',
+    '/contact': 'contact',
   }
 
   const handleNavClick = (e, href) => {
     closeMenu()
-
-    // Dedicated routes that should always navigate to the page
-    if (href === '/contact' || href === '/connect') {
-      if (pathname === '/contact' || pathname === '/connect') {
-        e.preventDefault()
-        if (window.__lenis) {
-          window.__lenis.scrollTo(0, { duration: 1 })
-        } else {
-          window.scrollTo({ top: 0, behavior: 'smooth' })
-        }
-        return
-      }
-      e.preventDefault()
-      router.push('/contact')
-      if (window.__lenis) {
-        window.__lenis.scrollTo(0, { immediate: true })
-      } else {
-        window.scrollTo(0, 0)
-      }
-      return
-    }
 
     // Smooth scroll if matching target section is available on current page
     if (pathname === '/') {
@@ -278,13 +260,15 @@ export default function Navigation() {
     }
   }
 
-  // Primary Navigation Links: Home | About Us | Our Work | Services | Team
+  // Primary Navigation Links matching Reference Design:
+  // Home | About Us | Our Work | Services | Team | Contact
   const links = [
     { href: '/', label: 'Home' },
     { href: '/#about', label: 'About Us' },
     { href: '/#our-work', label: 'Our Work' },
     { href: '/#services', label: 'Services' },
     { href: '/#team', label: 'Team' },
+    { href: '/#contact', label: 'Contact' },
   ]
 
   const isLinkActive = (href) => {
@@ -296,6 +280,7 @@ export default function Navigation() {
     if (href === '/#our-work' || href === '/#recent-experiences') return activeSection === 'our-work'
     if (href === '/#services' || href === '/#capabilities') return activeSection === 'services'
     if (href === '/#team' || href === '/#leadership') return activeSection === 'team'
+    if (href === '/#contact' || href === '/contact') return activeSection === 'contact'
     return false
   }
 
@@ -320,20 +305,28 @@ export default function Navigation() {
             ))}
           </nav>
 
-          {/* Center: Rockcastle Logo & Wordmark (Pinned Dead Center) */}
+          {/* Center: Rockcastle Logo & Tagline (Pinned Dead Center) */}
           <div className="nav__brand-center-anchor">
             <Link
               href="/"
               className="nav__brand"
-              aria-label="Rockcastle Home"
+              aria-label="Rock Castle — Experience Un-Ltd"
               onClick={(e) => handleNavClick(e, '/')}
             >
-              <img src="/rockcastle-logo.jpg" alt="" aria-hidden="true" className="nav__brand-logo" />
-              <img src="/rockcastle-logo-black.png" alt="Rock Castle" className="nav__brand-wordmark" />
+              <img
+                src="/rockcastle-logo-black.png"
+                alt="Rock Castle"
+                className="nav__brand-wordmark"
+              />
+              <span className="nav__brand-divider" aria-hidden="true" />
+              <div className="nav__brand-tagline">
+                <span>EXPERIENCE</span>
+                <span>UN-LTD</span>
+              </div>
             </Link>
           </div>
 
-          {/* Right: Social Glyphs & Scrolling Yellow Pill CTA */}
+          {/* Right: Social Glyphs (LinkedIn & Instagram) and Mobile Hamburger Toggle */}
           <div className="nav__right">
             {/* Social Icons (LinkedIn & Instagram) */}
             <div className="nav__socials">
@@ -344,10 +337,14 @@ export default function Navigation() {
                 className="nav__social-link"
                 aria-label="LinkedIn"
               >
-                <svg className="nav__social-icon" viewBox="0 0 24 24" width="17" height="17" fill="currentColor">
-                  <circle cx="4.98" cy="4.98" r="2.5" />
-                  <rect x="2.5" y="9.5" width="4.96" height="12" rx="0.5" />
-                  <path d="M14.5 9.5c-2.4 0-3.5 1.3-4.1 2.2V9.5H6.2c.05 1 0 12 0 12h4.2v-6.7c0-.36.03-.72.13-.98.28-.72.93-1.47 2.03-1.47 1.43 0 2 1.09 2 2.69V21.5h4.2v-7.2c0-3.86-2.06-5.8-4.26-5.8z" />
+                <svg
+                  className="nav__social-icon"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                >
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26z" />
                 </svg>
               </a>
 
@@ -361,8 +358,8 @@ export default function Navigation() {
                 <svg
                   className="nav__social-icon"
                   viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
+                  width="24"
+                  height="24"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
@@ -375,26 +372,6 @@ export default function Navigation() {
                 </svg>
               </a>
             </div>
-
-            {/* Signature Scrolling Yellow Pill Button (Routes to dedicated /contact page) */}
-            <Link
-              href="/contact"
-              className={`nav__pill-btn ${pathname === '/connect' || pathname === '/contact' ? 'nav__pill-btn--active' : ''}`}
-              onClick={(e) => handleNavClick(e, '/contact')}
-              aria-label="Connect with Rockcastle"
-            >
-              <div className="nav__pill-track-mask">
-                <div className="nav__pill-track">
-                  <span>CONNECT</span>
-                  <span>CONNECT</span>
-                  <span>CONNECT</span>
-                  <span>CONNECT</span>
-                  <span>CONNECT</span>
-                  <span>CONNECT</span>
-                </div>
-              </div>
-              <span className="nav__pill-plus">+</span>
-            </Link>
 
             {/* Mobile Hamburger Toggle */}
             <button
