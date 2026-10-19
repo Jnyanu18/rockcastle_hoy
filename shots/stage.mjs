@@ -1,0 +1,11 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
+await p.goto('http://localhost:3000/', { waitUntil: 'domcontentloaded' });
+await p.waitForTimeout(5000);
+await p.evaluate(() => document.querySelector('#about').scrollIntoView());
+await p.waitForTimeout(4500);
+await p.evaluate(() => window.scrollBy(0, 300));
+await p.waitForTimeout(1500);
+await p.screenshot({ path: 'shots/stage.png' });
+await b.close();

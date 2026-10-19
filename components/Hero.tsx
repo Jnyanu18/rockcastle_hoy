@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { hero } from "@/lib/content";
 import KineticLogo from "@/components/KineticLogo";
-import SlideUpText from "@/components/ui/SlideUpText";
 import HeroPlayCursor, { PlayCursorBadge } from "@/components/HeroPlayCursor";
 import HeroVideoModal from "@/components/HeroVideoModal";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* Play Video Squircle Tile: rounded yellow squircle with + shape kinetic ticker */
 function PlayVideoTile({ onPlay }: { onPlay?: () => void }) {
@@ -56,6 +59,30 @@ export default function Hero() {
     return () => observer.disconnect();
   }, [isVideoModalOpen]);
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    const nextSection = document.querySelector<HTMLElement>("#about");
+    if (!section || !nextSection || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const ctx = gsap.context(() => {
+      const masks = gsap.utils.toArray<HTMLElement>("[data-hero-mask]");
+      const parallax = gsap.utils.toArray<HTMLElement>("[data-hero-parallax]");
+      ScrollTrigger.create({
+        trigger: nextSection,
+        start: "top bottom",
+        end: "top top",
+        scrub: true,
+        onUpdate: ({ progress }) => {
+          masks.forEach((node) => node.style.setProperty("--hero-reveal", `${Math.round(progress * 100)}%`));
+          parallax.forEach((node, index) => {
+            node.style.setProperty("--hero-parallax-y", `${progress * (index % 2 ? -34 : 26)}px`);
+          });
+        },
+      });
+    }, section);
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
       ref={sectionRef}
@@ -91,15 +118,11 @@ export default function Hero() {
 
         {/* Mobile Welcome & Headline Copy */}
         <div className="mt-3 flex flex-col items-center text-center px-2">
-          <p className="text-xs font-semibold tracking-wide text-[#f4f6f9]">
-            <SlideUpText split="words" delay={0.2} stagger={0.02}>
-              {hero.label}
-            </SlideUpText>
+          <p data-hero-mask className="hero-dotted-mask text-xs font-semibold tracking-wide text-[#f4f6f9]">
+            {hero.label}
           </p>
-          <p className="mt-1.5 max-w-[260px] text-[11px] leading-relaxed font-medium text-[#f4f6f9]">
-            <SlideUpText split="words" delay={0.35} stagger={0.015}>
-              {hero.headline}
-            </SlideUpText>
+          <p data-hero-mask className="hero-dotted-mask mt-1.5 max-w-[260px] text-[11px] leading-relaxed font-medium text-[#f4f6f9]">
+            {hero.headline}
           </p>
         </div>
 
@@ -134,30 +157,24 @@ export default function Hero() {
       />
 
       {/* Center Kinetic Logo (replaces 3x3 HOY letter grid) */}
-      <div className="hidden md:flex absolute inset-0 items-center justify-center z-20 pointer-events-none">
+      <div data-hero-parallax className="hidden md:flex absolute inset-0 items-center justify-center z-20 pointer-events-none">
         <KineticLogo className="pointer-events-auto" />
       </div>
 
       {/* Primary headline: desktop at left-center, matching House of Yellow reference scale exactly */}
-      <div className="hidden md:block absolute md:top-1/2 md:-translate-y-1/2 md:left-6 lg:left-10 xl:left-12 md:max-w-[280px] lg:max-w-[310px] z-20 pointer-events-none">
-        <p className="mb-2.5 md:mb-3 text-[14px] lg:text-[15px] font-medium text-[#f4f6f9]">
-          <SlideUpText split="words" delay={0.2} stagger={0.02}>
-            {hero.label}
-          </SlideUpText>
+      <div data-hero-parallax className="hidden md:block absolute md:top-1/2 md:-translate-y-1/2 md:left-6 lg:left-10 xl:left-12 md:max-w-[280px] lg:max-w-[310px] z-20 pointer-events-none">
+        <p data-hero-mask className="hero-dotted-mask mb-2.5 md:mb-3 text-[14px] lg:text-[15px] font-medium text-[#f4f6f9]">
+          {hero.label}
         </p>
-        <p className="text-[21px] md:text-[23px] lg:text-[25px] leading-[1.22] font-medium tracking-[-0.01em] text-[#f4f6f9]">
-          <SlideUpText split="words" delay={0.35} stagger={0.015}>
-            {hero.headline}
-          </SlideUpText>
+        <p data-hero-mask className="hero-dotted-mask text-[21px] md:text-[23px] lg:text-[25px] leading-[1.22] font-medium tracking-[-0.01em] text-[#f4f6f9]">
+          {hero.headline}
         </p>
       </div>
 
       {/* Supporting copy: desktop right-center, same restrained scale */}
-      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 max-w-[11rem] lg:max-w-[12rem] text-right text-[13px] lg:text-sm leading-relaxed z-20 md:right-8 pointer-events-none text-[#f4f6f9]">
-        <p>
-          <SlideUpText split="words" delay={0.45} stagger={0.015}>
-            {hero.aside}
-          </SlideUpText>
+      <div data-hero-parallax className="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 max-w-[11rem] lg:max-w-[12rem] text-right text-[13px] lg:text-sm leading-relaxed z-20 md:right-8 pointer-events-none text-[#f4f6f9]">
+        <p data-hero-mask className="hero-dotted-mask">
+          {hero.aside}
         </p>
       </div>
 

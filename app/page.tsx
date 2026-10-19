@@ -23,10 +23,10 @@ export default function Home() {
           <WhoWeAre />
         </div>
         <RecentExperiences />
-        <StoriesAndInsta />
         <Stats />
         <Process />
         <ScrollingServices id="services" />
+        <StoriesAndInsta />
         <Leadership />
         <Clients />
         <Contact />

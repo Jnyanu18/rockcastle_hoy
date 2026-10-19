@@ -5,7 +5,7 @@ import gsap from "gsap";
 
 /**
  * PlayCursorBadge
- * Renders the House of Yellow signature pale-yellow squircle badge.
+ * Renders the light badge with the signature orange Play/Video ticker.
  * The text "Play" (vertical) and "Video" (horizontal) are aligned in a "+" shape,
  * continuously gliding towards the centre, passing through, and appearing from the other side.
  */
@@ -37,7 +37,7 @@ function InwardSpoke({
             style={{ width: `${slotWidth}px` }}
             className="shrink-0 flex items-center justify-center h-[18px]"
           >
-            <span className="text-[11px] font-semibold text-[#ea7700] tracking-[0.03em] font-sans select-none whitespace-nowrap">
+            <span className="text-[11px] font-semibold text-[var(--rc-orange)] tracking-[0.03em] font-sans select-none whitespace-nowrap">
               {word}
             </span>
           </div>

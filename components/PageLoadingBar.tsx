@@ -68,7 +68,7 @@ export default function PageLoadingBar() {
         style={{
           width: `${progress}%`,
           opacity: progress >= 100 ? 0 : 1,
-          boxShadow: "0 0 8px rgba(234, 119, 0, 0.6)",
+          boxShadow: "0 0 8px rgba(238, 125, 46, 0.6)",
           transition: progress >= 100 ? "opacity 400ms ease" : "width 200ms ease-out",
         }}
       />

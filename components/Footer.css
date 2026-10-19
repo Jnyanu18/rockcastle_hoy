@@ -94,8 +94,8 @@ main.main--how-we-work {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--rc-orange, #ea7700);
-  color: #151515;
+  background: var(--rc-orange, #ee7d2e);
+  color: #fff;
   border-radius: 9999px;
   height: 44px;
   padding: 0 24px;
@@ -110,7 +110,7 @@ main.main--how-we-work {
 
 .footer__cta-btn:hover {
   transform: scale(1.03);
-  box-shadow: 0 4px 18px rgba(234, 119, 0, 0.35);
+  box-shadow: 0 4px 18px rgba(238, 125, 46, 0.35);
 }
 
 /* ---- Curtain Reveal Fixed Stationary State ---- */

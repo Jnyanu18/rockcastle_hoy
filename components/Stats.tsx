@@ -130,8 +130,8 @@ export default function Stats() {
   return (
     <section
       id="stats"
-      className="hoy-stats-section bg-[#dcdcdc] px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-28"
-      style={{ backgroundColor: "#dcdcdc" }}
+      className="hoy-stats-section bg-[#ee7d2e] px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-28"
+      style={{ backgroundColor: "#ee7d2e" }}
     >
       {/* Container wrapper matching max content bounds */}
       <div className="mx-auto w-full max-w-[1760px]">
@@ -172,7 +172,7 @@ export default function Stats() {
                 </SlideUpText>
               </span>
             </div>
-            <p className="text-xs md:text-[13px] leading-relaxed text-[#151515]/80 max-w-sm">
+            <p className="text-xs md:text-[13px] leading-relaxed text-[#151515] max-w-sm">
               <SlideUpText split="words" stagger={0.015} delay={0.1}>
                 {stats.mobile.body}
               </SlideUpText>
@@ -363,7 +363,7 @@ export default function Stats() {
                       {item.label}
                     </SlideUpText>
                   </span>
-                  <span className="font-sans text-3xl sm:text-5xl lg:text-[60px] xl:text-[66px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#ea7700]">
+                  <span className="font-sans text-3xl sm:text-5xl lg:text-[60px] xl:text-[66px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#151515]">
                     <RunningMetric value={item.value} delay={index * 120} />
                   </span>
                 </div>
@@ -378,7 +378,7 @@ export default function Stats() {
                 rel="noopener noreferrer"
                 data-magnetic
                 aria-label="Follow Rock Castle on Instagram"
-                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#ea7700] text-[#151515] font-medium text-xs sm:text-sm tracking-wide transition-all duration-300 hover:scale-105 hover:bg-[#c46400] shadow-[0_8px_24px_rgba(0,0,0,0.22)] active:scale-95 cursor-pointer select-none"
+                className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#fff1e7] text-[#151515] font-medium text-xs sm:text-sm tracking-wide transition-all duration-300 hover:scale-105 hover:bg-[#f4f6f9] shadow-[0_8px_24px_rgba(0,0,0,0.22)] active:scale-95 cursor-pointer select-none"
               >
                 <InstagramIcon className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 text-[#151515]" />
                 <span className="font-semibold uppercase tracking-wider text-[11px] sm:text-xs">

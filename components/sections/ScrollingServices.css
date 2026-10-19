@@ -272,7 +272,7 @@
   align-items: center;
   gap: 8px;
   background: var(--rc-orange);
-  color: var(--rc-black);
+  color: #fff;
   font-family: var(--font-body);
   font-size: clamp(0.7rem, 0.74vw, 0.8rem);
   font-weight: 600;
@@ -281,17 +281,17 @@
   padding: clamp(6px, 0.9vh, 9px) clamp(16px, 1.4vw, 24px);
   border-radius: 9999px;
   text-decoration: none;
-  box-shadow: 0 4px 18px rgba(237, 238, 165, 0.22);
+  box-shadow: 0 4px 18px rgba(238, 125, 46, 0.3);
   transition: all 0.3s var(--ease-out-expo);
   cursor: pointer;
   user-select: none;
 }
 
 .servicesBlock .ss__cta-btn:hover {
-  background: var(--rc-white);
-  color: var(--rc-black);
+  background: #d96a1d;
+  color: #fff;
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 24px rgba(241, 236, 226, 0.3);
+  box-shadow: 0 8px 24px rgba(238, 125, 46, 0.4);
 }
 
 .servicesBlock .ss__cta-btn .ss__cta-arrow {
@@ -309,21 +309,22 @@
 .servicesBlock .images {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0;
+  gap: clamp(8px, 0.8vw, 12px);
   width: 100%;
-  max-width: clamp(860px, 84vw, 1280px);
+  max-width: min(92vw, 1560px);
   margin: clamp(10px, 1.4vh, 18px) auto 0 auto;
-  padding: 0 8px;
+  padding: 0 0 28px;
 }
 
 .servicesBlock .imageWrapper {
   aspect-ratio: 3 / 4;
-  height: clamp(230px, 36vh, 380px);
-  border-radius: clamp(10px, 1vw, 16px);
+  width: 100%;
+  height: auto;
+  border-radius: clamp(6px, 0.6vw, 10px);
   overflow: hidden;
   position: relative;
   background: #141412;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
 }
 
 .servicesBlock .imageWrapper img {
@@ -357,12 +358,7 @@
   }
 
   .servicesBlock .images {
-    max-width: 720px;
-    gap: 0;
-  }
-
-  .servicesBlock .imageWrapper {
-    height: clamp(180px, 26vh, 260px);
+    max-width: min(92vw, 960px);
   }
 
   .servicesBlock .itemText {
@@ -424,11 +420,6 @@
   .servicesBlock .images {
     grid-template-columns: repeat(2, 1fr);
     max-width: 320px;
-    gap: 0;
-  }
-
-  .servicesBlock .imageWrapper {
-    height: clamp(140px, 22vh, 180px);
   }
 
   /* Show 2 cards on mobile */

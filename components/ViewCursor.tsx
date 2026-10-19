@@ -116,14 +116,49 @@ export default function ViewCursor({
     let lastY = -1;
     let prevScrollY = window.scrollY;
 
-    type Mode = "hero" | "view" | "square-white" | "square-blue";
+    const CIRCLE_HOVER_SELECTOR = [
+      '[data-cursor="circle"]',
+      '.nav__link',
+      '.nav__brand',
+      '.nav__connect',
+      '.nav__connect-pill',
+      '.nav__pill-btn',
+      '.nav__social-link',
+      '.rx-plate__view-pill',
+      '.rcf-card__pill',
+      '.rx-filters button',
+      '.rcf-filters button',
+      '.experience-btn',
+    ].join(", ");
+
+    type Mode = "hero" | "circle" | "view" | "square-white" | "square-blue";
     let currentMode: Mode = "square-white";
 
     const setMode = (mode: Mode) => {
       if (currentMode === mode) return;
       currentMode = mode;
 
-      if (mode === "hero") {
+      if (mode === "circle") {
+        // Nav & Events hover: cursor becomes a 58px circle; hovered text turns orange and sits inside
+        gsap.to(label, {
+          opacity: 0,
+          scale: 0.4,
+          duration: 0.16,
+          ease: "power2.in",
+          overwrite: "auto",
+        });
+        gsap.to(badge, {
+          width: 58,
+          height: 58,
+          borderRadius: "50%",
+          backgroundColor: "#ffffff",
+          borderColor: "rgba(234, 119, 0, 0.45)",
+          boxShadow: "0 8px 24px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(234, 119, 0, 0.25)",
+          duration: 0.3,
+          ease: "back.out(1.7)",
+          overwrite: "auto",
+        });
+      } else if (mode === "hero") {
         // Hero section: smooth white circle center
         gsap.to(label, {
           opacity: 0,
@@ -210,7 +245,9 @@ export default function ViewCursor({
     const updateForElement = (el: Element | null) => {
       if (!el) return;
 
-      if (el.closest("#home")) {
+      if (el.closest(CIRCLE_HOVER_SELECTOR)) {
+        setMode("circle");
+      } else if (el.closest("#home")) {
         setMode("hero");
       } else if (el.closest(selector)) {
         setMode("view");

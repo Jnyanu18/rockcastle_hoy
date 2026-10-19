@@ -2,7 +2,7 @@
 
 .hoy-stats-section {
   position: relative;
-  background-color: #dcdcdc;
+  background-color: #ee7d2e;
   color: #151515;
   width: 100%;
   overflow-x: clip;
@@ -120,7 +120,7 @@
   position: absolute;
   inset: -1.25vw;
   background-color: #0a0e15;
-  border: 2px solid #ea7700;
+  border: 2px solid #ee7d2e;
   border-radius: 4.125vw;
   pointer-events: none;
   z-index: 1;
@@ -220,7 +220,7 @@
 }
 
 .hoy-reaction-heart {
-  background-color: #ea7700;
+  background-color: #ee7d2e;
 }
 
 .hoy-reaction-like {

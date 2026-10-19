@@ -10,9 +10,9 @@
      counters, index labels); all other text is white. Darkened twice now
      per feedback. Centralized here so plain-CSS sections and the Tailwind
      palette in tailwind.config.ts stay in sync. */
-  --hoy-yellow: #ea7700;
+  --hoy-yellow: #ee7d2e;
   /* orange sampled directly from the Rock Castle logo artwork — buttons, CTAs, numbers/index labels */
-  --rc-yellow: #ea7700;
+  --rc-yellow: #ee7d2e;
   --white: #dcdcdc; /* cement */
   /* soft "royal" off-white (not flat pure white) — text / light-on-dark role */
   --light-grey: #182230;
@@ -69,6 +69,24 @@ body {
     heroVideoKenBurns 28s ease-in-out infinite alternate;
 }
 
+.hero-dotted-mask {
+  --hero-reveal: 0%;
+  -webkit-mask-image: radial-gradient(circle, #000 1.25px, transparent 1.55px);
+  mask-image: radial-gradient(circle, #000 1.25px, transparent 1.55px);
+  -webkit-mask-size: 6px 6px;
+  mask-size: 6px 6px;
+  -webkit-mask-position: center;
+  mask-position: center;
+  clip-path: inset(0 calc(100% - var(--hero-reveal)) 0 0);
+  will-change: clip-path;
+}
+
+[data-hero-parallax] { translate: 0 var(--hero-parallax-y, 0px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-dotted-mask { -webkit-mask-image: none; mask-image: none; clip-path: none; }
+}
+
 @keyframes heroVideoFadeIn {
   from {
     opacity: 0;
@@ -111,15 +129,15 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #dcdcdc;
-  color: #151515;
+  background: #ee7d2e;
+  color: #fff;
   border-radius: 9999px;
   height: 44px;
   width: 148px;
   padding: 0 16px;
   overflow: hidden;
   text-decoration: none;
-  border: 1px solid rgba(244, 246, 249, 0.9);
+  border: 1px solid #ee7d2e;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.25s ease;
@@ -128,7 +146,7 @@ body {
 
 .contact-pill-btn:hover {
   transform: scale(1.03);
-  box-shadow: 0 4px 18px rgba(244, 246, 249, 0.25);
+  box-shadow: 0 4px 18px rgba(238, 125, 46, 0.4);
 }
 
 .contact-pill-track-mask {
@@ -176,7 +194,7 @@ body {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #151515;
+  color: #fff;
   text-transform: uppercase;
 }
 
@@ -185,15 +203,15 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--hoy-yellow);
-  color: #f4f6f9;
+  background: #fff1e7;
+  color: #151515;
   border-radius: 9999px;
   height: 44px;
   width: 154px;
   padding: 0 16px;
   overflow: hidden;
   text-decoration: none;
-  border: 1px solid rgba(244, 246, 249, 0.9);
+  border: 1px solid #fff1e7;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.25s ease,
@@ -203,8 +221,8 @@ body {
 
 .process-pill-btn:hover {
   transform: scale(1.03);
-  background-color: var(--hoy-yellow);
-  box-shadow: 0 4px 18px rgba(234, 119, 0, 0.35);
+  background-color: #f5dfd0;
+  box-shadow: 0 4px 18px rgba(21, 21, 21, 0.18);
 }
 
 .process-pill-track-mask {
@@ -232,7 +250,7 @@ body {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #f4f6f9;
+  color: #151515;
   text-transform: uppercase;
 }
 

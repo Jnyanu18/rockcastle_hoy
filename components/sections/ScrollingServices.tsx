@@ -42,15 +42,6 @@ const DEFAULT_ITEMS: DeckItem[] = [
   },
   {
     index: "06",
-    line1: "EXPERIENCES UN-LTD —",
-    line2: "SPATIAL & PRODUCTION",
-    desc: "360-degree event architecture, cutting-edge stage engineering, immersive AV technology, and turnkey fabrication built to transform any venue into an extraordinary world.",
-    buttonText: "Our Capabilities",
-    link: "#contact",
-    images: ["/rx/service-06-1.jpg", "/rx/service-06-2.jpg", "/rx/cover-3.jpg", "/rx/cover-2.jpg"],
-  },
-  {
-    index: "07",
     line1: "Awards & Recognition —",
     line2: "WORK THAT GETS NOTICED",
     desc: "Industry-celebrated IPs, EEMA-recognized experiential executions, and landmark corporate spectacles trusted by top global brands and institutions across India.",

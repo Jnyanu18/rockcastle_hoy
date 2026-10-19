@@ -129,12 +129,12 @@
 }
 
 .hoy-btn--dark {
-  background-color: var(--rc-orange, #ea7700);
-  color: #151515;
+  background-color: var(--rc-orange, #ee7d2e);
+  color: #fff;
 }
 
 .hoy-btn--dark:hover {
-  background-color: #c46400;
+  background-color: #d96a1d;
 }
 
 .hoy-btn--outline {

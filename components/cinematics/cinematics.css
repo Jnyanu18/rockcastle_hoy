@@ -74,7 +74,7 @@ html.cine-intro body {
 .cine-intro-rule {
   width: min(320px, 60vw);
   height: 1px;
-  background: var(--hoy-yellow, #ea7700);
+  background: var(--hoy-yellow, #ee7d2e);
   transform-origin: center;
 }
 
