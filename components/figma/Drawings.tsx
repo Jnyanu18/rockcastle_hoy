@@ -4,37 +4,36 @@ const base = { fill: "none", stroke: "currentColor", strokeWidth: 1.4, strokeLin
 export function LoungeDrawing({ className = "" }: { className?: string }) {
   return (
     <svg className={`rcf-draw ${className}`} viewBox="0 0 720 270" aria-hidden="true" {...base}>
-      <path pathLength={1} d="M8 239h704" />
-
-      <path pathLength={1} d="M82 239V132q0-13 11-19l59-31M638 239V132q0-13-11-19l-59-31" />
-      <path pathLength={1} d="M100 224V137q0-10 9-16l36-22M620 224v-87q0-10-9-16l-36-22" />
-      <path pathLength={1} d="M145 220V132q0-11 12-10c91 15 225 15 406 0q12-1 12 10v88q0 11-12 11H157q-12 0-12-11Z" />
-      <path pathLength={1} d="M153 215v-78q0-7 8-7c95 13 219 13 398 0q8 0 8 7v78q0 8-9 8H162q-9 0-9-8Z" />
-
-      <path pathLength={1} d="M128 229c38-11 95-16 232-16s194 5 232 16c17 5 18 18 0 22-75 17-389 17-464 0-18-4-17-17 0-22Z" />
-      <path pathLength={1} d="M230 246c-8 2-10 8-4 11 25 10 243 10 268 0 6-3 4-9-4-11M220 257c-11 2-13 8-5 11 31 10 257 10 288 0 8-3 6-9-5-11" />
-
-      <path pathLength={1} d="M144 91c38 23 111 34 216 34s178-11 216-34" />
-      <path pathLength={1} d="M146 88c-2-19 5-32 19-39 14-7 30-2 44 6M574 88c2-19-5-32-19-39-14-7-30-2-44 6" />
-      <path pathLength={1} d="M151 50c29 14 60 25 92 31 15 3 16 12 1 12-17 0-38-9-56-19M569 50c-29 14-60 25-92 31-15 3-16 12-1 12 17 0 38-9 56-19" />
-      <path pathLength={1} d="M145 91c0-4 4-7 8-7s8 3 8 7-4 7-8 7-8-3-8-7ZM559 91c0-4 4-7 8-7s8 3 8 7-4 7-8 7-8-3-8-7Z" />
+      <path pathLength={1} d="M76 236V106c0-18 12-33 30-41l44-21 44 21c18 8 30 23 30 41v130" />
+      <path pathLength={1} d="M644 236V106c0-18-12-33-30-41l-44-21-44 21c-18 8-30 23-30 41v130" />
+      <path pathLength={1} d="M80 236h560" />
+      <path pathLength={1} d="M140 236V121c0-13 10-24 23-28l46-16c18-7 39 1 47 18l12 27c7 16 10 33 10 50v64" />
+      <path pathLength={1} d="M580 236V121c0-13-10-24-23-28l-46-16c-18-7-39 1-47 18l-12 27c-7 16-10 33-10 50v64" />
+      <path pathLength={1} d="M145 220V120c0-10 8-18 18-18h394c10 0 18 8 18 18v100c0 12-10 22-22 22H167c-12 0-22-10-22-22Z" />
+      <path pathLength={1} d="M152 212V123c0-6 5-11 11-11h394c6 0 11 5 11 11v89c0 8-6 14-14 14H166c-8 0-14-6-14-14Z" />
+      <path pathLength={1} d="M106 236c28-18 87-28 176-28s148 10 176 28" />
+      <path pathLength={1} d="M101 98c32 23 88 35 163 35 73 0 129-9 162-35" />
+      <path pathLength={1} d="M134 98c0-24 14-42 35-52 19-9 42-9 60 1M586 98c0-24-14-42-35-52-19-9-42-9-60 1" />
+      <path pathLength={1} d="M156 44c22 8 46 13 72 15 15 1 20 9 12 18-7 8-18 12-28 12-12 0-24-4-35-12M564 44c-22 8-46 13-72 15-15 1-20 9-12 18 7 8 18 12 28 12 12 0 24-4 35-12" />
 
       {[188, 270, 352, 434, 516].map((x, i) => {
-        const y = 101 + Math.round(Math.abs(x - 352) * 0.035);
+        const y = 93 + Math.abs(x - 352) * 0.03;
         const tilt = i < 2 ? -5 : i > 2 ? 5 : 0;
         return (
           <g key={x}>
-            <path pathLength={1} d={`M${x} ${y - 4}v10`} />
-            <path pathLength={1} d={`M${x - 5} ${y + 6}q5-5 10 0l4 16q-7 7-18 0z`} transform={`rotate(${tilt} ${x} ${y + 14})`} />
-            <path pathLength={1} d={`M${x - 3} ${y + 24}h6`} transform={`rotate(${tilt} ${x} ${y + 14})`} />
+            <path pathLength={1} d={`M${x} ${y - 2}v10`} />
+            <path pathLength={1} d={`M${x - 4} ${y + 8}q5-5 10 0l4 17q-7 7-18 0z`} transform={`rotate(${tilt} ${x} ${y + 15})`} />
+            <path pathLength={1} d={`M${x - 2} ${y + 28}h4`} transform={`rotate(${tilt} ${x} ${y + 15})`} />
           </g>
         );
       })}
 
-      <path pathLength={1} d="M82 239c-7 7-7 12 0 15s14-2 18-9M638 239c7 7 7 12 0 15s-14-2-18-9" />
-      <path pathLength={1} d="M60 147v77m600-77v77" />
-      <circle pathLength={1} cx="60" cy="145" r="2.5" />
-      <circle pathLength={1} cx="660" cy="145" r="2.5" />
+      <path pathLength={1} d="M144 236c39-17 95-26 214-26s175 9 214 26" />
+      <path pathLength={1} d="M132 246c28 9 56 12 84 12h288c28 0 56-3 84-12" />
+      <path pathLength={1} d="M84 236c-7 7-7 12 0 15s14-2 18-9M636 236c7 7 7 12 0 15s-14-2-18-9" />
+      <path pathLength={1} d="M58 130v100m604-100v100" />
+      <circle pathLength={1} cx="58" cy="130" r="2.5" />
+      <circle pathLength={1} cx="662" cy="130" r="2.5" />
     </svg>
   );
 }
