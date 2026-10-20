@@ -276,9 +276,10 @@ export default function Navigation() {
   const links = [
     { href: '/', label: 'Home' },
     { href: '/#about', label: 'About Us' },
-    { href: '/#recent-experiences', label: 'Experience' },
+    { href: '/#recent-experiences', label: 'Our Work' },
     { href: '/#services', label: 'Services' },
     { href: '/#team', label: 'Team' },
+    { href: '/#contact', label: 'Contact' },
   ]
 
   const isLinkActive = (href) => {
@@ -301,8 +302,22 @@ export default function Navigation() {
         className={`nav nav--theme-${navTheme} ${scrolled ? 'nav--scrolled' : ''}`}
       >
         <div className="nav__inner">
-          {/* Left: Brand Logo & Left Navigation Links */}
           <div className="nav__left">
+            <nav className="nav__links" aria-label="Main Navigation">
+              {links.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={`nav__link ${isLinkActive(l.href) ? 'nav__link--active' : ''}`}
+                  onClick={(e) => handleNavClick(e, l.href)}
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          <div className="nav__center">
             <Link
               href="/"
               className="nav__brand"
@@ -320,37 +335,9 @@ export default function Navigation() {
                 <span>UN-LTD</span>
               </div>
             </Link>
-
-            <nav className="nav__links" aria-label="Main Navigation">
-              {links.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className={`nav__link ${isLinkActive(l.href) ? 'nav__link--active' : ''}`}
-                  onClick={(e) => handleNavClick(e, l.href)}
-                >
-                  {l.label}
-                </Link>
-              ))}
-            </nav>
           </div>
 
-          {/* Center: Connect Nav Item (Pinned Dead Center) */}
-          <div className="nav__center">
-            <Link
-              href="/contact"
-              className={`nav__connect-pill ${pathname === '/contact' ? 'nav__connect-pill--active' : ''}`}
-              onClick={(e) => handleNavClick(e, '/contact')}
-              aria-label="Connect with Rock Castle"
-            >
-              <span>CONNECT</span>
-              <span className="nav__connect-plus">+</span>
-            </Link>
-          </div>
-
-          {/* Right: Social Glyphs (LinkedIn & Instagram) and Mobile Hamburger Toggle */}
           <div className="nav__right">
-            {/* Social Icons (LinkedIn & Instagram) */}
             <div className="nav__socials">
               <a
                 href="https://www.linkedin.com/company/rock-castle-entertainment-pvt-ltd"
@@ -395,7 +382,15 @@ export default function Navigation() {
               </a>
             </div>
 
-            {/* Mobile Hamburger Toggle */}
+            <Link
+              href="/contact"
+              className={`nav__connect-pill ${pathname === '/contact' ? 'nav__connect-pill--active' : ''}`}
+              onClick={(e) => handleNavClick(e, '/contact')}
+              aria-label="Connect with Rock Castle"
+            >
+              <span className="nav__connect-plus">+</span>
+            </Link>
+
             <button
               className={`nav__toggle ${menuOpen ? 'nav__toggle--active' : ''}`}
               onClick={toggleMenu}

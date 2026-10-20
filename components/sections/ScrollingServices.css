@@ -311,13 +311,13 @@
   grid-template-columns: repeat(4, 1fr);
   gap: clamp(8px, 0.8vw, 12px);
   width: 100%;
-  max-width: min(92vw, 1560px);
+  max-width: min(82vw, 1180px);
   margin: clamp(10px, 1.4vh, 18px) auto 0 auto;
   padding: 0 0 28px;
 }
 
 .servicesBlock .imageWrapper {
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1;
   width: 100%;
   height: auto;
   border-radius: clamp(6px, 0.6vw, 10px);
@@ -358,7 +358,7 @@
   }
 
   .servicesBlock .images {
-    max-width: min(92vw, 960px);
+    max-width: min(82vw, 840px);
   }
 
   .servicesBlock .itemText {
@@ -419,7 +419,7 @@
 
   .servicesBlock .images {
     grid-template-columns: repeat(2, 1fr);
-    max-width: 320px;
+    max-width: min(100%, 340px);
   }
 
   /* Show 2 cards on mobile */

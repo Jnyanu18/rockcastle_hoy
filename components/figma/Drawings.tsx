@@ -3,15 +3,38 @@ const base = { fill: "none", stroke: "currentColor", strokeWidth: 1.4, strokeLin
 
 export function LoungeDrawing({ className = "" }: { className?: string }) {
   return (
-    <svg className={`rcf-draw ${className}`} viewBox="0 0 420 170" aria-hidden="true" {...base}>
-      <path pathLength={1} d="M60 150V60M360 150V60M60 62h300" />
-      <path pathLength={1} d="M95 62c10-45 55-60 115-60s105 15 115 60" />
-      <path pathLength={1} d="M80 150c0-40 10-60 30-62h200c20 2 30 22 30 62" />
-      <path pathLength={1} d="M70 150h280M95 160h230" />
-      <path pathLength={1} d="M120 20c40 14 140 14 180 0" />
-      {[145, 185, 225, 265].map((x, i) => (
-        <path key={x} pathLength={1} d={`M${x} ${28 + (i % 2) * 2}v12a5 8 0 1 0 0.1 0z`} />
-      ))}
+    <svg className={`rcf-draw ${className}`} viewBox="0 0 720 270" aria-hidden="true" {...base}>
+      <path pathLength={1} d="M8 239h704" />
+
+      <path pathLength={1} d="M82 239V132q0-13 11-19l59-31M638 239V132q0-13-11-19l-59-31" />
+      <path pathLength={1} d="M100 224V137q0-10 9-16l36-22M620 224v-87q0-10-9-16l-36-22" />
+      <path pathLength={1} d="M145 220V132q0-11 12-10c91 15 225 15 406 0q12-1 12 10v88q0 11-12 11H157q-12 0-12-11Z" />
+      <path pathLength={1} d="M153 215v-78q0-7 8-7c95 13 219 13 398 0q8 0 8 7v78q0 8-9 8H162q-9 0-9-8Z" />
+
+      <path pathLength={1} d="M128 229c38-11 95-16 232-16s194 5 232 16c17 5 18 18 0 22-75 17-389 17-464 0-18-4-17-17 0-22Z" />
+      <path pathLength={1} d="M230 246c-8 2-10 8-4 11 25 10 243 10 268 0 6-3 4-9-4-11M220 257c-11 2-13 8-5 11 31 10 257 10 288 0 8-3 6-9-5-11" />
+
+      <path pathLength={1} d="M144 91c38 23 111 34 216 34s178-11 216-34" />
+      <path pathLength={1} d="M146 88c-2-19 5-32 19-39 14-7 30-2 44 6M574 88c2-19-5-32-19-39-14-7-30-2-44 6" />
+      <path pathLength={1} d="M151 50c29 14 60 25 92 31 15 3 16 12 1 12-17 0-38-9-56-19M569 50c-29 14-60 25-92 31-15 3-16 12-1 12 17 0 38-9 56-19" />
+      <path pathLength={1} d="M145 91c0-4 4-7 8-7s8 3 8 7-4 7-8 7-8-3-8-7ZM559 91c0-4 4-7 8-7s8 3 8 7-4 7-8 7-8-3-8-7Z" />
+
+      {[188, 270, 352, 434, 516].map((x, i) => {
+        const y = 101 + Math.round(Math.abs(x - 352) * 0.035);
+        const tilt = i < 2 ? -5 : i > 2 ? 5 : 0;
+        return (
+          <g key={x}>
+            <path pathLength={1} d={`M${x} ${y - 4}v10`} />
+            <path pathLength={1} d={`M${x - 5} ${y + 6}q5-5 10 0l4 16q-7 7-18 0z`} transform={`rotate(${tilt} ${x} ${y + 14})`} />
+            <path pathLength={1} d={`M${x - 3} ${y + 24}h6`} transform={`rotate(${tilt} ${x} ${y + 14})`} />
+          </g>
+        );
+      })}
+
+      <path pathLength={1} d="M82 239c-7 7-7 12 0 15s14-2 18-9M638 239c7 7 7 12 0 15s-14-2-18-9" />
+      <path pathLength={1} d="M60 147v77m600-77v77" />
+      <circle pathLength={1} cx="60" cy="145" r="2.5" />
+      <circle pathLength={1} cx="660" cy="145" r="2.5" />
     </svg>
   );
 }

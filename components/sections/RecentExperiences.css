@@ -989,11 +989,42 @@
 .rx-plate__tag { height: auto; padding: 6px 14px; background: #ee7d2e; color: #fff; font-family: var(--font-sans); font-size: 11px; font-weight: 400; letter-spacing: 0; text-transform: none; gap: 6px; }
 .rx-plate__tag i, .rx-plate__view-pill i { font-style: normal; font-size: .8em; margin-left: 6px; }
 .rx-plate__view { left: 4%; right: 4%; bottom: 14px; }
-.rx-plate__view-pill { position: relative; isolation: isolate; flex: 0 0 auto; height: auto; padding: 8px 11px; background: #000; border: 0; box-shadow: none; color: #ee7d2e; font-family: var(--font-sans); font-size: 11px; font-weight: 400; transition: color .25s ease; }
-.rx-plate__view-pill::before { content: ''; position: absolute; top: 50%; left: 50%; z-index: 0; width: 44px; height: 44px; border-radius: 50%; background: #fff1e7; opacity: 0; transform: translate(-50%, -50%) scale(.65); transition: opacity .25s ease, transform .3s cubic-bezier(.16,1,.3,1); }
-.rx-plate__view-label { position: relative; z-index: 1; }
-.rx-plate-card:hover .rx-plate__view-pill, .rx-plate-card:focus-visible .rx-plate__view-pill { color: #ee7d2e; }
-.rx-plate-card:hover .rx-plate__view-pill::before, .rx-plate-card:focus-visible .rx-plate__view-pill::before { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.rx-plate__view-pill {
+  position: relative;
+  isolation: isolate;
+  flex: 1 1 100%;
+  width: 100%;
+  height: 38px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 999px;
+  background: #000;
+  box-shadow: none;
+  color: #ee7d2e;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  transition: background-color .25s ease;
+}
+.rx-plate__view-label {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.rx-plate__view-pill i {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-left: 0;
+  transform: translateY(-50%);
+}
+.rx-plate-card:hover .rx-plate__view-pill,
+.rx-plate-card:focus-visible .rx-plate__view-pill {
+  background: #000;
+  color: #ee7d2e;
+}
 .rx-plate__footer { margin-top: 14px; }
 .rx-plate__title { display: block; font-size: clamp(14px, 1.15vw, 20px); font-weight: 500; letter-spacing: 0; line-height: 1.2; padding-bottom: 8px; border-bottom: 1px solid #ee7d2e; }
 .rx-plate__stats { display: block; margin-top: 8px; padding: 0; border: 0; font-family: var(--font-sans); font-size: 10px; color: rgba(21, 21, 21, .7); }
