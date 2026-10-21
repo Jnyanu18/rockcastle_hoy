@@ -7,7 +7,7 @@ export interface DotPatternProps {
    * - 'hero' / 'dark': High-contrast black dots (~32% opacity) over dark video/photo backgrounds (e.g. Hero).
    * - 'custom': Use custom opacity/size.
    */
-  variant?: "peach" | "light" | "hero" | "dark" | "custom";
+  variant?: "peach" | "light" | "orange" | "hero" | "dark" | "custom";
   /** Custom opacity (0.0 to 1.0). Overrides the variant default if provided. */
   opacity?: number;
   /** Size in pixels of the repeating 9x9 staggered dot tile (defaults to 9px). */
@@ -78,6 +78,8 @@ export default function DotPattern({
   if (resolvedOpacity === undefined) {
     if (variant === "hero" || variant === "dark") {
       resolvedOpacity = 0.14;
+    } else if (variant === "orange") {
+      resolvedOpacity = 0.08;
     } else {
       // 'peach' or 'light'
       resolvedOpacity = 0.038;
