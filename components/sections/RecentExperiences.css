@@ -6,10 +6,96 @@
 .recent-experiences {
   position: relative;
   z-index: 10;
-  padding: 0 0 clamp(88px, 12vh, 160px);
+  padding: clamp(36px, 4.5vw, 64px) 0 clamp(88px, 12vh, 160px);
   color: #151515;
-  background: #fff1e7;
-  overflow: clip;
+  background: #d9d9d9;
+  overflow: visible;
+}
+
+.rx-intro-block {
+  padding: 0 clamp(32px, 6.7vw, 128px);
+  margin-bottom: clamp(16px, 2vw, 24px);
+}
+
+.rx-intro-block .rcf-eyebrow {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: clamp(11px, 0.75vw, 13px);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #151515;
+  margin-bottom: 14px;
+}
+
+.rx-intro-block .rcf-eyebrow i {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-left: 4px;
+  vertical-align: super;
+  background: var(--rcf-orange, #ee7d2e);
+  border-radius: 1px;
+}
+
+.rx-intro-block .rcf-featured__intro {
+  margin: 0;
+  max-width: clamp(420px, 44vw, 860px);
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 1.1vw, 17px);
+  font-weight: 500;
+  line-height: 1.45;
+  color: #151515;
+}
+
+/* Filter controls bar matching reference Figma image */
+.rx-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  padding: 0 clamp(32px, 6.7vw, 128px);
+  margin-bottom: clamp(18px, 2.2vw, 32px);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: #151515;
+}
+
+.rx-filters button {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 4px 10px;
+  cursor: pointer;
+  color: inherit;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rx-filters button:not(:first-child):not(:nth-child(2))::before {
+  content: "▪";
+  color: var(--rcf-orange, #ee7d2e);
+  font-size: 8px;
+  margin-right: 2px;
+}
+
+.rx-filters button.is-active {
+  background: var(--rcf-orange, #ee7d2e);
+  color: #fff;
+  font-weight: 500;
+}
+
+.rx-filters em {
+  font-style: normal;
+  margin-left: 14px;
+  font-size: 13px;
+  color: #151515;
+  font-weight: 500;
 }
 
 /* ---- Head (Matches Reference Image 1) ----------------------------------- */

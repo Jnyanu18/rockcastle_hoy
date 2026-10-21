@@ -21,18 +21,19 @@
   overflow: visible;
 }
 
-/* Left extending horizontal line with accent square */
+/* Left extending horizontal line starting from the accent square */
 .stage-baseline-left {
   flex: 1 1 auto;
   position: relative;
   height: 0;
+  margin-left: clamp(32px, 6.7vw, 128px);
   border-bottom: 1.5px solid var(--rcf-orange, #ee7d2e);
 }
 
-/* Small orange square resting on the line at ~6.7vw (aligned with WHO WE ARE and FEATURED WORK) */
+/* Small orange square resting on the line (aligned with WHO WE ARE and FEATURED WORK) */
 .stage-accent-square {
   position: absolute;
-  left: clamp(32px, 6.7vw, 128px);
+  left: 0;
   bottom: 0;
   width: 6px;
   height: 6px;

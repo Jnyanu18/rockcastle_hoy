@@ -124,6 +124,15 @@ export default function RecentExperiences() {
       ref={sectionRef}
       aria-label="Stories we’ve brought to life"
     >
+      <div className="rx-intro-block">
+        <span className="rcf-eyebrow">FEATURED WORK<i></i></span>
+        <p className="rcf-featured__intro">
+          Every experience tells our story&mdash;of passion, creativity, and the pursuit of
+          excellence. This is Rock Castle Experiences. A showcase of events we&rsquo;ve proudly
+          brought to life, together with our clients and partners.
+        </p>
+      </div>
+
       <div className="rx-filters rx-head-controls-bar" role="tablist" aria-label="Filter stories">
         {filters.map((f) => (
           <button
