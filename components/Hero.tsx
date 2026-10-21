@@ -6,6 +6,7 @@ import KineticLogo from "@/components/KineticLogo";
 import SlideUpText from "@/components/ui/SlideUpText";
 import HeroPlayCursor, { PlayCursorBadge } from "@/components/HeroPlayCursor";
 import HeroVideoModal from "@/components/HeroVideoModal";
+import DotPattern from "@/components/ui/DotPattern";
 
 /* Play Video Squircle Tile: rounded yellow squircle with + shape kinetic ticker */
 function PlayVideoTile({ onPlay }: { onPlay?: () => void }) {
@@ -79,6 +80,9 @@ export default function Hero() {
         aria-hidden
         className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0, 0, 0,0.22)_0%,rgba(0, 0, 0,0.4)_55%,rgba(0, 0, 0,0.72)_100%)] pointer-events-none"
       />
+
+      {/* Halftone / Black Dot Matrix Texture Overlay (Matches Reference Figma Design) */}
+      <DotPattern variant="hero" />
 
       {/* ========================================================
           MOBILE HERO VIEW (< md)

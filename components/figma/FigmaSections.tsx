@@ -2,6 +2,7 @@ import Section from "./Section";
 import { CameraDrawing } from "./Drawings";
 import StageLineAnimation from "./StageLineAnimation";
 import ReelCard from "./ReelCard";
+import DotPattern from "@/components/ui/DotPattern";
 export { default as StoriesSection } from "./StoriesSection";
 import "./figma.css";
 
@@ -16,6 +17,7 @@ const reels = [
 export function WhoWeAre() {
   return (
     <Section id="about" className="rcf-who">
+      <DotPattern variant="peach" />
       <span className="rcf-eyebrow">Who we are ?<i /></span>
       <span className="rcf-index">[ 01 ]</span>
       <div className="rcf-who__body">
