@@ -3,7 +3,7 @@
 .hoy-stats-section {
   position: relative;
   background-color: #ee7d2e;
-  color: #151515;
+  color: #ffffff;
   width: 100%;
   overflow-x: clip;
 }
@@ -235,4 +235,27 @@
   100% {
     transform: translateY(-8px) scale(1.03);
   }
+}
+
+/* Hand + heart + arrow line art, right of the stat figures (white strokes on orange) */
+.hoy-stats-art {
+  position: absolute;
+  right: -2vw;
+  top: 8%;
+  width: clamp(260px, 25vw, 520px);
+  color: #fff;
+  pointer-events: none;
+  z-index: 1;
+}
+.hoy-stats-art svg { width: 100%; height: auto; display: block; }
+.hoy-stats-art img {
+  width: 100%;
+  height: auto;
+  display: block;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 2.2s ease 0.2s;
+}
+.hoy-stats-art.is-in img { clip-path: inset(0 0 0 0); }
+@media (prefers-reduced-motion: reduce) {
+  .hoy-stats-art img { clip-path: none; transition: none; }
 }

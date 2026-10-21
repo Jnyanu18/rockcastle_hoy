@@ -267,7 +267,7 @@ export default function HeroVideoModal({
             showControls || !isPlaying ? "opacity-100 scale-100" : "opacity-0 scale-95"
           }`}
         >
-          <div className="pointer-events-auto flex items-center justify-center gap-3.5 rounded-full bg-[#ee7d2e] px-7 py-3 text-[#0A192F] shadow-[0_8px_30px_rgba(0, 0, 0,0.4)] border border-black/10 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer">
+          <div className="pointer-events-auto flex items-center justify-center gap-3.5 rounded-full bg-[#ea7700] px-7 py-3 text-[#0A192F] shadow-[0_8px_30px_rgba(0, 0, 0,0.4)] border border-black/10 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer">
             <span className="text-base font-light select-none leading-none text-[#0A192F]">+</span>
             <span className="text-[12px] sm:text-[13px] font-bold tracking-[0.2em] uppercase select-none font-sans text-[#0A192F]">
               {isPlaying ? "PAUSE" : "PLAY"}
@@ -292,7 +292,7 @@ export default function HeroVideoModal({
             type="button"
             onClick={togglePlay}
             aria-label={isPlaying ? "Pause video" : "Play video"}
-            className="flex h-9 w-9 items-center justify-center text-[#ee7d2e] transition-transform duration-150 hover:scale-110 active:scale-90 cursor-pointer"
+            className="flex h-9 w-9 items-center justify-center text-[#ea7700] transition-transform duration-150 hover:scale-110 active:scale-90 cursor-pointer"
           >
             {isPlaying ? (
               // Pause Icon (two vertical bars matching image)
@@ -325,13 +325,13 @@ export default function HeroVideoModal({
 
             {/* Filled Progress Bar */}
             <div
-              className="absolute left-0 top-1/2 -translate-y-1/2 h-1 group-hover:h-1.5 rounded-full bg-[#ee7d2e] pointer-events-none transition-all duration-150"
+              className="absolute left-0 top-1/2 -translate-y-1/2 h-1 group-hover:h-1.5 rounded-full bg-[#ea7700] pointer-events-none transition-all duration-150"
               style={{ width: `${progressPercent}%` }}
             />
 
             {/* Scrubber Yellow Knob Thumb (Matches Reference Image 2) */}
             <div
-              className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-3.5 w-3.5 rounded-full bg-[#ee7d2e] shadow-[0_2px_8px_rgba(0, 0, 0,0.5)] border border-black/10 transition-transform duration-150 group-hover:scale-125 pointer-events-none"
+              className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-3.5 w-3.5 rounded-full bg-[#ea7700] shadow-[0_2px_8px_rgba(0, 0, 0,0.5)] border border-black/10 transition-transform duration-150 group-hover:scale-125 pointer-events-none"
               style={{ left: `${progressPercent}%` }}
             />
           </div>
@@ -348,7 +348,7 @@ export default function HeroVideoModal({
             type="button"
             onClick={toggleMute}
             aria-label={isMuted ? "Unmute audio" : "Mute audio"}
-            className="flex h-9 w-9 items-center justify-center text-canvas/80 transition-colors duration-150 hover:text-[#ee7d2e] cursor-pointer"
+            className="flex h-9 w-9 items-center justify-center text-canvas/80 transition-colors duration-150 hover:text-[#ea7700] cursor-pointer"
           >
             {isMuted ? (
               // Muted Icon

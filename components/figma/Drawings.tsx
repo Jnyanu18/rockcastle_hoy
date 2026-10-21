@@ -1,3 +1,5 @@
+import { BOOK_PLANE_PATH, BOOK_PLANE_VIEWBOX } from "./bookPlanePath";
+
 /* Hand-drawn line art from the client Figma. Strokes draw in when an ancestor has `.is-in` (set by Section). */
 const base = { fill: "none", stroke: "currentColor", strokeWidth: 1.4, strokeLinecap: "round", strokeLinejoin: "round" } as const;
 
@@ -39,15 +41,10 @@ export function LoungeDrawing({ className = "" }: { className?: string }) {
 }
 
 export function BookPlaneDrawing({ className = "" }: { className?: string }) {
-  /* Open notebook with a paper rocket lifting off its pages on a dotted trail */
+  /* Client's own line drawing (open book, paper plane, one looping line) — exact trace, revealed left to right */
   return (
-    <svg className={`rcf-draw ${className}`} viewBox="0 0 300 150" aria-hidden="true" {...base}>
-      <path pathLength={1} d="M20 118c24-14 62-8 96 8 34-16 72-22 96-8V70c-24-14-62-8-96 8-34-16-72-22-96-8z" />
-      <path pathLength={1} d="M116 126V78M30 84c20-8 50-4 78 8M124 92c28-12 58-16 78-8" />
-      <path pathLength={1} d="M40 100c18-6 44-2 66 8M130 108c22-10 48-14 66-8" />
-      <path pathLength={1} d="M150 70c10-14 20-26 40-36" strokeDasharray="1 7" />
-      <path pathLength={1} d="M196 36c14-6 26-18 36-30l50 6-24 52-24-14-22 22-6-26z" />
-      <path pathLength={1} d="M282 12l-70 38M258 58l-24-14" />
+    <svg className={`rcf-bookplane ${className}`} viewBox={BOOK_PLANE_VIEWBOX} aria-hidden="true">
+      <path d={BOOK_PLANE_PATH} fill="currentColor" fillRule="evenodd" />
     </svg>
   );
 }
@@ -68,6 +65,25 @@ export function CameraDrawing({ className = "" }: { className?: string }) {
       <path className="rcf-ig__spark" d="M318 74l2.4 6 6 2.4-6 2.4-2.4 6-2.4-6-6-2.4 6-2.4z" />
       <path className="rcf-ig__spark rcf-ig__spark--b" d="M118 34l1.8 4.6 4.6 1.8-4.6 1.8-1.8 4.6-1.8-4.6-4.6-1.8 4.6-1.8z" />
       <path className="rcf-ig__spark rcf-ig__spark--c" d="M346 128l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z" />
+    </svg>
+  );
+}
+
+export function HeartHandDrawing({ className = "" }: { className?: string }) {
+  /* Hand offering a heart, trailing a feathered arrow that loops off to the top right */
+  return (
+    <svg className={`rcf-draw ${className}`} viewBox="0 0 600 300" aria-hidden="true" {...base}>
+      <path pathLength={1} d="M5 292C52 262 86 214 106 164" />
+      <path pathLength={1} d="M106 164C114 146 134 140 150 148c8 4 18 4 26-4" />
+      <path pathLength={1} d="M150 148c-2 12 8 22 22 16 8-4 12-10 10-18" />
+      <path pathLength={1} d="M106 164c-4 16 10 30 30 28 14-2 20-12 18-20" />
+      <path pathLength={1} d="M136 192c-3 10 7 20 20 16" />
+      <path pathLength={1} d="M215 198C168 158 146 120 168 94c20-22 48-10 52 12 8-24 46-32 60-2 14 32-22 64-65 94Z" />
+      <path pathLength={1} d="M268 168c46-6 78-34 110-52 22-12 36-26 22-38-12-10-30 2-22 16" />
+      <path pathLength={1} d="M388 112c50-22 112-44 170-98" />
+      <path pathLength={1} d="M556 18c-8-14 8-22 20-14 12 8 6 26-8 28-8 1-14-4-14-10" />
+      <path pathLength={1} d="M404 106c10-16 26-22 44-22M424 96c10-16 26-22 44-22M444 86c10-16 26-22 44-22" />
+      <path pathLength={1} d="M404 106c4 14 16 22 32 22M424 96c4 14 16 22 32 22M444 86c4 14 16 22 32 22" />
     </svg>
   );
 }

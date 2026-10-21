@@ -16,8 +16,8 @@
   left: 0;
   right: 0;
   z-index: 120;
-  padding: 4px 0;
-  color: #fff;
+  padding: clamp(30px, 3.8vh, 46px) 0;
+  color: #f4f6f9;
   background: transparent;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               background 0.3s ease,
@@ -29,36 +29,32 @@
 }
 
 .nav--scrolled {
-  padding: 2px 0;
+  padding: clamp(16px, 2vh, 22px) 0;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
 
-/* The hero state stays transparent; scrolling restores the existing orange bar. */
+/* Solid opaque background so page content does not appear behind the navbar,
+   switching with whatever is actually behind it (see isBackgroundLight in
+   Navigation.jsx) rather than always being dark. */
 .nav--theme-dark {
-  color: #fff;
+  color: #f4f6f9;
 }
 
 /* Scrolled bar: cement over cream sections, cream over cement (and dark) ones */
 .nav--theme-dark.nav--scrolled {
-  background: #ee7d2e;
+  background: #dcdcdc;
   color: #151515;
   box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12);
 }
 
 .nav--theme-light {
-  color: #fff;
+  color: #151515;
 }
 
 .nav--theme-light.nav--scrolled {
-  background: #ee7d2e;
-  color: #151515;
+  background: #fff1e7;
   box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12);
-}
-
-.nav:not(.nav--scrolled) {
-  background: transparent;
-  box-shadow: none;
 }
 
 /* Full-bleed inner container spanning corner-to-corner */
@@ -74,30 +70,6 @@
   box-sizing: border-box;
 }
 
-.nav__left {
-  display: flex;
-  align-items: center;
-  gap: clamp(12px, 1.5vw, 24px);
-  flex: 1 1 0;
-  min-width: 0;
-}
-
-.nav__center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.nav__center > * {
-  pointer-events: auto;
-}
-
 /* ===================================================
    ZONE 1: Left Navigation Links (Corner to Center)
    Order: Home | About Us | Our Work | Services | Team | Contact
@@ -105,20 +77,13 @@
 .nav__links {
   display: none;
   align-items: center;
-  gap: clamp(2px, 0.55vw, 10px);
+  gap: clamp(16px, 1.9vw, 32px);
   flex: 1;
   justify-content: flex-start;
   transition: opacity 0.25s ease;
 }
 
 .nav__link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 56px;
-  width: 56px;
-  height: 56px;
-  isolation: isolate;
   font-family: var(--font-body);
   font-size: 13.5px;
   font-weight: 500;
@@ -127,44 +92,37 @@
   color: currentColor;
   text-decoration: none;
   position: relative;
-  padding: 0 3px;
-  transition: color 0.25s ease, opacity 0.25s ease;
+  padding: 4px 0 6px;
+  transition: opacity 0.25s ease, color 0.25s ease;
   white-space: nowrap;
+  opacity: 0.92;
+}
+
+.nav__link:hover {
   opacity: 1;
 }
 
-.nav__link::before,
-.nav__connect::before {
+/* Underline Indicator: vibrant orange bar below active or hovered link matching reference */
+.nav__link::after {
   content: '';
   position: absolute;
-  inset: 4px;
-  z-index: -1;
-  border-radius: 50%;
-  background: #fff;
-  opacity: 0;
-  transform: scale(0.65);
-  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--rc-orange, #ea7700);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 1px;
 }
 
-.nav__link:hover,
-.nav__link:focus-visible,
-.nav__connect:hover,
-.nav__connect:focus-visible {
-  color: #ee7d2e;
-  opacity: 1;
-}
-
-.nav__link:hover::before,
-.nav__link:focus-visible::before,
-.nav__connect:hover::before,
-.nav__connect:focus-visible::before {
-  opacity: 1;
-  transform: scale(1);
+.nav__link:hover::after,
+.nav__link--active::after {
+  width: 100%;
 }
 
 .nav__link--active {
   opacity: 1;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* ===================================================
@@ -194,51 +152,13 @@
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.nav__connect-pill {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: #ee7d2e;
-  color: #fff;
-  box-shadow: 0 8px 20px rgba(238, 125, 46, 0.3);
-  text-decoration: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
-}
-
-.nav__connect-pill:hover,
-.nav__connect-pill:focus-visible {
-  transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 12px 24px rgba(238, 125, 46, 0.4);
-  filter: brightness(1.02);
-}
-
-.nav__connect-pill--active {
-  box-shadow: 0 12px 28px rgba(238, 125, 46, 0.42);
-}
-
-.nav__connect-plus {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1;
-}
-
 .nav__brand:hover {
   opacity: 0.94;
   transform: scale(1.02);
 }
 
 .nav__brand-wordmark {
-  height: clamp(34px, 2.8vw, 46px);
+  height: clamp(40px, 3.5vw, 56px);
   width: auto;
   object-fit: contain;
   display: block;
@@ -250,8 +170,8 @@
 .nav__brand-divider {
   display: block;
   width: 2px;
-  height: clamp(30px, 2.5vw, 40px);
-  background-color: currentColor;
+  height: clamp(34px, 2.9vw, 46px);
+  background-color: var(--rc-orange, #ea7700);
   flex-shrink: 0;
   border-radius: 1px;
 }
@@ -284,11 +204,8 @@
   filter: none;
 }
 
-/* Keep the transparent hero lockup white; show the natural dark mark on orange. */
+/* When navbar is in light mode, show natural black */
 .nav--theme-light .nav__brand-wordmark {
-  filter: brightness(0) invert(1);
-}
-.nav--theme-light.nav--scrolled .nav__brand-wordmark {
   filter: none;
 }
 
@@ -323,10 +240,6 @@
 }
 
 .nav__social-link {
-  position: relative;
-  isolation: isolate;
-  width: 44px;
-  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -338,42 +251,8 @@
 
 .nav__social-link:hover {
   opacity: 1;
-  color: #ee7d2e;
-}
-
-.nav__social-link::before {
-  content: '';
-  position: absolute;
-  inset: 1px;
-  z-index: -1;
-  border-radius: 50%;
-  background: #fff;
-  opacity: 0;
-  transform: scale(0.65);
-  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.nav__social-link:hover::before,
-.nav__social-link:focus-visible::before {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.nav__connect {
-  position: relative;
-  isolation: isolate;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  flex: 0 0 56px;
-  color: currentColor;
-  font: 600 10px/1 var(--font-body);
-  letter-spacing: 0.04em;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: color 0.25s ease;
+  color: var(--rc-orange, #ea7700);
+  transform: translateY(-1px);
 }
 
 .nav__social-icon {
@@ -387,7 +266,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--rc-orange, #ee7d2e);
+  background: var(--rc-orange, #ea7700);
   color: #f4f6f9;
   border-radius: 9999px;
   height: 40px;
@@ -410,8 +289,8 @@
 /* Stays orange on hover (a deeper shade) so the white label remains readable. */
 .nav__pill-btn:hover {
   transform: scale(1.02);
-  background: #d96a1d;
-  box-shadow: 0 4px 16px rgba(238, 125, 46, 0.35);
+  background: #c46400;
+  box-shadow: 0 4px 16px rgba(234, 119, 0, 0.35);
 }
 
 .nav__pill-track-mask {
@@ -514,7 +393,7 @@
   position: fixed;
   inset: 0;
   z-index: 110;
-  background: #ee7d2e;
+  background: var(--rc-black-rich, #0A192F);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -616,12 +495,11 @@
 }
 
 .menu__cta {
-  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: #fff1e7;
-  color: #151515;
+  justify-content: space-between;
+  background: var(--rc-orange, #ea7700);
+  color: #f4f6f9;
   padding: 14px 24px;
   border-radius: 9999px;
   font-family: var(--font-body);
@@ -635,13 +513,8 @@
 }
 
 .menu__cta:hover {
-  background: #fff;
+  background: #f4f6f9;
   transform: scale(1.01);
-}
-
-.menu__cta span:last-child {
-  position: absolute;
-  right: 24px;
 }
 
 .menu__accent {
@@ -673,7 +546,7 @@
 /* Phones: the connect pill collided with the centred logo. The menu and the
    floating "Let's talk" button already reach Connect, so the pill steps aside. */
 @media (max-width: 767px) {
-  .nav__connect {
+  .nav__pill-btn {
     display: none !important;
   }
 }

@@ -194,8 +194,8 @@
 
 .rx-head__arrow:hover:not(:disabled),
 .rx-head__arrow:focus-visible {
-  background: var(--hoy-yellow, #ee7d2e);
-  border-color: var(--hoy-yellow, #ee7d2e);
+  background: var(--hoy-yellow, #ea7700);
+  border-color: var(--hoy-yellow, #ea7700);
   color: #151515;
   outline: none;
 }
@@ -796,8 +796,6 @@
   background: var(--rc-orange);
   transform: scaleX(0);
   transform-origin: left center;
-  will-change: transform;
-  transition: transform 100ms linear;
 }
 
 .story-viewer__header {
@@ -1183,14 +1181,6 @@
   color: rgba(21, 21, 21, 0.7);
 }
 @media (max-width: 767px) {
-  .recent-experiences { padding-inline: 16px; }
   .rx-rail { display: grid; grid-template-columns: 1fr; overflow: visible; }
   .rx-rail__item { flex: none; max-width: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .rx-filters button,
-  .rx-filters button::before {
-    transition: none;
-  }
 }

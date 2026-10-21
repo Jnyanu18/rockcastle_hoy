@@ -82,6 +82,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
 
     // Read natural content heights and collapsed line 1 heights
     const readDimensions = () => {
+      gsap.set(itemsEl, { scale: 1 }); // measure at natural size
       gsap.set(itemEls, { clearProps: "height,transform,opacity,visibility" });
 
       const minHeights = itemEls.map((item) => {
@@ -98,7 +99,20 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
         return inner ? Math.ceil(inner.getBoundingClientRect().height) : 560;
       });
 
-      const containerH = itemsEl.clientHeight || 850;
+      const availH = itemsEl.clientHeight || 850;
+
+      // Short viewports / browser zoom: if the tallest open card (plus the collapsed headers
+      // stacked above it) is taller than the pinned frame, scale the whole deck down to fit
+      // so nothing is clipped at the bottom.
+      let need = 0;
+      for (let i = 0; i < itemEls.length; i++) {
+        let top = 0;
+        for (let j = 0; j < i; j++) top += (minHeights[j] || 42) + 8;
+        need = Math.max(need, top + (innerHeights[i] || 560));
+      }
+      const fit = Math.max(0.45, Math.min(1, availH / need));
+      gsap.set(itemsEl, { scale: fit, transformOrigin: "50% 0%" });
+      const containerH = availH / fit;
 
       return { minHeights, innerHeights, containerH };
     };
@@ -166,8 +180,11 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
           y: Math.round(state.y),
           height: Math.round(state.height),
           opacity: state.opacity,
-          visibility: "visible",
+          // upcoming cards stay fully hidden until scrolling starts to swipe them up
+          visibility: i > 0 && rise(i) <= 0 ? "hidden" : "visible",
           pointerEvents: isActive ? "auto" : "none",
+          // A fully open card never clips its photos/shadow, even if its measured height is a few px short
+          overflow: state.height >= inner(i) - 1 ? "visible" : "hidden",
         });
 
         if (activeIndexChanged) {
@@ -204,7 +221,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
     const onImgLoad = () => {
       loadedCount++;
       if (loadedCount >= imgs.length) {
-        ({ minHeights, innerHeights } = readDimensions());
+        ({ minHeights, innerHeights, containerH } = readDimensions());
         if (stRef.current) updateCards(stRef.current.progress || 0);
       }
     };
@@ -222,14 +239,20 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
     const handleResize = () => {
       if (resizeTimer) clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
-        ({ minHeights, innerHeights } = readDimensions());
+        ({ minHeights, innerHeights, containerH } = readDimensions());
         if (stRef.current) updateCards(stRef.current.progress || 0);
       }, 150);
     };
 
     window.addEventListener("resize", handleResize);
 
+    // Text wrapping / web fonts settle after the first measure; re-measure whenever a card's content resizes
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(handleResize) : null;
+    section.querySelectorAll(".innerItem").forEach((el) => ro?.observe(el));
+    document.fonts?.ready.then(handleResize).catch(() => {});
+
     return () => {
+      ro?.disconnect();
       window.removeEventListener("resize", handleResize);
       if (resizeTimer) clearTimeout(resizeTimer);
       ctx.revert();
@@ -241,16 +264,6 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
       <div className="howWeRollItemsBlock">
         <div className="scrollContainer" ref={scrollContainerRef}>
           <div className="stickyWrapper">
-            <span className="sideCross sideCross--left" aria-hidden="true">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0 C12 6.627 6.627 12 0 12 C6.627 12 12 17.373 12 24 C12 17.373 17.373 12 24 12 C17.373 12 12 6.627 12 0 Z" />
-              </svg>
-            </span>
-            <span className="sideCross sideCross--right" aria-hidden="true">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0 C12 6.627 6.627 12 0 12 C6.627 12 12 17.373 12 24 C12 17.373 17.373 12 24 12 C17.373 12 12 6.627 12 0 Z" />
-              </svg>
-            </span>
             <div className="items" ref={itemsRef}>
               {data.map((item, i) => {
                 const line1 = item.line1;

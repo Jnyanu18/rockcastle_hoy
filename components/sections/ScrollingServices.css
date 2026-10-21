@@ -10,7 +10,7 @@
   background: #fff1e7;
   color: #151515;
   width: 100%;
-  margin-bottom: clamp(32px, 5vw, 64px);
+  margin-bottom: clamp(72px, 9vw, 160px);
 }
 
 .howWeRollItemsBlock {
@@ -92,8 +92,8 @@
   position: absolute;
   top: 0;
   right: clamp(0px, 3vw, 60px);
-  width: clamp(140px, 17vw, 290px);
-  color: #8a8a8a;
+  width: clamp(230px, 28vw, 480px);
+  color: #b5aaa2;
   pointer-events: none;
 }
 
@@ -240,32 +240,9 @@
   display: none;
 }
 
-/* ---- Side Decorative Sparkle Stars — moved upside to match reference ---- */
-.servicesBlock .sideCross {
-  position: absolute;
-  top: clamp(105px, 13.5vh, 155px);
-  color: #151515;
-  pointer-events: none;
-  z-index: 20;
-  user-select: none;
-  opacity: 0.95;
-}
 
-.servicesBlock .sideCross svg {
-  width: clamp(26px, 2.2vw, 36px);
-  height: clamp(26px, 2.2vw, 36px);
-  display: block;
-}
 
-.servicesBlock .sideCross--left {
-  left: clamp(20px, 3.2vw, 56px);
-  transform: rotate(-10deg);
-}
 
-.servicesBlock .sideCross--right {
-  right: clamp(20px, 3.2vw, 56px);
-  transform: rotate(12deg);
-}
 
 .servicesBlock .ss__cta-btn {
   display: inline-flex;
@@ -309,22 +286,22 @@
 .servicesBlock .images {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: clamp(8px, 0.8vw, 12px);
+  gap: clamp(14px, 1.7vw, 32px);
   width: 100%;
-  max-width: min(82vw, 1180px);
+  max-width: min(76vw, 1180px);
   margin: clamp(10px, 1.4vh, 18px) auto 0 auto;
-  padding: 0 0 28px;
+  padding: 0 0 56px;
 }
 
 .servicesBlock .imageWrapper {
   aspect-ratio: 1;
   width: 100%;
   height: auto;
-  border-radius: clamp(6px, 0.6vw, 10px);
+  border-radius: clamp(10px, 1vw, 18px);
   overflow: hidden;
   position: relative;
   background: #141412;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+  box-shadow: none;
 }
 
 .servicesBlock .imageWrapper img {
@@ -367,9 +344,6 @@
 }
 
 @media (max-width: 767px) {
-  .servicesBlock .sideCross {
-    display: none;
-  }
 
   .servicesBlock .scrollContainer {
     height: 370vh;

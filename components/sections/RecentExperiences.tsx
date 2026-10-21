@@ -175,23 +175,14 @@ export default function RecentExperiences() {
                 )}
 
                 <span className="rx-plate__view" aria-hidden="true">
-                  <span className="rx-plate__view-pill"><span className="rx-plate__view-label">Experience <i>↗</i></span></span>
+                  <span className="rx-plate__view-pill">Experience <i>↗</i></span>
                 </span>
               </span>
 
               {/* Title lives below the photo frame, not overlaid on it */}
               <span className="rx-plate__footer" aria-hidden="true">
                 <span className="rx-plate__title">{story.title}</span>
-                {story.metrics?.length ? (
-                  <span className="rx-plate__stats">
-                    {story.metrics.map((metric) => (
-                      <span className="rx-plate__stat" key={`${story.id}-${metric.label}`}>
-                        <span className="rx-plate__stat-label">{metric.label}</span>
-                        <span className="rx-plate__stat-value">{metric.value}</span>
-                      </span>
-                    ))}
-                  </span>
-                ) : story.tagline ? <span className="rx-plate__stats">{story.tagline}</span> : null}
+                <span className="rx-plate__stats">Lorem ipsum &nbsp; Lorem ipsum &nbsp; Lorem ipsum</span>
               </span>
             </button>
           </li>

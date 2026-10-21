@@ -48,7 +48,7 @@ export default function Navigation() {
   const pathname = usePathname() || '/'
   const router = useRouter()
 
-  useMagnetic(navRef, '.nav__link, .nav__connect, .nav__social-link', 0.25)
+  useMagnetic(navRef, '.nav__link, .nav__social-link', 0.25)
 
   // Scroll detection: theme adaptation, scrolled state, and dynamic hero-to-corner spread
   const scrolledRef = useRef(false)
@@ -65,7 +65,7 @@ export default function Navigation() {
       { id: 'leadership', navKey: 'team' },
       { id: 'services', navKey: 'services' },
       { id: 'capabilities', navKey: 'services' },
-      { id: 'recent-experiences', navKey: 'experience' },
+      { id: 'recent-experiences', navKey: 'our-work' },
       { id: 'about', navKey: 'about' },
       { id: 'home', navKey: 'home' },
     ]
@@ -79,20 +79,10 @@ export default function Navigation() {
         const el = document.getElementById(item.id)
         if (el) {
           const rect = el.getBoundingClientRect()
-          let top = rect.top + scrollY
-          if (item.id === 'home') {
-            // The hero is sticky, so its viewport rect stops reflecting its flow position after scrolling.
-            let current = el
-            top = 0
-            while (current) {
-              top += current.offsetTop
-              current = current.offsetParent
-            }
-          }
           newWatch.push({
             navKey: item.navKey,
-            top,
-            bottom: top + el.offsetHeight,
+            top: rect.top + scrollY,
+            bottom: rect.bottom + scrollY,
           })
         }
       })
@@ -107,8 +97,7 @@ export default function Navigation() {
       const y = window.__lenis?.scroll ?? window.scrollY
 
       // Scrolled state
-      const heroBounds = watchBounds.find((section) => section.navKey === 'home')
-      const isScrolled = heroBounds ? y >= heroBounds.bottom : y > 30
+      const isScrolled = y > 30
       if (scrolledRef.current !== isScrolled) {
         scrolledRef.current = isScrolled
         setScrolled(isScrolled)
@@ -247,7 +236,7 @@ export default function Navigation() {
       // If navigating from another page (e.g. /contact), push link with hash to go home
       if (href.startsWith('/#') || href === '/') {
         e.preventDefault()
-        window.location.assign(href)
+        router.push(href)
         return
       }
     }
@@ -272,11 +261,11 @@ export default function Navigation() {
   }
 
   // Primary Navigation Links matching Reference Design:
-  // Home | About Us | Experience | Services | Team
+  // Home | About Us | Our Work | Services | Team | Contact
   const links = [
     { href: '/', label: 'Home' },
     { href: '/#about', label: 'About Us' },
-    { href: '/#recent-experiences', label: 'Our Work' },
+    { href: '/#our-work', label: 'Our Work' },
     { href: '/#services', label: 'Services' },
     { href: '/#team', label: 'Team' },
     { href: '/#contact', label: 'Contact' },
@@ -288,7 +277,7 @@ export default function Navigation() {
     }
     if (href === '/' || href === '/#home') return activeSection === 'home'
     if (href === '/#about') return activeSection === 'about'
-    if (href === '/#recent-experiences' || href === '/#our-work') return activeSection === 'experience'
+    if (href === '/#our-work' || href === '/#recent-experiences') return activeSection === 'our-work'
     if (href === '/#services' || href === '/#capabilities') return activeSection === 'services'
     if (href === '/#team' || href === '/#leadership') return activeSection === 'team'
     if (href === '/#contact' || href === '/contact') return activeSection === 'contact'
@@ -302,26 +291,26 @@ export default function Navigation() {
         className={`nav nav--theme-${navTheme} ${scrolled ? 'nav--scrolled' : ''}`}
       >
         <div className="nav__inner">
-          <div className="nav__left">
-            <nav className="nav__links" aria-label="Main Navigation">
-              {links.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className={`nav__link ${isLinkActive(l.href) ? 'nav__link--active' : ''}`}
-                  onClick={(e) => handleNavClick(e, l.href)}
-                >
-                  {l.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
+          {/* Left: Primary Section Navigation Links */}
+          <nav className="nav__links" aria-label="Main Navigation">
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`nav__link ${isLinkActive(l.href) ? 'nav__link--active' : ''}`}
+                onClick={(e) => handleNavClick(e, l.href)}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
 
-          <div className="nav__center">
+          {/* Center: Rockcastle Logo & Tagline (Pinned Dead Center) */}
+          <div className="nav__brand-center-anchor">
             <Link
               href="/"
               className="nav__brand"
-              aria-label="Rock Castle — Experiences Un-Ltd"
+              aria-label="Rock Castle — Experience Un-Ltd"
               onClick={(e) => handleNavClick(e, '/')}
             >
               <img
@@ -331,13 +320,15 @@ export default function Navigation() {
               />
               <span className="nav__brand-divider" aria-hidden="true" />
               <div className="nav__brand-tagline">
-                <span>EXPERIENCES</span>
+                <span>EXPERIENCE</span>
                 <span>UN-LTD</span>
               </div>
             </Link>
           </div>
 
+          {/* Right: Social Glyphs (LinkedIn & Instagram) and Mobile Hamburger Toggle */}
           <div className="nav__right">
+            {/* Social Icons (LinkedIn & Instagram) */}
             <div className="nav__socials">
               <a
                 href="https://www.linkedin.com/company/rock-castle-entertainment-pvt-ltd"
@@ -349,8 +340,8 @@ export default function Navigation() {
                 <svg
                   className="nav__social-icon"
                   viewBox="0 0 24 24"
-                  width="22"
-                  height="22"
+                  width="24"
+                  height="24"
                   fill="currentColor"
                 >
                   <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26z" />
@@ -367,8 +358,8 @@ export default function Navigation() {
                 <svg
                   className="nav__social-icon"
                   viewBox="0 0 24 24"
-                  width="22"
-                  height="22"
+                  width="24"
+                  height="24"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
@@ -382,15 +373,7 @@ export default function Navigation() {
               </a>
             </div>
 
-            <Link
-              href="/contact"
-              className={`nav__connect-pill ${pathname === '/contact' ? 'nav__connect-pill--active' : ''}`}
-              onClick={(e) => handleNavClick(e, '/contact')}
-              aria-label="Connect with Rock Castle"
-            >
-              <span className="nav__connect-plus">+</span>
-            </Link>
-
+            {/* Mobile Hamburger Toggle */}
             <button
               className={`nav__toggle ${menuOpen ? 'nav__toggle--active' : ''}`}
               onClick={toggleMenu}

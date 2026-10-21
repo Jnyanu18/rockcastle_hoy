@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import SlideUpText from "@/components/ui/SlideUpText";
 import { stats, social } from "@/lib/content";
 import { useInView } from "@/lib/hooks";
+import { HeartHandDrawing } from "@/components/figma/Drawings";
 import "./Stats.css";
 
 function parseMetric(val: string) {
@@ -106,6 +107,7 @@ function RunningMetric({ value, delay = 0 }: { value: string; delay?: number }) 
 */
 export default function Stats() {
   const figures = stats.figures;
+  const { ref: drawRef, inView: drawIn } = useInView<HTMLDivElement>(0.2);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -141,7 +143,7 @@ export default function Stats() {
         <div className="hoy-intro-cols mb-12 sm:mb-16 lg:mb-28">
           {/* Column 1: Section Index */}
           <div className="hoy-intro-col-1">
-            <span className="text-xs md:text-[13px] font-medium tracking-wide text-[#151515]">
+            <span className="text-xs md:text-[13px] font-medium tracking-wide text-white">
               <SlideUpText split="characters">
                 {`[ ${stats.index} ]`}
               </SlideUpText>
@@ -150,12 +152,12 @@ export default function Stats() {
 
           {/* Column 2: Beyond the Stage Eyebrow & Hero Statement */}
           <div className="hoy-intro-col-2">
-            <p className="text-xs md:text-[13px] font-medium text-[#151515] mb-4">
+            <p className="text-xs md:text-[13px] font-medium text-white mb-4">
               <SlideUpText split="words">
                 {stats.label}
               </SlideUpText>
             </p>
-            <h2 className="text-lg sm:text-xl lg:text-[24px] font-normal leading-[1.24] text-[#151515]">
+            <h2 className="text-lg sm:text-xl lg:text-[24px] font-normal leading-[1.24] text-white">
               <SlideUpText split="words" stagger={0.012} delay={0.06}>
                 {stats.heading}
               </SlideUpText>
@@ -165,14 +167,14 @@ export default function Stats() {
           {/* Column 3: Mobile Content / Brand Activations Aside */}
           <div className="hoy-intro-col-3">
             <div className="flex items-center gap-2 mb-3">
-              <span className="inline-block h-2.5 w-2.5 bg-[#151515] rounded-[1px] shrink-0" />
-              <span className="text-xs md:text-[13px] font-medium text-[#151515]">
+              <span className="inline-block h-2.5 w-2.5 bg-white rounded-[1px] shrink-0" />
+              <span className="text-xs md:text-[13px] font-medium text-white">
                 <SlideUpText split="words" delay={0.04}>
                   {stats.mobile.label}
                 </SlideUpText>
               </span>
             </div>
-            <p className="text-xs md:text-[13px] leading-relaxed text-[#151515] max-w-sm">
+            <p className="text-xs md:text-[13px] leading-relaxed text-white/90 max-w-sm">
               <SlideUpText split="words" stagger={0.015} delay={0.1}>
                 {stats.mobile.body}
               </SlideUpText>
@@ -188,7 +190,7 @@ export default function Stats() {
           <div className="hoy-showcase-col-decor-left hidden lg:flex">
             <span
               aria-hidden
-              className="h-2.5 w-2.5 bg-[#151515] rounded-[1px]"
+              className="h-2.5 w-2.5 bg-white rounded-[1px]"
             />
           </div>
 
@@ -358,12 +360,12 @@ export default function Stats() {
             <div className="grid grid-cols-2 gap-x-6 gap-y-6 sm:gap-x-8 sm:gap-y-8 lg:flex lg:flex-col lg:gap-5 xl:gap-6">
               {figures.map((item, index) => (
                 <div key={item.label} className="flex flex-col items-start justify-start">
-                  <span className="font-sans text-xs sm:text-sm font-medium tracking-wide text-[#151515] mb-1 sm:mb-1.5">
-                    <SlideUpText split="words" delay={0.06} className="text-[#151515]">
+                  <span className="font-sans text-xs sm:text-sm font-medium tracking-wide text-white mb-1 sm:mb-1.5">
+                    <SlideUpText split="words" delay={0.06} className="text-white">
                       {item.label}
                     </SlideUpText>
                   </span>
-                  <span className="font-sans text-3xl sm:text-5xl lg:text-[60px] xl:text-[66px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#151515]">
+                  <span className="font-sans text-3xl sm:text-5xl lg:text-[60px] xl:text-[66px] font-normal tabular-nums leading-none tracking-[-0.04em] text-white">
                     <RunningMetric value={item.value} delay={index * 120} />
                   </span>
                 </div>
@@ -389,6 +391,12 @@ export default function Stats() {
                 </span>
               </a>
             </div>
+          </div>
+
+          {/* Line-art hand + heart + arrow (client Figma) */}
+          <div ref={drawRef} className={`hoy-stats-art hidden lg:block ${drawIn ? "is-in" : ""}`} aria-hidden>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/heart-hand.png" alt="" draggable={false} />
           </div>
 
           {/* Right Decorative Sparkle Star Accent */}
@@ -447,7 +455,7 @@ function SparkleIcon() {
       viewBox="0 0 22 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 text-[#151515]/40"
+      className="w-6 h-6 text-white/50"
     >
       <path
         fillRule="evenodd"

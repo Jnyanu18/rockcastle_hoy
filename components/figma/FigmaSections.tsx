@@ -1,9 +1,8 @@
 import Section from "./Section";
-import { LoungeDrawing } from "./Drawings";
+import StageLineAnimation from "./StageLineAnimation";
 import DotPattern from "@/components/ui/DotPattern";
 export { default as StoriesSection } from "./StoriesSection";
 import "./figma.css";
-
 
 export function WhoWeAre() {
   return (
@@ -22,11 +21,11 @@ export function WhoWeAre() {
           lasting impact.
         </p>
         <p className="rcf-who__sub">
-          Big ideas deserve more than execution.<br />Let&rsquo;s turn yours into an experience. &rarr;
+          Big ideas deserve more than execution.<br />Let&rsquo;s turn yours into an experience. →
         </p>
-        <a href="#contact" className="rcf-btn" data-magnetic>Read more <span aria-hidden>&nearr;</span></a>
+        <a href="#contact" className="rcf-btn" data-magnetic>Read more <span aria-hidden>↗</span></a>
       </div>
-      <LoungeDrawing className="rcf-who__art" />
+      <StageLineAnimation />
     </Section>
   );
 }
