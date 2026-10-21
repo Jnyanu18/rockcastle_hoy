@@ -28,162 +28,217 @@
 }
 
 /* ===================================================
-   State 0: Unscrolled / Top of Home Page
+   State 0: Home Page Hero / Unscrolled State
    Transparent like before, spacious padding, white text
    =================================================== */
 .nav:not(.nav--scrolled) {
+  padding: clamp(30px, 3.8vh, 46px) 0;
+}
+
+.nav--scrolled {
+  padding: clamp(14px, 1.8vh, 18px) 0;
+}
+
+.nav--theme-transparent,
+.nav--theme-transparent.nav--scrolled {
   background: transparent !important;
   box-shadow: none !important;
-  padding: clamp(30px, 3.8vh, 46px) 0;
   color: #f4f6f9 !important;
 }
 
-.nav:not(.nav--scrolled) .nav__brand-wordmark {
+.nav--theme-transparent .nav__brand-wordmark {
   filter: brightness(0) invert(1) !important;
 }
 
-.nav:not(.nav--scrolled) .nav__brand-divider {
+.nav--theme-transparent .nav__brand-divider {
   background-color: var(--rc-orange, #ea7700) !important;
 }
 
-.nav:not(.nav--scrolled) .nav__brand-tagline {
+.nav--theme-transparent .nav__brand-tagline {
   color: #f4f6f9 !important;
 }
 
-.nav:not(.nav--scrolled) .nav__link {
+.nav--theme-transparent .nav__link {
   color: #f4f6f9 !important;
 }
 
-.nav:not(.nav--scrolled) .nav__link::after {
+.nav--theme-transparent .nav__link:hover {
+  color: #ffffff !important;
+  opacity: 1;
+}
+
+.nav--theme-transparent .nav__link::after {
   background: var(--rc-orange, #ea7700) !important;
 }
 
-.nav:not(.nav--scrolled) .nav__social-link {
+.nav--theme-transparent .nav__link--active::after {
+  background: var(--rc-orange, #ea7700) !important;
+}
+
+.nav--theme-transparent .nav__social-link {
   color: #f4f6f9 !important;
 }
 
-.nav:not(.nav--scrolled) .nav__social-link:hover {
+.nav--theme-transparent .nav__social-link:hover {
   color: var(--rc-orange, #ea7700) !important;
 }
 
-.nav:not(.nav--scrolled) .nav__toggle span {
+.nav--theme-transparent .nav__toggle span {
   background: #f4f6f9 !important;
-}
-
-/* Compact padding once scrolled */
-.nav--scrolled {
-  padding: clamp(14px, 1.8vh, 18px) 0;
 }
 
 /* ===================================================
    State 1: On greyish background (Featured Work / Cement / Dark)
    Navbar must be ORANGE (matching reference image)
    =================================================== */
-.nav--scrolled.nav--theme-orange,
-.nav--scrolled.nav--theme-dark {
-  background: #ee7d2e;
-  color: #ffffff;
-  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.16);
+.nav--theme-orange,
+.nav--theme-dark {
+  background: #ee7d2e !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.16) !important;
 }
 
-.nav--scrolled.nav--theme-orange .nav__brand-wordmark,
-.nav--scrolled.nav--theme-dark .nav__brand-wordmark {
+.nav--theme-orange .nav__brand-wordmark,
+.nav--theme-dark .nav__brand-wordmark {
   filter: brightness(0) invert(1) !important;
 }
 
-.nav--scrolled.nav--theme-orange .nav__brand-divider,
-.nav--scrolled.nav--theme-dark .nav__brand-divider {
-  background-color: rgba(255, 255, 255, 0.7);
+.nav--theme-orange .nav__brand-divider,
+.nav--theme-dark .nav__brand-divider {
+  background-color: rgba(255, 255, 255, 0.7) !important;
 }
 
-.nav--scrolled.nav--theme-orange .nav__brand-tagline,
-.nav--scrolled.nav--theme-dark .nav__brand-tagline {
-  color: #ffffff;
+.nav--theme-orange .nav__brand-tagline,
+.nav--theme-dark .nav__brand-tagline {
+  color: #ffffff !important;
 }
 
-.nav--scrolled.nav--theme-orange .nav__link,
-.nav--scrolled.nav--theme-dark .nav__link {
-  color: #ffffff;
+.nav--theme-orange .nav__link,
+.nav--theme-dark .nav__link {
+  color: #ffffff !important;
 }
 
-.nav--scrolled.nav--theme-orange .nav__link::after,
-.nav--scrolled.nav--theme-dark .nav__link::after {
-  background: #ffffff;
+.nav--theme-orange .nav__link:hover,
+.nav--theme-dark .nav__link:hover {
+  color: rgba(255, 255, 255, 0.85) !important;
 }
 
-.nav--scrolled.nav--theme-orange .nav__social-link,
-.nav--scrolled.nav--theme-dark .nav__social-link {
-  color: #ffffff;
+.nav--theme-orange .nav__link::after,
+.nav--theme-dark .nav__link::after {
+  background: #ffffff !important;
 }
 
-.nav--scrolled.nav--theme-orange .nav__social-link:hover,
-.nav--scrolled.nav--theme-dark .nav__social-link:hover {
-  color: rgba(255, 255, 255, 0.75);
+.nav--theme-orange .nav__link--active::after,
+.nav--theme-dark .nav__link--active::after {
+  background: #ffffff !important;
 }
 
-.nav--scrolled.nav--theme-orange .nav__toggle span,
-.nav--scrolled.nav--theme-dark .nav__toggle span {
-  background: #ffffff;
+.nav--theme-orange .nav__social-link,
+.nav--theme-dark .nav__social-link {
+  color: #ffffff !important;
+}
+
+.nav--theme-orange .nav__social-link:hover,
+.nav--theme-dark .nav__social-link:hover {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.nav--theme-orange .nav__toggle span,
+.nav--theme-dark .nav__toggle span {
+  background: #ffffff !important;
+}
+
+.nav--theme-orange .nav__pill-btn,
+.nav--theme-dark .nav__pill-btn {
+  background: #ffffff !important;
+  color: #ee7d2e !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18) !important;
+}
+
+.nav--theme-orange .nav__pill-track span,
+.nav--theme-dark .nav__pill-track span,
+.nav--theme-orange .nav__pill-plus,
+.nav--theme-dark .nav__pill-plus {
+  color: #ee7d2e !important;
 }
 
 /* ===================================================
    State 2: On orangish / peach background
    Navbar must be the color of Featured Work (#dcdcdc cement grey)
    =================================================== */
-.nav--scrolled.nav--theme-cement,
-.nav--scrolled.nav--theme-blue,
-.nav--scrolled.nav--theme-light {
-  background: #dcdcdc;
-  color: #151515;
-  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12);
+.nav--theme-cement,
+.nav--theme-blue,
+.nav--theme-light {
+  background: #dcdcdc !important;
+  color: #151515 !important;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12) !important;
 }
 
-.nav--scrolled.nav--theme-cement .nav__brand-wordmark,
-.nav--scrolled.nav--theme-blue .nav__brand-wordmark,
-.nav--scrolled.nav--theme-light .nav__brand-wordmark {
+.nav--theme-cement .nav__brand-wordmark,
+.nav--theme-blue .nav__brand-wordmark,
+.nav--theme-light .nav__brand-wordmark {
   filter: none !important;
 }
 
-.nav--scrolled.nav--theme-cement .nav__brand-divider,
-.nav--scrolled.nav--theme-blue .nav__brand-divider,
-.nav--scrolled.nav--theme-light .nav__brand-divider {
-  background-color: var(--rc-orange, #ee7d2e);
+.nav--theme-cement .nav__brand-divider,
+.nav--theme-blue .nav__brand-divider,
+.nav--theme-light .nav__brand-divider {
+  background-color: var(--rc-orange, #ee7d2e) !important;
 }
 
-.nav--scrolled.nav--theme-cement .nav__brand-tagline,
-.nav--scrolled.nav--theme-blue .nav__brand-tagline,
-.nav--scrolled.nav--theme-light .nav__brand-tagline {
-  color: #151515;
+.nav--theme-cement .nav__brand-tagline,
+.nav--theme-blue .nav__brand-tagline,
+.nav--theme-light .nav__brand-tagline {
+  color: #151515 !important;
 }
 
-.nav--scrolled.nav--theme-cement .nav__link,
-.nav--scrolled.nav--theme-blue .nav__link,
-.nav--scrolled.nav--theme-light .nav__link {
-  color: #151515;
+.nav--theme-cement .nav__link,
+.nav--theme-blue .nav__link,
+.nav--theme-light .nav__link {
+  color: #151515 !important;
 }
 
-.nav--scrolled.nav--theme-cement .nav__link::after,
-.nav--scrolled.nav--theme-blue .nav__link::after,
-.nav--scrolled.nav--theme-light .nav__link::after {
-  background: var(--rc-orange, #ee7d2e);
+.nav--theme-cement .nav__link:hover,
+.nav--theme-blue .nav__link:hover,
+.nav--theme-light .nav__link:hover {
+  color: var(--rc-orange, #ee7d2e) !important;
 }
 
-.nav--scrolled.nav--theme-cement .nav__social-link,
-.nav--scrolled.nav--theme-blue .nav__social-link,
-.nav--scrolled.nav--theme-light .nav__social-link {
-  color: #151515;
+.nav--theme-cement .nav__link::after,
+.nav--theme-blue .nav__link::after,
+.nav--theme-light .nav__link::after {
+  background: var(--rc-orange, #ee7d2e) !important;
 }
 
-.nav--scrolled.nav--theme-cement .nav__social-link:hover,
-.nav--scrolled.nav--theme-blue .nav__social-link:hover,
-.nav--scrolled.nav--theme-light .nav__social-link:hover {
-  color: var(--rc-orange, #ee7d2e);
+.nav--theme-cement .nav__link--active::after,
+.nav--theme-blue .nav__link--active::after,
+.nav--theme-light .nav__link--active::after {
+  background: var(--rc-orange, #ee7d2e) !important;
 }
 
-.nav--scrolled.nav--theme-cement .nav__toggle span,
-.nav--scrolled.nav--theme-blue .nav__toggle span,
-.nav--scrolled.nav--theme-light .nav__toggle span {
-  background: #151515;
+.nav--theme-cement .nav__social-link,
+.nav--theme-blue .nav__social-link,
+.nav--theme-light .nav__social-link {
+  color: #151515 !important;
+}
+
+.nav--theme-cement .nav__social-link:hover,
+.nav--theme-blue .nav__social-link:hover,
+.nav--theme-light .nav__social-link:hover {
+  color: var(--rc-orange, #ee7d2e) !important;
+}
+
+.nav--theme-cement .nav__toggle span,
+.nav--theme-blue .nav__toggle span,
+.nav--theme-light .nav__toggle span {
+  background: #151515 !important;
+}
+
+.nav--theme-cement .nav__pill-btn,
+.nav--theme-blue .nav__pill-btn,
+.nav--theme-light .nav__pill-btn {
+  background: var(--rc-orange, #ee7d2e) !important;
+  color: #ffffff !important;
 }
 
 /* Full-bleed inner container spanning corner-to-corner */
@@ -325,10 +380,6 @@
   display: block;
 }
 
-/* Always crisp white wordmark on both orange and greyish-blue navbar */
-.nav__brand-wordmark {
-  filter: brightness(0) invert(1) !important;
-}
 
 @media (max-width: 640px) {
   .nav__brand-wordmark {

@@ -24,36 +24,58 @@ function getEffectiveBg(el) {
   return m ? [parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3])] : [17, 25, 37]
 }
 
-/** Detects whether the element beneath the fixed nav bar is an orange/peach ground ('blue' navbar)
- *  or a greyish-blue / cement / dark ground ('orange' navbar).
+/** Detects what theme the navbar should use:
+ *  - 'transparent': when on the home hero section (#home) or near the top of the home page (y <= 30)
+ *  - 'cement': when over orangish / peach sections (#dcdcdc, matching featured work section)
+ *  - 'orange': when over greyish / cement / dark sections (#ee7d2e vibrant orange)
  */
-function getNavThemeForBackground(navEl) {
-  if (!navEl || typeof document.elementsFromPoint !== 'function') return 'orange'
+function getNavThemeForBackground(navEl, scrollY, pathname) {
+  const isHome = !pathname || pathname === '/'
+  const currentY = scrollY ?? (typeof window !== 'undefined' ? (window.__lenis?.scroll ?? window.scrollY) : 0)
+
+  // 1. If at the top of the home page, it must be transparent like before!
+  if (isHome && currentY <= 30) {
+    return 'transparent'
+  }
+
+  if (!navEl || typeof document.elementsFromPoint !== 'function') {
+    return isHome ? 'transparent' : 'cement'
+  }
+
   const rect = navEl.getBoundingClientRect()
   const sampleX = window.innerWidth / 2
   const sampleY = Math.min(window.innerHeight - 1, rect.bottom + 12)
   const stack = document.elementsFromPoint(sampleX, sampleY)
   const behind = stack.find((el) => !navEl.contains(el) && el !== navEl)
-  if (!behind) return 'orange'
+  if (!behind) {
+    return isHome ? 'transparent' : 'cement'
+  }
 
-  // 1. Direct section identifier check (fast & precise)
+  // 2. Over hero section (#home), navbar must be transparent like before!
+  const homeSection = behind.closest('#home')
+  if (homeSection) {
+    return 'transparent'
+  }
+
+  // 3. Direct section identifier check for orangish / peach sections
+  // When on orange/peach background, navbar must be the color of featured work section (#dcdcdc cement)!
   const orangeSection = behind.closest(
-    '#about, .rcf-who, #stats, .hoy-stats-section, #process, #services, .servicesBlock, .rcf-stories, #contact'
+    '#about, .rcf-who, #stats, .hoy-stats-section, #process, #services, .servicesBlock, .rcf-stories, #insta-feed, #contact'
   )
   if (orangeSection) {
-    // When on orange background, navbar must be the color of featured work section (#dcdcdc cement)!
     return 'cement'
   }
 
+  // 4. Direct section identifier check for greyish / cement sections
+  // When on greyish background, navbar must be orange (#ee7d2e)!
   const greyishSection = behind.closest(
-    '#home, #recent-experiences, .recent-experiences, #leadership, .leadership, #clients, .clients, footer, .footer'
+    '#recent-experiences, .recent-experiences, .rcf-featured, #leadership, .leadership, #clients, .clients, footer, .footer'
   )
   if (greyishSection) {
-    // When on greyish background, navbar must be orange (#ee7d2e)!
     return 'orange'
   }
 
-  // 2. Computed RGB fallback check
+  // 5. Computed RGB fallback check
   const [r, g, b] = getEffectiveBg(behind)
   const isVibrantOrange = r > 180 && r > g + 40 && b < 100
   const isPeachOrange = r > 225 && g > 195 && r - b >= 14
@@ -66,7 +88,7 @@ function getNavThemeForBackground(navEl) {
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
-  const [navTheme, setNavTheme] = useState('orange') // 'orange' (orange bar on greyish-blue bg) | 'blue' (greyish-blue bar on orange bg)
+  const [navTheme, setNavTheme] = useState('transparent') // 'transparent' | 'cement' | 'orange'
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
 
@@ -78,7 +100,7 @@ export default function Navigation() {
 
   // Scroll detection: theme adaptation, scrolled state, and dynamic hero-to-corner spread
   const scrolledRef = useRef(false)
-  const themeRef = useRef('orange')
+  const themeRef = useRef('transparent')
   const activeSectionRef = useRef('home')
   const lastProgressRef = useRef(-1)
 
@@ -141,9 +163,10 @@ export default function Navigation() {
       }
 
       // Detect background theme:
-      // When on orange background: navbar is greyish blue ('blue').
-      // When on greyish blue background: navbar is orange ('orange').
-      const targetTheme = getNavThemeForBackground(navRef.current)
+      // - Home page / Hero: transparent like before
+      // - Orange / peach background: #dcdcdc (Featured Work cement color)
+      // - Greyish / cement background: #ee7d2e (brand orange)
+      const targetTheme = getNavThemeForBackground(navRef.current, y, pathname)
       if (themeRef.current !== targetTheme) {
         themeRef.current = targetTheme
         setNavTheme(targetTheme)
