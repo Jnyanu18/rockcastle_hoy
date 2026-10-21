@@ -1,16 +1,8 @@
 import Section from "./Section";
-import { CameraDrawing, LoungeDrawing } from "./Drawings";
-import ReelCard from "./ReelCard";
+import { LoungeDrawing } from "./Drawings";
 export { default as StoriesSection } from "./StoriesSection";
 import "./figma.css";
 
-const reels = [
-  { kind: "Brand Activation", title: "MG Motor | EV Activation", img: "/rx/service-07-1.jpg" },
-  { kind: "Experience", title: "Diablo | Full Cut", img: "/rx/service-07-2.jpg" },
-  { kind: "Play Mode", title: "Dave & Buster's | Social Cut", img: "/rx/service-07-3.jpg" },
-  { kind: "From the Maker", title: "Optimist | Founder Story", img: "/rx/service-07-4.jpg" },
-  { kind: "Food Stories", title: "Daawat Rice | Brand Story", img: "/rx/service-06-1.jpg" },
-];
 
 export function WhoWeAre() {
   return (
@@ -28,9 +20,9 @@ export function WhoWeAre() {
           lasting impact.
         </p>
         <p className="rcf-who__sub">
-          Big ideas deserve more than execution.<br />Let&rsquo;s turn yours into an experience. →
+          Big ideas deserve more than execution.<br />Let&rsquo;s turn yours into an experience. &rarr;
         </p>
-        <a href="#contact" className="rcf-btn" data-magnetic>Read more <span aria-hidden>↗</span></a>
+        <a href="#contact" className="rcf-btn" data-magnetic>Read more <span aria-hidden>&nearr;</span></a>
       </div>
       <LoungeDrawing className="rcf-who__art" />
     </Section>
@@ -43,13 +35,14 @@ export function StoriesAndInsta() {
       <Section id="insta-feed" className="rcf-stories">
         <span className="rcf-insta__dots" aria-hidden><i /><i /><i /><i /></span>
         <h2 className="rcf-insta__title">
-          insta feed <CameraDrawing className="rcf-insta__art" />
+          insta feed
+          <img className="rcf-insta__art" src="/insta/camera.png" alt="" aria-hidden="true" />
         </h2>
-        <ul className="rcf-reels">
-          {reels.map((r) => (
-            <ReelCard key={r.title} kind={r.kind} title={r.title} img={r.img} />
-          ))}
-        </ul>
+        <div className="rcf-reels">
+          <div className="rcf-reels__stage">
+            <img src="/insta/reels.png" alt="Insta feed reels: MG Motor, Diablo, Dave & Buster's, Optimist, Daawat Rice" decoding="async" />
+          </div>
+        </div>
       </Section>
     </>
   );

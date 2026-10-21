@@ -62,28 +62,14 @@
 .rcf-thumbs { list-style: none; padding: 0; margin: 0 auto; max-width: 62vw; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(8px, 0.8vw, 12px); }
 .rcf-thumbs img { aspect-ratio: 1; width: 100%; object-fit: cover; border-radius: 12px; }
 .rcf-dots { display: block; margin: 3vw 0; color: var(--rcf-orange); letter-spacing: 4px; }
-.rcf-stories .rcf-insta__title { display: inline-flex; align-items: center; gap: 0; font-size: 3.96vw; font-weight: 500 !important; text-transform: lowercase !important; margin: 0 !important; line-height: 1; }
-.rcf-insta__dots { display: flex; justify-content: center; gap: .4vw; margin: 0 0 2.4vw; }
+/* Insta feed: sizes are fractions of the 1920px Figma frame (1vw = 19.2px). The reels PNG is the full frame, cropped to the phones. */
+.rcf-stories .rcf-insta__title { position: relative; display: inline-block; font-size: 3.2vw; font-weight: 500 !important; text-transform: lowercase !important; margin: 0 !important; line-height: 1; }
+.rcf-insta__dots { display: flex; justify-content: center; gap: .4vw; margin: 0 0 3.2vw; }
 .rcf-insta__dots i { width: .25vw; height: .25vw; min-width: 3px; min-height: 3px; border-radius: 50%; background: var(--rcf-orange); }
-.rcf-insta__art { width: 14.4vw; color: #1a1a1a; margin-top: .6vw; margin-left: -.3vw; flex: none; }
-.rcf-insta__art path, .rcf-insta__art rect, .rcf-insta__art circle { stroke-width: 1.2; }
-.rcf-reels { list-style: none; margin: 2vw auto 0; padding: 0; max-width: 100%; display: flex; justify-content: center; align-items: center; gap: .6vw; perspective: 1600px; margin-inline: -.6vw; }
-.rcf-reel { position: relative; flex: 0 1 auto; min-width: 0; width: var(--w); height: var(--h); border-radius: 2vw; overflow: hidden; border: .22vw solid var(--rcf-orange); background: #222; transform: var(--t, none); transform-origin: center; text-align: left; cursor: pointer; }
-.rcf-reel:nth-child(1) { --w: 18.6vw; --h: 36vw; --t: none; }
-.rcf-reel:nth-child(2) { --w: 18.6vw; --h: 36vw; --t: none; z-index: 3; box-shadow: 0 10px 40px rgba(238,125,46,.45); }
-.rcf-reel:nth-child(3) { --w: 18.6vw; --h: 36vw; --t: none; }
-.rcf-reel:nth-child(4) { --w: 18.6vw; --h: 36vw; --t: none; }
-.rcf-reel:nth-child(5) { --w: 18.6vw; --h: 36vw; --t: none; }
-.rcf-reel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-/* Tilt (transform) follows the cursor with no transition so it never lags; only the lift (scale) eases. */
-.rcf-reel { scale: 1; transition: scale .3s cubic-bezier(.2,.8,.2,1); will-change: transform, scale; backface-visibility: hidden; }
-.rcf-reel:hover { z-index: 5; scale: 1.1; transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); box-shadow: 0 28px 60px rgba(0,0,0,.4), 0 0 40px rgba(238,125,46,.45); }
-.rcf-reel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 55%, rgba(0,0,0,.85)); pointer-events: none; }
-.rcf-reel__play { position: absolute; z-index: 2; top: 50%; left: 50%; width: 4.5vw; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: var(--rcf-orange); display: grid; place-items: center; transition: transform .3s; }
-.rcf-reel__play svg { width: 40%; height: 40%; margin-left: 8%; fill: #fff; }
-.rcf-reel:hover .rcf-reel__play { transform: translate(-50%, -50%) scale(1.1); }
-.rcf-reel__meta { position: absolute; z-index: 2; left: 1.4vw; bottom: 1.7vw; right: 1vw; color: #fff; font-size: 1.04vw; font-weight: 600; line-height: 1.25; }
-.rcf-reel__meta b { display: block; color: var(--rcf-orange); text-transform: uppercase; letter-spacing: .1em; font-size: .72em; font-weight: 700; margin-bottom: .35em; }
+.rcf-insta__art { position: absolute; left: 100%; top: 50%; width: 11.3vw; margin-left: -.3vw; transform: translateY(-38%); max-width: none; }
+.rcf-reels { margin: 0 calc(-1 * var(--container-x, 32px)); }
+.rcf-reels__stage { position: relative; width: 100%; aspect-ratio: 2000 / 830; overflow: hidden; }
+.rcf-reels__stage img { position: absolute; left: 0; top: -17.6%; width: 100%; height: auto; display: block; }
 
 /* Line-art draw-in */
 .rcf-draw path, .rcf-draw circle, .rcf-draw rect { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 2.2s ease .2s; }
@@ -97,13 +83,8 @@
   .rcf-featured__intro, .rcf-stories > p { max-width: none; }
   .rcf-grid { grid-template-columns: 1fr; gap: 24px; }
   .rcf-thumbs, .rcf-reels { max-width: none; }
-  .rcf-reels { overflow-x: auto; justify-content: flex-start; padding: 12px; gap: 10px; }
-  .rcf-reel { --w: 52vw !important; --h: 92vw !important; --t: none !important; flex: none; }
-  .rcf-reel__meta { font-size: 14px; left: 14px; bottom: 14px; }
-  .rcf-reel__play { width: 56px; }
-  .rcf-stories .rcf-insta__title { font-size: 34px; }
-  .rcf-insta__art { width: 120px; }
-  .rcf-reel { border-width: 3px; border-radius: 24px; }
+  .rcf-stories .rcf-insta__title { font-size: 30px; }
+  .rcf-insta__art { width: 100px; }
   .rcf-stories__art { display: none; }
 }
 
@@ -142,3 +123,8 @@
   .rcf-who { min-height: 0; padding-bottom: clamp(32px, 8vw, 64px); }
   .rcf-who__art { position: static; width: min(92vw, 680px); margin: 32px auto 0; }
 }
+
+/* Client's book + paper plane drawing: exact trace, wiped in left to right */
+.rcf-bookplane { color: #b5aaa2; overflow: visible; clip-path: inset(-5% 100% -5% 0); transition: clip-path 2.6s cubic-bezier(.45,.05,.25,1) .2s; }
+.is-in .rcf-bookplane, .rcf-bookplane.is-in { clip-path: inset(-5% -2% -5% 0); }
+@media (prefers-reduced-motion: reduce) { .rcf-bookplane { clip-path: none; transition: none; } }

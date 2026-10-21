@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>body { background: #111; color: #fff; font-family: monospace; padding: 20px; }</style>
+</head>
+<body>
+  <h2>Measuring Figma Screenshot Layout</h2>
+  <canvas id="c"></canvas>
+  <pre id="log">Loading...</pre>
+
+  <script>
+    const img = new Image();
+    img.src = '/figma_full.png';
+    img.onload = () => {
+      const W = img.naturalWidth;
+      const H = img.naturalHeight;
+      const canvas = document.getElementById('c');
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+
+      const idata = ctx.getImageData(0, 0, W, H);
+      const data = idata.data;
+
+      function getPixel(x, y) {
+        const i = (y * W + x) * 4;
+        return [data[i], data[i+1], data[i+2], data[i+3]];
+      }
+
+      // Find top of peach canvas (below figma top bar):
+      // Peach canvas is around rgb(255, 241, 231) or rgb(254, 241, 230)
+      let peachTop = 0;
+      for (let y = 50; y < 200; y++) {
+        const [r, g, b] = getPixel(200, y);
+        if (r > 240 && g > 230 && b > 215) {
+          peachTop = y;
+          break;
+        }
+      }
+
+      // Find bottom of peach canvas (where grey starts):
+      // Grey is around rgb(220, 220, 220)
+      let peachBottom = 0;
+      for (let y = 300; y < 550; y++) {
+        const [r, g, b] = getPixel(50, y);
+        if (r < 235 && g < 235 && b < 235 && Math.abs(r - g) < 5 && Math.abs(r - b) < 5) {
+          peachBottom = y;
+          break;
+        }
+      }
+
+      // Find left edge and right edge of the page canvas if any, or is it full width?
+      // In Figma screenshot, check x=0, y=peachTop + 50
+      const [r0, g0, b0] = getPixel(0, peachTop + 50);
+      const isFullWidthPeach = (r0 > 240 && g0 > 230);
+
+      // Now let's detect text bounding boxes:
+      // Text is dark ink: rgb < 60
+      function isDark(x, y) {
+        const [r, g, b] = getPixel(x, y);
+        return r < 80 && g < 80 && b < 80;
+      }
+
+      // Orange line / button: r > 200, g between 90 and 160, b < 60
+      function isOrange(x, y) {
+        const [r, g, b] = getPixel(x, y);
+        return r > 200 && g > 90 && g < 160 && b < 60;
+      }
+
+      // Find "WHO WE ARE ?"
+      let whoMinX = 9999, whoMaxX = 0, whoMinY = 9999, whoMaxY = 0;
+      for (let y = peachTop; y < peachTop + 100; y++) {
+        for (let x = 30; x < 200; x++) {
+          if (isDark(x, y)) {
+            whoMinX = Math.min(whoMinX, x);
+            whoMaxX = Math.max(whoMaxX, x);
+            whoMinY = Math.min(whoMinY, y);
+            whoMaxY = Math.max(whoMaxY, y);
+          }
+        }
+      }
+
+      // Find "[ 01 ]"
+      let idxMinX = 9999, idxMaxX = 0, idxMinY = 9999, idxMaxY = 0;
+      for (let y = peachTop; y < peachTop + 100; y++) {
+        for (let x = W - 150; x < W - 20; x++) {
+          if (isDark(x, y)) {
+            idxMinX = Math.min(idxMinX, x);
+            idxMaxX = Math.max(idxMaxX, x);
+            idxMinY = Math.min(idxMinY, y);
+            idxMaxY = Math.max(idxMaxY, y);
+          }
+        }
+      }
+
+      // Find H2 "WE TURN IDEAS INTO EXPERIENCES."
+      let h2MinX = 9999, h2MaxX = 0, h2MinY = 9999, h2MaxY = 0;
+      for (let y = peachTop; y < peachTop + 150; y++) {
+        for (let x = 250; x < 550; x++) {
+          if (isDark(x, y)) {
+            h2MinX = Math.min(h2MinX, x);
+            h2MaxX = Math.max(h2MaxX, x);
+            h2MinY = Math.min(h2MinY, y);
+            h2MaxY = Math.max(h2MaxY, y);
+          }
+        }
+      }
+
+      // Find lead paragraph text
+      let leadMinX = 9999, leadMaxX = 0, leadMinY = 9999, leadMaxY = 0;
+      for (let y = h2MaxY + 5; y < h2MaxY + 180; y++) {
+        for (let x = 250; x < W - 20; x++) {
+          if (isDark(x, y)) {
+            leadMinX = Math.min(leadMinX, x);
+            leadMaxX = Math.max(leadMaxX, x);
+            leadMinY = Math.min(leadMinY, y);
+            leadMaxY = Math.max(leadMaxY, y);
+          }
+        }
+      }
+
+      // Find "Read more" button (orange fill)
+      let btnMinX = 9999, btnMaxX = 0, btnMinY = 9999, btnMaxY = 0;
+      for (let y = leadMaxY; y < peachBottom; y++) {
+        for (let x = 250; x < 500; x++) {
+          if (isOrange(x, y)) {
+            btnMinX = Math.min(btnMinX, x);
+            btnMaxX = Math.max(btnMaxX, x);
+            btnMinY = Math.min(btnMinY, y);
+            btnMaxY = Math.max(btnMaxY, y);
+          }
+        }
+      }
+
+      // Find stage drawing bounds
+      let stageMinX = 9999, stageMaxX = 0, stageMinY = 9999, stageMaxY = 0;
+      for (let y = leadMaxY - 30; y < peachBottom + 50; y++) {
+        for (let x = 600; x < W; x++) {
+          if (isOrange(x, y)) {
+            stageMinX = Math.min(stageMinX, x);
+            stageMaxX = Math.max(stageMaxX, x);
+            stageMinY = Math.min(stageMinY, y);
+            stageMaxY = Math.max(stageMaxY, y);
+          }
+        }
+      }
+
+      // Find "FEATURED WORK" in grey area
+      let featMinX = 9999, featMaxX = 0, featMinY = 9999, featMaxY = 0;
+      for (let y = peachBottom; y < H; y++) {
+        for (let x = 20; x < 200; x++) {
+          if (isDark(x, y)) {
+            featMinX = Math.min(featMinX, x);
+            featMaxX = Math.max(featMaxX, x);
+            featMinY = Math.min(featMinY, y);
+            featMaxY = Math.max(featMaxY, y);
+          }
+        }
+      }
+
+      // Orange dot on baseline
+      let dotX = 0;
+      for (let x = 10; x < 200; x++) {
+        if (isOrange(x, peachBottom - 2)) {
+          dotX = x;
+          break;
+        }
+      }
+
+      const report = {
+        totalSize: { W, H },
+        canvas: { peachTop, peachBottom, height: peachBottom - peachTop, isFullWidthPeach },
+        whoWeAre: { x: whoMinX, y: whoMinY, w: whoMaxX - whoMinX, h: whoMaxY - whoMinY, relY: whoMinY - peachTop },
+        index01: { x: idxMinX, y: idxMinY, w: idxMaxX - idxMinX, h: idxMaxY - idxMinY, right: W - idxMaxX, relY: idxMinY - peachTop },
+        h2: { x: h2MinX, y: h2MinY, w: h2MaxX - h2MinX, h: h2MaxY - h2MinY, relY: h2MinY - peachTop },
+        leadParagraph: { x: leadMinX, y: leadMinY, w: leadMaxX - leadMinX, h: leadMaxY - leadMinY, relY: leadMinY - peachTop },
+        readMoreBtn: { x: btnMinX, y: btnMinY, w: btnMaxX - btnMinX, h: btnMaxY - btnMinY, relY: btnMinY - peachTop },
+        stageArtwork: { x: stageMinX, y: stageMinY, w: stageMaxX - stageMinX, h: stageMaxY - stageMinY, relY: stageMinY - peachTop, right: W - stageMaxX },
+        baseline: { y: peachBottom, orangeDotX: dotX },
+        featuredWork: { x: featMinX, y: featMinY, w: featMaxX - featMinX, h: featMaxY - featMinY }
+      };
+
+      document.getElementById('log').innerText = JSON.stringify(report, null, 2);
+    };
+  </script>
+</body>
+</html>

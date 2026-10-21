@@ -18,7 +18,7 @@ export default function Home() {
       <Navigation />
       <main>
         {/* Sticky Hero with Curtain-rising Statement (Who are we) Scroll Effect */}
-        <div className="relative">
+        <div className="relative z-20">
           <Hero />
           <WhoWeAre />
         </div>
