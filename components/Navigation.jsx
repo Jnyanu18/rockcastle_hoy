@@ -24,23 +24,49 @@ function getEffectiveBg(el) {
   return m ? [parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3])] : [17, 25, 37]
 }
 
-/** Samples what is rendered beneath the fixed nav bar: 'cream' | 'cement' | 'dark'. */
-function backgroundKind(navEl) {
-  if (!navEl || typeof document.elementsFromPoint !== 'function') return 'dark'
+/** Detects whether the element beneath the fixed nav bar is an orange/peach ground ('blue' navbar)
+ *  or a greyish-blue / cement / dark ground ('orange' navbar).
+ */
+function getNavThemeForBackground(navEl) {
+  if (!navEl || typeof document.elementsFromPoint !== 'function') return 'orange'
   const rect = navEl.getBoundingClientRect()
   const sampleX = window.innerWidth / 2
   const sampleY = Math.min(window.innerHeight - 1, rect.bottom + 12)
   const stack = document.elementsFromPoint(sampleX, sampleY)
   const behind = stack.find((el) => !navEl.contains(el) && el !== navEl)
-  const [r, g, b] = getEffectiveBg(behind || document.body)
-  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-  if (luminance <= 0.6) return 'dark'
-  return r - b > 8 ? 'cream' : 'cement'
+  if (!behind) return 'orange'
+
+  // 1. Direct section identifier check (fast & precise)
+  const orangeSection = behind.closest(
+    '#about, .rcf-who, #stats, .hoy-stats-section, #process, #services, .servicesBlock, .rcf-stories, #contact'
+  )
+  if (orangeSection) {
+    // When on orange background, navbar must be the color of featured work section (#dcdcdc cement)!
+    return 'cement'
+  }
+
+  const greyishSection = behind.closest(
+    '#home, #recent-experiences, .recent-experiences, #leadership, .leadership, #clients, .clients, footer, .footer'
+  )
+  if (greyishSection) {
+    // When on greyish background, navbar must be orange (#ee7d2e)!
+    return 'orange'
+  }
+
+  // 2. Computed RGB fallback check
+  const [r, g, b] = getEffectiveBg(behind)
+  const isVibrantOrange = r > 180 && r > g + 40 && b < 100
+  const isPeachOrange = r > 225 && g > 195 && r - b >= 14
+  if (isVibrantOrange || isPeachOrange) {
+    return 'cement'
+  }
+
+  return 'orange'
 }
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
-  const [navTheme, setNavTheme] = useState('dark') // 'dark' (white text) | 'light' (dark text)
+  const [navTheme, setNavTheme] = useState('orange') // 'orange' (orange bar on greyish-blue bg) | 'blue' (greyish-blue bar on orange bg)
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
 
@@ -52,7 +78,7 @@ export default function Navigation() {
 
   // Scroll detection: theme adaptation, scrolled state, and dynamic hero-to-corner spread
   const scrolledRef = useRef(false)
-  const themeRef = useRef('dark')
+  const themeRef = useRef('orange')
   const activeSectionRef = useRef('home')
   const lastProgressRef = useRef(-1)
 
@@ -114,20 +140,10 @@ export default function Navigation() {
         lastProgressRef.current = progress
       }
 
-      // Detect background theme by sampling whatever is actually rendered
-      // behind the nav bar, rather than maintaining a hand-kept list of
-      // "light section" ids that drifts out of sync as sections get
-      // restyled.
-      // Once scrolled the bar is solid, and it contrasts with the section
-      // behind it: navy bar over light sections, white bar over navy ones.
-      // At the very top the bar is transparent over the hero video, so it
-      // keeps white text there.
-      // Scrolled: cement bar ('dark' class) over cream sections, cream bar
-      // ('light' class) over cement/dark ones. Unscrolled: text colour only.
-      const kind = backgroundKind(navRef.current)
-      const targetTheme = !scrolledRef.current
-        ? 'dark'
-        : (kind === 'cream' ? 'dark' : 'light')
+      // Detect background theme:
+      // When on orange background: navbar is greyish blue ('blue').
+      // When on greyish blue background: navbar is orange ('orange').
+      const targetTheme = getNavThemeForBackground(navRef.current)
       if (themeRef.current !== targetTheme) {
         themeRef.current = targetTheme
         setNavTheme(targetTheme)

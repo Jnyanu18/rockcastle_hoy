@@ -20,41 +20,170 @@
   color: #f4f6f9;
   background: transparent;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.3s ease,
-              backdrop-filter 0.3s ease,
-              box-shadow 0.3s ease,
+              background 0.35s ease,
+              box-shadow 0.35s ease,
               padding 0.3s ease,
-              color 0.3s ease;
-  will-change: transform;
+              color 0.35s ease;
+  will-change: transform, background;
 }
 
+/* ===================================================
+   State 0: Unscrolled / Top of Home Page
+   Transparent like before, spacious padding, white text
+   =================================================== */
+.nav:not(.nav--scrolled) {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: clamp(30px, 3.8vh, 46px) 0;
+  color: #f4f6f9 !important;
+}
+
+.nav:not(.nav--scrolled) .nav__brand-wordmark {
+  filter: brightness(0) invert(1) !important;
+}
+
+.nav:not(.nav--scrolled) .nav__brand-divider {
+  background-color: var(--rc-orange, #ea7700) !important;
+}
+
+.nav:not(.nav--scrolled) .nav__brand-tagline {
+  color: #f4f6f9 !important;
+}
+
+.nav:not(.nav--scrolled) .nav__link {
+  color: #f4f6f9 !important;
+}
+
+.nav:not(.nav--scrolled) .nav__link::after {
+  background: var(--rc-orange, #ea7700) !important;
+}
+
+.nav:not(.nav--scrolled) .nav__social-link {
+  color: #f4f6f9 !important;
+}
+
+.nav:not(.nav--scrolled) .nav__social-link:hover {
+  color: var(--rc-orange, #ea7700) !important;
+}
+
+.nav:not(.nav--scrolled) .nav__toggle span {
+  background: #f4f6f9 !important;
+}
+
+/* Compact padding once scrolled */
 .nav--scrolled {
-  padding: clamp(16px, 2vh, 22px) 0;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  padding: clamp(14px, 1.8vh, 18px) 0;
 }
 
-/* Solid opaque background so page content does not appear behind the navbar,
-   switching with whatever is actually behind it (see isBackgroundLight in
-   Navigation.jsx) rather than always being dark. */
-.nav--theme-dark {
-  color: #f4f6f9;
+/* ===================================================
+   State 1: On greyish background (Featured Work / Cement / Dark)
+   Navbar must be ORANGE (matching reference image)
+   =================================================== */
+.nav--scrolled.nav--theme-orange,
+.nav--scrolled.nav--theme-dark {
+  background: #ee7d2e;
+  color: #ffffff;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.16);
 }
 
-/* Scrolled bar: cement over cream sections, cream over cement (and dark) ones */
-.nav--theme-dark.nav--scrolled {
+.nav--scrolled.nav--theme-orange .nav__brand-wordmark,
+.nav--scrolled.nav--theme-dark .nav__brand-wordmark {
+  filter: brightness(0) invert(1) !important;
+}
+
+.nav--scrolled.nav--theme-orange .nav__brand-divider,
+.nav--scrolled.nav--theme-dark .nav__brand-divider {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.nav--scrolled.nav--theme-orange .nav__brand-tagline,
+.nav--scrolled.nav--theme-dark .nav__brand-tagline {
+  color: #ffffff;
+}
+
+.nav--scrolled.nav--theme-orange .nav__link,
+.nav--scrolled.nav--theme-dark .nav__link {
+  color: #ffffff;
+}
+
+.nav--scrolled.nav--theme-orange .nav__link::after,
+.nav--scrolled.nav--theme-dark .nav__link::after {
+  background: #ffffff;
+}
+
+.nav--scrolled.nav--theme-orange .nav__social-link,
+.nav--scrolled.nav--theme-dark .nav__social-link {
+  color: #ffffff;
+}
+
+.nav--scrolled.nav--theme-orange .nav__social-link:hover,
+.nav--scrolled.nav--theme-dark .nav__social-link:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.nav--scrolled.nav--theme-orange .nav__toggle span,
+.nav--scrolled.nav--theme-dark .nav__toggle span {
+  background: #ffffff;
+}
+
+/* ===================================================
+   State 2: On orangish / peach background
+   Navbar must be the color of Featured Work (#dcdcdc cement grey)
+   =================================================== */
+.nav--scrolled.nav--theme-cement,
+.nav--scrolled.nav--theme-blue,
+.nav--scrolled.nav--theme-light {
   background: #dcdcdc;
   color: #151515;
   box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12);
 }
 
-.nav--theme-light {
+.nav--scrolled.nav--theme-cement .nav__brand-wordmark,
+.nav--scrolled.nav--theme-blue .nav__brand-wordmark,
+.nav--scrolled.nav--theme-light .nav__brand-wordmark {
+  filter: none !important;
+}
+
+.nav--scrolled.nav--theme-cement .nav__brand-divider,
+.nav--scrolled.nav--theme-blue .nav__brand-divider,
+.nav--scrolled.nav--theme-light .nav__brand-divider {
+  background-color: var(--rc-orange, #ee7d2e);
+}
+
+.nav--scrolled.nav--theme-cement .nav__brand-tagline,
+.nav--scrolled.nav--theme-blue .nav__brand-tagline,
+.nav--scrolled.nav--theme-light .nav__brand-tagline {
   color: #151515;
 }
 
-.nav--theme-light.nav--scrolled {
-  background: #fff1e7;
-  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12);
+.nav--scrolled.nav--theme-cement .nav__link,
+.nav--scrolled.nav--theme-blue .nav__link,
+.nav--scrolled.nav--theme-light .nav__link {
+  color: #151515;
+}
+
+.nav--scrolled.nav--theme-cement .nav__link::after,
+.nav--scrolled.nav--theme-blue .nav__link::after,
+.nav--scrolled.nav--theme-light .nav__link::after {
+  background: var(--rc-orange, #ee7d2e);
+}
+
+.nav--scrolled.nav--theme-cement .nav__social-link,
+.nav--scrolled.nav--theme-blue .nav__social-link,
+.nav--scrolled.nav--theme-light .nav__social-link {
+  color: #151515;
+}
+
+.nav--scrolled.nav--theme-cement .nav__social-link:hover,
+.nav--scrolled.nav--theme-blue .nav__social-link:hover,
+.nav--scrolled.nav--theme-light .nav__social-link:hover {
+  color: var(--rc-orange, #ee7d2e);
+}
+
+.nav--scrolled.nav--theme-cement .nav__toggle span,
+.nav--scrolled.nav--theme-blue .nav__toggle span,
+.nav--scrolled.nav--theme-light .nav__toggle span {
+  background: #151515;
 }
 
 /* Full-bleed inner container spanning corner-to-corner */
@@ -196,17 +325,9 @@
   display: block;
 }
 
-/* When navbar is in dark mode (white text/icons), invert wordmark to crisp white */
-.nav--theme-dark .nav__brand-wordmark {
-  filter: brightness(0) invert(1);
-}
-.nav--theme-dark.nav--scrolled .nav__brand-wordmark {
-  filter: none;
-}
-
-/* When navbar is in light mode, show natural black */
-.nav--theme-light .nav__brand-wordmark {
-  filter: none;
+/* Always crisp white wordmark on both orange and greyish-blue navbar */
+.nav__brand-wordmark {
+  filter: brightness(0) invert(1) !important;
 }
 
 @media (max-width: 640px) {
