@@ -62,8 +62,8 @@ function getDotPatternDataUri(color: string = "%23000000", radius: number = 1.15
 export default function DotPattern({
   variant = "peach",
   opacity,
-  size = 9,
-  dotRadius = 1.15,
+  size = 11,
+  dotRadius = 1.6,
   dotColor = "#000000",
   className = "",
   style = {},
@@ -77,10 +77,10 @@ export default function DotPattern({
 
   if (resolvedOpacity === undefined) {
     if (variant === "hero" || variant === "dark") {
-      resolvedOpacity = 0.32;
+      resolvedOpacity = 0.26;
     } else {
       // 'peach' or 'light'
-      resolvedOpacity = 0.065;
+      resolvedOpacity = 0.055;
     }
   }
 
