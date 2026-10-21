@@ -7,6 +7,7 @@ import SlideUpText from "@/components/ui/SlideUpText";
 import HeroPlayCursor, { PlayCursorBadge } from "@/components/HeroPlayCursor";
 import HeroVideoModal from "@/components/HeroVideoModal";
 import DotPattern from "@/components/ui/DotPattern";
+import StageLineAnimation from "@/components/figma/StageLineAnimation";
 
 /* Play Video Squircle Tile: rounded yellow squircle with + shape kinetic ticker */
 function PlayVideoTile({ onPlay }: { onPlay?: () => void }) {
@@ -87,28 +88,33 @@ export default function Hero() {
       {/* ========================================================
           MOBILE HERO VIEW (< md)
           ======================================================== */}
-      <div className="flex md:hidden absolute inset-0 z-10 flex-col items-center justify-center px-4 pt-14 pb-6 pointer-events-auto">
-        {/* Mobile Center Kinetic Logo (replaces HOY letter stack) */}
+      <div className="flex md:hidden absolute inset-0 z-10 flex-col items-center justify-center px-4 pt-14 pb-8 pointer-events-auto">
+        {/* Mobile Center Kinetic Logo */}
         <div className="relative mb-3 flex items-center justify-center h-24 w-full">
           <KineticLogo className="!relative !top-auto !left-auto !translate-x-0 !translate-y-0 pointer-events-auto" />
         </div>
 
         {/* Mobile Welcome & Headline Copy */}
-        <div className="mt-3 flex flex-col items-center text-center px-2">
-          <p className="text-xs font-semibold tracking-wide text-[#f4f6f9]">
+        <div className="mt-2 flex flex-col items-center text-center px-3 max-w-[340px]">
+          <p className="text-[15px] font-medium text-[#ffffff] tracking-tight mb-1">
             <SlideUpText split="words" delay={0.2} stagger={0.02}>
-              {hero.label}
+              {hero.welcome || "Welcome!"}
             </SlideUpText>
           </p>
-          <p className="mt-1.5 max-w-[260px] text-[11px] leading-relaxed font-medium text-[#f4f6f9]">
-            <SlideUpText split="words" delay={0.35} stagger={0.015}>
+          <p className="text-[12px] leading-[1.42] font-normal text-[#ffffff]/90">
+            <SlideUpText split="words" delay={0.3} stagger={0.01}>
               {hero.headline}
+            </SlideUpText>
+          </p>
+          <p className="mt-2 text-[12.5px] font-medium text-[#ffffff]">
+            <SlideUpText split="words" delay={0.42} stagger={0.015}>
+              {hero.subline || "Big ideas. Brought to life."}
             </SlideUpText>
           </p>
         </div>
 
         {/* Mobile Play Video Button */}
-        <div className="mt-5 flex flex-col items-center">
+        <div className="mt-4 flex flex-col items-center">
           <PlayVideoTile onPlay={() => setIsVideoModalOpen(true)} />
         </div>
       </div>
@@ -137,33 +143,49 @@ export default function Hero() {
         onOpen={() => setIsVideoModalOpen(true)}
       />
 
-      {/* Center Kinetic Logo (replaces 3x3 HOY letter grid) */}
+      {/* Center Kinetic Logo */}
       <div className="hidden md:flex absolute inset-0 items-center justify-center z-20 pointer-events-none">
         <KineticLogo className="pointer-events-auto" />
       </div>
 
-      {/* Primary headline: desktop at left-center, matching House of Yellow reference scale exactly */}
-      <div className="hidden md:block absolute md:top-1/2 md:-translate-y-1/2 md:left-6 lg:left-10 xl:left-12 md:max-w-[280px] lg:max-w-[310px] z-20 pointer-events-none">
-        <p className="mb-2.5 md:mb-3 text-[14px] lg:text-[15px] font-medium text-[#f4f6f9]">
+      {/* Left Text Section: "Welcome!", main paragraph, and "Big ideas. Brought to life." */}
+      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 left-[clamp(60px,9vw,175px)] w-max z-20 pointer-events-none text-left">
+        <p className="text-[14px] lg:text-[15px] font-medium text-[#ffffff] tracking-normal mb-2 md:mb-2.5">
           <SlideUpText split="words" delay={0.2} stagger={0.02}>
-            {hero.label}
+            {hero.welcome || "Welcome!"}
           </SlideUpText>
         </p>
-        <p className="text-[21px] md:text-[23px] lg:text-[25px] leading-[1.22] font-medium tracking-[-0.01em] text-[#f4f6f9]">
-          <SlideUpText split="words" delay={0.35} stagger={0.015}>
-            {hero.headline}
+        <div className="text-[16px] md:text-[17px] lg:text-[20px] xl:text-[23px] leading-[1.28] font-medium tracking-[-0.01em] text-[#ffffff]">
+          {(hero.headlineLines || [hero.headline]).map((line, idx) => (
+            <span key={idx} className="block whitespace-nowrap">
+              <SlideUpText split="words" delay={0.3 + idx * 0.03} stagger={0.01}>
+                {line}
+              </SlideUpText>
+            </span>
+          ))}
+        </div>
+        <p className="mt-3.5 md:mt-4 text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] font-medium text-[#ffffff]">
+          <SlideUpText split="words" delay={0.52} stagger={0.015}>
+            {hero.subline || "Big ideas. Brought to life."}
           </SlideUpText>
         </p>
       </div>
 
-      {/* Supporting copy: desktop right-center, same restrained scale */}
-      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 max-w-[11rem] lg:max-w-[12rem] text-right text-[13px] lg:text-sm leading-relaxed z-20 md:right-8 pointer-events-none text-[#f4f6f9]">
-        <p>
-          <SlideUpText split="words" delay={0.45} stagger={0.015}>
-            {hero.aside}
-          </SlideUpText>
-        </p>
+      {/* Right Text Section: Left-aligned supporting copy */}
+      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 right-[clamp(60px,10vw,210px)] w-max text-left z-20 pointer-events-none text-[#ffffff]">
+        <div className="text-[12px] md:text-[12.5px] lg:text-[13.5px] xl:text-[14px] leading-relaxed font-normal text-[#ffffff]/90">
+          {(hero.asideLines || [hero.aside]).map((line, idx) => (
+            <span key={idx} className="block whitespace-nowrap">
+              <SlideUpText split="words" delay={0.36 + idx * 0.03} stagger={0.01}>
+                {line}
+              </SlideUpText>
+            </span>
+          ))}
+        </div>
       </div>
+
+      {/* StageLineAnimation at bottom center matching reference image */}
+      <StageLineAnimation centered className="hero-stage-line" />
 
       {/* ========================================================
           FULLSCREEN VIDEO MODAL (Matches Reference Image 2)

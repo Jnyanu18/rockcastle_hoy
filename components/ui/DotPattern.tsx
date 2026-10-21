@@ -77,10 +77,10 @@ export default function DotPattern({
 
   if (resolvedOpacity === undefined) {
     if (variant === "hero" || variant === "dark") {
-      resolvedOpacity = 0.26;
+      resolvedOpacity = 0.14;
     } else {
       // 'peach' or 'light'
-      resolvedOpacity = 0.055;
+      resolvedOpacity = 0.038;
     }
   }
 
