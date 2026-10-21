@@ -1,5 +1,6 @@
 import Section from "./Section";
 import { LoungeDrawing } from "./Drawings";
+import DotPattern from "@/components/ui/DotPattern";
 export { default as StoriesSection } from "./StoriesSection";
 import "./figma.css";
 
@@ -7,6 +8,7 @@ import "./figma.css";
 export function WhoWeAre() {
   return (
     <Section id="about" className="rcf-who">
+      <DotPattern variant="peach" />
       <span className="rcf-eyebrow">Who we are ?<i /></span>
       <span className="rcf-index">[ 01 ]</span>
       <div className="rcf-who__body">
