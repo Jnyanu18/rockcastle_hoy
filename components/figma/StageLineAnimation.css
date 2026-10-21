@@ -1,0 +1,113 @@
+/* Stage Line Art & Continuous Baseline Animation */
+
+.stage-line-animation-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 30;
+  overflow: visible;
+}
+
+.stage-baseline-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+  position: relative;
+  height: 0;
+  overflow: visible;
+}
+
+/* Left extending horizontal line with accent square */
+.stage-baseline-left {
+  flex: 1 1 auto;
+  position: relative;
+  height: 0;
+  border-bottom: 1.5px solid var(--rcf-orange, #ee7d2e);
+}
+
+/* Small orange square resting on the line at ~6.7vw (aligned with WHO WE ARE and FEATURED WORK) */
+.stage-accent-square {
+  position: absolute;
+  left: clamp(32px, 6.7vw, 128px);
+  bottom: 0;
+  width: 6px;
+  height: 6px;
+  background-color: var(--rcf-orange, #ee7d2e);
+  border-radius: 0.8px;
+  transform: translateY(0);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.stage-line-animation-wrapper.is-active .stage-accent-square {
+  animation: squarePulse 3.5s ease-in-out infinite;
+}
+
+@keyframes squarePulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(238, 125, 46, 0);
+  }
+  50% {
+    box-shadow: 0 0 8px 2px rgba(238, 125, 46, 0.45);
+  }
+}
+
+/* Container for Stage SVG */
+.stage-svg-container {
+  flex: 0 0 auto;
+  /* Matches reference image proportion */
+  width: clamp(320px, 27vw, 520px);
+  position: relative;
+  /* Baseline is at Y=553 out of 650.
+     Distance from baseline to bottom of SVG is 650 - 553 = 97px.
+     Percentage: 97 / 650 = 14.923%.
+     translateY(14.923%) aligns Y=553 precisely with the continuous horizontal baseline! */
+  transform: translateY(14.923%);
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 35;
+  overflow: visible;
+}
+
+.stage-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  transition: filter 0.4s ease;
+}
+
+.stage-svg-container:hover .stage-svg {
+  filter: drop-shadow(0 0 8px rgba(238, 125, 46, 0.45));
+}
+
+/* Right extending baseline */
+.stage-baseline-right {
+  flex: 0 0 clamp(32px, 6.7vw, 128px);
+  height: 0;
+  border-bottom: 1.5px solid var(--rcf-orange, #ee7d2e);
+}
+
+/* Accessibility / Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .stage-svg-container {
+    clip-path: none !important;
+    transition: none !important;
+  }
+  .stage-accent-square {
+    animation: none !important;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+  .stage-svg-container {
+    width: clamp(260px, 75vw, 380px);
+  }
+  .stage-baseline-right {
+    flex: 0 0 clamp(16px, 4vw, 32px);
+  }
+}

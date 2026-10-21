@@ -1,6 +1,6 @@
 import Section from "./Section";
 import { CameraDrawing } from "./Drawings";
-import StageDrawing from "./StageDrawing";
+import StageLineAnimation from "./StageLineAnimation";
 import ReelCard from "./ReelCard";
 export { default as StoriesSection } from "./StoriesSection";
 import "./figma.css";
@@ -33,7 +33,7 @@ export function WhoWeAre() {
         </p>
         <a href="#contact" className="rcf-btn" data-magnetic>Read more <span aria-hidden>↗</span></a>
       </div>
-      <StageDrawing className="rcf-who__art" />
+      <StageLineAnimation />
     </Section>
   );
 }
