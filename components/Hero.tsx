@@ -7,7 +7,6 @@ import SlideUpText from "@/components/ui/SlideUpText";
 import HeroPlayCursor, { PlayCursorBadge } from "@/components/HeroPlayCursor";
 import HeroVideoModal from "@/components/HeroVideoModal";
 import DotPattern from "@/components/ui/DotPattern";
-import StageLineAnimation from "@/components/figma/StageLineAnimation";
 
 /* Play Video Squircle Tile: rounded yellow squircle with + shape kinetic ticker */
 function PlayVideoTile({ onPlay }: { onPlay?: () => void }) {
@@ -46,7 +45,7 @@ export default function Hero() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.play().catch(() => {});
+          video.play().catch(() => { });
         } else {
           video.pause();
         }
@@ -75,11 +74,10 @@ export default function Hero() {
         className="hero-video-kenburns absolute inset-0 h-full w-full object-cover"
       />
 
-      {/* Vignette overlay: darker at the edges, lighter through the center,
-          so the single clip reads as directed rather than a flat tint. */}
+      {/* Cinematic dark overlay: 40% black over the video so the hero text stays legible. */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0, 0, 0,0.22)_0%,rgba(0, 0, 0,0.4)_55%,rgba(0, 0, 0,0.72)_100%)] pointer-events-none"
+        className="absolute inset-0 bg-black/45 pointer-events-none"
       />
 
       {/* Halftone / Black Dot Matrix Texture Overlay (Matches Reference Figma Design) */}
@@ -150,12 +148,12 @@ export default function Hero() {
 
       {/* Left Text Section: "Welcome!", main paragraph, and "Big ideas. Brought to life." */}
       <div className="hidden md:block absolute top-1/2 -translate-y-1/2 left-[clamp(60px,9vw,175px)] w-max z-20 pointer-events-none text-left">
-        <p className="text-[14px] lg:text-[15px] font-medium text-[#ffffff] tracking-normal mb-2 md:mb-2.5">
+        <p className="text-[clamp(16px,1.4vw,27px)] leading-[1.18] font-medium text-[#ffffff] tracking-normal mb-1">
           <SlideUpText split="words" delay={0.2} stagger={0.02}>
             {hero.welcome || "Welcome!"}
           </SlideUpText>
         </p>
-        <div className="text-[16px] md:text-[17px] lg:text-[20px] xl:text-[23px] leading-[1.28] font-medium tracking-[-0.01em] text-[#ffffff]">
+        <div className="text-[clamp(16px,1.4vw,27px)] leading-[1.18] font-medium tracking-[-0.01em] text-[#ffffff]">
           {(hero.headlineLines || [hero.headline]).map((line, idx) => (
             <span key={idx} className="block whitespace-nowrap">
               <SlideUpText split="words" delay={0.3 + idx * 0.03} stagger={0.01}>
@@ -164,7 +162,7 @@ export default function Hero() {
             </span>
           ))}
         </div>
-        <p className="mt-3.5 md:mt-4 text-[14px] md:text-[15px] lg:text-[16px] xl:text-[17px] font-medium text-[#ffffff]">
+        <p className="mt-3.5 md:mt-4 text-[clamp(15px,1.2vw,23px)] font-medium text-[#ffffff]">
           <SlideUpText split="words" delay={0.52} stagger={0.015}>
             {hero.subline || "Big ideas. Brought to life."}
           </SlideUpText>
@@ -173,7 +171,7 @@ export default function Hero() {
 
       {/* Right Text Section: Left-aligned supporting copy */}
       <div className="hidden md:block absolute top-1/2 -translate-y-1/2 right-[clamp(60px,10vw,210px)] w-max text-left z-20 pointer-events-none text-[#ffffff]">
-        <div className="text-[12px] md:text-[12.5px] lg:text-[13.5px] xl:text-[14px] leading-relaxed font-normal text-[#ffffff]/90">
+        <div className="text-[clamp(12px,0.95vw,18px)] leading-[1.43] font-normal text-[#ffffff]/90">
           {(hero.asideLines || [hero.aside]).map((line, idx) => (
             <span key={idx} className="block whitespace-nowrap">
               <SlideUpText split="words" delay={0.36 + idx * 0.03} stagger={0.01}>
@@ -183,9 +181,6 @@ export default function Hero() {
           ))}
         </div>
       </div>
-
-      {/* StageLineAnimation at bottom center matching reference image */}
-      <StageLineAnimation centered className="hero-stage-line" />
 
       {/* ========================================================
           FULLSCREEN VIDEO MODAL (Matches Reference Image 2)

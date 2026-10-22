@@ -159,31 +159,31 @@
 
 @keyframes orbitR {
   0%, 7% {
-    transform: translate(-72px, -72px);
+    transform: translate(-66px, -66px);
   }
   12.5%, 19.5% {
-    transform: translate(0px, -84px);
+    transform: translate(0px, -68px);
   }
   25%, 32% {
-    transform: translate(72px, -72px);
+    transform: translate(66px, -66px);
   }
   37.5%, 44.5% {
-    transform: translate(84px, 0px);
+    transform: translate(68px, 0px);
   }
   50%, 57% {
-    transform: translate(72px, 72px);
+    transform: translate(66px, 66px);
   }
   62.5%, 69.5% {
-    transform: translate(0px, 84px);
+    transform: translate(0px, 68px);
   }
   75%, 82% {
-    transform: translate(-72px, 72px);
+    transform: translate(-66px, 66px);
   }
   87.5%, 94.5% {
-    transform: translate(-84px, 0px);
+    transform: translate(-68px, 0px);
   }
   100% {
-    transform: translate(-72px, -72px);
+    transform: translate(-66px, -66px);
   }
 }
 
@@ -194,31 +194,31 @@
 
 @keyframes orbitO {
   0%, 7% {
-    transform: translate(72px, -72px);
+    transform: translate(66px, -66px);
   }
   12.5%, 19.5% {
-    transform: translate(84px, 0px);
+    transform: translate(68px, 0px);
   }
   25%, 32% {
-    transform: translate(72px, 72px);
+    transform: translate(66px, 66px);
   }
   37.5%, 44.5% {
-    transform: translate(0px, 84px);
+    transform: translate(0px, 68px);
   }
   50%, 57% {
-    transform: translate(-72px, 72px);
+    transform: translate(-66px, 66px);
   }
   62.5%, 69.5% {
-    transform: translate(-84px, 0px);
+    transform: translate(-68px, 0px);
   }
   75%, 82% {
-    transform: translate(-72px, -72px);
+    transform: translate(-66px, -66px);
   }
   87.5%, 94.5% {
-    transform: translate(0px, -84px);
+    transform: translate(0px, -68px);
   }
   100% {
-    transform: translate(72px, -72px);
+    transform: translate(66px, -66px);
   }
 }
 
@@ -229,31 +229,31 @@
 
 @keyframes orbitK {
   0%, 7% {
-    transform: translate(72px, 72px);
+    transform: translate(66px, 66px);
   }
   12.5%, 19.5% {
-    transform: translate(0px, 84px);
+    transform: translate(0px, 68px);
   }
   25%, 32% {
-    transform: translate(-72px, 72px);
+    transform: translate(-66px, 66px);
   }
   37.5%, 44.5% {
-    transform: translate(-84px, 0px);
+    transform: translate(-68px, 0px);
   }
   50%, 57% {
-    transform: translate(-72px, -72px);
+    transform: translate(-66px, -66px);
   }
   62.5%, 69.5% {
-    transform: translate(0px, -84px);
+    transform: translate(0px, -68px);
   }
   75%, 82% {
-    transform: translate(72px, -72px);
+    transform: translate(66px, -66px);
   }
   87.5%, 94.5% {
-    transform: translate(84px, 0px);
+    transform: translate(68px, 0px);
   }
   100% {
-    transform: translate(72px, 72px);
+    transform: translate(66px, 66px);
   }
 }
 
@@ -264,31 +264,31 @@
 
 @keyframes orbitC {
   0%, 7% {
-    transform: translate(-72px, 72px);
+    transform: translate(-66px, 66px);
   }
   12.5%, 19.5% {
-    transform: translate(-84px, 0px);
+    transform: translate(-68px, 0px);
   }
   25%, 32% {
-    transform: translate(-72px, -72px);
+    transform: translate(-66px, -66px);
   }
   37.5%, 44.5% {
-    transform: translate(0px, -84px);
+    transform: translate(0px, -68px);
   }
   50%, 57% {
-    transform: translate(72px, -72px);
+    transform: translate(66px, -66px);
   }
   62.5%, 69.5% {
-    transform: translate(84px, 0px);
+    transform: translate(68px, 0px);
   }
   75%, 82% {
-    transform: translate(72px, 72px);
+    transform: translate(66px, 66px);
   }
   87.5%, 94.5% {
-    transform: translate(0px, 84px);
+    transform: translate(0px, 68px);
   }
   100% {
-    transform: translate(-72px, 72px);
+    transform: translate(-66px, 66px);
   }
 }
 

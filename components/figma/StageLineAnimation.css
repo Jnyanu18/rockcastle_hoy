@@ -59,6 +59,7 @@
 /* Container for Stage SVG */
 .stage-svg-container {
   flex: 0 0 auto;
+  margin-right: clamp(32px, 6.7vw, 128px);
   /* Matches reference image proportion */
   width: clamp(320px, 27vw, 520px);
   position: relative;
@@ -107,6 +108,7 @@
 @media (max-width: 900px) {
   .stage-svg-container {
     width: clamp(260px, 75vw, 380px);
+    margin-right: clamp(16px, 4vw, 32px);
   }
   .stage-baseline-right {
     flex: 0 0 clamp(16px, 4vw, 32px);
@@ -140,6 +142,7 @@
 
 .stage-svg-container--centered {
   width: clamp(210px, 20vw, 310px) !important;
+  margin-right: 0 !important;
   transform: translateY(14.923%) !important;
   pointer-events: none !important;
   cursor: default !important;

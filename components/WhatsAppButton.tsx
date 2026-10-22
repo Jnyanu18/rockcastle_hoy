@@ -22,9 +22,6 @@ export default function WhatsAppButton() {
         {/* Centered Circle Base */}
         <circle cx="32" cy="32" r="28" fill="#ea7700" />
 
-        {/* Brand Accent Square at Upper Right matching reference image */}
-        <rect x="52" y="6.5" width="4.5" height="4.5" fill="#ea7700" rx="0.6" />
-
         {/* Pure Code Vector Hand & Microphone Outline */}
         <g
           transform="translate(32, 32) scale(0.91) translate(-37.5, -42.75)"

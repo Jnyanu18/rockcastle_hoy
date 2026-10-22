@@ -314,3 +314,58 @@ body {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Hover bubble: a translucent white pill/circle blooms around a nav or filter
+   label and hugs its text, so every label gets a bubble sized to its width. */
+.nav__link,
+.rx-filter-btn:not(.is-active),
+.rcf-filters button:not(.is-active) {
+  position: relative;
+  isolation: isolate;
+}
+
+.nav__link::before,
+.rx-filter-btn:not(.is-active)::before,
+.rcf-filters button:not(.is-active)::before {
+  content: "";
+  position: absolute;
+  inset: -9px -17px;
+  z-index: -1;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: scale(0.4);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.45s var(--ease-out-expo);
+}
+
+.nav__link:hover::before,
+.nav__link:focus-visible::before,
+.rx-filter-btn:not(.is-active):hover::before,
+.rcf-filters button:not(.is-active):hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.rx-filter-btn:not(.is-active)::before,
+.rcf-filters button:not(.is-active)::before {
+  inset: -7px -14px;
+}
+
+/* the bubble replaces the underline on hover; the active link keeps its bar */
+.nav__link:not(.nav__link--active):hover::after {
+  width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav__link::before,
+  .rx-filter-btn::before,
+  .rcf-filters button::before {
+    transition: opacity 0.15s ease;
+    transform: none;
+  }
+}
