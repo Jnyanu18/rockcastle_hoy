@@ -112,3 +112,51 @@
     flex: 0 0 clamp(16px, 4vw, 32px);
   }
 }
+
+/* ===================================================
+   Centered variant for Hero Section bottom-center
+   =================================================== */
+.stage-line-animation-wrapper.stage-line--centered {
+  position: absolute;
+  left: 50% !important;
+  right: auto !important;
+  bottom: clamp(48px, 8.5vh, 105px) !important;
+  transform: translateX(-50%) !important;
+  width: auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-end !important;
+  pointer-events: none !important;
+  z-index: 25 !important;
+}
+
+.stage-baseline-bar--centered {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-end !important;
+  width: auto !important;
+  height: 0 !important;
+}
+
+.stage-svg-container--centered {
+  width: clamp(210px, 20vw, 310px) !important;
+  transform: translateY(14.923%) !important;
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+.stage-line--centered .stage-baseline-left,
+.stage-line--centered .stage-baseline-right {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .stage-line-animation-wrapper.stage-line--centered {
+    bottom: clamp(24px, 5vh, 44px) !important;
+  }
+  .stage-svg-container--centered {
+    width: clamp(160px, 46vw, 220px) !important;
+  }
+}
+
+

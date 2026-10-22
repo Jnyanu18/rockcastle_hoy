@@ -5,6 +5,7 @@ import SlideUpText from "@/components/ui/SlideUpText";
 import { stats, social } from "@/lib/content";
 import { useInView } from "@/lib/hooks";
 import { HeartHandDrawing } from "@/components/figma/Drawings";
+import DotPattern from "@/components/ui/DotPattern";
 import "./Stats.css";
 
 function parseMetric(val: string) {
@@ -135,8 +136,11 @@ export default function Stats() {
       className="hoy-stats-section bg-[#ee7d2e] px-5 sm:px-8 lg:px-12 pt-14 md:pt-24 pb-16 md:pb-28"
       style={{ backgroundColor: "#ee7d2e" }}
     >
+      {/* Halftone Dot Matrix Texture Overlay for Mobile & Beyond section */}
+      <DotPattern variant="orange" />
+
       {/* Container wrapper matching max content bounds */}
-      <div className="mx-auto w-full max-w-[1760px]">
+      <div className="mx-auto w-full max-w-[1760px] relative z-10">
         {/* ========================================================================= */}
         {/* TOP INTRO BLOCK [ 03 ] Beyond the Stage                                    */}
         {/* ========================================================================= */}

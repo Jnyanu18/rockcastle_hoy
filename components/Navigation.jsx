@@ -24,23 +24,71 @@ function getEffectiveBg(el) {
   return m ? [parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3])] : [17, 25, 37]
 }
 
-/** Samples what is rendered beneath the fixed nav bar: 'cream' | 'cement' | 'dark'. */
-function backgroundKind(navEl) {
-  if (!navEl || typeof document.elementsFromPoint !== 'function') return 'dark'
+/** Detects what theme the navbar should use:
+ *  - 'transparent': when on the home hero section (#home) or near the top of the home page (y <= 30)
+ *  - 'cement': when over orangish / peach sections (#dcdcdc, matching featured work section)
+ *  - 'orange': when over greyish / cement / dark sections (#ee7d2e vibrant orange)
+ */
+function getNavThemeForBackground(navEl, scrollY, pathname) {
+  const isHome = !pathname || pathname === '/'
+  const currentY = scrollY ?? (typeof window !== 'undefined' ? (window.__lenis?.scroll ?? window.scrollY) : 0)
+
+  // 1. If at the top of the home page, it must be transparent like before!
+  if (isHome && currentY <= 30) {
+    return 'transparent'
+  }
+
+  if (!navEl || typeof document.elementsFromPoint !== 'function') {
+    return isHome ? 'transparent' : 'cement'
+  }
+
   const rect = navEl.getBoundingClientRect()
   const sampleX = window.innerWidth / 2
   const sampleY = Math.min(window.innerHeight - 1, rect.bottom + 12)
   const stack = document.elementsFromPoint(sampleX, sampleY)
   const behind = stack.find((el) => !navEl.contains(el) && el !== navEl)
-  const [r, g, b] = getEffectiveBg(behind || document.body)
-  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-  if (luminance <= 0.6) return 'dark'
-  return r - b > 8 ? 'cream' : 'cement'
+  if (!behind) {
+    return isHome ? 'transparent' : 'cement'
+  }
+
+  // 2. Over hero section (#home), navbar must be transparent like before!
+  const homeSection = behind.closest('#home')
+  if (homeSection) {
+    return 'transparent'
+  }
+
+  // 3. Direct section identifier check for orangish / peach sections
+  // When on orange/peach background, navbar must be the color of featured work section (#dcdcdc cement)!
+  const orangeSection = behind.closest(
+    '#about, .rcf-who, #stats, .hoy-stats-section, #process, #services, .servicesBlock, .rcf-stories, #insta-feed, #contact'
+  )
+  if (orangeSection) {
+    return 'cement'
+  }
+
+  // 4. Direct section identifier check for greyish / cement sections
+  // When on greyish background, navbar must be orange (#ee7d2e)!
+  const greyishSection = behind.closest(
+    '#recent-experiences, .recent-experiences, .rcf-featured, #leadership, .leadership, #clients, .clients, footer, .footer'
+  )
+  if (greyishSection) {
+    return 'orange'
+  }
+
+  // 5. Computed RGB fallback check
+  const [r, g, b] = getEffectiveBg(behind)
+  const isVibrantOrange = r > 180 && r > g + 40 && b < 100
+  const isPeachOrange = r > 225 && g > 195 && r - b >= 14
+  if (isVibrantOrange || isPeachOrange) {
+    return 'cement'
+  }
+
+  return 'orange'
 }
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
-  const [navTheme, setNavTheme] = useState('dark') // 'dark' (white text) | 'light' (dark text)
+  const [navTheme, setNavTheme] = useState('transparent') // 'transparent' | 'cement' | 'orange'
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
 
@@ -52,7 +100,7 @@ export default function Navigation() {
 
   // Scroll detection: theme adaptation, scrolled state, and dynamic hero-to-corner spread
   const scrolledRef = useRef(false)
-  const themeRef = useRef('dark')
+  const themeRef = useRef('transparent')
   const activeSectionRef = useRef('home')
   const lastProgressRef = useRef(-1)
 
@@ -114,20 +162,11 @@ export default function Navigation() {
         lastProgressRef.current = progress
       }
 
-      // Detect background theme by sampling whatever is actually rendered
-      // behind the nav bar, rather than maintaining a hand-kept list of
-      // "light section" ids that drifts out of sync as sections get
-      // restyled.
-      // Once scrolled the bar is solid, and it contrasts with the section
-      // behind it: navy bar over light sections, white bar over navy ones.
-      // At the very top the bar is transparent over the hero video, so it
-      // keeps white text there.
-      // Scrolled: cement bar ('dark' class) over cream sections, cream bar
-      // ('light' class) over cement/dark ones. Unscrolled: text colour only.
-      const kind = backgroundKind(navRef.current)
-      const targetTheme = !scrolledRef.current
-        ? 'dark'
-        : (kind === 'cream' ? 'dark' : 'light')
+      // Detect background theme:
+      // - Home page / Hero: transparent like before
+      // - Orange / peach background: #dcdcdc (Featured Work cement color)
+      // - Greyish / cement background: #ee7d2e (brand orange)
+      const targetTheme = getNavThemeForBackground(navRef.current, y, pathname)
       if (themeRef.current !== targetTheme) {
         themeRef.current = targetTheme
         setNavTheme(targetTheme)

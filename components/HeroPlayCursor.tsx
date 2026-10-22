@@ -116,35 +116,85 @@ export default function HeroPlayCursor({ containerRef, onOpen }: HeroPlayCursorP
     const xTo = gsap.quickTo(cursor, "x", { duration: 0.35, ease: "power3.out" });
     const yTo = gsap.quickTo(cursor, "y", { duration: 0.35, ease: "power3.out" });
 
+    let lastX = -1;
+    let lastY = -1;
+    let prevScrollY = window.scrollY;
+
+    const showCursor = () => {
+      if (isVisibleRef.current) return;
+      isVisibleRef.current = true;
+      gsap.to(cursor, {
+        scale: 1,
+        opacity: 1,
+        duration: 0.35,
+        ease: "back.out(1.8)",
+        overwrite: "auto",
+      });
+    };
+
+    const hideCursor = (immediate = false) => {
+      if (!isVisibleRef.current) return;
+      isVisibleRef.current = false;
+      gsap.to(cursor, {
+        scale: 0,
+        opacity: 0,
+        duration: immediate ? 0.15 : 0.25,
+        ease: "power2.in",
+        overwrite: "auto",
+      });
+    };
+
+    const checkPosition = (x: number, y: number) => {
+      if (x < 0 || y < 0) {
+        hideCursor();
+        return;
+      }
+
+      // Check if container is in viewport
+      const rect = container.getBoundingClientRect();
+      if (rect.bottom <= 0 || rect.top >= window.innerHeight) {
+        hideCursor();
+        return;
+      }
+
+      // Check if coordinates are within container's visible bounds
+      if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) {
+        hideCursor();
+        return;
+      }
+
+      // Check top element at cursor point: ensure Hero isn't covered by curtain/overlay (e.g. WhoWeAre)
+      const topEl = document.elementFromPoint(x, y);
+      if (!topEl || (!container.contains(topEl) && topEl !== container)) {
+        hideCursor();
+        return;
+      }
+
+      showCursor();
+    };
+
     const handleMouseMove = (e: MouseEvent) => {
-      xTo(e.clientX);
-      yTo(e.clientY);
+      lastX = e.clientX;
+      lastY = e.clientY;
+      xTo(lastX);
+      yTo(lastY);
+      checkPosition(lastX, lastY);
+    };
 
-      const target = e.target as Node | null;
-      const isInside = container.contains(target);
-
-      if (isInside) {
-        if (!isVisibleRef.current) {
-          isVisibleRef.current = true;
-          gsap.to(cursor, {
-            scale: 1,
-            opacity: 1,
-            duration: 0.35,
-            ease: "back.out(1.8)",
-            overwrite: "auto",
-          });
-        }
-      } else if (isVisibleRef.current) {
-        isVisibleRef.current = false;
-        gsap.to(cursor, {
-          scale: 0,
-          opacity: 0,
-          duration: 0.25,
-          ease: "power2.in",
-          overwrite: "auto",
-        });
+    const evaluateOnScroll = () => {
+      if (lastX >= 0 && lastY >= 0) {
+        checkPosition(lastX, lastY);
       }
     };
+
+    const tick = () => {
+      const curScrollY = window.scrollY;
+      if (curScrollY !== prevScrollY) {
+        prevScrollY = curScrollY;
+        evaluateOnScroll();
+      }
+    };
+    gsap.ticker.add(tick);
 
     const handleMouseDown = (e: MouseEvent) => {
       if (isVisibleRef.current && container.contains(e.target as Node | null)) {
@@ -169,28 +219,34 @@ export default function HeroPlayCursor({ containerRef, onOpen }: HeroPlayCursorP
     };
 
     const handleMouseLeave = () => {
-      if (isVisibleRef.current) {
-        isVisibleRef.current = false;
-        gsap.to(cursor, {
-          scale: 0,
-          opacity: 0,
-          duration: 0.2,
-          ease: "power2.in",
-          overwrite: "auto",
-        });
-      }
+      lastX = -1;
+      lastY = -1;
+      hideCursor(true);
+    };
+
+    const handleBlur = () => {
+      lastX = -1;
+      lastY = -1;
+      hideCursor(true);
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("scroll", evaluateOnScroll, { passive: true });
+    window.addEventListener("wheel", evaluateOnScroll, { passive: true });
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
     document.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("blur", handleBlur);
 
     return () => {
+      gsap.ticker.remove(tick);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", evaluateOnScroll);
+      window.removeEventListener("wheel", evaluateOnScroll);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
       document.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("blur", handleBlur);
     };
   }, [containerRef]);
 

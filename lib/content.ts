@@ -23,11 +23,29 @@ export const social = {
 };
 
 export const hero = {
-  label: "Experiences Un-Ltd.",
+  welcome: "Welcome!",
   headline:
-    "We turn ambitious ideas into monumental experiences. From brand activations and immersive pavilions to mega concerts and corporate spectacles.",
+    "We’re in the business of creating experiences that make people stop, feel and remember. From the first spark of an idea to the final moment on ground, we combine creativity, strategy and flawless execution.",
+  headlineLines: [
+    "We’re in the business of creating",
+    "experiences that make people stop,",
+    "feel and remember. From the first",
+    "spark of an idea to the final moment",
+    "on ground, we combine creativity,",
+    "strategy and flawless execution.",
+  ],
+  subline: "Big ideas. Brought to life.",
   aside:
-    "Where visionary design meets flawless technical execution. We engineer high-octane experiential environments that leave lasting impressions across India and global stages.",
+    "We bring creativity, strategy and execution together to turn bold ideas into memorable experiences. Every detail is thoughtfully crafted to connect brands with people, spark conversations and create an impact that lasts.",
+  asideLines: [
+    "We bring creativity, strategy and",
+    "execution together to turn bold ideas into",
+    "memorable experiences. Every detail is",
+    "thoughtfully crafted to connect brands",
+    "with people, spark conversations and",
+    "create an impact that lasts.",
+  ],
+  label: "Welcome!",
   primaryCta: { label: "Play reel", href: "#recent-experiences" },
   // Letter grid: [row, column, letter]. Cells not listed stay empty.
   letters: [

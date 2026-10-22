@@ -116,20 +116,7 @@ export default function ViewCursor({
     let lastY = -1;
     let prevScrollY = window.scrollY;
 
-    const CIRCLE_HOVER_SELECTOR = [
-      '[data-cursor="circle"]',
-      '.nav__link',
-      '.nav__brand',
-      '.nav__connect',
-      '.nav__connect-pill',
-      '.nav__pill-btn',
-      '.nav__social-link',
-      '.rx-plate__view-pill',
-      '.rcf-card__pill',
-      '.rx-filters button',
-      '.rcf-filters button',
-      '.experience-btn',
-    ].join(", ");
+    const CIRCLE_HOVER_SELECTOR = '[data-cursor="circle"]';
 
     type Mode = "hero" | "circle" | "view" | "square-white" | "square-blue";
     let currentMode: Mode = "square-white";

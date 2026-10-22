@@ -7,7 +7,7 @@ export interface DotPatternProps {
    * - 'hero' / 'dark': High-contrast black dots (~32% opacity) over dark video/photo backgrounds (e.g. Hero).
    * - 'custom': Use custom opacity/size.
    */
-  variant?: "peach" | "light" | "hero" | "dark" | "custom";
+  variant?: "peach" | "light" | "orange" | "hero" | "dark" | "custom";
   /** Custom opacity (0.0 to 1.0). Overrides the variant default if provided. */
   opacity?: number;
   /** Size in pixels of the repeating 9x9 staggered dot tile (defaults to 9px). */
@@ -28,8 +28,8 @@ export interface DotPatternProps {
   children?: ReactNode;
 }
 
-/* Staggered halftone dot SVG pattern data URI (9x9 tile with center dot) */
-function getDotPatternDataUri(color: string = "%23000000", radius: number = 1.15, size: number = 9): string {
+/* Staggered halftone dot SVG pattern data URI (staggered tile with center dot) */
+function getDotPatternDataUri(color: string = "%23000000", radius: number = 1.6, size: number = 9.5): string {
   const half = size / 2;
   const svg = `<svg width='${size}' height='${size}' viewBox='0 0 ${size} ${size}' xmlns='http://www.w3.org/2000/svg'><circle cx='0' cy='0' r='${radius}' fill='${color}'/><circle cx='${size}' cy='0' r='${radius}' fill='${color}'/><circle cx='0' cy='${size}' r='${radius}' fill='${color}'/><circle cx='${size}' cy='${size}' r='${radius}' fill='${color}'/><circle cx='${half}' cy='${half}' r='${radius}' fill='${color}'/></svg>`;
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
@@ -62,7 +62,7 @@ function getDotPatternDataUri(color: string = "%23000000", radius: number = 1.15
 export default function DotPattern({
   variant = "peach",
   opacity,
-  size = 11,
+  size = 9.5,
   dotRadius = 1.6,
   dotColor = "#000000",
   className = "",
@@ -77,10 +77,12 @@ export default function DotPattern({
 
   if (resolvedOpacity === undefined) {
     if (variant === "hero" || variant === "dark") {
-      resolvedOpacity = 0.26;
+      resolvedOpacity = 0.14;
+    } else if (variant === "orange") {
+      resolvedOpacity = 0.08;
     } else {
       // 'peach' or 'light'
-      resolvedOpacity = 0.055;
+      resolvedOpacity = 0.038;
     }
   }
 

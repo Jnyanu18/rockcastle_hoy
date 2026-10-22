@@ -20,41 +20,225 @@
   color: #f4f6f9;
   background: transparent;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.3s ease,
-              backdrop-filter 0.3s ease,
-              box-shadow 0.3s ease,
+              background 0.35s ease,
+              box-shadow 0.35s ease,
               padding 0.3s ease,
-              color 0.3s ease;
-  will-change: transform;
+              color 0.35s ease;
+  will-change: transform, background;
+}
+
+/* ===================================================
+   State 0: Home Page Hero / Unscrolled State
+   Transparent like before, spacious padding, white text
+   =================================================== */
+.nav:not(.nav--scrolled) {
+  padding: clamp(30px, 3.8vh, 46px) 0;
 }
 
 .nav--scrolled {
-  padding: clamp(16px, 2vh, 22px) 0;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  padding: clamp(14px, 1.8vh, 18px) 0;
 }
 
-/* Solid opaque background so page content does not appear behind the navbar,
-   switching with whatever is actually behind it (see isBackgroundLight in
-   Navigation.jsx) rather than always being dark. */
+.nav--theme-transparent,
+.nav--theme-transparent.nav--scrolled {
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #f4f6f9 !important;
+}
+
+.nav--theme-transparent .nav__brand-wordmark {
+  filter: brightness(0) invert(1) !important;
+}
+
+.nav--theme-transparent .nav__brand-divider {
+  background-color: var(--rc-orange, #ea7700) !important;
+}
+
+.nav--theme-transparent .nav__brand-tagline {
+  color: #f4f6f9 !important;
+}
+
+.nav--theme-transparent .nav__link {
+  color: #f4f6f9 !important;
+}
+
+.nav--theme-transparent .nav__link:hover {
+  color: #ffffff !important;
+  opacity: 1;
+}
+
+.nav--theme-transparent .nav__link::after {
+  background: var(--rc-orange, #ea7700) !important;
+}
+
+.nav--theme-transparent .nav__link--active::after {
+  background: var(--rc-orange, #ea7700) !important;
+}
+
+.nav--theme-transparent .nav__social-link {
+  color: #f4f6f9 !important;
+}
+
+.nav--theme-transparent .nav__social-link:hover {
+  color: var(--rc-orange, #ea7700) !important;
+}
+
+.nav--theme-transparent .nav__toggle span {
+  background: #f4f6f9 !important;
+}
+
+/* ===================================================
+   State 1: On greyish background (Featured Work / Cement / Dark)
+   Navbar must be ORANGE (matching reference image)
+   =================================================== */
+.nav--theme-orange,
 .nav--theme-dark {
-  color: #f4f6f9;
+  background: #ee7d2e !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.16) !important;
 }
 
-/* Scrolled bar: cement over cream sections, cream over cement (and dark) ones */
-.nav--theme-dark.nav--scrolled {
-  background: #dcdcdc;
-  color: #151515;
-  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12);
+.nav--theme-orange .nav__brand-wordmark,
+.nav--theme-dark .nav__brand-wordmark {
+  filter: brightness(0) invert(1) !important;
 }
 
+.nav--theme-orange .nav__brand-divider,
+.nav--theme-dark .nav__brand-divider {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.nav--theme-orange .nav__brand-tagline,
+.nav--theme-dark .nav__brand-tagline {
+  color: #ffffff !important;
+}
+
+.nav--theme-orange .nav__link,
+.nav--theme-dark .nav__link {
+  color: #ffffff !important;
+}
+
+.nav--theme-orange .nav__link:hover,
+.nav--theme-dark .nav__link:hover {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.nav--theme-orange .nav__link::after,
+.nav--theme-dark .nav__link::after {
+  background: #ffffff !important;
+}
+
+.nav--theme-orange .nav__link--active::after,
+.nav--theme-dark .nav__link--active::after {
+  background: #ffffff !important;
+}
+
+.nav--theme-orange .nav__social-link,
+.nav--theme-dark .nav__social-link {
+  color: #ffffff !important;
+}
+
+.nav--theme-orange .nav__social-link:hover,
+.nav--theme-dark .nav__social-link:hover {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.nav--theme-orange .nav__toggle span,
+.nav--theme-dark .nav__toggle span {
+  background: #ffffff !important;
+}
+
+.nav--theme-orange .nav__pill-btn,
+.nav--theme-dark .nav__pill-btn {
+  background: #ffffff !important;
+  color: #ee7d2e !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18) !important;
+}
+
+.nav--theme-orange .nav__pill-track span,
+.nav--theme-dark .nav__pill-track span,
+.nav--theme-orange .nav__pill-plus,
+.nav--theme-dark .nav__pill-plus {
+  color: #ee7d2e !important;
+}
+
+/* ===================================================
+   State 2: On orangish / peach background
+   Navbar must be the color of Featured Work (#dcdcdc cement grey)
+   =================================================== */
+.nav--theme-cement,
+.nav--theme-blue,
 .nav--theme-light {
-  color: #151515;
+  background: #dcdcdc !important;
+  color: #151515 !important;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12) !important;
 }
 
-.nav--theme-light.nav--scrolled {
-  background: #fff1e7;
-  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12);
+.nav--theme-cement .nav__brand-wordmark,
+.nav--theme-blue .nav__brand-wordmark,
+.nav--theme-light .nav__brand-wordmark {
+  filter: none !important;
+}
+
+.nav--theme-cement .nav__brand-divider,
+.nav--theme-blue .nav__brand-divider,
+.nav--theme-light .nav__brand-divider {
+  background-color: var(--rc-orange, #ee7d2e) !important;
+}
+
+.nav--theme-cement .nav__brand-tagline,
+.nav--theme-blue .nav__brand-tagline,
+.nav--theme-light .nav__brand-tagline {
+  color: #151515 !important;
+}
+
+.nav--theme-cement .nav__link,
+.nav--theme-blue .nav__link,
+.nav--theme-light .nav__link {
+  color: #151515 !important;
+}
+
+.nav--theme-cement .nav__link:hover,
+.nav--theme-blue .nav__link:hover,
+.nav--theme-light .nav__link:hover {
+  color: var(--rc-orange, #ee7d2e) !important;
+}
+
+.nav--theme-cement .nav__link::after,
+.nav--theme-blue .nav__link::after,
+.nav--theme-light .nav__link::after {
+  background: var(--rc-orange, #ee7d2e) !important;
+}
+
+.nav--theme-cement .nav__link--active::after,
+.nav--theme-blue .nav__link--active::after,
+.nav--theme-light .nav__link--active::after {
+  background: var(--rc-orange, #ee7d2e) !important;
+}
+
+.nav--theme-cement .nav__social-link,
+.nav--theme-blue .nav__social-link,
+.nav--theme-light .nav__social-link {
+  color: #151515 !important;
+}
+
+.nav--theme-cement .nav__social-link:hover,
+.nav--theme-blue .nav__social-link:hover,
+.nav--theme-light .nav__social-link:hover {
+  color: var(--rc-orange, #ee7d2e) !important;
+}
+
+.nav--theme-cement .nav__toggle span,
+.nav--theme-blue .nav__toggle span,
+.nav--theme-light .nav__toggle span {
+  background: #151515 !important;
+}
+
+.nav--theme-cement .nav__pill-btn,
+.nav--theme-blue .nav__pill-btn,
+.nav--theme-light .nav__pill-btn {
+  background: var(--rc-orange, #ee7d2e) !important;
+  color: #ffffff !important;
 }
 
 /* Full-bleed inner container spanning corner-to-corner */
@@ -196,18 +380,6 @@
   display: block;
 }
 
-/* When navbar is in dark mode (white text/icons), invert wordmark to crisp white */
-.nav--theme-dark .nav__brand-wordmark {
-  filter: brightness(0) invert(1);
-}
-.nav--theme-dark.nav--scrolled .nav__brand-wordmark {
-  filter: none;
-}
-
-/* When navbar is in light mode, show natural black */
-.nav--theme-light .nav__brand-wordmark {
-  filter: none;
-}
 
 @media (max-width: 640px) {
   .nav__brand-wordmark {
