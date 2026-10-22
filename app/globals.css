@@ -354,6 +354,12 @@ body {
 .rx-filter-btn:not(.is-active)::before,
 .rcf-filters button:not(.is-active)::before {
   inset: -7px -14px;
+  /* No backdrop-filter here: these buttons live inside GSAP-animated rows and
+     under main's clip-path, so the blur sampled other sections (hero video,
+     fixed footer) and flashed them on hover. Solid tint instead. */
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 /* the bubble replaces the underline on hover; the active link keeps its bar */

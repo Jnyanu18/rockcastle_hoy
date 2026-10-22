@@ -28,12 +28,12 @@ function checkIsDarkBackground(el: Element | null): boolean {
   // 1. Direct section container check for maximum performance
   // Footer and light sections have white/light backgrounds -> square is blue (#151515)
   const lightSection = el.closest(
-    "#footer, .footer, footer, #stats, .stats, #process, .process, #leadership, .leadership, #clients, .clients"
+    "#footer, .footer, footer, #recent-experiences, .recent-experiences, #stats, .stats, #process, .process, #leadership, .leadership, #clients, .clients"
   );
   if (lightSection) return false;
 
   const darkSection = el.closest(
-    "#home, #about, #recent-experiences, .recent-experiences, #services, .servicesBlock, #contact, .contact"
+    "#home, #about, #services, .servicesBlock, #contact, .contact"
   );
   if (darkSection) return true;
 
