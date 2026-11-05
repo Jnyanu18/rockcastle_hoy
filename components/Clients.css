@@ -36,9 +36,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(190px, 18vw, 280px);
+  width: clamp(150px, 14vw, 220px);
   height: clamp(104px, 10.5vw, 154px);
-  padding: 16px 22px;
+  padding: 16px 14px;
 }
 
 .cl-logo {
@@ -47,7 +47,8 @@
   max-width: 210px;
   max-height: 96px;
   object-fit: contain;
-  opacity: 0.8;
+  filter: brightness(0);
+  opacity: 1;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
@@ -69,9 +70,9 @@
   }
 
   .cl-cell {
-    width: 192px;
+    width: 155px;
     height: 102px;
-    padding: 14px 18px;
+    padding: 14px 12px;
   }
 
   .cl-logo {

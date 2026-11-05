@@ -42,7 +42,7 @@ main.main--how-we-work {
 
 .footer {
   position: relative;
-  background-color: #dcdcdc;
+  background-color: #ffffff;
   color: #151515;
   padding: clamp(40px, 5vw, 64px) 0 clamp(16px, 2vw, 24px);
   box-sizing: border-box;
@@ -389,7 +389,7 @@ main.main--how-we-work {
 @media (max-width: 767px) {
   .footer {
     padding: 32px 0 24px;
-    background-color: #dcdcdc;
+    background-color: #ffffff;
   }
 
   .footer__inner {
