@@ -277,87 +277,37 @@ export default function Stats() {
                   className="h-full w-full object-cover"
                 />
 
-                {/* Floating Social Reactions (Hearts and Likes matching Screenshot 2) */}
-                <div className="absolute inset-0 pointer-events-none z-20">
-                  {/* Top Yellow Heart */}
-                  <div
-                    className="hoy-reaction-badge hoy-reaction-heart right-[15%] top-[10%] h-8 w-8"
-                    style={{ animationDelay: "0s" }}
-                  >
-                    <HeartIcon />
-                  </div>
-
-                  {/* Upper Yellow Heart */}
-                  <div
-                    className="hoy-reaction-badge hoy-reaction-heart right-[20%] top-[20%] h-9 w-9"
-                    style={{ animationDelay: "0.8s" }}
-                  >
-                    <HeartIcon />
-                  </div>
-
-                  {/* Upper White Thumbs Up */}
-                  <div
-                    className="hoy-reaction-badge hoy-reaction-like right-[10%] top-[23%] h-9 w-9"
-                    style={{ animationDelay: "0.4s" }}
-                  >
-                    <LikeIcon />
-                  </div>
-
-                  {/* Mid-Upper White Thumbs Up */}
-                  <div
-                    className="hoy-reaction-badge hoy-reaction-like right-[22%] top-[37%] h-9 w-9"
-                    style={{ animationDelay: "1.2s" }}
-                  >
-                    <LikeIcon />
-                  </div>
-
-                  {/* Mid White Thumbs Up */}
-                  <div
-                    className="hoy-reaction-badge hoy-reaction-like right-[14%] top-[43%] h-8 w-8"
-                    style={{ animationDelay: "1.8s" }}
-                  >
-                    <LikeIcon />
-                  </div>
-
-                  {/* Mid-Lower Yellow Heart */}
-                  <div
-                    className="hoy-reaction-badge hoy-reaction-heart right-[22%] top-[49%] h-9 w-9"
-                    style={{ animationDelay: "0.6s" }}
-                  >
-                    <HeartIcon />
-                  </div>
-
-                  {/* Lower White Thumbs Up */}
-                  <div
-                    className="hoy-reaction-badge hoy-reaction-like right-[11%] top-[56%] h-9 w-9"
-                    style={{ animationDelay: "2.1s" }}
-                  >
-                    <LikeIcon />
-                  </div>
-
-                  {/* Lower White Thumbs Up */}
-                  <div
-                    className="hoy-reaction-badge hoy-reaction-like right-[21%] top-[66%] h-9 w-9"
-                    style={{ animationDelay: "1.5s" }}
-                  >
-                    <LikeIcon />
-                  </div>
-
-                  {/* Bottom Yellow Heart */}
-                  <div
-                    className="hoy-reaction-badge hoy-reaction-heart right-[14%] top-[77%] h-9 w-9"
-                    style={{ animationDelay: "0.9s" }}
-                  >
-                    <HeartIcon />
-                  </div>
-
-                  {/* Bottom Subtle Yellow Heart */}
-                  <div
-                    className="hoy-reaction-badge hoy-reaction-heart right-[19%] top-[88%] h-8 w-8 opacity-70"
-                    style={{ animationDelay: "1.7s" }}
-                  >
-                    <HeartIcon />
-                  </div>
+                {/* Floating Social Reactions Stream (Bottom-to-Top Live Likes & Hearts) */}
+                <div className="hoy-reactions-stream absolute inset-x-0 top-[8%] bottom-[5%] pointer-events-none z-20 overflow-hidden">
+                  {[
+                    { type: "heart", right: "15%", size: "h-8 w-8", delay: "-0.2s", duration: "4.2s", sway: "12px" },
+                    { type: "like",  right: "11%", size: "h-9 w-9", delay: "-0.65s", duration: "4.6s", sway: "-14px" },
+                    { type: "heart", right: "20%", size: "h-9 w-9", delay: "-1.1s", duration: "4.0s", sway: "10px" },
+                    { type: "like",  right: "22%", size: "h-9 w-9", delay: "-1.55s", duration: "4.8s", sway: "-11px" },
+                    { type: "like",  right: "14%", size: "h-8 w-8", delay: "-2.0s", duration: "4.3s", sway: "13px" },
+                    { type: "heart", right: "21%", size: "h-9 w-9", delay: "-2.45s", duration: "4.5s", sway: "-12px" },
+                    { type: "like",  right: "11%", size: "h-9 w-9", delay: "-2.9s", duration: "4.1s", sway: "11px" },
+                    { type: "heart", right: "18%", size: "h-8 w-8", delay: "-3.35s", duration: "4.7s", sway: "-13px" },
+                    { type: "like",  right: "20%", size: "h-9 w-9", delay: "-3.8s", duration: "4.4s", sway: "14px" },
+                    { type: "heart", right: "14%", size: "h-9 w-9", delay: "-4.25s", duration: "4.6s", sway: "-10px" },
+                  ].map((b, i) => (
+                    <div
+                      key={i}
+                      className={`hoy-reaction-badge ${
+                        b.type === "heart" ? "hoy-reaction-heart" : "hoy-reaction-like"
+                      } ${b.size}`}
+                      style={
+                        {
+                          right: b.right,
+                          animationDelay: b.delay,
+                          animationDuration: b.duration,
+                          "--sway": b.sway,
+                        } as React.CSSProperties
+                      }
+                    >
+                      {b.type === "heart" ? <HeartIcon /> : <LikeIcon />}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

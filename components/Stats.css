@@ -207,15 +207,17 @@
   }
 }
 
-/* Floating Reactions */
+/* Floating Reactions (Bottom-to-Top Live Stream) */
 .hoy-reaction-badge {
   position: absolute;
+  bottom: 0%;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-  animation: floatReaction 4s ease-in-out infinite alternate;
+  animation: floatReactionUp 4.4s linear infinite;
+  will-change: bottom, transform, opacity;
   pointer-events: none;
 }
 
@@ -227,13 +229,32 @@
   background-color: #dcdcdc;
 }
 
-@keyframes floatReaction {
+@keyframes floatReactionUp {
   0% {
-    transform: translateY(0px) scale(1);
+    bottom: 0%;
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(0.35);
   }
-
+  10% {
+    opacity: 1;
+    transform: translate3d(calc(var(--sway, 12px) * -0.45), 0, 0) scale(1.06);
+  }
+  25% {
+    opacity: 1;
+    transform: translate3d(calc(var(--sway, 12px) * 0.5), 0, 0) scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: translate3d(calc(var(--sway, 12px) * -0.65), 0, 0) scale(1);
+  }
+  75% {
+    opacity: 0.92;
+    transform: translate3d(calc(var(--sway, 12px) * 0.55), 0, 0) scale(1);
+  }
   100% {
-    transform: translateY(-8px) scale(1.03);
+    bottom: 92%;
+    opacity: 0;
+    transform: translate3d(calc(var(--sway, 12px) * -0.25), -8px, 0) scale(0.75);
   }
 }
 
