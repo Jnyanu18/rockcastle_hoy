@@ -1,0 +1,121 @@
+/* ==========================================================================
+   AWARDS — Right-to-left continuous marquee of e4m RedCarpet Awards on black
+   ========================================================================== */
+
+.awards {
+  position: relative;
+  z-index: 2;
+  background-color: #000000;
+  color: #ffffff;
+  padding: clamp(24px, 3vw, 38px) 0 clamp(28px, 3.8vw, 48px);
+  overflow: clip;
+}
+
+.aw-heading {
+  margin: 0 0 clamp(28px, 3.8vw, 48px);
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.15vw, 17px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.aw-heading i {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-left: 3px;
+  vertical-align: super;
+  background: var(--hoy-yellow, #ee7d2e);
+  border-radius: 1px;
+}
+
+.aw-rows {
+  display: flex;
+  flex-direction: column;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+}
+
+.aw-row {
+  display: flex;
+  align-items: flex-start;
+  width: max-content;
+  will-change: transform;
+  animation: aw-marquee 38s linear infinite;
+}
+
+.aw-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  width: clamp(230px, 19.5vw, 300px);
+  padding: 0 18px;
+  flex-shrink: 0;
+}
+
+.aw-logo {
+  width: clamp(114px, 9.2vw, 136px);
+  height: auto;
+  display: block;
+  margin-bottom: clamp(14px, 1.4vw, 20px);
+}
+
+.aw-year {
+  font-family: var(--font-body);
+  font-size: clamp(11px, 0.78vw, 12.5px);
+  font-weight: 700;
+  line-height: 1.35;
+  color: #ffffff;
+  margin: 0 0 2px;
+}
+
+.aw-title {
+  font-family: var(--font-body);
+  font-size: clamp(11px, 0.78vw, 12.5px);
+  font-weight: 700;
+  line-height: 1.35;
+  color: #ffffff;
+  margin: 0;
+  max-width: 230px;
+}
+
+@keyframes aw-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 767px) {
+  .awards {
+    padding: 24px 0 30px;
+  }
+
+  .aw-heading {
+    margin-bottom: 24px;
+  }
+
+  .aw-cell {
+    width: 215px;
+    padding: 0 14px;
+  }
+
+  .aw-logo {
+    width: 112px;
+    margin-bottom: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aw-row {
+    animation: none;
+  }
+}
+

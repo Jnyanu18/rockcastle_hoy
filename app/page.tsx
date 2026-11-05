@@ -6,6 +6,7 @@ import Clients from "@/components/Clients";
 import Stats from "@/components/Stats";
 import Process from "@/components/Process";
 import ScrollingServices from "@/components/sections/ScrollingServices";
+import Awards from "@/components/Awards";
 import Leadership from "@/components/sections/Leadership";
 import Footer from "@/components/Footer.jsx";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -25,6 +26,7 @@ export default function Home() {
         <Stats />
         <Process />
         <ScrollingServices id="services" />
+        <Awards />
         <Leadership />
         <Clients />
       </main>
