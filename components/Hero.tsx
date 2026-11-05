@@ -1,23 +1,46 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { hero } from "@/lib/content";
 import KineticLogo from "@/components/KineticLogo";
 import SlideUpText from "@/components/ui/SlideUpText";
+import HeroPlayCursor, { PlayCursorBadge } from "@/components/HeroPlayCursor";
+import HeroVideoModal from "@/components/HeroVideoModal";
 import DotPattern from "@/components/ui/DotPattern";
 
+/* Play Video Squircle Tile: rounded yellow squircle with + shape kinetic ticker */
+function PlayVideoTile({ onPlay }: { onPlay?: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onPlay}
+      data-magnetic
+      aria-label="Play video"
+      className="group relative transition-transform duration-300 active:scale-95 hover:scale-105 cursor-pointer"
+    >
+      <PlayCursorBadge className="scale-90" />
+    </button>
+  );
+}
+
 /* Full-bleed sticky hero with video background:
-   - Mobile: Centered HOY letter unit, welcome headline, and star orbit ring
+   - Mobile: Centered HOY letter unit, welcome headline, play video tile, and star orbit ring
    - Desktop: Kept identical with original 3x3 letter grid and left/right copy
 */
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   useEffect(() => {
     const el = sectionRef.current;
     const video = videoRef.current;
     if (!el || !video) return;
+
+    if (isVideoModalOpen) {
+      video.pause();
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -32,7 +55,7 @@ export default function Hero() {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [isVideoModalOpen]);
 
   return (
     <section
@@ -87,11 +110,37 @@ export default function Hero() {
             </SlideUpText>
           </p>
         </div>
+
+        {/* Mobile Play Video Button */}
+        <div className="mt-4 flex flex-col items-center">
+          <PlayVideoTile onPlay={() => setIsVideoModalOpen(true)} />
+        </div>
       </div>
 
       {/* ========================================================
           DESKTOP HERO VIEW (>= md): KineticLogo in Center
           ======================================================== */}
+      {/* Clickable Desktop Hit-Zone (opens video modal on click) */}
+      <div
+        onClick={() => setIsVideoModalOpen(true)}
+        aria-label="Play full video"
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setIsVideoModalOpen(true);
+          }
+        }}
+        className="hidden md:block absolute inset-0 z-10 cursor-pointer"
+      />
+
+      {/* Hero Custom Play Cursor (Floating Yellow Squircle with Rotating Spoke Text) */}
+      <HeroPlayCursor
+        containerRef={sectionRef}
+        onOpen={() => setIsVideoModalOpen(true)}
+      />
+
       {/* Center Kinetic Logo */}
       <div className="hidden md:flex absolute inset-0 items-center justify-center z-20 pointer-events-none">
         <KineticLogo className="pointer-events-auto" />
@@ -132,6 +181,16 @@ export default function Hero() {
           ))}
         </div>
       </div>
+
+      {/* ========================================================
+          FULLSCREEN VIDEO MODAL (Matches Reference Image 2)
+          ======================================================== */}
+      <HeroVideoModal
+        isOpen={isVideoModalOpen}
+        onClose={() => setIsVideoModalOpen(false)}
+        videoSrc="/rockcastle.mp4"
+        title="Rock Castle — Experiences Un-Ltd."
+      />
     </section>
   );
 }

@@ -7,7 +7,7 @@
   --p: 0;
   position: relative;
   z-index: 5;
-  background-color: #eeece9;
+  background-color: #dcdcdc;
   color: #151515;
   width: 100%;
   /* clip (not hidden) so the sticky stage keeps working */
@@ -276,7 +276,7 @@
 }
 
 .leadership__badge-bg {
-  fill: #eeece9;
+  fill: #dcdcdc;
   stroke: rgba(21, 21, 21, 0.2);
   stroke-width: 1;
 }
@@ -440,7 +440,7 @@
     border-radius: 999px 999px 6px 6px;
     background: #d9d6d1;
     margin: 0 0 14px 0;
-    box-shadow: 14px 14px 0 -1px #eeece9, 14px 14px 0 0 #f08228;
+    box-shadow: 14px 14px 0 -1px #dcdcdc, 14px 14px 0 0 #f08228;
   }
 
   .leadership__mname {

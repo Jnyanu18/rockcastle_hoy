@@ -59,10 +59,10 @@ function checkIsDarkBackground(el: Element | null): boolean {
 
 /**
  * ViewCursor:
- * - On blue/dark bg: white square (#eeece9).
+ * - On blue/dark bg: white square (#dcdcdc).
  * - On white/light bg: blue square (#151515).
- * - On hero section: white circle center (#eeece9).
- * - On media hover: smoothly expands into 80px white circle (#eeece9) with blue text (#151515).
+ * - On hero section: white circle center (#dcdcdc).
+ * - On media hover: smoothly expands into 80px white circle (#dcdcdc) with blue text (#151515).
  * - Real-time scroll awareness: automatically transitions even when scrolling without moving the mouse.
  */
 export default function ViewCursor({
@@ -97,7 +97,7 @@ export default function ViewCursor({
       width: 12,
       height: 12,
       borderRadius: "3.5px",
-      backgroundColor: "#eeece9",
+      backgroundColor: "#dcdcdc",
       borderColor: "transparent",
       boxShadow: "0 2px 8px rgba(0, 0, 0, 0.45)",
     });
@@ -158,7 +158,7 @@ export default function ViewCursor({
           width: 16,
           height: 16,
           borderRadius: "50%",
-          backgroundColor: "#eeece9",
+          backgroundColor: "#dcdcdc",
           borderColor: "transparent",
           boxShadow: "none",
           duration: 0.28,
@@ -171,7 +171,7 @@ export default function ViewCursor({
           width: 80,
           height: 80,
           borderRadius: "50%",
-          backgroundColor: "#eeece9",
+          backgroundColor: "#dcdcdc",
           borderColor: "rgba(21, 21, 21, 0.12)",
           boxShadow: "0 12px 30px rgba(0, 0, 0, 0.32)",
           duration: 0.36,
@@ -219,7 +219,7 @@ export default function ViewCursor({
           width: 12,
           height: 12,
           borderRadius: "3.5px",
-          backgroundColor: "#eeece9",
+          backgroundColor: "#dcdcdc",
           borderColor: "transparent",
           boxShadow: "0 2px 8px rgba(0, 0, 0, 0.45)",
           duration: 0.28,
@@ -360,7 +360,7 @@ export default function ViewCursor({
           width: 12,
           height: 12,
           borderRadius: "3.5px",
-          backgroundColor: "#eeece9",
+          backgroundColor: "#dcdcdc",
           boxShadow: "0 2px 8px rgba(0, 0, 0, 0.45)",
           willChange: "width, height, border-radius, background-color, transform",
         }}

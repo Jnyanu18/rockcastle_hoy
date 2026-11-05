@@ -6,3 +6,5 @@ node_modules
 shots/
 .qa-shots/
 *.stackdump
+
+.vercel

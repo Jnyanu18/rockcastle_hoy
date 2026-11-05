@@ -13,13 +13,13 @@
   --hoy-yellow: #ee7d2e;
   /* orange sampled directly from the Rock Castle logo artwork — buttons, CTAs, numbers/index labels */
   --rc-yellow: #ee7d2e;
-  --white: #eeece9; /* cement */
+  --white: #dcdcdc; /* cement */
   /* soft "royal" off-white (not flat pure white) — text / light-on-dark role */
-  --light-grey: #1c1c1c;
+  --light-grey: #182230;
   /* deepened navy — subtle surface, scroll state */
-  --mid-grey: #6f6a66;
+  --mid-grey: #5c7084;
   /* muted blue-grey — secondary text, borders */
-  --dark-grey: #121212;
+  --dark-grey: #0a0e15;
   /* near-black navy — dark accent surface */
   --black: #151515; /* ink */
   --peach: #fff1e7; /* cream/pink — replaces the old navy section role */

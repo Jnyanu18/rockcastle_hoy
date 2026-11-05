@@ -8,32 +8,97 @@ import { HeartHandDrawing } from "@/components/figma/Drawings";
 import DotPattern from "@/components/ui/DotPattern";
 import "./Stats.css";
 
-const DIGITS = Array.from({ length: 20 }, (_, i) => i % 10);
+function parseMetric(val: string) {
+  const hasPrefixPlus = val.startsWith("+");
+  const cleaned = hasPrefixPlus ? val.slice(1) : val;
 
-/* Odometer: each digit is a strip of 0-9 twice over that rolls up to its target digit, staggered left to right. */
+  if (cleaned.endsWith("M+")) {
+    const num = parseFloat(cleaned.replace("M+", ""));
+    return { target: num, prefix: hasPrefixPlus ? "+" : "", suffix: "M+", decimals: 1 };
+  }
+  if (cleaned.endsWith("+")) {
+    const num = parseFloat(cleaned.replace("+", ""));
+    return { target: num, prefix: hasPrefixPlus ? "+" : "", suffix: "+", decimals: 0 };
+  }
+  if (cleaned.includes(".") && !cleaned.includes("M")) {
+    const parts = cleaned.split(".");
+    if (parts.length > 2 || (parts.length === 2 && parts[1].length === 3)) {
+      const num = parseInt(cleaned.replace(/\./g, ""), 10);
+      return { target: num, prefix: hasPrefixPlus ? "+" : "", suffix: "", separator: ".", decimals: 0 };
+    }
+  }
+  const num = parseFloat(cleaned);
+  return { target: isNaN(num) ? 0 : num, prefix: hasPrefixPlus ? "+" : "", suffix: "", decimals: 0 };
+}
+
 function RunningMetric({ value, delay = 0 }: { value: string; delay?: number }) {
   const { ref, inView } = useInView<HTMLSpanElement>(0.15);
+  const hasAnimated = useRef(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const rafRef = useRef<number | undefined>(undefined);
+  const initialValue = (() => {
+    const { prefix = "", suffix = "", decimals = 0 } = parseMetric(value);
+    return `${prefix}${decimals > 0 ? "0.0" : "0"}${suffix}`;
+  })();
+
+  // Runs once the count-up starts; intentionally NOT cancelled when `inView`
+  // later flips back to false (e.g. scrolling past mid-animation) — only a
+  // real unmount should cut it off, otherwise the number freezes partway.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !inView || hasAnimated.current) return;
+    hasAnimated.current = true;
+
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.textContent = value;
+      return;
+    }
+
+    const { target, prefix = "", suffix = "", decimals = 0, separator } = parseMetric(value);
+    const duration = 1600;
+
+    timerRef.current = setTimeout(() => {
+      const startTime = performance.now();
+
+      const tick = (now: number) => {
+        if (!el) return;
+        const elapsed = now - startTime;
+        const t = Math.min(1, elapsed / duration);
+        const ease = 1 - Math.pow(1 - t, 4);
+        const current = target * ease;
+
+        let formatted = "";
+        if (decimals > 0) {
+          formatted = current.toFixed(decimals);
+        } else if (separator === ".") {
+          formatted = Math.round(current).toLocaleString("de-DE");
+        } else {
+          formatted = Math.round(current).toString();
+        }
+
+        el.textContent = `${prefix}${formatted}${suffix}`;
+
+        if (t < 1) {
+          rafRef.current = requestAnimationFrame(tick);
+        } else {
+          el.textContent = value;
+        }
+      };
+
+      rafRef.current = requestAnimationFrame(tick);
+    }, delay);
+  }, [inView, value, delay, ref]);
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timerRef.current);
+      if (rafRef.current !== undefined) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   return (
-    <span ref={ref} className={`odo tabular-nums${inView ? " is-rolling" : ""}`} role="text" aria-label={value}>
-      {value.split("").map((ch, i) =>
-        /\d/.test(ch) ? (
-          <span key={i} className="odo__col" aria-hidden="true">
-            <span
-              className="odo__strip"
-              style={{ "--n": Number(ch) + 10, "--wait": `${delay + i * 90}ms` } as React.CSSProperties}
-            >
-              {DIGITS.map((d, k) => (
-                <span key={k}>{d}</span>
-              ))}
-            </span>
-          </span>
-        ) : (
-          <span key={i} aria-hidden="true">
-            {ch}
-          </span>
-        ),
-      )}
+    <span ref={ref} className="tabular-nums">
+      {initialValue}
     </span>
   );
 }
@@ -82,7 +147,7 @@ export default function Stats() {
         <div className="hoy-intro-cols mb-12 sm:mb-16 lg:mb-28">
           {/* Column 1: Section Index */}
           <div className="hoy-intro-col-1">
-            <span className="text-xs md:text-[13px] font-medium tracking-wide text-[#151515]">
+            <span className="text-xs md:text-[13px] font-medium tracking-wide text-white">
               <SlideUpText split="characters">
                 {`[ ${stats.index} ]`}
               </SlideUpText>
@@ -91,7 +156,7 @@ export default function Stats() {
 
           {/* Column 2: Beyond the Stage Eyebrow & Hero Statement */}
           <div className="hoy-intro-col-2">
-            <p className="text-xs md:text-[13px] font-medium text-[#151515] mb-4">
+            <p className="text-xs md:text-[13px] font-medium text-white mb-4">
               <SlideUpText split="words">
                 {stats.label}
               </SlideUpText>
@@ -100,7 +165,7 @@ export default function Stats() {
                 className="inline-block w-[5px] h-[5px] ml-[3px] align-super bg-white rounded-[1px]"
               />
             </p>
-            <h2 className="text-lg sm:text-xl lg:text-[24px] font-normal leading-[1.24] text-[#151515]">
+            <h2 className="text-lg sm:text-xl lg:text-[24px] font-normal leading-[1.24] text-white">
               <SlideUpText split="words" stagger={0.012} delay={0.06}>
                 {stats.heading}
               </SlideUpText>
@@ -110,14 +175,14 @@ export default function Stats() {
           {/* Column 3: Mobile Content / Brand Activations Aside */}
           <div className="hoy-intro-col-3">
             <div className="flex items-center gap-2 mb-3">
-              <span className="inline-block h-2.5 w-2.5 bg-[#151515] rounded-[1px] shrink-0" />
-              <span className="text-xs md:text-[13px] font-medium text-[#151515]">
+              <span className="inline-block h-2.5 w-2.5 bg-white rounded-[1px] shrink-0" />
+              <span className="text-xs md:text-[13px] font-medium text-white">
                 <SlideUpText split="words" delay={0.04}>
                   {stats.mobile.label}
                 </SlideUpText>
               </span>
             </div>
-            <p className="text-xs md:text-[13px] leading-relaxed text-[#151515]/90 max-w-sm">
+            <p className="text-xs md:text-[13px] leading-relaxed text-white/90 max-w-sm">
               <SlideUpText split="words" stagger={0.015} delay={0.1}>
                 {stats.mobile.body}
               </SlideUpText>
@@ -133,7 +198,7 @@ export default function Stats() {
           <div className="hoy-showcase-col-decor-left hidden lg:flex">
             <span
               aria-hidden
-              className="h-2.5 w-2.5 bg-[#151515] rounded-[1px]"
+              className="h-2.5 w-2.5 bg-white rounded-[1px]"
             />
           </div>
 
@@ -254,12 +319,12 @@ export default function Stats() {
             <div className="grid grid-cols-2 gap-x-6 gap-y-6 sm:gap-x-8 sm:gap-y-8 lg:flex lg:flex-col lg:gap-5 xl:gap-6">
               {figures.map((item, index) => (
                 <div key={item.label} className="flex flex-col items-start justify-start">
-                  <span className="font-sans text-xs sm:text-sm font-medium tracking-wide text-[#151515] mb-1 sm:mb-1.5">
-                    <SlideUpText split="words" delay={0.06} className="text-[#151515]">
+                  <span className="font-sans text-xs sm:text-sm font-medium tracking-wide text-white mb-1 sm:mb-1.5">
+                    <SlideUpText split="words" delay={0.06} className="text-white">
                       {item.label}
                     </SlideUpText>
                   </span>
-                  <span className="font-sans text-3xl sm:text-5xl lg:text-[60px] xl:text-[66px] font-normal tabular-nums leading-none tracking-[-0.04em] text-[#151515]">
+                  <span className="font-sans text-3xl sm:text-5xl lg:text-[60px] xl:text-[66px] font-bold tabular-nums leading-none tracking-[-0.04em] text-white">
                     <RunningMetric value={item.value} delay={index * 120} />
                   </span>
                 </div>
@@ -349,7 +414,7 @@ function SparkleIcon() {
       viewBox="0 0 22 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-6 h-6 text-[#151515]/50"
+      className="w-6 h-6 text-white/50"
     >
       <path
         fillRule="evenodd"

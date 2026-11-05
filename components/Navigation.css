@@ -161,12 +161,12 @@
 
 /* ===================================================
    State 2: On orangish / peach background
-   Navbar must be the color of Featured Work (#eeece9 cement grey)
+   Navbar must be the color of Featured Work (#dcdcdc cement grey)
    =================================================== */
 .nav--theme-cement,
 .nav--theme-blue,
 .nav--theme-light {
-  background: #eeece9 !important;
+  background: #dcdcdc !important;
   color: #151515 !important;
   box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12) !important;
 }
@@ -562,7 +562,7 @@
   position: fixed;
   inset: 0;
   z-index: 110;
-  background: var(--rc-black-rich, #151515);
+  background: var(--rc-black-rich, #0A192F);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -224,7 +224,7 @@
   width: clamp(38px, 2.3vw, 45px);
   height: clamp(38px, 2.3vw, 45px);
   border-radius: 50%;
-  background: #eeece9;
+  background: #dcdcdc;
   color: var(--rc-black);
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s var(--ease-out-expo), background 0.3s ease;

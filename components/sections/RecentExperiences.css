@@ -624,7 +624,7 @@
   font-size: var(--fs-meta);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #eeece9;
+  color: #dcdcdc;
 }
 
 /* Cover: title anchored bottom-left like an opening credit */
@@ -656,7 +656,7 @@
 .story-frame__cover-meta span+span::before {
   content: '·';
   margin-right: 14px;
-  color: #eeece9;
+  color: #dcdcdc;
 }
 
 /* Statement: an editorial pause between media */
@@ -848,7 +848,7 @@
 .story-viewer__meta span+span::before {
   content: '·';
   margin-right: 10px;
-  color: #eeece9;
+  color: #dcdcdc;
 }
 
 .story-viewer__controls {
@@ -914,7 +914,7 @@
 }
 
 .story-viewer__caption-label {
-  color: #eeece9;
+  color: #dcdcdc;
 }
 
 .story-viewer__cta {
@@ -1070,7 +1070,7 @@
 /* ---- Figma grid: plain 3 x 2 cards, filter row top-right ---------------------- */
 .recent-experiences {
   padding-top: clamp(32px, 4vw, 72px);
-  background: #eeece9;
+  background: #dcdcdc;
 }
 
 .rx-rail {
