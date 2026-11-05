@@ -18,9 +18,7 @@
 }
 
 .rx-intro-block .rcf-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  display: inline-block;
   font-family: var(--font-sans);
   font-size: clamp(12px, 0.9vw, 14px);
   text-transform: uppercase;
@@ -34,6 +32,8 @@
   display: inline-block;
   width: 5px;
   height: 5px;
+  margin-left: 3px;
+  vertical-align: super;
   background: var(--rcf-orange, #ee7d2e);
   border-radius: 1px;
 }

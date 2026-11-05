@@ -25,6 +25,10 @@ export default function Process() {
               <SlideUpText split="words">
                 {processContent.label}
               </SlideUpText>
+              <i
+                aria-hidden="true"
+                className="inline-block w-[5px] h-[5px] ml-[3px] align-super bg-white rounded-[1px]"
+              />
             </span>
             <span className="text-xs md:text-[13px] font-medium tabular-nums text-white lg:hidden">
               <SlideUpText split="characters" delay={0.04}>

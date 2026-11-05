@@ -16,27 +16,24 @@
   left: 0;
   right: 0;
   z-index: 120;
-  padding: clamp(30px, 3.8vh, 46px) 0;
+  padding: clamp(18px, 2.4vh, 26px) 0;
   color: #f4f6f9;
   background: transparent;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               background 0.35s ease,
               box-shadow 0.35s ease,
-              padding 0.3s ease,
               color 0.35s ease;
   will-change: transform, background;
 }
 
 /* ===================================================
-   State 0: Home Page Hero / Unscrolled State
-   Transparent like before, spacious padding, white text
+   Navbar Size & Position
+   Kept constant and identical on scroll so it never shifts up or shrinks
    =================================================== */
-.nav:not(.nav--scrolled) {
-  padding: clamp(30px, 3.8vh, 46px) 0;
-}
-
+.nav,
+.nav:not(.nav--scrolled),
 .nav--scrolled {
-  padding: clamp(14px, 1.8vh, 18px) 0;
+  padding: clamp(18px, 2.4vh, 26px) 0;
 }
 
 .nav--theme-transparent,
@@ -342,7 +339,7 @@
 }
 
 .nav__brand-wordmark {
-  height: clamp(40px, 3.5vw, 56px);
+  height: clamp(34px, 2.7vw, 46px);
   width: auto;
   object-fit: contain;
   display: block;
@@ -354,7 +351,7 @@
 .nav__brand-divider {
   display: block;
   width: 2px;
-  height: clamp(34px, 2.9vw, 46px);
+  height: clamp(28px, 2.2vw, 38px);
   background-color: var(--rc-orange, #ea7700);
   flex-shrink: 0;
   border-radius: 1px;
@@ -441,13 +438,13 @@
   background: var(--rc-orange, #ea7700);
   color: #f4f6f9;
   border-radius: 9999px;
-  height: 40px;
-  width: 154px;
-  padding: 0 14px 0 16px;
+  height: 38px;
+  width: 148px;
+  padding: 0 13px 0 15px;
   overflow: hidden;
   text-decoration: none;
   font-family: var(--font-body);
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.05em;
   border: 1px solid rgba(0, 0, 0, 0.08);

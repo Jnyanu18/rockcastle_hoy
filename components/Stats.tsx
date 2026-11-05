@@ -160,6 +160,10 @@ export default function Stats() {
               <SlideUpText split="words">
                 {stats.label}
               </SlideUpText>
+              <i
+                aria-hidden="true"
+                className="inline-block w-[5px] h-[5px] ml-[3px] align-super bg-white rounded-[1px]"
+              />
             </p>
             <h2 className="text-lg sm:text-xl lg:text-[24px] font-normal leading-[1.24] text-white">
               <SlideUpText split="words" stagger={0.012} delay={0.06}>
