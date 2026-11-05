@@ -61,7 +61,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="home"
-      className="sticky top-0 h-[calc(100svh/var(--page-zoom))] min-h-[640px] w-full overflow-hidden bg-ink text-canvas z-0"
+      className="sticky top-0 h-[100svh] min-h-[640px] w-full overflow-hidden bg-ink text-canvas z-0"
     >
       {/* Background Video: slow continuous Ken-Burns drift + fade-in on mount */}
       <video

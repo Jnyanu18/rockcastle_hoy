@@ -270,7 +270,6 @@ export default function Stats() {
                 <video
                   ref={videoRef}
                   src="/video1.mp4"
-                  preload="metadata"
                   autoPlay
                   loop
                   muted

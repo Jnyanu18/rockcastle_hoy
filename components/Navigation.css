@@ -721,12 +721,3 @@
     display: none !important;
   }
 }
-
-/* Letter-roll hover: the label slides up and an identical copy rolls in from below */
-.nav__roll { display: inline-block; overflow: hidden; vertical-align: top; height: 1.3em; line-height: 1.3; }
-.nav__roll-inner { display: block; position: relative; }
-.nav__roll-inner::after { content: attr(data-label); position: absolute; left: 0; top: 100%; }
-@media (hover: hover) {
-  .nav__roll-inner { transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1); }
-  .nav__link:hover .nav__roll-inner { transform: translateY(-100%); }
-}

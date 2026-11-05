@@ -66,11 +66,11 @@ export default function KineticLogo({ className = '' }) {
             <div className="kl-orbit-letter kl-orbit-letter--o" title="O">
               <GlyphO />
             </div>
-            <div className="kl-orbit-letter kl-orbit-letter--c" title="K">
-              <GlyphK />
-            </div>
-            <div className="kl-orbit-letter kl-orbit-letter--k" title="C">
+            <div className="kl-orbit-letter kl-orbit-letter--c" title="C">
               <GlyphC />
+            </div>
+            <div className="kl-orbit-letter kl-orbit-letter--k" title="K">
+              <GlyphK />
             </div>
 
             {/* Central Anchored Squircle O */}

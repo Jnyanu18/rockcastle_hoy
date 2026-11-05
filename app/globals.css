@@ -45,11 +45,7 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Desktop is shown at 90% so the design is not oversized on common laptop screens. */
-:root { --page-zoom: 1; }
-@media (min-width: 1024px) { :root { --page-zoom: 0.9; } }
 html {
-  zoom: var(--page-zoom);
   scroll-behavior: auto !important;
   -webkit-font-smoothing: antialiased;
 }
@@ -378,14 +374,4 @@ body {
     transition: opacity 0.15s ease;
     transform: none;
   }
-}
-
-/* CLARITY PASS: crisper type and photos, neutral (not blue) blacks */
-html { text-rendering: optimizeLegibility; }
-.rx-plate__media img,
-.rcf-card__media img,
-.servicesBlock .imageWrapper img,
-.leadership__card img,
-.rcf-reels__stage img {
-  filter: contrast(1.06) saturate(1.1);
 }

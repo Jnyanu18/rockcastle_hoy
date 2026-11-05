@@ -353,11 +353,7 @@ export default function Navigation() {
                 className={`nav__link ${isLinkActive(l.href) ? 'nav__link--active' : ''}`}
                 onClick={(e) => handleNavClick(e, l.href)}
               >
-                <span className="nav__roll">
-                  <span className="nav__roll-inner" data-label={l.label}>
-                    {l.label}
-                  </span>
-                </span>
+                {l.label}
               </Link>
             ))}
           </nav>

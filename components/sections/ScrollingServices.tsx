@@ -35,7 +35,7 @@ const DEFAULT_ITEMS: DeckItem[] = [
       "/rx/service-06-1.jpg",
       "/rx/service-07-3.jpg",
       "/rx/service-07-2.jpg",
-      "/video1.mp4",
+      "/rx/video1.mp4",
       "/rx/cover-1.jpg",
       "/rx/cover-2.jpg",
       "/rx/service-07-4.jpg",
@@ -216,24 +216,6 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
   const itemsRef = useRef<HTMLDivElement>(null);
   const stRef = useRef<ScrollTrigger | null>(null);
   const data = items || DEFAULT_ITEMS;
-
-  // The book + plane drawing is pen-drawn the first time the section scrolls into view
-  useEffect(() => {
-    const section = sectionRef.current;
-    const scrollContainer = scrollContainerRef.current;
-    if (!section || !scrollContainer) return;
-    const artEls = Array.from(section.querySelectorAll<HTMLElement>(".ss__art"));
-    if (!artEls.length) return;
-
-    const checkArt = () => {
-      if (scrollContainer.getBoundingClientRect().top >= window.innerHeight * 0.55) return;
-      artEls.forEach((el) => el.classList.add("is-in"));
-      window.removeEventListener("scroll", checkArt);
-    };
-    window.addEventListener("scroll", checkArt, { passive: true });
-    checkArt();
-    return () => window.removeEventListener("scroll", checkArt);
-  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -451,7 +433,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
                   >
                     <div className="innerContainer">
                       <div className="innerItem">
-                        {item.art && <BookPlaneDrawing className="ss__art" />}
+                        {item.art && <BookPlaneDrawing className="ss__art is-in" />}
                         <div className="normalTitle">
                           <div className="normalTitleLine normalTitleLine--1">
                             {item.index && (
