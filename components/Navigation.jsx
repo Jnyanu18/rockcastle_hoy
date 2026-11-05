@@ -221,7 +221,11 @@ export default function Navigation() {
   }, [menuOpen])
 
   const toggleMenu = () => setMenuOpen((prev) => !prev)
-  const closeMenu = () => setMenuOpen(false)
+  const closeMenu = () => {
+    setMenuOpen(false)
+    document.body.style.overflow = ''
+    window.__lenis?.start()
+  }
 
   // In-page section targets for single-page smooth scroll fallback
   const sectionMap = {
@@ -251,7 +255,7 @@ export default function Navigation() {
       if (href === '/' || href === '/#home') {
         e.preventDefault()
         if (window.__lenis) {
-          window.__lenis.scrollTo(0, { duration: 1 })
+          window.__lenis.scrollTo(0, { duration: 1, force: true })
         } else {
           window.scrollTo({ top: 0, behavior: 'smooth' })
         }
@@ -260,11 +264,21 @@ export default function Navigation() {
 
       const targetId = sectionMap[href] || (href.includes('#') ? href.split('#')[1] : null)
       if (targetId) {
-        const el = document.getElementById(targetId) || (targetId === 'contact' ? document.getElementById('footer') : null)
+        const directEl = document.getElementById(targetId)
+        const footerEl = !directEl && targetId === 'contact' ? document.getElementById('footer') : null
+        const el = directEl || footerEl
         if (el) {
           e.preventDefault()
+          const isFixedFooter = footerEl && footerEl.classList.contains('footer--reveal')
+          const scrollTarget = isFixedFooter ? document.documentElement.scrollHeight : el
           if (window.__lenis) {
-            window.__lenis.scrollTo(el, { duration: 1.2, offset: -20 })
+            window.__lenis.scrollTo(scrollTarget, {
+              duration: 1.2,
+              offset: isFixedFooter ? 0 : -20,
+              force: true,
+            })
+          } else if (isFixedFooter) {
+            window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })
           } else {
             el.scrollIntoView({ behavior: 'smooth' })
           }

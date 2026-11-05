@@ -267,12 +267,12 @@ export default function HeroVideoModal({
             showControls || !isPlaying ? "opacity-100 scale-100" : "opacity-0 scale-95"
           }`}
         >
-          <div className="pointer-events-auto flex items-center justify-center gap-3.5 rounded-full bg-[#ea7700] px-7 py-3 text-[#0A192F] shadow-[0_8px_30px_rgba(0, 0, 0,0.4)] border border-black/10 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer">
-            <span className="text-base font-light select-none leading-none text-[#0A192F]">+</span>
-            <span className="text-[12px] sm:text-[13px] font-bold tracking-[0.2em] uppercase select-none font-sans text-[#0A192F]">
+          <div className="pointer-events-auto flex items-center justify-center gap-2 sm:gap-3.5 rounded-full bg-[#ea7700] px-3.5 py-1.5 sm:px-7 sm:py-3 text-[#0A192F] shadow-[0_8px_30px_rgba(0, 0, 0,0.4)] border border-black/10 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer">
+            <span className="text-xs sm:text-base font-light select-none leading-none text-[#0A192F]">+</span>
+            <span className="text-[9.5px] sm:text-[13px] font-bold tracking-[0.14em] sm:tracking-[0.2em] uppercase select-none font-sans text-[#0A192F]">
               {isPlaying ? "PAUSE" : "PLAY"}
             </span>
-            <span className="text-base font-light select-none leading-none text-[#0A192F]">+</span>
+            <span className="text-xs sm:text-base font-light select-none leading-none text-[#0A192F]">+</span>
           </div>
         </div>
       </div>

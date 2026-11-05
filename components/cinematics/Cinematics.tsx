@@ -22,7 +22,7 @@ gsap.registerPlugin(ScrollTrigger);
 /*  Everything is skipped under prefers-reduced-motion (the grain stays still).*/
 /* -------------------------------------------------------------------------- */
 
-const SESSION_KEY = "rc-cine-intro-v3";
+const SESSION_KEY = "rc-cine-intro-v6";
 const EXPO_IN_OUT = "expo.inOut";
 const EXPO_OUT = "expo.out";
 
@@ -73,12 +73,13 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
     const counter = el.querySelector<HTMLElement>("[data-count]");
     const tc = { f: 0 };
 
-    // Measure SVG handwriting stroke lengths and prime strokeDasharray/offset
+    // Prime each handwriting stroke so round linecaps are completely outside [0..len] before drawing
     const strokes = el.querySelectorAll<SVGPathElement>("[data-write-stroke]");
     strokes.forEach((p) => {
       const len = p.getTotalLength();
-      p.style.strokeDasharray = `${len}`;
-      p.style.strokeDashoffset = `${len}`;
+      const cap = 130;
+      p.style.strokeDasharray = `${len + cap} ${len + cap * 4}`;
+      p.style.strokeDashoffset = `${len + cap * 2}`;
     });
 
     const finish = () => {
@@ -91,40 +92,47 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
 
     const tl = gsap.timeline({ onComplete: finish });
     tl.set(hero, { "--cine-zoom": 1.18 })
-      .fromTo(q("[data-count]"), { opacity: 0 }, { opacity: 1, duration: 0.35 }, 0.1)
-      // 1. Write out "ROCK" handwritten brush script stroke-by-stroke
+      .set(q(".cine-intro-logo-svg"), { opacity: 1 })
+      .set(q("[data-tagline]"), { opacity: 0, clipPath: "inset(0 100% 0 0)" })
+      // Loading bar & counter appear right as the writing starts
+      .fromTo(
+        q("[data-progress-track], [data-count-bar]"),
+        { opacity: 0 },
+        { opacity: 1, duration: 0.25, ease: "power2.out" },
+        0.02
+      )
+      // 1. Immediately write out "ROCK" handwritten brush script stroke-by-stroke
       .to(
         q("[data-rock-stroke]"),
         {
           strokeDashoffset: 0,
           duration: 0.34,
           ease: "power2.inOut",
-          stagger: 0.16,
+          stagger: 0.15,
         },
-        0.15
+        0.02
       )
       // 2. Reveal "CASTLE" bold block letters sequentially
       .fromTo(
         q("[data-castle-letter]"),
-        { scaleY: 0, attr: { y: 466 } },
+        { attr: { y: 466, height: 0 } },
         {
-          scaleY: 1,
-          attr: { y: 278 },
-          duration: 0.38,
+          attr: { y: 278, height: 188 },
+          duration: 0.36,
           ease: EXPO_OUT,
           stagger: 0.055,
         },
-        0.85
+        0.72
       )
       // 3. Swipe the signature brush underline and pop the exclamation dot
       .to(
         q("[data-underline-stroke]"),
         {
           strokeDashoffset: 0,
-          duration: 0.42,
+          duration: 0.4,
           ease: "power3.out",
         },
-        1.22
+        1.08
       )
       .to(
         q("[data-underline-dot]"),
@@ -133,46 +141,45 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
           duration: 0.18,
           ease: "back.out(2)",
         },
-        1.54
+        1.42
       )
-      // 4. Write out "experiences un-ltd." tagline underneath
-      .fromTo(
+      // 4. Write out "experiences un-ltd." tagline underneath after logo writes
+      .to(
         q("[data-tagline]"),
-        { clipPath: "inset(0 100% 0 0)", opacity: 0.4 },
-        { clipPath: "inset(0 0% 0 0)", opacity: 1, duration: 0.55, ease: "power2.out" },
-        1.38
+        { clipPath: "inset(0 0% 0 0)", opacity: 1, duration: 0.5, ease: "power2.out" },
+        1.25
       )
       // Counter ticks up to 100% and orange loading bar fills across the logo writing sequence
       .fromTo(
         q("[data-progress-fill]"),
         { scaleX: 0 },
-        { scaleX: 1, duration: 1.85, ease: "power2.inOut" },
-        0.15
+        { scaleX: 1, duration: 1.75, ease: "power2.inOut" },
+        0.02
       )
       .to(
         tc,
         {
           f: 100,
-          duration: 1.85,
+          duration: 1.75,
           ease: "power2.inOut",
           onUpdate: () => {
             if (!counter) return;
             counter.textContent = `${String(Math.round(tc.f)).padStart(3, "0")}%`;
           },
         },
-        0.15
+        0.02
       )
       // Logo scales gently and fades out as the gate splits open
       .to(
         q("[data-logo-stage]"),
-        { scale: 1.04, opacity: 0, duration: 0.45, ease: "power2.in" },
-        2.15
+        { scale: 1.04, opacity: 0, duration: 0.42, ease: "power2.in" },
+        2.0
       )
-      .to(q("[data-count-bar]"), { opacity: 0, duration: 0.3 }, 2.15)
-      .to(q("[data-half='top']"), { yPercent: -101, duration: 1.05, ease: EXPO_IN_OUT }, 2.35)
-      .to(q("[data-half='bottom']"), { yPercent: 101, duration: 1.05, ease: EXPO_IN_OUT }, 2.35)
+      .to(q("[data-count-bar]"), { opacity: 0, duration: 0.3 }, 2.0)
+      .to(q("[data-half='top']"), { yPercent: -101, duration: 1.05, ease: EXPO_IN_OUT }, 2.2)
+      .to(q("[data-half='bottom']"), { yPercent: 101, duration: 1.05, ease: EXPO_IN_OUT }, 2.2)
       // Camera push: the hero settles from a tight frame to its resting framing.
-      .to(hero, { "--cine-zoom": 1, duration: 1.9, ease: EXPO_OUT }, 2.5);
+      .to(hero, { "--cine-zoom": 1, duration: 1.9, ease: EXPO_OUT }, 2.35);
 
     return () => {
       tl.kill();
@@ -192,6 +199,7 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
       <div className="cine-intro-title" data-logo-stage>
         <svg
           className="cine-intro-logo-svg"
+          style={{ opacity: 0 }}
           viewBox="0 0 1144 615"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -233,12 +241,14 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
                 <path
                   data-write-stroke
                   data-rock-stroke
+                  strokeDasharray="0 9999"
                   d="M 148 52 L 128 292"
                   strokeWidth="64"
                 />
                 <path
                   data-write-stroke
                   data-rock-stroke
+                  strokeDasharray="0 9999"
                   d="M 28 76 C 110 18, 330 18, 372 72 C 392 128, 220 192, 52 204 C 135 225, 255 272, 392 298"
                   strokeWidth="96"
                 />
@@ -249,6 +259,7 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
                 <path
                   data-write-stroke
                   data-rock-stroke
+                  strokeDasharray="0 9999"
                   d="M 545 78 C 460 32, 412 115, 422 215 C 432 295, 515 315, 575 265 C 625 205, 615 52, 525 48 C 465 48, 455 185, 525 245 C 585 280, 635 215, 642 122"
                   strokeWidth="105"
                 />
@@ -259,6 +270,7 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
                 <path
                   data-write-stroke
                   data-rock-stroke
+                  strokeDasharray="0 9999"
                   d="M 792 145 L 796 55 C 740 35, 675 95, 678 215 C 680 315, 765 330, 804 228"
                   strokeWidth="98"
                 />
@@ -269,25 +281,27 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
                 <path
                   data-write-stroke
                   data-rock-stroke
+                  strokeDasharray="0 9999"
                   d="M 882 52 L 886 318"
                   strokeWidth="64"
                 />
                 <path
                   data-write-stroke
                   data-rock-stroke
+                  strokeDasharray="0 9999"
                   d="M 1068 48 L 822 238 L 995 298"
                   strokeWidth="95"
                 />
               </g>
 
-              {/* CASTLE — 6 block letters (C, A, S, T, L, E) */}
+              {/* CASTLE — 6 block letters (C, A, S, T, L, E) start with height=0 so they never flash before GSAP runs */}
               <g fill="white">
-                <rect data-castle-letter x="35"  y="278" width="180" height="188" />
-                <rect data-castle-letter x="215" y="278" width="205" height="188" />
-                <rect data-castle-letter x="420" y="278" width="176" height="188" />
-                <rect data-castle-letter x="596" y="278" width="194" height="188" />
-                <rect data-castle-letter x="790" y="278" width="164" height="188" />
-                <rect data-castle-letter x="954" y="278" width="175" height="188" />
+                <rect data-castle-letter x="35"  y="466" width="180" height="0" />
+                <rect data-castle-letter x="215" y="466" width="205" height="0" />
+                <rect data-castle-letter x="420" y="466" width="176" height="0" />
+                <rect data-castle-letter x="596" y="466" width="194" height="0" />
+                <rect data-castle-letter x="790" y="466" width="164" height="0" />
+                <rect data-castle-letter x="954" y="466" width="175" height="0" />
               </g>
 
               {/* Brush Underline + Dot */}
@@ -295,12 +309,14 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
                 <path
                   data-write-stroke
                   data-underline-stroke
+                  strokeDasharray="0 9999"
                   d="M 162 588 Q 520 518 905 498"
                   strokeWidth="84"
                 />
                 <path
                   data-write-stroke
                   data-underline-dot
+                  strokeDasharray="0 9999"
                   d="M 960 515 L 1005 478"
                   strokeWidth="84"
                 />
@@ -317,16 +333,32 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
           />
         </svg>
 
-        <p data-tagline className="cine-intro-written-tag">
+        <p
+          data-tagline
+          className="cine-intro-written-tag"
+          style={{ opacity: 0, clipPath: "inset(0 100% 0 0)" }}
+        >
           experiences un-ltd.
         </p>
 
-        <div className="cine-intro-progress" data-progress-track>
-          <span className="cine-intro-progress__fill" data-progress-fill />
+        <div
+          className="cine-intro-progress"
+          data-progress-track
+          style={{ opacity: 0 }}
+        >
+          <span
+            className="cine-intro-progress__fill"
+            data-progress-fill
+            style={{ transform: "scaleX(0)" }}
+          />
         </div>
       </div>
 
-      <div data-count-bar className="cine-intro-count">
+      <div
+        data-count-bar
+        className="cine-intro-count"
+        style={{ opacity: 0 }}
+      >
         <span>Rock Castle</span>
         <span data-count>000%</span>
       </div>

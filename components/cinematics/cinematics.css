@@ -53,6 +53,7 @@ html.cine-intro body {
   height: auto;
   display: block;
   overflow: visible;
+  opacity: 0;
 }
 
 .cine-intro-written-tag {
@@ -63,6 +64,8 @@ html.cine-intro body {
   letter-spacing: 0.04em;
   color: #ffffff;
   line-height: 1.2;
+  clip-path: inset(0 100% 0 0);
+  opacity: 0;
 }
 
 .cine-intro-progress {
@@ -72,6 +75,7 @@ html.cine-intro body {
   background: rgba(255, 255, 255, 0.14);
   overflow: hidden;
   margin-top: 4px;
+  opacity: 0;
 }
 
 .cine-intro-progress__fill {

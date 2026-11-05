@@ -569,12 +569,14 @@
   padding: clamp(90px, 12vh, 120px) var(--gutter, 24px) 40px;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .menu--open {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 .menu__header {
