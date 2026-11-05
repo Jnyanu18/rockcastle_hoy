@@ -1,364 +1,472 @@
 /* ==========================================================================
-   Leadership section — 3D flip-card grid of studio leads + a kinetic
-   transition ribbon leading into the clients section below it.
+   Leadership — pinned, scroll-driven chapters (light).
+   Section is 300vh tall; an inner sticky stage walks through the 3 leaders.
    ========================================================================== */
 
 .leadership {
+  --p: 0;
   position: relative;
   z-index: 5;
-  background-color: #dcdcdc;
-  color: var(--rc-black);
+  background-color: #eeece9;
+  color: #151515;
   width: 100%;
-  overflow-x: hidden;
-  padding: clamp(42px, 6vh, 72px) var(--container-x);
+  /* clip (not hidden) so the sticky stage keeps working */
+  overflow: clip;
   border-top: 1px solid rgba(21, 21, 21, 0.12);
   box-sizing: border-box;
+  height: calc(300vh / var(--page-zoom, 1));
 }
 
-.leadership__inner {
+.leadership__mobile {
+  display: none;
+}
+
+.leadership__sticky {
+  position: sticky;
+  top: 0;
+  height: calc(100vh / var(--page-zoom, 1));
+  display: flex;
+  flex-direction: column;
+  padding: clamp(84px, 11vh, 108px) var(--container-x) clamp(20px, 3.5vh, 36px);
+  box-sizing: border-box;
   max-width: 1320px;
   margin: 0 auto;
 }
 
-/* ---- Top header & metadata ---- */
-.leadership__head {
-  margin-bottom: clamp(24px, 3.5vh, 38px);
-}
-
-.leadership__meta-bar {
+/* ---- Top row + progress ---- */
+.leadership__top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: clamp(20px, 3vh, 28px);
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(21, 21, 21, 0.14);
-}
-
-.leadership__tag {
-  display: inline-flex;
-  align-items: center;
   font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #151515;
+  padding-bottom: 12px;
 }
 
-.leadership__coords {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: rgba(21, 21, 21, 0.6);
-  letter-spacing: 0.1em;
+.leadership__label {
+  font-weight: 700;
 }
 
-.leadership__title {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3.42vw, 2.76rem);
-  font-weight: 500;
-  line-height: 1.04;
-  letter-spacing: -0.025em;
-  text-transform: uppercase;
-  color: #151515;
-  max-width: 24ch;
-  margin: 0;
+.leadership__counter {
+  color: rgba(21, 21, 21, 0.7);
 }
 
-.leadership__subtitle {
-  font-family: var(--font-body);
-  font-size: clamp(1rem, 1.15vw, 1.2rem);
-  line-height: 1.62;
-  color: rgba(21, 21, 21, 0.78);
-  max-width: 68ch;
-  margin: clamp(18px, 2.5vh, 26px) 0 0 0;
+.leadership__counter i {
+  font-style: normal;
+  color: #f08228;
+  margin: 0 4px;
 }
 
-/* ---- 3-column lead grid ---- */
-.leadership__grid {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  flex-wrap: wrap;
-  gap: clamp(24px, 3.2vw, 44px);
-  width: 100%;
-}
-
-.leadership__founder-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 0 1 280px;
-  max-width: 100%;
-  will-change: transform;
-}
-
-.leadership__card-header-track {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  margin-bottom: 20px;
-  padding: 0 4px;
-  box-sizing: border-box;
-}
-
-.leadership__track-label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--rc-black);
-  opacity: 0.65;
-}
-
-.leadership__flipcard {
-  border-radius: 16px;
-  transition: transform 0.3s ease;
-}
-
-/* ---- FlipCard front face content ---- */
-.leadership__card-front {
+.leadership__progress {
+  height: 1px;
+  background: rgba(21, 21, 21, 0.16);
   position: relative;
+}
+
+.leadership__progress span {
+  position: absolute;
+  left: 0;
+  top: -1px;
+  height: 3px;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: inherit;
-  background: #ffffff;
-  padding: 26px 24px;
-  box-sizing: border-box;
+  background: #f08228;
+  transform-origin: left center;
+  transform: scaleX(var(--p));
+}
+
+/* ---- Stage grid ---- */
+.leadership__stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 1fr);
+  column-gap: clamp(20px, 3vw, 56px);
+  padding-top: clamp(18px, 3vh, 34px);
+}
+
+.leadership__col {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
+  min-height: 0;
+}
+
+.leadership__col--left,
+.leadership__col--right {
   justify-content: space-between;
 }
 
-.leadership__card-front--photo {
-  background-size: cover;
-  background-position: center 20%;
-}
-
-.leadership__card-front--photo::before {
-  content: "";
+/* giant outlined numeral behind the portrait */
+.leadership__bgnums {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 0%, transparent 62%, rgba(21, 21, 21, 0.72) 100%);
+  z-index: 0;
+  display: grid;
+  place-items: center;
   pointer-events: none;
 }
 
-.leadership__card-front--photo .leadership__card-credential,
-.leadership__card-front--photo .leadership__card-name {
-  position: relative;
-  z-index: 1;
-  color: #f4f6f9;
+.leadership__bgnums span {
+  grid-area: 1 / 1;
+  font-family: var(--font-display);
+  font-size: clamp(14rem, 36vw, 32rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(21, 21, 21, 0.1);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.leadership__card-front--photo .leadership__card-credential {
-  color: #f4f6f9;
-  background: rgba(21, 21, 21, 0.55);
-  padding: 4px 10px;
-  border-radius: 999px;
-  backdrop-filter: blur(4px);
+.leadership__bgnums span.is-active {
+  opacity: 1;
+  transform: none;
 }
 
-.leadership__card-credential {
-  align-self: flex-end;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(21, 21, 21, 0.5);
+/* ---- Left: heading + names ---- */
+.leadership__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.1vw, 3rem);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin: 0;
+  max-width: 11ch;
 }
 
-.leadership__card-front-info {
+.leadership__names {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: clamp(8px, 1.4vh, 16px);
 }
 
-.leadership__card-name {
+.leadership__name-btn {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  width: 100%;
+  background: none;
+  border: 0;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--black);
-  margin: 0;
-  line-height: 1.14;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.35rem, 2.3vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: rgba(21, 21, 21, 0.26);
+  transition: color 0.5s ease, padding-left 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ---- FlipCard back face content ---- */
-.leadership__card-back {
+.leadership__name-btn:hover {
+  color: rgba(21, 21, 21, 0.6);
+}
+
+.leadership__name-btn.is-active {
+  color: #151515;
+}
+
+.leadership__marker {
+  flex-shrink: 0;
+  width: 0;
+  height: 10px;
+  background: #f08228;
+  transform: translateY(-0.12em) rotate(45deg);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.leadership__name-btn.is-active .leadership__marker {
+  width: 10px;
+}
+
+/* ---- Centre: arch portrait ---- */
+.leadership__col--centre {
+  align-items: center;
+  justify-content: center;
+}
+
+.leadership__arch {
+  --arch-h: min(62vh, 540px);
   position: relative;
+  height: var(--arch-h);
+  width: calc(var(--arch-h) * 0.76);
+  max-width: 100%;
+}
+
+/* orange outline arch, offset behind the photo */
+.leadership__arch::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid #f08228;
+  border-radius: 999px 999px 6px 6px;
+  transform: translate(16px, 16px);
+}
+
+.leadership__arch-item {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 999px 999px 6px 6px;
+  background: #d9d6d1;
+  z-index: 1;
+  clip-path: inset(100% 0 0 0);
+  opacity: 0;
+  transition: opacity 0.5s ease 0.6s, clip-path 0s linear 1.2s;
+}
+
+.leadership__arch-item.is-active {
+  z-index: 2;
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+  transition: clip-path 0.95s cubic-bezier(0.77, 0, 0.175, 1), opacity 0s;
+}
+
+.leadership__photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 18%;
+  filter: grayscale(1) contrast(1.06);
+  transform: scale(1.2);
+  transition: transform 0s linear 1.2s;
+}
+
+.leadership__arch-item.is-active .leadership__photo {
+  transform: scale(1);
+  transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.leadership__photo.is-static {
+  transform: none;
+}
+
+/* orbiting circular badge */
+.leadership__badge {
+  position: absolute;
+  z-index: 3;
+  width: clamp(104px, 9.5vw, 138px);
+  aspect-ratio: 1;
+  top: 8%;
+  right: -12%;
+  animation: leadership-spin 22s linear infinite;
+}
+
+.leadership__badge svg {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  padding: 26px 24px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: #ffffff;
-  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
-.leadership__card-back-header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+.leadership__badge svg.is-active {
+  opacity: 1;
 }
 
-.leadership__card-back-cred {
+.leadership__badge-bg {
+  fill: #eeece9;
+  stroke: rgba(21, 21, 21, 0.2);
+  stroke-width: 1;
+}
+
+.leadership__badge-text {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12.5px;
   font-weight: 600;
-  color: rgba(21, 21, 21, 0.5);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  fill: #151515;
 }
 
-.leadership__card-back-body {
+.leadership__badge-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  background: #f08228;
+  transform: rotate(45deg);
+}
+
+@keyframes leadership-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---- Right: intro + details ---- */
+.leadership__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.05vw, 1.08rem);
+  line-height: 1.65;
+  color: rgba(21, 21, 21, 0.68);
+  margin: 0;
+  max-width: 36ch;
+}
+
+.leadership__details {
+  position: relative;
+  height: clamp(250px, 40vh, 340px);
+}
+
+.leadership__detail {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  margin: auto 0;
-  padding: 16px 0;
+  justify-content: flex-end;
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(26px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-.leadership__quote-mark {
-  font-family: var(--font-editorial);
-  font-size: 3.4rem;
-  line-height: 0.75;
-  color: rgba(21, 21, 21, 0.35);
-  margin-bottom: 6px;
-  display: block;
+.leadership__detail.is-active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity 0.7s ease 0.4s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s;
 }
 
-.leadership__card-quote {
+.leadership__pill {
+  align-self: flex-start;
+  padding: 7px 14px;
+  border: 1px solid rgba(21, 21, 21, 0.28);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.leadership__role {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.7vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.leadership__quote {
   font-family: var(--font-editorial);
   font-style: italic;
-  font-size: 1.05rem;
+  font-size: clamp(1rem, 1.15vw, 1.15rem);
   line-height: 1.55;
-  color: var(--black);
+  color: rgba(21, 21, 21, 0.82);
   margin: 0;
+  max-width: 36ch;
 }
 
-.leadership__card-back-divider {
-  width: 32px;
-  height: 1px;
-  background: rgba(21, 21, 21, 0.3);
-  margin: 20px 0 14px;
+.leadership__years {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(21, 21, 21, 0.16);
 }
 
-.leadership__card-back-name {
+.leadership__years b {
   font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--black);
-  margin: 0;
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: #f08228;
 }
 
-.leadership__card-back-role {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  color: rgba(21, 21, 21, 0.5);
-  margin-top: 5px;
-  display: block;
-}
-
-/* ---- Back face content stagger: quote mark -> quote -> divider -> name -> role,
-   instead of all appearing at once the instant the card flips. Plain CSS
-   transitions, so the site's global prefers-reduced-motion kill-switch
-   (globals.css) neutralizes this automatically — no extra JS check needed. ---- */
-.leadership__quote-mark,
-.leadership__card-quote,
-.leadership__card-back-name,
-.leadership__card-back-role {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-}
-
-.leadership__card-back-divider {
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.4s ease-out;
-}
-
-.leadership__card-back--revealed .leadership__quote-mark {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0s;
-}
-
-.leadership__card-back--revealed .leadership__card-quote {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.06s;
-}
-
-.leadership__card-back--revealed .leadership__card-back-divider {
-  transform: scaleX(1);
-  transition-delay: 0.12s;
-}
-
-.leadership__card-back--revealed .leadership__card-back-name {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.18s;
-}
-
-.leadership__card-back--revealed .leadership__card-back-role {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.24s;
+.leadership__years span {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: rgba(21, 21, 21, 0.62);
 }
 
 /* ==========================================================================
-   Responsive
+   Mobile / tablet: no pin, simple stack
    ========================================================================== */
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .leadership {
-    padding: 72px 32px;
+    height: auto;
+    padding: 64px var(--container-x) 72px;
   }
 
-  .leadership__grid {
-    gap: 32px;
-  }
-}
-
-@media (max-width: 640px) {
-  .leadership {
-    padding: 60px 20px;
+  .leadership__sticky {
+    display: none;
   }
 
-  .leadership__head {
-    margin-bottom: 40px;
+  .leadership__mobile {
+    display: block;
   }
 
-  .leadership__meta-bar {
+  .leadership__mobile .leadership__top {
+    border-bottom: 1px solid rgba(21, 21, 21, 0.16);
+  }
+
+  .leadership__title--m {
+    max-width: 14ch;
+    font-size: clamp(2.1rem, 8vw, 3rem);
+    margin: 32px 0 18px;
+  }
+
+  .leadership__subtitle--m {
+    margin-bottom: 48px;
+  }
+
+  .leadership__mcard {
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    gap: 12px;
+    margin-bottom: 56px;
   }
 
-  .leadership__founder-item {
-    flex: 0 1 100%;
-    width: 100%;
+  .leadership__march {
+    position: relative;
+    width: min(78%, 320px);
+    aspect-ratio: 0.8;
+    overflow: hidden;
+    border-radius: 999px 999px 6px 6px;
+    background: #d9d6d1;
+    margin: 0 0 14px 0;
+    box-shadow: 14px 14px 0 -1px #eeece9, 14px 14px 0 0 #f08228;
   }
 
-  .leadership__card-front {
-    padding: 20px 18px;
+  .leadership__mname {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    margin: 6px 0 0;
   }
 
-  .leadership__card-back {
-    padding: 20px 18px;
+  .leadership__mrole {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: rgba(21, 21, 21, 0.62);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .leadership__flipcard {
-    transition: none;
+  .leadership__badge {
+    animation: none;
+  }
+
+  .leadership__arch-item,
+  .leadership__photo,
+  .leadership__detail,
+  .leadership__bgnums span {
+    transition: none !important;
   }
 }

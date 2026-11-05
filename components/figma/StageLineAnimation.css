@@ -82,6 +82,32 @@
   transition: filter 0.4s ease;
 }
 
+/* Pen pass: each outline piece draws in turn, then the solid orange inks in and the outline fades. */
+.stage-pen path {
+  stroke: var(--rcf-orange, #ee7d2e);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 1;
+  transition: stroke-dashoffset 1s ease-in-out var(--d, 0s), opacity 0.6s ease 2.9s;
+}
+
+.stage-ink {
+  fill: var(--rcf-orange, #ee7d2e);
+  opacity: 0;
+  transition: opacity 0.9s ease 2.6s;
+}
+
+.stage-line-animation-wrapper.is-active .stage-pen path {
+  stroke-dashoffset: 0;
+  opacity: 0;
+}
+
+.stage-line-animation-wrapper.is-active .stage-ink {
+  opacity: 1;
+}
+
 .stage-svg-container:hover .stage-svg {
   filter: drop-shadow(0 0 8px rgba(238, 125, 46, 0.45));
 }
@@ -99,6 +125,8 @@
     clip-path: none !important;
     transition: none !important;
   }
+  .stage-pen path { display: none; }
+  .stage-ink { opacity: 1; transition: none; }
   .stage-accent-square {
     animation: none !important;
   }

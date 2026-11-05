@@ -26,7 +26,7 @@ function getEffectiveBg(el) {
 
 /** Detects what theme the navbar should use:
  *  - 'transparent': when on the home hero section (#home) or near the top of the home page (y <= 30)
- *  - 'cement': when over orangish / peach sections (#dcdcdc, matching featured work section)
+ *  - 'cement': when over orangish / peach sections (#eeece9, matching featured work section)
  *  - 'orange': when over greyish / cement / dark sections (#ee7d2e vibrant orange)
  */
 function getNavThemeForBackground(navEl, scrollY, pathname) {
@@ -58,7 +58,7 @@ function getNavThemeForBackground(navEl, scrollY, pathname) {
   }
 
   // 3. Direct section identifier check for orangish / peach sections
-  // When on orange/peach background, navbar must be the color of featured work section (#dcdcdc cement)!
+  // When on orange/peach background, navbar must be the color of featured work section (#eeece9 cement)!
   const orangeSection = behind.closest(
     '#about, .rcf-who, #stats, .hoy-stats-section, #process, #services, .servicesBlock, .rcf-stories, #insta-feed, #contact'
   )
@@ -164,7 +164,7 @@ export default function Navigation() {
 
       // Detect background theme:
       // - Home page / Hero: transparent like before
-      // - Orange / peach background: #dcdcdc (Featured Work cement color)
+      // - Orange / peach background: #eeece9 (Featured Work cement color)
       // - Greyish / cement background: #ee7d2e (brand orange)
       const targetTheme = getNavThemeForBackground(navRef.current, y, pathname)
       if (themeRef.current !== targetTheme) {
@@ -353,7 +353,11 @@ export default function Navigation() {
                 className={`nav__link ${isLinkActive(l.href) ? 'nav__link--active' : ''}`}
                 onClick={(e) => handleNavClick(e, l.href)}
               >
-                {l.label}
+                <span className="nav__roll">
+                  <span className="nav__roll-inner" data-label={l.label}>
+                    {l.label}
+                  </span>
+                </span>
               </Link>
             ))}
           </nav>

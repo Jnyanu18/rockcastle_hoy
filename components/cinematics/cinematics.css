@@ -23,7 +23,7 @@ html.cine-intro body {
   left: 0;
   right: 0;
   height: 50.5%;
-  background: #0a0e15;
+  background: #121212;
 }
 
 .cine-intro-half--top {
@@ -120,7 +120,7 @@ html.cine-intro body {
   position: absolute;
   inset: 0;
   z-index: 30;
-  background: #05070b;
+  background: #080808;
   opacity: var(--cine-dim, 0);
   pointer-events: none;
 }

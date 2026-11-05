@@ -60,7 +60,7 @@ export default function Contact() {
               </SlideUpText>
             </h2>
 
-            <p className="mt-5 sm:mt-6 md:mt-7 max-w-[700px] text-[18px] sm:text-[22px] md:text-[26px] lg:text-[32px] xl:text-[36px] font-medium leading-[1.12] sm:leading-[1.08] tracking-[-0.03em] text-[#151515]/75">
+            <p className="mt-5 sm:mt-6 md:mt-7 max-w-[700px] text-[18px] sm:text-[22px] md:text-[26px] lg:text-[32px] xl:text-[36px] font-medium leading-[1.12] sm:leading-[1.08] tracking-[-0.03em] text-[#151515]/90">
               <SlideUpText split="words" stagger={0.02} delay={0.12}>
                 {contact.subheading}
               </SlideUpText>

@@ -14,6 +14,7 @@ const sans = Poppins({
 import SmoothScroll from "@/components/SmoothScroll";
 import ViewCursor from "@/components/ViewCursor";
 import PageLoadingBar from "@/components/PageLoadingBar";
+import ScrollProgress from "@/components/ScrollProgress";
 import { GlobalMagnetic } from "@/components/hooks/useMagnetic";
 
 export const metadata: Metadata = {
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-canvas font-sans text-ink antialiased">
         <PageLoadingBar />
+        <ScrollProgress />
         <SmoothScroll />
         <ViewCursor />
         <GlobalMagnetic />

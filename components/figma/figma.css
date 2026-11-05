@@ -5,7 +5,7 @@
 .rcf-band {
   --rcf-orange: #ee7d2e;
   --rcf-peach: #fff1e7;
-  --rcf-grey: #dcdcdc;
+  --rcf-grey: #eeece9;
   --rcf-ink: #151515;
 }
 
@@ -800,18 +800,71 @@
 .rcf-bookplane {
   color: #b5aaa2;
   overflow: visible;
-  clip-path: inset(-5% 100% -5% 0);
-  transition: clip-path 2.6s cubic-bezier(.45, .05, .25, 1) .2s;
 }
 
-.is-in .rcf-bookplane,
-.rcf-bookplane.is-in {
-  clip-path: inset(-5% -2% -5% 0);
+/* Pen pass: the outline draws piece after piece along the whole drawing (--d = start, --l = share of the pen travel,
+   1.5s in all), then the solid line inks in and the thin outline fades. */
+.rcf-bp-pen path {
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 1;
+  transition: stroke-dashoffset calc(var(--l) * 1.5s) linear calc(var(--d) * 1.5s + .1s), opacity .5s ease 1.8s;
+}
+
+.rcf-bp-ink {
+  fill: currentColor;
+  opacity: 0;
+  transition: opacity .6s ease 1.6s;
+}
+
+.is-in .rcf-bp-pen path,
+.rcf-bookplane.is-in .rcf-bp-pen path {
+  stroke-dashoffset: 0;
+  opacity: 0;
+}
+
+.is-in .rcf-bp-ink,
+.rcf-bookplane.is-in .rcf-bp-ink {
+  opacity: 1;
+}
+
+/* Wrapper + split-out paper plane: the plane sits exactly over its place in the drawing,
+   until the page scroll drives it away (see below). */
+.rcf-bp {
+  display: block;
+  position: relative;
+}
+
+.rcf-bp > .rcf-bookplane,
+.rcf-bp__plane > .rcf-bookplane {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The plane layer sits exactly over its place in the drawing (kept separate so it can be animated on its own). */
+.rcf-bp__plane {
+  position: absolute;
+  inset: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rcf-bookplane {
-    clip-path: none;
-    transition: none;
-  }
+  .rcf-bp-pen path { display: none; }
+  .rcf-bp-ink { opacity: 1; transition: none; }
+}
+
+/* Insta drawing: strokes of the mask draw in one after another (--d = start, --l = length share of the 2.8s total) */
+.rcf-insta__art { height: auto; overflow: visible; }
+.rcf-insta-draw__stroke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset calc(var(--l) * 2.8s) linear calc(var(--d) * 2.8s + .25s);
+}
+.is-in .rcf-insta-draw__stroke { stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .rcf-insta-draw__stroke { stroke-dashoffset: 0; transition: none; }
 }

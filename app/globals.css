@@ -13,13 +13,13 @@
   --hoy-yellow: #ee7d2e;
   /* orange sampled directly from the Rock Castle logo artwork — buttons, CTAs, numbers/index labels */
   --rc-yellow: #ee7d2e;
-  --white: #dcdcdc; /* cement */
+  --white: #eeece9; /* cement */
   /* soft "royal" off-white (not flat pure white) — text / light-on-dark role */
-  --light-grey: #182230;
+  --light-grey: #1c1c1c;
   /* deepened navy — subtle surface, scroll state */
-  --mid-grey: #5c7084;
+  --mid-grey: #6f6a66;
   /* muted blue-grey — secondary text, borders */
-  --dark-grey: #0a0e15;
+  --dark-grey: #121212;
   /* near-black navy — dark accent surface */
   --black: #151515; /* ink */
   --peach: #fff1e7; /* cream/pink — replaces the old navy section role */
@@ -45,7 +45,11 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Desktop is shown at 90% so the design is not oversized on common laptop screens. */
+:root { --page-zoom: 1; }
+@media (min-width: 1024px) { :root { --page-zoom: 0.9; } }
 html {
+  zoom: var(--page-zoom);
   scroll-behavior: auto !important;
   -webkit-font-smoothing: antialiased;
 }
@@ -374,4 +378,14 @@ body {
     transition: opacity 0.15s ease;
     transform: none;
   }
+}
+
+/* CLARITY PASS: crisper type and photos, neutral (not blue) blacks */
+html { text-rendering: optimizeLegibility; }
+.rx-plate__media img,
+.rcf-card__media img,
+.servicesBlock .imageWrapper img,
+.leadership__card img,
+.rcf-reels__stage img {
+  filter: contrast(1.06) saturate(1.1);
 }

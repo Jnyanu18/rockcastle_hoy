@@ -1,4 +1,4 @@
-import { BOOK_PLANE_PATH, BOOK_PLANE_VIEWBOX } from "./bookPlanePath";
+import { BOOK_PLANE_PATH, BOOK_PLANE_PIECES, BOOK_PLANE_VIEWBOX } from "./bookPlanePath";
 
 /* Hand-drawn line art from the client Figma. Strokes draw in when an ancestor has `.is-in` (set by Section). */
 const base = { fill: "none", stroke: "currentColor", strokeWidth: 1.4, strokeLinecap: "round", strokeLinejoin: "round" } as const;
@@ -40,12 +40,48 @@ export function LoungeDrawing({ className = "" }: { className?: string }) {
   );
 }
 
+/* Region of the trace that holds the paper plane (cut just below its tail, where the line trails off). */
+const PLANE_REGION = "M1020 0H1270V70L1196 72V142H1112L1118 122L1020 6Z";
+
 export function BookPlaneDrawing({ className = "" }: { className?: string }) {
-  /* Client's own line drawing (open book, paper plane, one looping line) — exact trace, revealed left to right */
+  /* Client's own line drawing (open book, paper plane, one looping line) — exact trace. A pen draws its outline piece by piece
+     (the line is one continuous stroke, so the pen travels the whole drawing), then the solid line inks in over it.
+     The paper plane is split out as its own layer, sitting exactly over its place in the drawing. */
+  const pen = (
+    <g className="rcf-bp-pen" fill="none">
+      {BOOK_PLANE_PIECES.map((piece, i) => (
+        <path key={i} d={piece.d} pathLength={1} style={{ ["--d" as string]: piece.start, ["--l" as string]: piece.len }} />
+      ))}
+    </g>
+  );
+  const ink = <path className="rcf-bp-ink" d={BOOK_PLANE_PATH} fillRule="evenodd" />;
   return (
-    <svg className={`rcf-bookplane ${className}`} viewBox={BOOK_PLANE_VIEWBOX} aria-hidden="true">
-      <path d={BOOK_PLANE_PATH} fill="currentColor" fillRule="evenodd" />
-    </svg>
+    <span className={`rcf-bp ${className}`} aria-hidden="true">
+      <svg className="rcf-bookplane" viewBox={BOOK_PLANE_VIEWBOX}>
+        <defs>
+          <clipPath id="rcf-bp-book">
+            <path clipRule="evenodd" d={`M0 0H1280V450H0Z ${PLANE_REGION}`} />
+          </clipPath>
+        </defs>
+        <g clipPath="url(#rcf-bp-book)">
+          {pen}
+          {ink}
+        </g>
+      </svg>
+      <span className="rcf-bp__plane">
+        <svg className="rcf-bookplane" viewBox={BOOK_PLANE_VIEWBOX}>
+          <defs>
+            <clipPath id="rcf-bp-plane">
+              <path d={PLANE_REGION} />
+            </clipPath>
+          </defs>
+          <g clipPath="url(#rcf-bp-plane)">
+            {pen}
+            {ink}
+          </g>
+        </svg>
+      </span>
+    </span>
   );
 }
 
