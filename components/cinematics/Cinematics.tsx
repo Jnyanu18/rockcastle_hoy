@@ -22,7 +22,7 @@ gsap.registerPlugin(ScrollTrigger);
 /*  Everything is skipped under prefers-reduced-motion (the grain stays still).*/
 /* -------------------------------------------------------------------------- */
 
-const SESSION_KEY = "rc-cine-intro";
+const SESSION_KEY = "rc-cine-intro-v3";
 const EXPO_IN_OUT = "expo.inOut";
 const EXPO_OUT = "expo.out";
 
@@ -73,6 +73,14 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
     const counter = el.querySelector<HTMLElement>("[data-count]");
     const tc = { f: 0 };
 
+    // Measure SVG handwriting stroke lengths and prime strokeDasharray/offset
+    const strokes = el.querySelectorAll<SVGPathElement>("[data-write-stroke]");
+    strokes.forEach((p) => {
+      const len = p.getTotalLength();
+      p.style.strokeDasharray = `${len}`;
+      p.style.strokeDashoffset = `${len}`;
+    });
+
     const finish = () => {
       html.classList.remove("cine-intro");
       lenis()?.start();
@@ -83,30 +91,88 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
 
     const tl = gsap.timeline({ onComplete: finish });
     tl.set(hero, { "--cine-zoom": 1.18 })
-      .fromTo(q("[data-word]"), { yPercent: 110 }, { yPercent: 0, duration: 0.9, ease: EXPO_OUT, stagger: 0.08 }, 0.15)
-      .fromTo(q("[data-rule]"), { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: EXPO_IN_OUT }, 0.25)
-      .fromTo(q("[data-count]"), { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.2)
+      .fromTo(q("[data-count]"), { opacity: 0 }, { opacity: 1, duration: 0.35 }, 0.1)
+      // 1. Write out "ROCK" handwritten brush script stroke-by-stroke
+      .to(
+        q("[data-rock-stroke]"),
+        {
+          strokeDashoffset: 0,
+          duration: 0.34,
+          ease: "power2.inOut",
+          stagger: 0.16,
+        },
+        0.15
+      )
+      // 2. Reveal "CASTLE" bold block letters sequentially
+      .fromTo(
+        q("[data-castle-letter]"),
+        { scaleY: 0, attr: { y: 466 } },
+        {
+          scaleY: 1,
+          attr: { y: 278 },
+          duration: 0.38,
+          ease: EXPO_OUT,
+          stagger: 0.055,
+        },
+        0.85
+      )
+      // 3. Swipe the signature brush underline and pop the exclamation dot
+      .to(
+        q("[data-underline-stroke]"),
+        {
+          strokeDashoffset: 0,
+          duration: 0.42,
+          ease: "power3.out",
+        },
+        1.22
+      )
+      .to(
+        q("[data-underline-dot]"),
+        {
+          strokeDashoffset: 0,
+          duration: 0.18,
+          ease: "back.out(2)",
+        },
+        1.54
+      )
+      // 4. Write out "experiences un-ltd." tagline underneath
+      .fromTo(
+        q("[data-tagline]"),
+        { clipPath: "inset(0 100% 0 0)", opacity: 0.4 },
+        { clipPath: "inset(0 0% 0 0)", opacity: 1, duration: 0.55, ease: "power2.out" },
+        1.38
+      )
+      // Counter ticks up to 100% and orange loading bar fills across the logo writing sequence
+      .fromTo(
+        q("[data-progress-fill]"),
+        { scaleX: 0 },
+        { scaleX: 1, duration: 1.85, ease: "power2.inOut" },
+        0.15
+      )
       .to(
         tc,
         {
-          f: 48,
-          duration: 1.3,
-          ease: "none",
+          f: 100,
+          duration: 1.85,
+          ease: "power2.inOut",
           onUpdate: () => {
             if (!counter) return;
-            const f = Math.round(tc.f);
-            counter.textContent = `00:00:${String(Math.floor(f / 24)).padStart(2, "0")}:${String(f % 24).padStart(2, "0")}`;
+            counter.textContent = `${String(Math.round(tc.f)).padStart(3, "0")}%`;
           },
         },
-        0.2
+        0.15
       )
-      // Title leaves, then the frame splits open like a gate.
-      .to(q("[data-word]"), { yPercent: -110, duration: 0.5, ease: "expo.in", stagger: 0.04 }, 1.45)
-      .to(q("[data-rule], [data-count]"), { opacity: 0, duration: 0.3 }, 1.5)
-      .to(q("[data-half='top']"), { yPercent: -101, duration: 1.1, ease: EXPO_IN_OUT }, 1.75)
-      .to(q("[data-half='bottom']"), { yPercent: 101, duration: 1.1, ease: EXPO_IN_OUT }, 1.75)
+      // Logo scales gently and fades out as the gate splits open
+      .to(
+        q("[data-logo-stage]"),
+        { scale: 1.04, opacity: 0, duration: 0.45, ease: "power2.in" },
+        2.15
+      )
+      .to(q("[data-count-bar]"), { opacity: 0, duration: 0.3 }, 2.15)
+      .to(q("[data-half='top']"), { yPercent: -101, duration: 1.05, ease: EXPO_IN_OUT }, 2.35)
+      .to(q("[data-half='bottom']"), { yPercent: 101, duration: 1.05, ease: EXPO_IN_OUT }, 2.35)
       // Camera push: the hero settles from a tight frame to its resting framing.
-      .to(hero, { "--cine-zoom": 1, duration: 2.0, ease: EXPO_OUT }, 1.95);
+      .to(hero, { "--cine-zoom": 1, duration: 1.9, ease: EXPO_OUT }, 2.5);
 
     return () => {
       tl.kill();
@@ -122,22 +188,147 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
     <div ref={root} className="cine-intro-layer" aria-hidden="true">
       <div data-half="top" className="cine-intro-half cine-intro-half--top" />
       <div data-half="bottom" className="cine-intro-half cine-intro-half--bottom" />
-      <div className="cine-intro-title">
-        <span className="cine-intro-mask">
-          <span data-word className="cine-intro-word">
-            {brand.name}
-          </span>
-        </span>
-        <span data-rule className="cine-intro-rule" />
-        <span className="cine-intro-mask">
-          <span data-word className="cine-intro-tag">
-            {brand.tagline}
-          </span>
-        </span>
+
+      <div className="cine-intro-title" data-logo-stage>
+        <svg
+          className="cine-intro-logo-svg"
+          viewBox="0 0 1144 615"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            {/* Convert black logo PNG pixels to crisp white while preserving alpha */}
+            <filter id="rc-intro-white" colorInterpolationFilters="sRGB">
+              <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 1
+                        0 0 0 0 1
+                        0 0 0 0 1
+                        0 0 0 1 0"
+              />
+            </filter>
+
+            {/* Per-letter clip regions for ROCK script */}
+            <clipPath id="rc-clip-r">
+              <rect x="0" y="0" width="398" height="305" />
+            </clipPath>
+            <clipPath id="rc-clip-o">
+              <rect x="398" y="0" width="257" height="315" />
+            </clipPath>
+            <clipPath id="rc-clip-c">
+              <rect x="655" y="0" width="153" height="335" />
+            </clipPath>
+            <clipPath id="rc-clip-k">
+              <rect x="805" y="0" width="339" height="325" />
+            </clipPath>
+            <clipPath id="rc-clip-under">
+              <rect x="0" y="466" width="1144" height="149" />
+            </clipPath>
+
+            {/* Master handwriting mask revealing ROCK, CASTLE, and underline */}
+            <mask id="rc-logo-write-mask" maskUnits="userSpaceOnUse">
+              <rect x="0" y="0" width="1144" height="615" fill="black" />
+
+              {/* ROCK — R */}
+              <g clipPath="url(#rc-clip-r)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
+                <path
+                  data-write-stroke
+                  data-rock-stroke
+                  d="M 148 52 L 128 292"
+                  strokeWidth="64"
+                />
+                <path
+                  data-write-stroke
+                  data-rock-stroke
+                  d="M 28 76 C 110 18, 330 18, 372 72 C 392 128, 220 192, 52 204 C 135 225, 255 272, 392 298"
+                  strokeWidth="96"
+                />
+              </g>
+
+              {/* ROCK — O */}
+              <g clipPath="url(#rc-clip-o)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
+                <path
+                  data-write-stroke
+                  data-rock-stroke
+                  d="M 545 78 C 460 32, 412 115, 422 215 C 432 295, 515 315, 575 265 C 625 205, 615 52, 525 48 C 465 48, 455 185, 525 245 C 585 280, 635 215, 642 122"
+                  strokeWidth="105"
+                />
+              </g>
+
+              {/* ROCK — C */}
+              <g clipPath="url(#rc-clip-c)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
+                <path
+                  data-write-stroke
+                  data-rock-stroke
+                  d="M 792 145 L 796 55 C 740 35, 675 95, 678 215 C 680 315, 765 330, 804 228"
+                  strokeWidth="98"
+                />
+              </g>
+
+              {/* ROCK — K */}
+              <g clipPath="url(#rc-clip-k)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
+                <path
+                  data-write-stroke
+                  data-rock-stroke
+                  d="M 882 52 L 886 318"
+                  strokeWidth="64"
+                />
+                <path
+                  data-write-stroke
+                  data-rock-stroke
+                  d="M 1068 48 L 822 238 L 995 298"
+                  strokeWidth="95"
+                />
+              </g>
+
+              {/* CASTLE — 6 block letters (C, A, S, T, L, E) */}
+              <g fill="white">
+                <rect data-castle-letter x="35"  y="278" width="180" height="188" />
+                <rect data-castle-letter x="215" y="278" width="205" height="188" />
+                <rect data-castle-letter x="420" y="278" width="176" height="188" />
+                <rect data-castle-letter x="596" y="278" width="194" height="188" />
+                <rect data-castle-letter x="790" y="278" width="164" height="188" />
+                <rect data-castle-letter x="954" y="278" width="175" height="188" />
+              </g>
+
+              {/* Brush Underline + Dot */}
+              <g clipPath="url(#rc-clip-under)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
+                <path
+                  data-write-stroke
+                  data-underline-stroke
+                  d="M 162 588 Q 520 518 905 498"
+                  strokeWidth="84"
+                />
+                <path
+                  data-write-stroke
+                  data-underline-dot
+                  d="M 960 515 L 1005 478"
+                  strokeWidth="84"
+                />
+              </g>
+            </mask>
+          </defs>
+
+          <image
+            href="/rockcastle-logo-black.png"
+            width="1144"
+            height="615"
+            filter="url(#rc-intro-white)"
+            mask="url(#rc-logo-write-mask)"
+          />
+        </svg>
+
+        <p data-tagline className="cine-intro-written-tag">
+          experiences un-ltd.
+        </p>
+
+        <div className="cine-intro-progress" data-progress-track>
+          <span className="cine-intro-progress__fill" data-progress-fill />
+        </div>
       </div>
-      <div className="cine-intro-count">
-        <span>Reel 01</span>
-        <span data-count>00:00:00:00</span>
+
+      <div data-count-bar className="cine-intro-count">
+        <span>Rock Castle</span>
+        <span data-count>000%</span>
       </div>
       <noscript>
         <style>{`.cine-intro-layer{display:none}`}</style>
