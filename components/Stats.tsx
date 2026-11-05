@@ -373,7 +373,7 @@ export default function Stats() {
                       {item.label}
                     </SlideUpText>
                   </span>
-                  <span className="font-sans text-3xl sm:text-5xl lg:text-[60px] xl:text-[66px] font-normal tabular-nums leading-none tracking-[-0.04em] text-white">
+                  <span className="font-sans text-3xl sm:text-5xl lg:text-[60px] xl:text-[66px] font-bold tabular-nums leading-none tracking-[-0.04em] text-white">
                     <RunningMetric value={item.value} delay={index * 120} />
                   </span>
                 </div>

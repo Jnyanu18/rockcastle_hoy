@@ -13,6 +13,31 @@
   margin-bottom: clamp(72px, 9vw, 160px);
 }
 
+.servicesBlock--single {
+  margin-bottom: 0;
+}
+
+.servicesBlock--single .scrollContainer {
+  height: auto !important;
+}
+
+.servicesBlock--single .stickyWrapper {
+  position: relative !important;
+  height: auto !important;
+  overflow: visible !important;
+  padding-top: clamp(64px, 8vw, 110px);
+  padding-bottom: clamp(48px, 6vw, 88px);
+}
+
+.servicesBlock--single .items {
+  height: auto !important;
+}
+
+.servicesBlock--single .scrollItem {
+  position: relative !important;
+  overflow: visible !important;
+}
+
 .howWeRollItemsBlock {
   position: relative;
   width: 100%;
@@ -282,18 +307,43 @@
   transform: translateX(4px);
 }
 
-/* ---- 4 Large Portrait Images Grid ---- */
-.servicesBlock .images {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(14px, 1.7vw, 32px);
+/* ---- Horizontal Scrollable Media Rail (Images & Videos) ---- */
+.servicesBlock .ss-media-slider {
   width: 100%;
   max-width: min(76vw, 1180px);
   margin: clamp(10px, 1.4vh, 18px) auto 0 auto;
-  padding: 0 0 56px;
+  padding: 0 0 36px;
+}
+
+.servicesBlock .images {
+  --ss-gap: clamp(14px, 1.7vw, 32px);
+  display: flex;
+  align-items: stretch;
+  gap: var(--ss-gap);
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  user-select: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+
+.servicesBlock .images::-webkit-scrollbar {
+  display: none;
+}
+
+.servicesBlock .images.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
 }
 
 .servicesBlock .imageWrapper {
+  flex: 0 0 calc((100% - 3 * var(--ss-gap)) / 4);
+  scroll-snap-align: start;
   aspect-ratio: 1;
   width: 100%;
   height: auto;
@@ -304,16 +354,95 @@
   box-shadow: none;
 }
 
-.servicesBlock .imageWrapper img {
+.servicesBlock .imageWrapper img,
+.servicesBlock .imageWrapper video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  pointer-events: none;
   transition: transform 0.6s var(--ease-out-expo);
 }
 
-.servicesBlock .imageWrapper:hover img {
+.servicesBlock .imageWrapper:hover img,
+.servicesBlock .imageWrapper:hover video {
   transform: scale(1.06);
+}
+
+.servicesBlock .ss-slider-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: clamp(16px, 2vw, 24px);
+}
+
+.servicesBlock .ss-slider-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.servicesBlock .ss-slider-dot {
+  --dot-weight: 0;
+  position: relative;
+  width: calc(8px + var(--dot-weight) * 22px);
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(21, 21, 21, 0.22);
+  cursor: pointer;
+  overflow: hidden;
+  transition: width 0.22s cubic-bezier(0.22, 1, 0.36, 1), transform 0.2s ease, background-color 0.2s ease;
+}
+
+.servicesBlock .ss-slider-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--rc-orange, #ee7d2e);
+  opacity: var(--dot-weight);
+  transform: scaleX(calc(0.4 + var(--dot-weight) * 0.6));
+  transition: opacity 0.2s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.servicesBlock .ss-slider-dot:hover {
+  background: rgba(21, 21, 21, 0.4);
+  transform: scale(1.15);
+}
+
+.servicesBlock .ss-slider-dot.is-active {
+  background: var(--rc-orange, #ee7d2e);
+}
+
+.servicesBlock .ss-slider-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(21, 21, 21, 0.22);
+  background: transparent;
+  color: #151515;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease, opacity 0.22s ease, transform 0.2s ease;
+}
+
+.servicesBlock .ss-slider-btn:hover:not(:disabled) {
+  background: var(--rc-orange, #ee7d2e);
+  border-color: var(--rc-orange, #ee7d2e);
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.servicesBlock .ss-slider-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
 }
 
 /* ===================================================
@@ -334,7 +463,7 @@
     font-size: clamp(1.7rem, 4.2vw, 3rem);
   }
 
-  .servicesBlock .images {
+  .servicesBlock .ss-media-slider {
     max-width: min(82vw, 840px);
   }
 
@@ -391,14 +520,12 @@
     line-height: 1.4;
   }
 
-  .servicesBlock .images {
-    grid-template-columns: repeat(2, 1fr);
+  .servicesBlock .ss-media-slider {
     max-width: min(100%, 340px);
   }
 
-  /* Show 2 cards on mobile */
-  .servicesBlock .imageWrapper:nth-child(n + 3) {
-    display: none;
+  .servicesBlock .imageWrapper {
+    flex: 0 0 calc((100% - var(--ss-gap)) / 2);
   }
 }
 

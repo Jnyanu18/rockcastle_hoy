@@ -11,9 +11,6 @@ const stories: { tag: Exclude<Filter, "All">; label: string; img: string; pill?:
   { tag: "Events", label: "Events", img: "/rx/cover-1.jpg", pill: true },
   { tag: "Activations", label: "Activation", img: "/rx/cover-2.jpg" },
   { tag: "Activations", label: "Activation", img: "/rx/cover-3.jpg" },
-  { tag: "Exhibitions", label: "Exhibition", img: "/rx/cover-4.jpg" },
-  { tag: "Events", label: "Events", img: "/rx/cover-1.jpg", pill: true },
-  { tag: "Creative Strategy", label: "Creative Strategy", img: "/rx/cover-2.jpg" },
 ];
 
 /** Stories section: "Behind every experience, there's a story." + filterable six-card grid. */

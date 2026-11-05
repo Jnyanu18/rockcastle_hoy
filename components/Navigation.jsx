@@ -260,7 +260,7 @@ export default function Navigation() {
 
       const targetId = sectionMap[href] || (href.includes('#') ? href.split('#')[1] : null)
       if (targetId) {
-        const el = document.getElementById(targetId)
+        const el = document.getElementById(targetId) || (targetId === 'contact' ? document.getElementById('footer') : null)
         if (el) {
           e.preventDefault()
           if (window.__lenis) {

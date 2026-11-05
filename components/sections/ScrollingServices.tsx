@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -21,35 +21,184 @@ type DeckItem = {
   images?: string[];
 };
 
-// Reuses the same three services shown in the Services section, split into
-// the two balanced headline lines this deck expects.
+const isVideoSrc = (src: string) => /\.(mp4|webm|ogg)$/i.test(src);
+
+// Behind every experience section with scrollable images & videos
 const DEFAULT_ITEMS: DeckItem[] = [
   {
     art: true,
     line1: "Behind every experience,",
     line2: "there’s a story.",
     desc: "From the first spark of an idea to the final moment, explore the thinking, creativity and craftsmanship behind some of our most memorable brand experiences.",
-    images: ["/rx/service-07-1.jpg", "/rx/service-06-1.jpg", "/rx/service-07-3.jpg", "/rx/service-07-2.jpg"],
-  },
-  {
-    index: "05",
-    line1: "STORIES WE’VE",
-    line2: "BROUGHT TO LIFE",
-    desc: "From landmark corporate summits and public festivals to immersive brand pavilions — we engineer spaces that captivate thousands and create permanent brand recall.",
-    buttonText: "Explore Stories",
-    link: "#recent-experiences",
-    images: ["/rx/cover-1.jpg", "/rx/cover-2.jpg", "/rx/cover-3.jpg", "/rx/cover-4.jpg"],
-  },
-  {
-    index: "06",
-    line1: "Awards & Recognition —",
-    line2: "WORK THAT GETS NOTICED",
-    desc: "Industry-celebrated IPs, EEMA-recognized experiential executions, and landmark corporate spectacles trusted by top global brands and institutions across India.",
-    buttonText: "Work That Gets Noticed",
-    link: "#contact",
-    images: ["/rx/service-07-1.jpg", "/rx/service-07-2.jpg", "/rx/service-07-3.jpg", "/rx/service-07-4.jpg"],
+    images: [
+      "/rx/service-07-1.jpg",
+      "/rx/service-06-1.jpg",
+      "/rx/service-07-3.jpg",
+      "/rx/service-07-2.jpg",
+      "/rx/video1.mp4",
+      "/rx/cover-1.jpg",
+      "/rx/cover-2.jpg",
+      "/rx/service-07-4.jpg",
+      "/rx/cover-3.jpg",
+      "/rockcastle.mp4",
+      "/rx/cover-4.jpg",
+    ],
   },
 ];
+
+function MediaRail({ media, title }: { media: string[]; title: string }) {
+  const railRef = useRef<HTMLDivElement>(null);
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollStartRef = useRef(0);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(true);
+  const [progress, setProgress] = useState(0);
+
+  const updateScrollState = useCallback(() => {
+    const el = railRef.current;
+    if (!el) return;
+    const maxScroll = Math.max(0, el.scrollWidth - el.clientWidth);
+    setCanPrev(el.scrollLeft > 6);
+    setCanNext(el.scrollLeft < maxScroll - 6);
+    setProgress(maxScroll > 0 ? Math.min(1, Math.max(0, el.scrollLeft / maxScroll)) : 0);
+  }, []);
+
+  useEffect(() => {
+    updateScrollState();
+    window.addEventListener("resize", updateScrollState);
+    return () => window.removeEventListener("resize", updateScrollState);
+  }, [updateScrollState]);
+
+  const slideBy = (dir: -1 | 1) => {
+    const el = railRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>(".imageWrapper");
+    const gap = parseFloat(getComputedStyle(el).columnGap || getComputedStyle(el).gap || "24");
+    const step = card ? (card.getBoundingClientRect().width + gap) * 2 : el.clientWidth * 0.65;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    const el = railRef.current;
+    if (!el) return;
+    isDraggingRef.current = true;
+    startXRef.current = e.clientX;
+    scrollStartRef.current = el.scrollLeft;
+    el.classList.add("is-dragging");
+  };
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current || !railRef.current) return;
+    const dx = e.clientX - startXRef.current;
+    railRef.current.scrollLeft = scrollStartRef.current - dx;
+  };
+
+  const stopDragging = () => {
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
+    railRef.current?.classList.remove("is-dragging");
+  };
+
+  const dotCount = Math.max(2, media.length - 3);
+  const activeFloat = progress * (dotCount - 1);
+
+  const scrollToDot = (idx: number) => {
+    const el = railRef.current;
+    if (!el) return;
+    const maxScroll = Math.max(0, el.scrollWidth - el.clientWidth);
+    const target = dotCount > 1 ? (idx / (dotCount - 1)) * maxScroll : 0;
+    el.scrollTo({ left: target, behavior: "smooth" });
+  };
+
+  return (
+    <div className="ss-media-slider">
+      <div
+        className="images images--scrollable"
+        ref={railRef}
+        onScroll={updateScrollState}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={stopDragging}
+        onPointerCancel={stopDragging}
+        onPointerLeave={stopDragging}
+      >
+        {media.map((src, j) => {
+          const isVideo = isVideoSrc(src);
+          return (
+            <div className="imageWrapper" key={`${src}-${j}`} data-cursor="view">
+              {isVideo ? (
+                <video
+                  src={src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  draggable={false}
+                />
+              ) : (
+                <img
+                  src={src}
+                  alt={`${title} — visual ${j + 1}`}
+                  loading="lazy"
+                  draggable={false}
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {media.length > 4 && (
+        <div className="ss-slider-controls" aria-label="Slide gallery controls">
+          <button
+            type="button"
+            className="ss-slider-btn"
+            onClick={() => slideBy(-1)}
+            disabled={!canPrev}
+            aria-label="Slide left"
+          >
+            ←
+          </button>
+          <div className="ss-slider-dots" role="tablist" aria-label="Gallery scroll position">
+            {Array.from({ length: dotCount }).map((_, idx) => {
+              const dist = Math.abs(activeFloat - idx);
+              const weight = Math.max(0, 1 - dist);
+              const isCurrent = dist < 0.5;
+              return (
+                <button
+                  key={idx}
+                  type="button"
+                  role="tab"
+                  aria-selected={isCurrent}
+                  aria-label={`Go to slide position ${idx + 1}`}
+                  className={`ss-slider-dot${isCurrent ? " is-active" : ""}`}
+                  onClick={() => scrollToDot(idx)}
+                  style={
+                    {
+                      "--dot-weight": weight.toFixed(3),
+                    } as React.CSSProperties
+                  }
+                />
+              );
+            })}
+          </div>
+          <button
+            type="button"
+            className="ss-slider-btn"
+            onClick={() => slideBy(1)}
+            disabled={!canNext}
+            aria-label="Slide right to see more"
+          >
+            →
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
 
 type Props = {
   items?: DeckItem[];
@@ -78,7 +227,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
     if (prefersReduced) return;
 
     const itemEls = Array.from(section.querySelectorAll<HTMLElement>(".scrollItem"));
-    if (!itemEls.length) return;
+    if (itemEls.length <= 1) return;
 
     // Read natural content heights and collapsed line 1 heights
     const readDimensions = () => {
@@ -259,8 +408,15 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
     };
   }, [data.length]);
 
+  const isSingle = data.length <= 1;
+
   return (
-    <section className="servicesBlock bg-[#fff1e7]" id={id} ref={sectionRef} style={{ backgroundColor: "#fff1e7" }}>
+    <section
+      className={`servicesBlock bg-[#fff1e7] ${isSingle ? "servicesBlock--single" : ""}`}
+      id={id}
+      ref={sectionRef}
+      style={{ backgroundColor: "#fff1e7" }}
+    >
       <div className="howWeRollItemsBlock">
         <div className="scrollContainer" ref={scrollContainerRef}>
           <div className="stickyWrapper">
@@ -343,13 +499,7 @@ export default function ScrollingServices({ items, id = "capabilities" }: Props)
                         </div>
 
                         {item.images && item.images.length > 0 && (
-                          <div className="images">
-                            {item.images.map((src, j) => (
-                              <div className="imageWrapper" key={j} data-cursor="view">
-                                <img src={src} alt={`${line1} — visual ${j + 1}`} loading="lazy" />
-                              </div>
-                            ))}
-                          </div>
+                          <MediaRail media={item.images} title={line1} />
                         )}
                       </div>
                     </div>

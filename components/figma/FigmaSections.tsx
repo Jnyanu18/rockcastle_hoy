@@ -1,7 +1,6 @@
 import Section from "./Section";
 import StageLineAnimation from "./StageLineAnimation";
 import DotPattern from "@/components/ui/DotPattern";
-export { default as StoriesSection } from "./StoriesSection";
 import "./figma.css";
 
 export function WhoWeAre() {
@@ -27,24 +26,5 @@ export function WhoWeAre() {
       </div>
       <StageLineAnimation />
     </Section>
-  );
-}
-
-export function StoriesAndInsta() {
-  return (
-    <>
-      <Section id="insta-feed" className="rcf-stories">
-        <span className="rcf-insta__dots" aria-hidden><i /><i /><i /><i /></span>
-        <h2 className="rcf-insta__title">
-          insta feed
-          <img className="rcf-insta__art" src="/insta/camera.png" alt="" aria-hidden="true" />
-        </h2>
-        <div className="rcf-reels">
-          <div className="rcf-reels__stage">
-            <img src="/insta/reels.png" alt="Insta feed reels: MG Motor, Diablo, Dave & Buster's, Optimist, Daawat Rice" decoding="async" />
-          </div>
-        </div>
-      </Section>
-    </>
   );
 }

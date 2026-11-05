@@ -160,23 +160,9 @@ export const process = {
 export const services = [
   {
     index: "05",
-    title: "Stories We’ve Brought to Life",
-    body:
-      "From visionary corporate mega-summits to high-octane public festivals and immersive brand pavilions — we engineer spaces that captivate thousands and create permanent brand recall.",
-    images: ["", "", "", ""],
-  },
-  {
-    index: "06",
     title: "Experiences Un-Ltd — Spatial & Production",
     body:
       "360-degree event architecture, cutting-edge stage engineering, immersive AV technology, and turnkey fabrication built to transform any venue into an extraordinary world.",
-    images: ["", "", "", ""],
-  },
-  {
-    index: "07",
-    title: "Awards & Recognition — Work That Gets Noticed",
-    body:
-      "Industry-celebrated IPs, EEMA-recognized experiential executions, and landmark corporate spectacles trusted by top global brands and institutions across India.",
     images: ["", "", "", ""],
   },
 ];
