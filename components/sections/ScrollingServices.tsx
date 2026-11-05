@@ -35,7 +35,7 @@ const DEFAULT_ITEMS: DeckItem[] = [
       "/rx/service-06-1.jpg",
       "/rx/service-07-3.jpg",
       "/rx/service-07-2.jpg",
-      "/rx/video1.mp4",
+      "/video1.mp4",
       "/rx/cover-1.jpg",
       "/rx/cover-2.jpg",
       "/rx/service-07-4.jpg",
