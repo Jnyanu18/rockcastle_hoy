@@ -1,472 +1,301 @@
 /* ==========================================================================
-   Leadership — pinned, scroll-driven chapters (light).
-   Section is 300vh tall; an inner sticky stage walks through the 3 leaders.
+   Leadership / Team Section — Smooth Pill-to-Square Hover Effect
+   Matches the reference Figma/Dribbble interaction while keeping Rock Castle's
+   theme (#fff1e7, #ee7d2e, #151515) and universal sans-serif (--font-body).
    ========================================================================== */
 
 .leadership {
-  --p: 0;
+  --rc-orange: #ee7d2e;
+  --rc-peach: #fff1e7;
+  --rc-ink: #151515;
   position: relative;
   z-index: 5;
-  background-color: #dcdcdc;
-  color: #151515;
+  background-color: var(--rc-peach);
+  color: var(--rc-ink);
   width: 100%;
-  /* clip (not hidden) so the sticky stage keeps working */
-  overflow: clip;
-  border-top: 1px solid rgba(21, 21, 21, 0.12);
-  box-sizing: border-box;
-  height: calc(300vh / var(--page-zoom, 1));
-}
-
-.leadership__mobile {
-  display: none;
-}
-
-.leadership__sticky {
-  position: sticky;
-  top: 0;
-  height: calc(100vh / var(--page-zoom, 1));
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  padding: clamp(84px, 11vh, 108px) var(--container-x) clamp(20px, 3.5vh, 36px);
+  justify-content: center;
+  overflow: hidden;
+  padding: clamp(36px, 5vh, 64px) var(--container-x, 32px);
   box-sizing: border-box;
-  max-width: 1320px;
-  margin: 0 auto;
+  font-family: var(--font-body);
+  border-bottom: 1px solid rgba(21, 21, 21, 0.1);
 }
 
-/* ---- Top row + progress ---- */
-.leadership__top {
+.leadership__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1480px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---- Top Meta Bar ---- */
+.leadership__meta {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
+  margin-bottom: clamp(12px, 2vh, 22px);
+}
+
+.leadership__eyebrow {
+  font-family: var(--font-body);
+  font-size: clamp(11px, 0.78vw, 13px);
+  font-weight: 500;
   text-transform: uppercase;
-  padding-bottom: 12px;
+  letter-spacing: 0.04em;
+  color: var(--rc-ink);
 }
 
-.leadership__label {
-  font-weight: 700;
+.leadership__eyebrow i {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-left: 4px;
+  vertical-align: super;
+  background: var(--rc-orange);
+  border-radius: 1px;
 }
 
-.leadership__counter {
-  color: rgba(21, 21, 21, 0.7);
-}
-
-.leadership__counter i {
-  font-style: normal;
-  color: #f08228;
-  margin: 0 4px;
-}
-
-.leadership__progress {
-  height: 1px;
-  background: rgba(21, 21, 21, 0.16);
-  position: relative;
-}
-
-.leadership__progress span {
-  position: absolute;
-  left: 0;
-  top: -1px;
-  height: 3px;
-  width: 100%;
-  background: #f08228;
-  transform-origin: left center;
-  transform: scaleX(var(--p));
-}
-
-/* ---- Stage grid ---- */
-.leadership__stage {
-  position: relative;
-  flex: 1;
-  min-height: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 1fr);
-  column-gap: clamp(20px, 3vw, 56px);
-  padding-top: clamp(18px, 3vh, 34px);
-}
-
-.leadership__col {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-}
-
-.leadership__col--left,
-.leadership__col--right {
-  justify-content: space-between;
-}
-
-/* giant outlined numeral behind the portrait */
-.leadership__bgnums {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  display: grid;
-  place-items: center;
-  pointer-events: none;
-}
-
-.leadership__bgnums span {
-  grid-area: 1 / 1;
-  font-family: var(--font-display);
-  font-size: clamp(14rem, 36vw, 32rem);
+.leadership__index {
+  font-family: var(--font-body);
+  font-size: clamp(11px, 0.78vw, 13px);
   font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.06em;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(21, 21, 21, 0.1);
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  font-variant-numeric: tabular-nums;
+  color: var(--rc-ink);
 }
 
-.leadership__bgnums span.is-active {
-  opacity: 1;
-  transform: none;
+/* ---- Centered Header ---- */
+.leadership__header {
+  text-align: center;
+  max-width: 680px;
+  margin-bottom: clamp(32px, 4.5vh, 52px);
 }
 
-/* ---- Left: heading + names ---- */
 .leadership__title {
-  font-family: var(--font-display);
-  font-size: clamp(1.9rem, 3.1vw, 3rem);
-  font-weight: 500;
-  line-height: 1.04;
-  letter-spacing: -0.03em;
+  font-family: var(--font-body);
+  font-size: clamp(1.85rem, 3.2vw, 2.9rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--rc-ink);
+  margin: 0 0 12px 0;
+}
+
+.leadership__title-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 5px;
+  vertical-align: super;
+  background: var(--rc-orange);
+  border-radius: 1px;
+}
+
+.leadership__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.02vw, 1.04rem);
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(21, 21, 21, 0.66);
   margin: 0;
-  max-width: 11ch;
 }
 
-.leadership__names {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* ---- Smooth Expanding Pill-to-Rounded-Square Gallery ---- */
+.leadership__gallery {
   display: flex;
-  flex-direction: column;
-  gap: clamp(8px, 1.4vh, 16px);
-}
-
-.leadership__name-btn {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  width: 100%;
-  background: none;
-  border: 0;
-  padding: 0;
-  text-align: left;
-  cursor: pointer;
-  font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2.3vw, 2.2rem);
-  font-weight: 500;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
-  color: rgba(21, 21, 21, 0.26);
-  transition: color 0.5s ease, padding-left 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.leadership__name-btn:hover {
-  color: rgba(21, 21, 21, 0.6);
-}
-
-.leadership__name-btn.is-active {
-  color: #151515;
-}
-
-.leadership__marker {
-  flex-shrink: 0;
-  width: 0;
-  height: 10px;
-  background: #f08228;
-  transform: translateY(-0.12em) rotate(45deg);
-  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.leadership__name-btn.is-active .leadership__marker {
-  width: 10px;
-}
-
-/* ---- Centre: arch portrait ---- */
-.leadership__col--centre {
   align-items: center;
   justify-content: center;
+  gap: clamp(18px, 2.2vw, 30px);
+  width: 100%;
+  height: clamp(390px, 55vh, 480px);
 }
 
-.leadership__arch {
-  --arch-h: min(62vh, 540px);
+.leadership__pill-card {
   position: relative;
-  height: var(--arch-h);
-  width: calc(var(--arch-h) * 0.76);
-  max-width: 100%;
-}
-
-/* orange outline arch, offset behind the photo */
-.leadership__arch::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 1.5px solid #f08228;
-  border-radius: 999px 999px 6px 6px;
-  transform: translate(16px, 16px);
-}
-
-.leadership__arch-item {
-  position: absolute;
-  inset: 0;
+  height: 100%;
+  /* Collapsed vertical capsule / pill width */
+  width: clamp(144px, 13vw, 186px);
+  border-radius: 999px;
   overflow: hidden;
-  border-radius: 999px 999px 6px 6px;
-  background: #d9d6d1;
-  z-index: 1;
-  clip-path: inset(100% 0 0 0);
-  opacity: 0;
-  transition: opacity 0.5s ease 0.6s, clip-path 0s linear 1.2s;
+  background: var(--card-bg, #e5dcd3);
+  cursor: pointer;
+  flex-shrink: 0;
+  outline: none;
+  box-shadow: 0 12px 30px -14px rgba(21, 21, 21, 0.14);
+  transition:
+    width 0.68s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.68s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.leadership__arch-item.is-active {
-  z-index: 2;
-  clip-path: inset(0 0 0 0);
-  opacity: 1;
-  transition: clip-path 0.95s cubic-bezier(0.77, 0, 0.175, 1), opacity 0s;
+/* Expanded rounded-square state on hover / active */
+.leadership__pill-card.is-active {
+  width: clamp(360px, 35vw, 450px);
+  border-radius: 56px;
+  box-shadow:
+    0 24px 52px -16px rgba(21, 21, 21, 0.22),
+    0 0 0 2px rgba(238, 125, 46, 0.35);
 }
 
-.leadership__photo {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center 18%;
-  filter: grayscale(1) contrast(1.06);
-  transform: scale(1.2);
-  transition: transform 0s linear 1.2s;
-}
-
-.leadership__arch-item.is-active .leadership__photo {
-  transform: scale(1);
-  transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.leadership__photo.is-static {
-  transform: none;
-}
-
-/* orbiting circular badge */
-.leadership__badge {
-  position: absolute;
-  z-index: 3;
-  width: clamp(104px, 9.5vw, 138px);
-  aspect-ratio: 1;
-  top: 8%;
-  right: -12%;
-  animation: leadership-spin 22s linear infinite;
-}
-
-.leadership__badge svg {
+.leadership__pill-img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+  transform: scale(1.03);
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.55s ease;
 }
 
-.leadership__badge svg.is-active {
-  opacity: 1;
+.leadership__pill-card:not(.is-active) .leadership__pill-img {
+  filter: saturate(0.88) contrast(1.02);
 }
 
-.leadership__badge-bg {
-  fill: #dcdcdc;
-  stroke: rgba(21, 21, 21, 0.2);
-  stroke-width: 1;
+.leadership__pill-card.is-active .leadership__pill-img {
+  transform: scale(1);
+  filter: saturate(1.04) contrast(1.02);
 }
 
-.leadership__badge-text {
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  font-weight: 600;
-  fill: #151515;
-}
-
-.leadership__badge-dot {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 14px;
-  height: 14px;
-  margin: -7px 0 0 -7px;
-  background: #f08228;
-  transform: rotate(45deg);
-}
-
-@keyframes leadership-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ---- Right: intro + details ---- */
-.leadership__subtitle {
-  font-family: var(--font-body);
-  font-size: clamp(0.95rem, 1.05vw, 1.08rem);
-  line-height: 1.65;
-  color: rgba(21, 21, 21, 0.68);
-  margin: 0;
-  max-width: 36ch;
-}
-
-.leadership__details {
-  position: relative;
-  height: clamp(250px, 40vh, 340px);
-}
-
-.leadership__detail {
+/* Bottom gradient overlay for crisp white text on the expanded card */
+.leadership__pill-shade {
   position: absolute;
   inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15, 15, 15, 0.72) 0%,
+    rgba(15, 15, 15, 0.22) 34%,
+    rgba(15, 15, 15, 0) 60%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+
+.leadership__pill-card.is-active .leadership__pill-shade {
+  opacity: 1;
+}
+
+/* Bottom Centered Name + Role Caption (Matches Reference Image) */
+.leadership__pill-caption {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 28px;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 14px;
+  align-items: center;
+  text-align: center;
+  gap: 3px;
   opacity: 0;
-  transform: translateY(26px);
+  transform: translateY(14px);
+  transition:
+    opacity 0.38s ease,
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  white-space: nowrap;
 }
 
-.leadership__detail.is-active {
+.leadership__pill-card.is-active .leadership__pill-caption {
   opacity: 1;
-  transform: none;
-  pointer-events: auto;
-  transition: opacity 0.7s ease 0.4s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s;
+  transform: translateY(0);
+  transition-delay: 0.1s;
 }
 
-.leadership__pill {
-  align-self: flex-start;
-  padding: 7px 14px;
-  border: 1px solid rgba(21, 21, 21, 0.28);
-  border-radius: 999px;
+.leadership__pill-name {
   font-family: var(--font-body);
-  font-size: 12.5px;
-  font-weight: 500;
-  line-height: 1;
-}
-
-.leadership__role {
-  font-family: var(--font-display);
-  font-size: clamp(1.2rem, 1.7vw, 1.6rem);
-  font-weight: 500;
-  line-height: 1.15;
+  font-size: clamp(1.25rem, 1.65vw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.18;
   letter-spacing: -0.02em;
+  color: #ffffff;
   margin: 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
 }
 
-.leadership__quote {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-size: clamp(1rem, 1.15vw, 1.15rem);
-  line-height: 1.55;
-  color: rgba(21, 21, 21, 0.82);
-  margin: 0;
-  max-width: 36ch;
-}
-
-.leadership__years {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(21, 21, 21, 0.16);
-}
-
-.leadership__years b {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.2vw, 3rem);
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  color: #f08228;
-}
-
-.leadership__years span {
+.leadership__pill-role {
   font-family: var(--font-body);
-  font-size: 0.92rem;
-  color: rgba(21, 21, 21, 0.62);
+  font-size: clamp(0.84rem, 0.96vw, 0.96rem);
+  font-weight: 400;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
 }
 
 /* ==========================================================================
-   Mobile / tablet: no pin, simple stack
+   Responsive Adaptations
    ========================================================================== */
 
 @media (max-width: 900px) {
-  .leadership {
-    height: auto;
-    padding: 64px var(--container-x) 72px;
-  }
-
-  .leadership__sticky {
-    display: none;
-  }
-
-  .leadership__mobile {
-    display: block;
-  }
-
-  .leadership__mobile .leadership__top {
-    border-bottom: 1px solid rgba(21, 21, 21, 0.16);
-  }
-
-  .leadership__title--m {
-    max-width: 14ch;
-    font-size: clamp(2.1rem, 8vw, 3rem);
-    margin: 32px 0 18px;
-  }
-
-  .leadership__subtitle--m {
-    margin-bottom: 48px;
-  }
-
-  .leadership__mcard {
-    display: flex;
-    flex-direction: column;
+  .leadership__gallery {
+    height: 360px;
     gap: 12px;
-    margin-bottom: 56px;
   }
 
-  .leadership__march {
-    position: relative;
-    width: min(78%, 320px);
-    aspect-ratio: 0.8;
-    overflow: hidden;
-    border-radius: 999px 999px 6px 6px;
-    background: #d9d6d1;
-    margin: 0 0 14px 0;
-    box-shadow: 14px 14px 0 -1px #dcdcdc, 14px 14px 0 0 #f08228;
+  .leadership__pill-card {
+    width: 105px;
   }
 
-  .leadership__mname {
-    font-family: var(--font-display);
-    font-size: 1.7rem;
-    font-weight: 500;
-    letter-spacing: -0.025em;
-    margin: 6px 0 0;
+  .leadership__pill-card.is-active {
+    width: clamp(260px, 52vw, 340px);
+    border-radius: 42px;
+  }
+}
+
+@media (max-width: 640px) {
+  .leadership {
+    min-height: auto;
+    padding: 48px 16px 56px;
   }
 
-  .leadership__mrole {
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    color: rgba(21, 21, 21, 0.62);
+  .leadership__gallery {
+    height: 310px;
+    gap: 8px;
+  }
+
+  .leadership__pill-card {
+    width: 68px;
+  }
+
+  .leadership__pill-card.is-active {
+    width: calc(100vw - 32px - 136px - 16px);
+    max-width: 270px;
+    border-radius: 32px;
+  }
+
+  .leadership__pill-caption {
+    left: 12px;
+    right: 12px;
+    bottom: 16px;
+    white-space: normal;
+  }
+
+  .leadership__pill-name {
+    font-size: 1.05rem;
+  }
+
+  .leadership__pill-role {
+    font-size: 0.75rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .leadership__badge {
-    animation: none;
-  }
-
-  .leadership__arch-item,
-  .leadership__photo,
-  .leadership__detail,
-  .leadership__bgnums span {
+  .leadership__pill-card,
+  .leadership__pill-img,
+  .leadership__pill-caption {
     transition: none !important;
   }
 }

@@ -470,6 +470,12 @@
   .servicesBlock .itemText {
     max-width: 440px;
   }
+
+  .servicesBlock .ss__art {
+    width: clamp(150px, 19vw, 210px);
+    top: -16px;
+    right: 0;
+  }
 }
 
 @media (max-width: 767px) {
@@ -487,6 +493,14 @@
     height: calc(100vh - clamp(74px, 10vh, 90px) - 12px);
     max-width: 100%;
     padding: 0 16px;
+  }
+
+  .servicesBlock .ss__art {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: clamp(130px, 40vw, 175px);
+    margin: 0 auto 8px auto;
   }
 
   .servicesBlock .normalTitle .titleText {

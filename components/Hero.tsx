@@ -94,17 +94,17 @@ export default function Hero() {
 
         {/* Mobile Welcome & Headline Copy */}
         <div className="mt-2 flex flex-col items-center text-center px-3 max-w-[340px]">
-          <p className="text-[15px] font-medium text-[#ffffff] tracking-tight mb-1">
+          <p className="text-[20px] font-bold text-[#ffffff] tracking-[-0.02em] mb-1.5">
             <SlideUpText split="words" delay={0.2} stagger={0.02}>
               {hero.welcome || "Welcome!"}
             </SlideUpText>
           </p>
-          <p className="text-[12px] leading-[1.42] font-normal text-[#ffffff]/90">
+          <p className="text-[12px] leading-[1.45] font-normal text-[#ffffff]/85">
             <SlideUpText split="words" delay={0.3} stagger={0.01}>
               {hero.headline}
             </SlideUpText>
           </p>
-          <p className="mt-2 text-[12.5px] font-medium text-[#ffffff]">
+          <p className="mt-2.5 text-[13.5px] font-semibold text-[#ffffff]">
             <SlideUpText split="words" delay={0.42} stagger={0.015}>
               {hero.subline || "Big ideas. Brought to life."}
             </SlideUpText>
@@ -148,12 +148,12 @@ export default function Hero() {
 
       {/* Left Text Section: "Welcome!", main paragraph, and "Big ideas. Brought to life." */}
       <div className="hidden md:block absolute top-1/2 -translate-y-1/2 left-[clamp(60px,9vw,175px)] w-max z-20 pointer-events-none text-left">
-        <p className="text-[clamp(16px,1.4vw,27px)] leading-[1.18] font-medium text-[#ffffff] tracking-normal mb-1">
+        <p className="text-[clamp(24px,2.2vw,40px)] leading-[1.08] font-bold text-[#ffffff] tracking-[-0.025em] mb-3">
           <SlideUpText split="words" delay={0.2} stagger={0.02}>
             {hero.welcome || "Welcome!"}
           </SlideUpText>
         </p>
-        <div className="text-[clamp(16px,1.4vw,27px)] leading-[1.18] font-medium tracking-[-0.01em] text-[#ffffff]">
+        <div className="text-[clamp(13px,1.05vw,18px)] leading-[1.42] font-normal tracking-[-0.005em] text-[#ffffff]/90">
           {(hero.headlineLines || [hero.headline]).map((line, idx) => (
             <span key={idx} className="block whitespace-nowrap">
               <SlideUpText split="words" delay={0.3 + idx * 0.03} stagger={0.01}>
@@ -162,7 +162,7 @@ export default function Hero() {
             </span>
           ))}
         </div>
-        <p className="mt-3.5 md:mt-4 text-[clamp(15px,1.2vw,23px)] font-medium text-[#ffffff]">
+        <p className="mt-4 md:mt-5 text-[clamp(16px,1.35vw,24px)] font-semibold tracking-[-0.015em] text-[#ffffff]">
           <SlideUpText split="words" delay={0.52} stagger={0.015}>
             {hero.subline || "Big ideas. Brought to life."}
           </SlideUpText>

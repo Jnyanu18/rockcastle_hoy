@@ -13,28 +13,6 @@ export default function Footer({ reveal = true }) {
   const footerRef = useRef(null)
   const pathname = usePathname() || '/'
 
-  const navLinks = [
-    { label: 'Who We Are', href: '/#about', targetId: 'about' },
-    { label: 'Work', href: '/#recent-experiences', targetId: 'recent-experiences' },
-    { label: 'Services', href: '/#services', targetId: 'services' },
-    { label: 'Leadership', href: '/#leadership', targetId: 'leadership' },
-    { label: 'Connect', href: '/contact', targetId: 'contact' },
-  ]
-
-  const handleNavClick = (e, item) => {
-    if (item.targetId && pathname === '/') {
-      const el = document.getElementById(item.targetId)
-      if (el) {
-        e.preventDefault()
-        if (window.__lenis) {
-          window.__lenis.scrollTo(el, { duration: 1.2, offset: -20 })
-        } else {
-          el.scrollIntoView({ behavior: 'smooth' })
-        }
-      }
-    }
-  }
-
   useEffect(() => {
     if (!reveal) return
 
@@ -133,19 +111,8 @@ export default function Footer({ reveal = true }) {
     <footer ref={footerRef} className="footer" id="footer" aria-label="Site Footer">
       <div className="footer__inner">
         <div className="footer__grid">
-          {/* Brand */}
-          <div className="footer__col footer__col--brand">
-            <Link href="/" className="footer__logo-link" aria-label="Rock Castle Home">
-              <img
-                src="/rockcastle-logo-black.png"
-                alt="Rock Castle"
-                className="footer__logo-img"
-              />
-            </Link>
-          </div>
-
-          {/* Office */}
-          <div className="footer__col">
+          {/* Left: Office */}
+          <div className="footer__col footer__col--office">
             <h4 className="footer__col-heading">Office</h4>
             <div className="footer__col-content">
               <p>1st Floor, Plus Offices</p>
@@ -154,53 +121,24 @@ export default function Footer({ reveal = true }) {
             </div>
           </div>
 
-          {/* Contact */}
-          <div className="footer__col">
+          {/* Center: Orange Rock Castle Logo */}
+          <div className="footer__col footer__col--brand">
+            <Link href="/" className="footer__logo-link" aria-label="Rock Castle Home">
+              <img
+                src="/rockcastle-logo.jpg"
+                alt="Rock Castle"
+                className="footer__logo-img"
+              />
+            </Link>
+          </div>
+
+          {/* Right: Contact */}
+          <div className="footer__col footer__col--contact">
             <h4 className="footer__col-heading">Contact</h4>
             <div className="footer__col-content">
               <a href="mailto:info@rockcastle.in" className="footer__link">info@rockcastle.in</a>
               <a href="tel:+919717733823" className="footer__link">+91 97177 33823</a>
               <a href="tel:+919810222642" className="footer__link">+91 98102 22642</a>
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <div className="footer__col">
-            <h4 className="footer__col-heading">Explore</h4>
-            <nav className="footer__col-content" aria-label="Footer Navigation">
-              {navLinks.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="footer__link"
-                  onClick={(e) => handleNavClick(e, item)}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
-          </div>
-
-          {/* Social */}
-          <div className="footer__col footer__col--social">
-            <h4 className="footer__col-heading">Social</h4>
-            <div className="footer__col-content">
-              <a
-                href="https://www.instagram.com/rockcastle.experiences"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer__link"
-              >
-                Instagram ↗
-              </a>
-              <a
-                href="https://www.linkedin.com/company/rock-castle-entertainment-pvt-ltd"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer__link"
-              >
-                LinkedIn ↗
-              </a>
             </div>
           </div>
         </div>
