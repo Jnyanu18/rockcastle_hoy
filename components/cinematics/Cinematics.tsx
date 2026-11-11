@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { brand } from "@/lib/content";
+import { ROCKCASTLE_LOGO_PATH } from "./rockcastleLogoPath";
 import "./cinematics.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -22,7 +23,7 @@ gsap.registerPlugin(ScrollTrigger);
 /*  Everything is skipped under prefers-reduced-motion (the grain stays still).*/
 /* -------------------------------------------------------------------------- */
 
-const SESSION_KEY = "rc-cine-intro-v6";
+const SESSION_KEY = "rc-cine-intro-v7";
 const EXPO_IN_OUT = "expo.inOut";
 const EXPO_OUT = "expo.out";
 
@@ -77,7 +78,7 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
     const strokes = el.querySelectorAll<SVGPathElement>("[data-write-stroke]");
     strokes.forEach((p) => {
       const len = p.getTotalLength();
-      const cap = 130;
+      const cap = 150;
       p.style.strokeDasharray = `${len + cap} ${len + cap * 4}`;
       p.style.strokeDashoffset = `${len + cap * 2}`;
     });
@@ -101,38 +102,37 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
         { opacity: 1, duration: 0.25, ease: "power2.out" },
         0.02
       )
-      // 1. Immediately write out "ROCK" handwritten brush script stroke-by-stroke
+      // 1. Immediately write out "ROCK" handwritten brush script in a continuous, fluid flow
       .to(
         q("[data-rock-stroke]"),
         {
           strokeDashoffset: 0,
-          duration: 0.34,
-          ease: "power2.inOut",
-          stagger: 0.15,
+          duration: 0.28,
+          ease: "sine.inOut",
+          stagger: 0.11,
         },
         0.02
       )
-      // 2. Reveal "CASTLE" bold block letters sequentially
-      .fromTo(
-        q("[data-castle-letter]"),
-        { attr: { y: 466, height: 0 } },
+      // 2. Smoothly sweep in "CASTLE" vector letters sequentially via brush strokes
+      .to(
+        q("[data-castle-stroke]"),
         {
-          attr: { y: 278, height: 188 },
-          duration: 0.36,
-          ease: EXPO_OUT,
+          strokeDashoffset: 0,
+          duration: 0.34,
+          ease: "power2.out",
           stagger: 0.055,
         },
-        0.72
+        0.66
       )
       // 3. Swipe the signature brush underline and pop the exclamation dot
       .to(
         q("[data-underline-stroke]"),
         {
           strokeDashoffset: 0,
-          duration: 0.4,
-          ease: "power3.out",
+          duration: 0.42,
+          ease: "power2.out",
         },
-        1.08
+        1.02
       )
       .to(
         q("[data-underline-dot]"),
@@ -141,13 +141,13 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
           duration: 0.18,
           ease: "back.out(2)",
         },
-        1.42
+        1.36
       )
       // 4. Write out "experiences un-ltd." tagline underneath after logo writes
       .to(
         q("[data-tagline]"),
         { clipPath: "inset(0 0% 0 0)", opacity: 1, duration: 0.5, ease: "power2.out" },
-        1.25
+        1.22
       )
       // Counter ticks up to 100% and orange loading bar fills across the logo writing sequence
       .fromTo(
@@ -202,133 +202,133 @@ function TitleSequence({ onDone }: { onDone: () => void }) {
           style={{ opacity: 0 }}
           viewBox="0 0 1144 615"
           xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="xMidYMid meet"
         >
           <defs>
-            {/* Convert black logo PNG pixels to crisp white while preserving alpha */}
-            <filter id="rc-intro-white" colorInterpolationFilters="sRGB">
-              <feColorMatrix
-                type="matrix"
-                values="0 0 0 0 1
-                        0 0 0 0 1
-                        0 0 0 0 1
-                        0 0 0 1 0"
-              />
+            {/* Soft brush feathering on mask strokes for liquid-smooth leading edges */}
+            <filter id="rc-soft-brush" x="-5%" y="-5%" width="110%" height="110%">
+              <feGaussianBlur stdDeviation="2.5" />
             </filter>
 
-            {/* Per-letter clip regions for ROCK script */}
+            {/* Clean per-letter clip regions for ROCK script (stops at y=283 so CASTLE never bleeds early) */}
             <clipPath id="rc-clip-r">
-              <rect x="0" y="0" width="398" height="305" />
+              <path d="M 0 0 H 402 V 302 H 355 V 283 H 0 Z" />
             </clipPath>
             <clipPath id="rc-clip-o">
-              <rect x="398" y="0" width="257" height="315" />
+              <rect x="402" y="0" width="254" height="283" />
             </clipPath>
             <clipPath id="rc-clip-c">
-              <rect x="655" y="0" width="153" height="335" />
+              <rect x="655" y="0" width="152" height="283" />
             </clipPath>
             <clipPath id="rc-clip-k">
-              <rect x="805" y="0" width="339" height="325" />
+              <rect x="805" y="0" width="339" height="283" />
+            </clipPath>
+            <clipPath id="rc-clip-castle">
+              <rect x="0" y="282" width="1144" height="186" />
             </clipPath>
             <clipPath id="rc-clip-under">
               <rect x="0" y="466" width="1144" height="149" />
             </clipPath>
 
-            {/* Master handwriting mask revealing ROCK, CASTLE, and underline */}
+            {/* Master handwriting mask revealing inline vector ROCK, CASTLE, and underline */}
             <mask id="rc-logo-write-mask" maskUnits="userSpaceOnUse">
               <rect x="0" y="0" width="1144" height="615" fill="black" />
 
-              {/* ROCK — R */}
-              <g clipPath="url(#rc-clip-r)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
-                <path
-                  data-write-stroke
-                  data-rock-stroke
-                  strokeDasharray="0 9999"
-                  d="M 148 52 L 128 292"
-                  strokeWidth="64"
-                />
-                <path
-                  data-write-stroke
-                  data-rock-stroke
-                  strokeDasharray="0 9999"
-                  d="M 28 76 C 110 18, 330 18, 372 72 C 392 128, 220 192, 52 204 C 135 225, 255 272, 392 298"
-                  strokeWidth="96"
-                />
-              </g>
+              <g filter="url(#rc-soft-brush)">
+                {/* ROCK — R */}
+                <g clipPath="url(#rc-clip-r)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
+                  <path
+                    data-write-stroke
+                    data-rock-stroke
+                    strokeDasharray="0 9999"
+                    d="M 148 48 L 128 292"
+                    strokeWidth="68"
+                  />
+                  <path
+                    data-write-stroke
+                    data-rock-stroke
+                    strokeDasharray="0 9999"
+                    d="M 28 76 C 110 18, 330 18, 372 72 C 392 128, 220 192, 52 204 C 135 225, 255 272, 392 298"
+                    strokeWidth="98"
+                  />
+                </g>
 
-              {/* ROCK — O */}
-              <g clipPath="url(#rc-clip-o)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
-                <path
-                  data-write-stroke
-                  data-rock-stroke
-                  strokeDasharray="0 9999"
-                  d="M 545 78 C 460 32, 412 115, 422 215 C 432 295, 515 315, 575 265 C 625 205, 615 52, 525 48 C 465 48, 455 185, 525 245 C 585 280, 635 215, 642 122"
-                  strokeWidth="105"
-                />
-              </g>
+                {/* ROCK — O */}
+                <g clipPath="url(#rc-clip-o)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
+                  <path
+                    data-write-stroke
+                    data-rock-stroke
+                    strokeDasharray="0 9999"
+                    d="M 545 78 C 460 32, 412 115, 422 215 C 432 295, 515 315, 575 265 C 625 205, 615 52, 525 48 C 465 48, 455 185, 525 245 C 585 280, 635 215, 642 122"
+                    strokeWidth="108"
+                  />
+                </g>
 
-              {/* ROCK — C */}
-              <g clipPath="url(#rc-clip-c)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
-                <path
-                  data-write-stroke
-                  data-rock-stroke
-                  strokeDasharray="0 9999"
-                  d="M 792 145 L 796 55 C 740 35, 675 95, 678 215 C 680 315, 765 330, 804 228"
-                  strokeWidth="98"
-                />
-              </g>
+                {/* ROCK — C */}
+                <g clipPath="url(#rc-clip-c)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
+                  <path
+                    data-write-stroke
+                    data-rock-stroke
+                    strokeDasharray="0 9999"
+                    d="M 792 145 L 796 55 C 740 35, 675 95, 678 215 C 680 315, 765 330, 804 228"
+                    strokeWidth="102"
+                  />
+                </g>
 
-              {/* ROCK — K */}
-              <g clipPath="url(#rc-clip-k)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
-                <path
-                  data-write-stroke
-                  data-rock-stroke
-                  strokeDasharray="0 9999"
-                  d="M 882 52 L 886 318"
-                  strokeWidth="64"
-                />
-                <path
-                  data-write-stroke
-                  data-rock-stroke
-                  strokeDasharray="0 9999"
-                  d="M 1068 48 L 822 238 L 995 298"
-                  strokeWidth="95"
-                />
-              </g>
+                {/* ROCK — K */}
+                <g clipPath="url(#rc-clip-k)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
+                  <path
+                    data-write-stroke
+                    data-rock-stroke
+                    strokeDasharray="0 9999"
+                    d="M 882 48 L 886 300"
+                    strokeWidth="68"
+                  />
+                  <path
+                    data-write-stroke
+                    data-rock-stroke
+                    strokeDasharray="0 9999"
+                    d="M 1068 48 L 822 238 L 995 298"
+                    strokeWidth="98"
+                  />
+                </g>
 
-              {/* CASTLE — 6 block letters (C, A, S, T, L, E) start with height=0 so they never flash before GSAP runs */}
-              <g fill="white">
-                <rect data-castle-letter x="35"  y="466" width="180" height="0" />
-                <rect data-castle-letter x="215" y="466" width="205" height="0" />
-                <rect data-castle-letter x="420" y="466" width="176" height="0" />
-                <rect data-castle-letter x="596" y="466" width="194" height="0" />
-                <rect data-castle-letter x="790" y="466" width="164" height="0" />
-                <rect data-castle-letter x="954" y="466" width="175" height="0" />
-              </g>
+                {/* CASTLE — 6 smooth vertical brush strokes (C, A, S, T, L, E) */}
+                <g clipPath="url(#rc-clip-castle)" fill="none" stroke="white" strokeLinecap="butt">
+                  <path data-write-stroke data-castle-stroke strokeDasharray="0 9999" d="M 122 472 L 122 276" strokeWidth="190" />
+                  <path data-write-stroke data-castle-stroke strokeDasharray="0 9999" d="M 318 472 L 318 276" strokeWidth="212" />
+                  <path data-write-stroke data-castle-stroke strokeDasharray="0 9999" d="M 508 472 L 508 276" strokeWidth="184" />
+                  <path data-write-stroke data-castle-stroke strokeDasharray="0 9999" d="M 695 472 L 695 276" strokeWidth="202" />
+                  <path data-write-stroke data-castle-stroke strokeDasharray="0 9999" d="M 872 472 L 872 276" strokeWidth="172" />
+                  <path data-write-stroke data-castle-stroke strokeDasharray="0 9999" d="M 1042 472 L 1042 276" strokeWidth="184" />
+                </g>
 
-              {/* Brush Underline + Dot */}
-              <g clipPath="url(#rc-clip-under)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
-                <path
-                  data-write-stroke
-                  data-underline-stroke
-                  strokeDasharray="0 9999"
-                  d="M 162 588 Q 520 518 905 498"
-                  strokeWidth="84"
-                />
-                <path
-                  data-write-stroke
-                  data-underline-dot
-                  strokeDasharray="0 9999"
-                  d="M 960 515 L 1005 478"
-                  strokeWidth="84"
-                />
+                {/* Brush Underline + Dot */}
+                <g clipPath="url(#rc-clip-under)" fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round">
+                  <path
+                    data-write-stroke
+                    data-underline-stroke
+                    strokeDasharray="0 9999"
+                    d="M 162 588 Q 520 518 905 498"
+                    strokeWidth="88"
+                  />
+                  <path
+                    data-write-stroke
+                    data-underline-dot
+                    strokeDasharray="0 9999"
+                    d="M 960 515 L 1005 478"
+                    strokeWidth="88"
+                  />
+                </g>
               </g>
             </mask>
           </defs>
 
-          <image
-            href="/rockcastle-logo-black.png"
-            width="1144"
-            height="615"
-            filter="url(#rc-intro-white)"
+          {/* Inline Vector Illustration - 100% Exact Cubic-Bezier Vector Path (like StageLineAnimation) */}
+          <path
+            d={ROCKCASTLE_LOGO_PATH}
+            fill="#ffffff"
+            fillRule="evenodd"
             mask="url(#rc-logo-write-mask)"
           />
         </svg>
