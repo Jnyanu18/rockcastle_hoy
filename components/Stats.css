@@ -30,13 +30,8 @@
   }
 
   .hoy-intro-col-2 {
-    width: 56.125vw;
-    padding-right: 18vw;
-  }
-
-  .hoy-intro-col-3 {
-    width: 22.8125vw;
-    flex-shrink: 0;
+    flex: 1;
+    max-width: 58vw;
   }
 }
 

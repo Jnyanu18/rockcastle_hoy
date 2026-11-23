@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { hero } from "@/lib/content";
 import KineticLogo from "@/components/KineticLogo";
-import SlideUpText from "@/components/ui/SlideUpText";
 import HeroPlayCursor, { PlayCursorBadge } from "@/components/HeroPlayCursor";
 import HeroVideoModal from "@/components/HeroVideoModal";
 import DotPattern from "@/components/ui/DotPattern";
@@ -92,25 +90,6 @@ export default function Hero() {
           <KineticLogo className="!relative !top-auto !left-auto !translate-x-0 !translate-y-0 pointer-events-auto" />
         </div>
 
-        {/* Mobile Welcome & Headline Copy */}
-        <div className="mt-2 flex flex-col items-center text-center px-3 max-w-[340px]">
-          <p className="text-[20px] font-bold text-[#ffffff] tracking-[-0.02em] mb-1.5">
-            <SlideUpText split="words" delay={0.2} stagger={0.02}>
-              {hero.welcome || "Welcome!"}
-            </SlideUpText>
-          </p>
-          <p className="text-[12px] leading-[1.45] font-normal text-[#ffffff]/85">
-            <SlideUpText split="words" delay={0.3} stagger={0.01}>
-              {hero.headline}
-            </SlideUpText>
-          </p>
-          <p className="mt-2.5 text-[13.5px] font-semibold text-[#ffffff]">
-            <SlideUpText split="words" delay={0.42} stagger={0.015}>
-              {hero.subline || "Big ideas. Brought to life."}
-            </SlideUpText>
-          </p>
-        </div>
-
         {/* Mobile Play Video Button */}
         <div className="mt-4 flex flex-col items-center">
           <PlayVideoTile onPlay={() => setIsVideoModalOpen(true)} />
@@ -144,42 +123,6 @@ export default function Hero() {
       {/* Center Kinetic Logo */}
       <div className="hidden md:flex absolute inset-0 items-center justify-center z-20 pointer-events-none">
         <KineticLogo className="pointer-events-auto" />
-      </div>
-
-      {/* Left Text Section: "Welcome!", main paragraph, and "Big ideas. Brought to life." */}
-      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 left-[clamp(60px,9vw,175px)] w-max z-20 pointer-events-none text-left">
-        <p className="text-[clamp(24px,2.2vw,40px)] leading-[1.08] font-bold text-[#ffffff] tracking-[-0.025em] mb-3">
-          <SlideUpText split="words" delay={0.2} stagger={0.02}>
-            {hero.welcome || "Welcome!"}
-          </SlideUpText>
-        </p>
-        <div className="text-[clamp(13px,1.05vw,18px)] leading-[1.42] font-normal tracking-[-0.005em] text-[#ffffff]/90">
-          {(hero.headlineLines || [hero.headline]).map((line, idx) => (
-            <span key={idx} className="block whitespace-nowrap">
-              <SlideUpText split="words" delay={0.3 + idx * 0.03} stagger={0.01}>
-                {line}
-              </SlideUpText>
-            </span>
-          ))}
-        </div>
-        <p className="mt-4 md:mt-5 text-[clamp(16px,1.35vw,24px)] font-semibold tracking-[-0.015em] text-[#ffffff]">
-          <SlideUpText split="words" delay={0.52} stagger={0.015}>
-            {hero.subline || "Big ideas. Brought to life."}
-          </SlideUpText>
-        </p>
-      </div>
-
-      {/* Right Text Section: Left-aligned supporting copy */}
-      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 right-[clamp(60px,10vw,210px)] w-max text-left z-20 pointer-events-none text-[#ffffff]">
-        <div className="text-[clamp(12px,0.95vw,18px)] leading-[1.43] font-normal text-[#ffffff]/90">
-          {(hero.asideLines || [hero.aside]).map((line, idx) => (
-            <span key={idx} className="block whitespace-nowrap">
-              <SlideUpText split="words" delay={0.36 + idx * 0.03} stagger={0.01}>
-                {line}
-              </SlideUpText>
-            </span>
-          ))}
-        </div>
       </div>
 
       {/* ========================================================
