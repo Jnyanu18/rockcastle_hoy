@@ -26,7 +26,7 @@ const TEAM_MEMBERS: RockMember[] = [
   {
     id: "rock-r",
     letter: "R",
-    color: "#1c1917",
+    color: "#ee7d2e",
     name: "Alok Nagpal",
     role: "Founder & Managing Director",
     photo: "/team/alok-cutout.png",
@@ -71,7 +71,7 @@ const TEAM_MEMBERS: RockMember[] = [
   {
     id: "rock-k",
     letter: "K",
-    color: "#c85318",
+    color: "#ee7d2e",
     name: "Live Production",
     role: "Experiential Execution",
     photo: "/team/live-cutout.png",
