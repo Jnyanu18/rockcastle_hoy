@@ -60,7 +60,7 @@ function getNavThemeForBackground(navEl, scrollY, pathname) {
   // 3. Direct section identifier check for orangish / peach sections
   // When on orange/peach background, navbar must be the color of featured work section (#dcdcdc cement)!
   const orangeSection = behind.closest(
-    '#about, .rcf-who, #stats, .hoy-stats-section, #process, #services, .servicesBlock, .rcf-stories, #insta-feed, #contact'
+    '#about, .rcf-who, #stats, .hoy-stats-section, #services, .servicesBlock, .rcf-stories, #leadership, .leadership, #insta-feed, #contact'
   )
   if (orangeSection) {
     return 'cement'
@@ -69,7 +69,7 @@ function getNavThemeForBackground(navEl, scrollY, pathname) {
   // 4. Direct section identifier check for greyish / cement sections
   // When on greyish background, navbar must be orange (#ee7d2e)!
   const greyishSection = behind.closest(
-    '#recent-experiences, .recent-experiences, .rcf-featured, #leadership, .leadership, #clients, .clients, footer, .footer'
+    '#recent-experiences, .recent-experiences, .rcf-featured, #awards, .awards-section, #clients, .clients, footer, .footer'
   )
   if (greyishSection) {
     return 'orange'

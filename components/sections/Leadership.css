@@ -1,7 +1,8 @@
 /* ==========================================================================
-   Leadership / Team Section — Smooth Pill-to-Square Hover Effect
-   Matches the reference Figma/Dribbble interaction while keeping Rock Castle's
-   theme (#fff1e7, #ee7d2e, #151515) and universal sans-serif (--font-body).
+   Leadership / Team Section — "ROCK" Giant Typographic Portrait Showcase
+   Matches reference layout ("Meet the creative minds behind Rock Castle")
+   adapted to Rock Castle's theme (#fff1e7 peach, #ee7d2e orange, #151515 ink)
+   and universal sans-serif font (--font-body).
    ========================================================================== */
 
 .leadership {
@@ -13,21 +14,20 @@
   background-color: var(--rc-peach);
   color: var(--rc-ink);
   width: 100%;
-  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: hidden;
-  padding: clamp(36px, 5vh, 64px) var(--container-x, 32px);
+  padding: clamp(96px, 12vh, 144px) var(--container-x, 32px) clamp(132px, 16vh, 192px);
   box-sizing: border-box;
   font-family: var(--font-body);
-  border-bottom: 1px solid rgba(21, 21, 21, 0.1);
+  border-bottom: 1px solid rgba(21, 21, 21, 0.08);
 }
 
 .leadership__inner {
   position: relative;
   z-index: 2;
-  max-width: 1480px;
+  max-width: 1320px;
   margin: 0 auto;
   width: 100%;
   display: flex;
@@ -35,204 +35,144 @@
   align-items: center;
 }
 
-/* ---- Top Meta Bar ---- */
-.leadership__meta {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: clamp(12px, 2vh, 22px);
-}
-
-.leadership__eyebrow {
-  font-family: var(--font-body);
-  font-size: clamp(11px, 0.78vw, 13px);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--rc-ink);
-}
-
-.leadership__eyebrow i {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  margin-left: 4px;
-  vertical-align: super;
-  background: var(--rc-orange);
-  border-radius: 1px;
-}
-
-.leadership__index {
-  font-family: var(--font-body);
-  font-size: clamp(11px, 0.78vw, 13px);
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  color: var(--rc-ink);
-}
-
-/* ---- Centered Header ---- */
+/* ---- Centered Header (Matches Reference) ---- */
 .leadership__header {
-  text-align: center;
-  max-width: 680px;
-  margin-bottom: clamp(32px, 4.5vh, 52px);
-}
-
-.leadership__title {
-  font-family: var(--font-body);
-  font-size: clamp(1.85rem, 3.2vw, 2.9rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  color: var(--rc-ink);
-  margin: 0 0 12px 0;
-}
-
-.leadership__title-dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin-left: 5px;
-  vertical-align: super;
-  background: var(--rc-orange);
-  border-radius: 1px;
-}
-
-.leadership__subtitle {
-  font-family: var(--font-body);
-  font-size: clamp(0.9rem, 1.02vw, 1.04rem);
-  font-weight: 400;
-  line-height: 1.55;
-  color: rgba(21, 21, 21, 0.66);
-  margin: 0;
-}
-
-/* ---- Smooth Expanding Pill-to-Rounded-Square Gallery ---- */
-.leadership__gallery {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(18px, 2.2vw, 30px);
-  width: 100%;
-  height: clamp(390px, 55vh, 480px);
-}
-
-.leadership__pill-card {
-  position: relative;
-  height: 100%;
-  /* Collapsed vertical capsule / pill width */
-  width: clamp(144px, 13vw, 186px);
-  border-radius: 999px;
-  overflow: hidden;
-  background: var(--card-bg, #e5dcd3);
-  cursor: pointer;
-  flex-shrink: 0;
-  outline: none;
-  box-shadow: 0 12px 30px -14px rgba(21, 21, 21, 0.14);
-  transition:
-    width 0.68s cubic-bezier(0.22, 1, 0.36, 1),
-    border-radius 0.68s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Expanded rounded-square state on hover / active */
-.leadership__pill-card.is-active {
-  width: clamp(360px, 35vw, 450px);
-  border-radius: 56px;
-  box-shadow:
-    0 24px 52px -16px rgba(21, 21, 21, 0.22),
-    0 0 0 2px rgba(238, 125, 46, 0.35);
-}
-
-.leadership__pill-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 15%;
-  display: block;
-  transform: scale(1.03);
-  transition:
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.55s ease;
-}
-
-.leadership__pill-card:not(.is-active) .leadership__pill-img {
-  filter: saturate(0.88) contrast(1.02);
-}
-
-.leadership__pill-card.is-active .leadership__pill-img {
-  transform: scale(1);
-  filter: saturate(1.04) contrast(1.02);
-}
-
-/* Bottom gradient overlay for crisp white text on the expanded card */
-.leadership__pill-shade {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(15, 15, 15, 0.72) 0%,
-    rgba(15, 15, 15, 0.22) 34%,
-    rgba(15, 15, 15, 0) 60%
-  );
-  opacity: 0;
-  transition: opacity 0.45s ease;
-  pointer-events: none;
-}
-
-.leadership__pill-card.is-active .leadership__pill-shade {
-  opacity: 1;
-}
-
-/* Bottom Centered Name + Role Caption (Matches Reference Image) */
-.leadership__pill-caption {
-  position: absolute;
-  left: 20px;
-  right: 20px;
-  bottom: 28px;
-  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 3px;
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 0.38s ease,
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  pointer-events: none;
-  white-space: nowrap;
+  margin-bottom: clamp(32px, 5vh, 58px);
 }
 
-.leadership__pill-card.is-active .leadership__pill-caption {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.1s;
+.leadership__accent-bar {
+  width: 58px;
+  height: 5px;
+  border-radius: 999px;
+  background-color: var(--rc-orange);
+  margin-bottom: clamp(18px, 2.4vh, 28px);
 }
 
-.leadership__pill-name {
+.leadership__title {
   font-family: var(--font-body);
-  font-size: clamp(1.25rem, 1.65vw, 1.6rem);
-  font-weight: 600;
-  line-height: 1.18;
-  letter-spacing: -0.02em;
-  color: #ffffff;
+  font-size: clamp(2rem, 3.8vw, 3.45rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--rc-ink);
+  margin: 0 0 clamp(14px, 2vh, 22px) 0;
+}
+
+.leadership__title-line {
+  display: block;
+}
+
+.leadership__kicker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-family: var(--font-body);
+  font-size: clamp(11px, 0.85vw, 13.5px);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.34em;
+  color: rgba(21, 21, 21, 0.65);
   margin: 0;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
+  padding-left: 0.34em; /* optically center wide letter-spacing */
 }
 
-.leadership__pill-role {
+.leadership__kicker-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--rc-orange);
+  flex-shrink: 0;
+  margin-left: -0.34em;
+}
+
+/* ---- 4-Letter R-O-C-K Portrait Row ---- */
+.leadership__rock-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(14px, 1.8vw, 28px);
+  width: 100%;
+  max-width: 1220px;
+  align-items: start;
+}
+
+.leadership__member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Giant Letter + Cutout Portrait Stage */
+.leadership__letter-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 260 / 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(14px, 1.8vh, 22px);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.leadership__member:hover .leadership__letter-stage {
+  transform: translateY(-6px);
+}
+
+.leadership__letter-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 14px 26px rgba(21, 21, 21, 0.08));
+  transition: filter 0.45s ease;
+}
+
+.leadership__member:hover .leadership__letter-svg {
+  filter: drop-shadow(0 22px 34px rgba(238, 125, 46, 0.16));
+}
+
+.leadership__letter-shape {
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center center;
+}
+
+.leadership__member:hover .leadership__letter-shape {
+  transform: scale(1.02);
+}
+
+.leadership__portrait-group {
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: 130px 285px;
+}
+
+.leadership__member:hover .leadership__portrait-group {
+  transform: scale(1.045) translateY(-3px);
+}
+
+/* ---- Name, Role & Social Icons ---- */
+.leadership__member-name {
   font-family: var(--font-body);
-  font-size: clamp(0.84rem, 0.96vw, 0.96rem);
+  font-size: clamp(1rem, 1.25vw, 1.28rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--rc-ink);
+  margin: 0 0 4px 0;
+}
+
+.leadership__member-role {
+  font-family: var(--font-body);
+  font-size: clamp(0.8rem, 0.92vw, 0.94rem);
   font-weight: 400;
   line-height: 1.35;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(21, 21, 21, 0.62);
   margin: 0;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
 }
 
 /* ==========================================================================
@@ -240,62 +180,51 @@
    ========================================================================== */
 
 @media (max-width: 900px) {
-  .leadership__gallery {
-    height: 360px;
-    gap: 12px;
+  .leadership {
+    padding: 76px 24px 108px;
   }
 
-  .leadership__pill-card {
-    width: 105px;
-  }
-
-  .leadership__pill-card.is-active {
-    width: clamp(260px, 52vw, 340px);
-    border-radius: 42px;
+  .leadership__rock-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 20px;
+    max-width: 580px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 520px) {
   .leadership {
-    min-height: auto;
-    padding: 48px 16px 56px;
+    padding: 64px 18px 92px;
   }
 
-  .leadership__gallery {
-    height: 310px;
-    gap: 8px;
+  .leadership__title {
+    font-size: clamp(1.65rem, 7.2vw, 2.2rem);
   }
 
-  .leadership__pill-card {
-    width: 68px;
+  .leadership__kicker {
+    font-size: 10.5px;
+    letter-spacing: 0.24em;
+    gap: 10px;
   }
 
-  .leadership__pill-card.is-active {
-    width: calc(100vw - 32px - 136px - 16px);
-    max-width: 270px;
-    border-radius: 32px;
+  .leadership__rock-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 14px;
   }
 
-  .leadership__pill-caption {
-    left: 12px;
-    right: 12px;
-    bottom: 16px;
-    white-space: normal;
+  .leadership__member-name {
+    font-size: 0.96rem;
   }
 
-  .leadership__pill-name {
-    font-size: 1.05rem;
-  }
-
-  .leadership__pill-role {
-    font-size: 0.75rem;
+  .leadership__member-role {
+    font-size: 0.76rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .leadership__pill-card,
-  .leadership__pill-img,
-  .leadership__pill-caption {
+  .leadership__letter-stage,
+  .leadership__letter-svg,
+  .leadership__letter-shape,
+  .leadership__portrait-group {
     transition: none !important;
   }
 }

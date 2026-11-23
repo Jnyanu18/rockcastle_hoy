@@ -4,7 +4,6 @@ import RecentExperiences from "@/components/sections/RecentExperiences";
 import { WhoWeAre } from "@/components/figma/FigmaSections";
 import Clients from "@/components/Clients";
 import Stats from "@/components/Stats";
-import Process from "@/components/Process";
 import ScrollingServices from "@/components/sections/ScrollingServices";
 import Awards from "@/components/Awards";
 import Leadership from "@/components/sections/Leadership";
@@ -24,7 +23,6 @@ export default function Home() {
         </div>
         <RecentExperiences />
         <Stats />
-        <Process />
         <ScrollingServices id="services" />
         <Awards />
 
