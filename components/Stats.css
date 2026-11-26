@@ -33,11 +33,6 @@
     width: 56.125vw;
     padding-right: 18vw;
   }
-
-  .hoy-intro-col-3 {
-    width: 22.8125vw;
-    flex-shrink: 0;
-  }
 }
 
 /* --- Section 03 Video + Stats Showcase Grid --- */

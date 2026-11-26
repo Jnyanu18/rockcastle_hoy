@@ -171,23 +171,6 @@ export default function Stats() {
               </SlideUpText>
             </h2>
           </div>
-
-          {/* Column 3: Mobile Content / Brand Activations Aside */}
-          <div className="hoy-intro-col-3">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="inline-block h-2.5 w-2.5 bg-white rounded-[1px] shrink-0" />
-              <span className="text-xs md:text-[13px] font-medium text-white">
-                <SlideUpText split="words" delay={0.04}>
-                  {stats.mobile.label}
-                </SlideUpText>
-              </span>
-            </div>
-            <p className="text-xs md:text-[13px] leading-relaxed text-white/90 max-w-sm">
-              <SlideUpText split="words" stagger={0.015} delay={0.1}>
-                {stats.mobile.body}
-              </SlideUpText>
-            </p>
-          </div>
         </div>
 
         {/* ========================================================================= */}
